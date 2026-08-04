@@ -1,0 +1,3 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/cplex_threads_1.prm' succeeded.
+SKIP STATIC_DEMAND_SHARE C0001 stage=missing: resultado completo.
+STATIC_DEMAND_SHARE completado: 1 filas de resumen.

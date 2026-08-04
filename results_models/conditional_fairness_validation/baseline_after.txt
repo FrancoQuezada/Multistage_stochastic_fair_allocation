@@ -1,0 +1,22 @@
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 39511.228 (OPTIMAL)
+Lex step 2 objective: 79022.457 (OPTIMAL)
+Lex step 3 objective: 118533.685 (OPTIMAL)
+Lex step 4 objective: 158044.913 (OPTIMAL)
+Lex step 5 objective: 197556.142 (OPTIMAL)
+end
+##########################################################
+NONE status=true expected_cost=749505.4619992657 lex_levels=Float64[]
+PEA status=true expected_cost=749505.4619992658 lex_levels=Float64[]
+SA status=true expected_cost=749505.461999266 lex_levels=Float64[]
+LEXMMFPEA status=true expected_cost=749505.4619992657 lex_levels=[202.97470029229197, 405.94940058458394, 608.9241008768759, 811.8988011691679, 1014.8735014614599]
+LEXMMFSA status=true expected_cost=749505.4619992657 lex_levels=[39511.22837121523, 79022.45674243048, 118533.68511364586, 158044.91348486123, 197556.1418560766]

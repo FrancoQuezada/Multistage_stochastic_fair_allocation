@@ -1,0 +1,241 @@
+Total configuraciones heuristicas a ejecutar: 80
+Running heuristic config 1/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 579253.081
+Running heuristic config 2/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 576240.831
+Running heuristic config 3/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 609694.017
+Running heuristic config 4/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 642574.477
+Running heuristic config 5/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.413212014e6
+Running heuristic config 6/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.407081945e6
+Running heuristic config 7/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.167787191e6
+Running heuristic config 8/80 -> (heuristic=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.447535449e6
+Running heuristic config 9/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 624944.714
+Running heuristic config 10/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 614087.393
+Running heuristic config 11/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 688069.587
+Running heuristic config 12/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 515139.698
+Running heuristic config 13/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.341095387e6
+Running heuristic config 14/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.395307482e6
+Running heuristic config 15/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.371673014e6
+Running heuristic config 16/80 -> (heuristic=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.487679104e6
+Running heuristic config 17/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 541640.439
+Running heuristic config 18/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 637693.126
+Running heuristic config 19/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 686248.979
+Running heuristic config 20/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 718379.174
+Running heuristic config 21/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.161673687e6
+Running heuristic config 22/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.348176558e6
+Running heuristic config 23/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.434380488e6
+Running heuristic config 24/80 -> (heuristic=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.230240299e6
+Running heuristic config 25/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 403813.45
+Running heuristic config 26/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 695451.732
+Running heuristic config 27/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 561148.552
+Running heuristic config 28/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 453249.427
+Running heuristic config 29/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.289880229e6
+Running heuristic config 30/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.180248545e6
+Running heuristic config 31/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.096692629e6
+Running heuristic config 32/80 -> (heuristic=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.241221939e6
+Running heuristic config 33/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 449361.578
+Running heuristic config 34/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 727726.458
+Running heuristic config 35/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 555873.146
+Running heuristic config 36/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 472151.261
+Running heuristic config 37/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.143965636e6
+Running heuristic config 38/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.261460038e6
+Running heuristic config 39/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.133665046e6
+Running heuristic config 40/80 -> (heuristic=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.304218081e6
+Running heuristic config 41/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 553561.943
+Running heuristic config 42/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 610801.992
+Running heuristic config 43/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 592064.267
+Running heuristic config 44/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 571292.815
+Running heuristic config 45/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.198715085e6
+Running heuristic config 46/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.228524136e6
+Running heuristic config 47/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.139393947e6
+Running heuristic config 48/80 -> (heuristic=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.176113244e6
+Running heuristic config 49/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 460407.732
+Running heuristic config 50/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 741049.481
+Running heuristic config 51/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 573210.759
+Running heuristic config 52/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 514959.598
+Running heuristic config 53/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.160437079e6
+Running heuristic config 54/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.085985542e6
+Running heuristic config 55/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.23949568e6
+Running heuristic config 56/80 -> (heuristic=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.159906609e6
+Running heuristic config 57/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 587972.817
+Running heuristic config 58/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 695358.902
+Running heuristic config 59/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 616171.574
+Running heuristic config 60/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 521744.052
+Running heuristic config 61/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.280084783e6
+Running heuristic config 62/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.229478494e6
+Running heuristic config 63/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.146225864e6
+Running heuristic config 64/80 -> (heuristic=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.106575203e6
+Running heuristic config 65/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 465890.866
+Running heuristic config 66/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 518952.195
+Running heuristic config 67/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 626212.274
+Running heuristic config 68/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 541347.011
+Running heuristic config 69/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.138786347e6
+Running heuristic config 70/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.223191167e6
+Running heuristic config 71/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.280266973e6
+Running heuristic config 72/80 -> (heuristic=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.306554344e6
+Running heuristic config 73/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 488810.196
+Running heuristic config 74/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 520920.501
+Running heuristic config 75/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 667264.196
+Running heuristic config 76/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 646240.478
+Running heuristic config 77/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.360251531e6
+Running heuristic config 78/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.361484691e6
+Running heuristic config 79/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.440740569e6
+Running heuristic config 80/80 -> (heuristic=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=1.0, pv_scale=1.0, eta=1.0)
+OPTIMAL
+Objective : 1.371147818e6

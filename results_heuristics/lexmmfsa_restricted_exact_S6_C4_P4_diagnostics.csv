@@ -1,0 +1,15 @@
+InstanceNo,InstanceFile,NBstage,Childs,Periods,#scen,Theta,Avg_d,Dev_d,J,Fairness,InstFolder,Status,MeanAbsFairnessGap,MaxAbsFairnessGap,RunTimeSec,ModelSolveTimeSec
+1,Drahi_1.csv,6,4,4,1024,0.2,100.0,10.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,3.794213056564331,1.04
+1,Drahi_1.csv,6,4,4,1024,0.2,100.0,20.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,1.669114112854004,1.1099999999999999
+1,Drahi_1.csv,6,4,4,1024,0.6,100.0,10.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,1.4014334678649902,0.74
+1,Drahi_1.csv,6,4,4,1024,0.6,100.0,20.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,1.6137468814849854,1.08
+1,Drahi_1.csv,6,4,4,1024,0.2,100.0,10.0,10,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,4.4401772022247314,3.0
+1,Drahi_1.csv,6,4,4,1024,0.2,100.0,20.0,10,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,4.682541131973267,3.19
+1,Drahi_1.csv,6,4,4,1024,0.6,100.0,10.0,10,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,4.204174280166626,2.7199999999999998
+1,Drahi_1.csv,6,4,4,1024,0.6,100.0,20.0,10,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,4.021971940994263,2.78
+2,Drahi_2.csv,6,4,4,1024,0.2,100.0,10.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,1.6157021522521973,1.09
+2,Drahi_2.csv,6,4,4,1024,0.2,100.0,20.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,1.4302940368652344,0.94
+2,Drahi_2.csv,6,4,4,1024,0.6,100.0,10.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,1.4936401844024658,0.96
+2,Drahi_2.csv,6,4,4,1024,0.6,100.0,20.0,5,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,1.66339111328125,0.98
+2,Drahi_2.csv,6,4,4,1024,0.2,100.0,10.0,10,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,4.349771499633789,2.9800000000000004
+2,Drahi_2.csv,6,4,4,1024,0.2,100.0,20.0,10,LEXMMFSA,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,true,NaN,NaN,6.67888069152832,4.88

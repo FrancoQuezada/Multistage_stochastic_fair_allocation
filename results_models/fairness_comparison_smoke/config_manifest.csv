@@ -1,0 +1,2 @@
+ConfigID,RandomInstanceID,InstanceFile,InstFolder,TreeSpec,NBstage,Childs,Periods,Scenarios,J,Theta,Avg_d,Dev_d,DemandProfile,BatteryScale,PVScale,InstanceSampleSeed
+C0001,R001,Drahi_51.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804

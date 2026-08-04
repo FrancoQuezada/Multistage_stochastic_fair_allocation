@@ -1,0 +1,241 @@
+Total configuraciones a ejecutar: 80
+Running config 1/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 577775.623
+Running config 2/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 621841.455
+Running config 3/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 734754.731
+Running config 4/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 696618.026
+Running config 5/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.460589776e6
+Running config 6/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.460992515e6
+Running config 7/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.215891868e6
+Running config 8/80 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.445943834e6
+Running config 9/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 625489.77
+Running config 10/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 614491.839
+Running config 11/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 719935.096
+Running config 12/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 562060.454
+Running config 13/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.342573379e6
+Running config 14/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.393806285e6
+Running config 15/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.39711231e6
+Running config 16/80 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.483543249e6
+Running config 17/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 590952.233
+Running config 18/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 639042.965
+Running config 19/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 684403.128
+Running config 20/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 716880.002
+Running config 21/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.235486129e6
+Running config 22/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.478305386e6
+Running config 23/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.443640441e6
+Running config 24/80 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.361956243e6
+Running config 25/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 565370.861
+Running config 26/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 693885.161
+Running config 27/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 858181.389
+Running config 28/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 586835.072
+Running config 29/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.438383065e6
+Running config 30/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.387882311e6
+Running config 31/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.372926276e6
+Running config 32/80 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.369429913e6
+Running config 33/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 591995.329
+Running config 34/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 725834.896
+Running config 35/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 651841.361
+Running config 36/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 677354.65
+Running config 37/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.212232499e6
+Running config 38/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.408777171e6
+Running config 39/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.29140216e6
+Running config 40/80 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.456902935e6
+Running config 41/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 677173.853
+Running config 42/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 719590.716
+Running config 43/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 741821.658
+Running config 44/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 689078.976
+Running config 45/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.230255641e6
+Running config 46/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.330194132e6
+Running config 47/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.416213336e6
+Running config 48/80 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.344818232e6
+Running config 49/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 619518.769
+Running config 50/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 741647.349
+Running config 51/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 709645.847
+Running config 52/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 592824.638
+Running config 53/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.339090968e6
+Running config 54/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.300101053e6
+Running config 55/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.243644843e6
+Running config 56/80 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.453508476e6
+Running config 57/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 766184.351
+Running config 58/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 693206.022
+Running config 59/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 760387.848
+Running config 60/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 529488.022
+Running config 61/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.436361587e6
+Running config 62/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.394415468e6
+Running config 63/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.394220039e6
+Running config 64/80 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.253697107e6
+Running config 65/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 564165.516
+Running config 66/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 579642.913
+Running config 67/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 761555.382
+Running config 68/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 605214.183
+Running config 69/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.261100989e6
+Running config 70/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.36394305e6
+Running config 71/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.315673495e6
+Running config 72/80 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.433370145e6
+Running config 73/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 519170.235
+Running config 74/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 521914.179
+Running config 75/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 666066.419
+Running config 76/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 717969.523
+Running config 77/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.441824175e6
+Running config 78/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.422011199e6
+Running config 79/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.445553683e6
+Running config 80/80 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, demand_profile=mixed, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.367567989e6

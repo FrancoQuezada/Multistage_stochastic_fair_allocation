@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+FAIRNESS_SET="NONE"
+INSTANCE_FROM="${INSTANCE_FROM:-1}"
+INSTANCE_TO="${INSTANCE_TO:-2}"
+TREE_SET="${TREE_SET:-2:2:12;2:4:12}"
+J_SET="${J_SET:-5,10}"
+THETA_SET="${THETA_SET:-0.2,0.6}"
+AVG_D_SET="${AVG_D_SET:-100.0}"
+DEV_D_SET="${DEV_D_SET:-10.0}"
+OUT_CSV="${OUT_CSV:-fairness_NONE_report.csv}"
+OUT_CSV_HOUSE="${OUT_CSV_HOUSE:-fairness_NONE_report_by_house.csv}"
+
+SCRIPT_NAME="script_None.sh"
+export SCRIPT_NAME FAIRNESS_SET INSTANCE_FROM INSTANCE_TO TREE_SET
+export J_SET THETA_SET AVG_D_SET DEV_D_SET OUT_CSV OUT_CSV_HOUSE
+
+exec "$SCRIPT_DIR/script.sh" "$@"

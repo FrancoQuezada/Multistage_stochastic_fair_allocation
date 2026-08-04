@@ -1,0 +1,8 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+
+[46639] signal 2: Interrupción
+in expression starting at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:115

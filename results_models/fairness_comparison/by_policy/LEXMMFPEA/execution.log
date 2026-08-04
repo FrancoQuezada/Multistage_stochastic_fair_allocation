@@ -1,0 +1,52 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+RUN LEXMMFPEA C0001 stage=missing (2:2:12, Drahi_51.csv)
+OPTIMAL
+Objective : 505572.164
+RUN LEXMMFPEA C0002 stage=missing (2:2:12, Drahi_70.csv)
+OPTIMAL
+Objective : 578769.259
+RUN LEXMMFPEA C0003 stage=missing (2:2:12, Drahi_37.csv)
+OPTIMAL
+Objective : 789209.186
+RUN LEXMMFPEA C0004 stage=missing (2:2:12, Drahi_95.csv)
+OPTIMAL
+Objective : 723643.565
+RUN LEXMMFPEA C0005 stage=missing (2:2:12, Drahi_83.csv)
+OPTIMAL
+Objective : 718215.045
+RUN LEXMMFPEA C0006 stage=missing (6:4:4, Drahi_51.csv)
+OPTIMAL
+Objective : 594291.185
+RUN LEXMMFPEA C0007 stage=missing (6:4:4, Drahi_70.csv)
+OPTIMAL
+Objective : 457140.724
+RUN LEXMMFPEA C0008 stage=missing (6:4:4, Drahi_37.csv)
+OPTIMAL
+Objective : 686130.874
+RUN LEXMMFPEA C0009 stage=missing (6:4:4, Drahi_95.csv)
+OPTIMAL
+Objective : 709864.095
+RUN LEXMMFPEA C0010 stage=missing (6:4:4, Drahi_83.csv)
+OPTIMAL
+Objective : 762820.26
+LEXMMFPEA completado: 10 filas de resumen.

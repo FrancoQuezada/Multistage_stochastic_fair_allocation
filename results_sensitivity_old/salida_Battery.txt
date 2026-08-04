@@ -1,0 +1,1963 @@
+Total configuraciones a ejecutar: 400
+Running config 1/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 569899.203
+Running config 2/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 567062.268
+Running config 3/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 691849.393
+Running config 4/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 519020.349
+Running config 5/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.27713964e6
+Running config 6/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.354149674e6
+Running config 7/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.359240894e6
+Running config 8/400 -> (fairness=NONE, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.288823542e6
+Running config 9/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 596313.126
+Running config 10/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 634504.281
+Running config 11/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 703111.922
+Running config 12/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 596381.256
+Running config 13/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.322731189e6
+Running config 14/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.428941533e6
+Running config 15/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.442787665e6
+Running config 16/400 -> (fairness=PEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.406176302e6
+Running config 17/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 625478.351
+Running config 18/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 666834.36
+Running config 19/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 709281.714
+Running config 20/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 705660.666
+Running config 21/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.40250573e6
+Running config 22/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.456604625e6
+Running config 23/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.463759247e6
+Running config 24/400 -> (fairness=SA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.454891012e6
+Running config 25/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 594186.753
+Running config 26/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 635131.01
+Running config 27/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 703130.4
+Running config 28/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 606927.061
+Running config 29/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.322752011e6
+Running config 30/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.429711761e6
+Running config 31/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.443605996e6
+Running config 32/400 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.416914301e6
+Running config 33/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 28423.411 (OPTIMAL)
+Lex step 2 objective: 56850.236 (OPTIMAL)
+Lex step 3 objective: 85278.062 (OPTIMAL)
+Lex step 4 objective: 113705.888 (OPTIMAL)
+Lex step 5 objective: 142133.752 (OPTIMAL)
+end
+##########################################################
+Running config 34/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 24352.362 (OPTIMAL)
+Lex step 2 objective: 48704.724 (OPTIMAL)
+Lex step 3 objective: 73062.189 (OPTIMAL)
+Lex step 4 objective: 97420.654 (OPTIMAL)
+Lex step 5 objective: 121779.426 (OPTIMAL)
+end
+##########################################################
+Running config 35/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12238.086 (OPTIMAL)
+Lex step 2 objective: 24476.172 (OPTIMAL)
+Lex step 3 objective: 36718.952 (OPTIMAL)
+Lex step 4 objective: 48962.732 (OPTIMAL)
+Lex step 5 objective: 61206.511 (OPTIMAL)
+end
+##########################################################
+Running config 36/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 18609.07 (OPTIMAL)
+Lex step 2 objective: 37218.139 (OPTIMAL)
+Lex step 3 objective: 55833.09 (OPTIMAL)
+Lex step 4 objective: 74449.04 (OPTIMAL)
+Lex step 5 objective: 93065.123 (OPTIMAL)
+end
+##########################################################
+Running config 37/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12765.506 (OPTIMAL)
+Lex step 2 objective: 25531.012 (OPTIMAL)
+Lex step 3 objective: 38296.519 (OPTIMAL)
+Lex step 4 objective: 51062.025 (OPTIMAL)
+Lex step 5 objective: 63830.006 (OPTIMAL)
+Lex step 6 objective: 76598.987 (OPTIMAL)
+Lex step 7 objective: 89367.969 (OPTIMAL)
+Lex step 8 objective: 102136.95 (OPTIMAL)
+Lex step 9 objective: 114905.932 (OPTIMAL)
+Lex step 10 objective: 127674.913 (OPTIMAL)
+end
+##########################################################
+Running config 38/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 7834.368 (OPTIMAL)
+Lex step 2 objective: 15668.737 (OPTIMAL)
+Lex step 3 objective: 23503.105 (OPTIMAL)
+Lex step 4 objective: 31337.474 (OPTIMAL)
+Lex step 5 objective: 39174.061 (OPTIMAL)
+Lex step 6 objective: 47011.648 (OPTIMAL)
+Lex step 7 objective: 54849.235 (OPTIMAL)
+Lex step 8 objective: 62686.823 (OPTIMAL)
+Lex step 9 objective: 70524.41 (OPTIMAL)
+Lex step 10 objective: 78362.171 (OPTIMAL)
+end
+##########################################################
+Running config 39/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9222.053 (OPTIMAL)
+Lex step 2 objective: 18444.106 (OPTIMAL)
+Lex step 3 objective: 27666.159 (OPTIMAL)
+Lex step 4 objective: 36888.212 (OPTIMAL)
+Lex step 5 objective: 46110.265 (OPTIMAL)
+Lex step 6 objective: 55332.319 (OPTIMAL)
+Lex step 7 objective: 64554.372 (OPTIMAL)
+Lex step 8 objective: 73782.262 (OPTIMAL)
+Lex step 9 objective: 83011.152 (OPTIMAL)
+Lex step 10 objective: 92240.042 (OPTIMAL)
+end
+##########################################################
+Running config 40/400 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9450.979 (OPTIMAL)
+Lex step 2 objective: 18901.957 (OPTIMAL)
+Lex step 3 objective: 28352.936 (OPTIMAL)
+Lex step 4 objective: 37803.914 (OPTIMAL)
+Lex step 5 objective: 47256.908 (OPTIMAL)
+Lex step 6 objective: 56710.902 (OPTIMAL)
+Lex step 7 objective: 66164.896 (OPTIMAL)
+Lex step 8 objective: 75618.89 (OPTIMAL)
+Lex step 9 objective: 85072.884 (OPTIMAL)
+Lex step 10 objective: 94527.12 (OPTIMAL)
+end
+##########################################################
+Running config 41/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 614800.242
+Running config 42/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 646628.346
+Running config 43/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 605753.98
+Running config 44/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 708651.698
+Running config 45/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.413494367e6
+Running config 46/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.437139918e6
+Running config 47/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.429963728e6
+Running config 48/400 -> (fairness=NONE, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.334010508e6
+Running config 49/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 627120.599
+Running config 50/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 677999.302
+Running config 51/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 648650.197
+Running config 52/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 717374.26
+Running config 53/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.444501115e6
+Running config 54/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.46966266e6
+Running config 55/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.467182552e6
+Running config 56/400 -> (fairness=PEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.404709776e6
+Running config 57/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 636032.132
+Running config 58/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 699701.282
+Running config 59/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 702477.368
+Running config 60/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 728361.016
+Running config 61/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.448972354e6
+Running config 62/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.474317907e6
+Running config 63/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.478734126e6
+Running config 64/400 -> (fairness=SA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.414166984e6
+Running config 65/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 626866.66
+Running config 66/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 677726.614
+Running config 67/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 649488.188
+Running config 68/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 715990.231
+Running config 69/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.44434869e6
+Running config 70/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.468964946e6
+Running config 71/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.467300402e6
+Running config 72/400 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.405379124e6
+Running config 73/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 24151.025 (OPTIMAL)
+Lex step 2 objective: 48305.268 (OPTIMAL)
+Lex step 3 objective: 72460.511 (OPTIMAL)
+Lex step 4 objective: 96615.754 (OPTIMAL)
+Lex step 5 objective: 120771.07 (OPTIMAL)
+end
+##########################################################
+Running config 74/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12923.468 (OPTIMAL)
+Lex step 2 objective: 25846.936 (OPTIMAL)
+Lex step 3 objective: 38775.775 (OPTIMAL)
+Lex step 4 objective: 51705.615 (OPTIMAL)
+Lex step 5 objective: 64635.475 (OPTIMAL)
+end
+##########################################################
+Running config 75/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 14501.453 (OPTIMAL)
+Lex step 2 objective: 29002.906 (OPTIMAL)
+Lex step 3 objective: 43510.373 (OPTIMAL)
+Lex step 4 objective: 58018.84 (OPTIMAL)
+Lex step 5 objective: 72527.306 (OPTIMAL)
+end
+##########################################################
+Running config 76/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12354.436 (OPTIMAL)
+Lex step 2 objective: 24708.872 (OPTIMAL)
+Lex step 3 objective: 37068.482 (OPTIMAL)
+Lex step 4 objective: 49429.092 (OPTIMAL)
+Lex step 5 objective: 61789.702 (OPTIMAL)
+end
+##########################################################
+Running config 77/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 6768.063 (OPTIMAL)
+Lex step 2 objective: 13536.125 (OPTIMAL)
+Lex step 3 objective: 20304.188 (OPTIMAL)
+Lex step 4 objective: 27072.25 (OPTIMAL)
+Lex step 5 objective: 33842.116 (OPTIMAL)
+Lex step 6 objective: 40612.982 (OPTIMAL)
+Lex step 7 objective: 47383.847 (OPTIMAL)
+Lex step 8 objective: 54154.713 (OPTIMAL)
+Lex step 9 objective: 60925.579 (OPTIMAL)
+Lex step 10 objective: 67696.587 (OPTIMAL)
+end
+##########################################################
+Running config 78/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 6165.882 (OPTIMAL)
+Lex step 2 objective: 12331.764 (OPTIMAL)
+Lex step 3 objective: 18497.646 (OPTIMAL)
+Lex step 4 objective: 24663.528 (OPTIMAL)
+Lex step 5 objective: 30831.141 (OPTIMAL)
+Lex step 6 objective: 36999.753 (OPTIMAL)
+Lex step 7 objective: 43168.365 (OPTIMAL)
+Lex step 8 objective: 49336.977 (OPTIMAL)
+Lex step 9 objective: 55505.589 (OPTIMAL)
+Lex step 10 objective: 61674.342 (OPTIMAL)
+end
+##########################################################
+Running config 79/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 4880.609 (OPTIMAL)
+Lex step 2 objective: 9761.219 (OPTIMAL)
+Lex step 3 objective: 14641.828 (OPTIMAL)
+Lex step 4 objective: 19522.438 (OPTIMAL)
+Lex step 5 objective: 24405.257 (OPTIMAL)
+Lex step 6 objective: 29289.077 (OPTIMAL)
+Lex step 7 objective: 34172.896 (OPTIMAL)
+Lex step 8 objective: 39056.716 (OPTIMAL)
+Lex step 9 objective: 43940.536 (OPTIMAL)
+Lex step 10 objective: 48824.355 (OPTIMAL)
+end
+##########################################################
+Running config 80/400 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 7038.767 (OPTIMAL)
+Lex step 2 objective: 14077.533 (OPTIMAL)
+Lex step 3 objective: 21116.3 (OPTIMAL)
+Lex step 4 objective: 28155.067 (OPTIMAL)
+Lex step 5 objective: 35193.833 (OPTIMAL)
+Lex step 6 objective: 42235.402 (OPTIMAL)
+Lex step 7 objective: 49277.972 (OPTIMAL)
+Lex step 8 objective: 56320.541 (OPTIMAL)
+Lex step 9 objective: 63363.11 (OPTIMAL)
+Lex step 10 objective: 70405.877 (OPTIMAL)
+end
+##########################################################
+Running config 81/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 560783.39
+Running config 82/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 506312.963
+Running config 83/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 495132.608
+Running config 84/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 574785.129
+Running config 85/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.28565135e6
+Running config 86/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.448151847e6
+Running config 87/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.339569508e6
+Running config 88/400 -> (fairness=NONE, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.27308611e6
+Running config 89/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 633542.162
+Running config 90/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 575992.444
+Running config 91/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 572290.045
+Running config 92/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 644439.134
+Running config 93/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.328258373e6
+Running config 94/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.448151847e6
+Running config 95/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.458895844e6
+Running config 96/400 -> (fairness=PEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.327259025e6
+Running config 97/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 696418.464
+Running config 98/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 635441.216
+Running config 99/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 625336.516
+Running config 100/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 718371.701
+Running config 101/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.399294779e6
+Running config 102/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.448189489e6
+Running config 103/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.509230877e6
+Running config 104/400 -> (fairness=SA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.414181514e6
+Running config 105/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 635661.993
+Running config 106/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 575799.991
+Running config 107/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 583940.667
+Running config 108/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 651576.236
+Running config 109/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.327526093e6
+Running config 110/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.448151847e6
+Running config 111/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.478253221e6
+Running config 112/400 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.325854098e6
+Running config 113/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 21632.36 (OPTIMAL)
+Lex step 2 objective: 43264.72 (OPTIMAL)
+Lex step 3 objective: 64897.08 (OPTIMAL)
+Lex step 4 objective: 86538.965 (OPTIMAL)
+Lex step 5 objective: 108181.851 (OPTIMAL)
+end
+##########################################################
+Running config 114/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 25838.715 (OPTIMAL)
+Lex step 2 objective: 51677.43 (OPTIMAL)
+Lex step 3 objective: 77521.478 (OPTIMAL)
+Lex step 4 objective: 103366.527 (OPTIMAL)
+Lex step 5 objective: 129211.575 (OPTIMAL)
+end
+##########################################################
+Running config 115/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 35039.125 (OPTIMAL)
+Lex step 2 objective: 70078.249 (OPTIMAL)
+Lex step 3 objective: 105122.654 (OPTIMAL)
+Lex step 4 objective: 140168.058 (OPTIMAL)
+Lex step 5 objective: 175213.664 (OPTIMAL)
+end
+##########################################################
+Running config 116/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 19385.353 (OPTIMAL)
+Lex step 2 objective: 38770.706 (OPTIMAL)
+Lex step 3 objective: 58161.726 (OPTIMAL)
+Lex step 4 objective: 77553.745 (OPTIMAL)
+Lex step 5 objective: 96945.889 (OPTIMAL)
+end
+##########################################################
+Running config 117/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 15329.564 (OPTIMAL)
+Lex step 2 objective: 30659.129 (OPTIMAL)
+Lex step 3 objective: 45988.693 (OPTIMAL)
+Lex step 4 objective: 61320.159 (OPTIMAL)
+Lex step 5 objective: 76652.624 (OPTIMAL)
+Lex step 6 objective: 91985.09 (OPTIMAL)
+Lex step 7 objective: 107317.556 (OPTIMAL)
+Lex step 8 objective: 122650.021 (OPTIMAL)
+Lex step 9 objective: 137982.487 (OPTIMAL)
+Lex step 10 objective: 153315.01 (OPTIMAL)
+end
+##########################################################
+Running config 118/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 20455.081 (OPTIMAL)
+Lex step 2 objective: 40910.163 (OPTIMAL)
+Lex step 3 objective: 61365.244 (OPTIMAL)
+Lex step 4 objective: 81820.325 (OPTIMAL)
+Lex step 5 objective: 102275.406 (OPTIMAL)
+Lex step 6 objective: 122730.488 (OPTIMAL)
+Lex step 7 objective: 143185.569 (OPTIMAL)
+Lex step 8 objective: 163640.65 (OPTIMAL)
+Lex step 9 objective: 184095.731 (OPTIMAL)
+Lex step 10 objective: 204550.813 (OPTIMAL)
+end
+##########################################################
+Running config 119/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10897.528 (OPTIMAL)
+Lex step 2 objective: 21795.057 (OPTIMAL)
+Lex step 3 objective: 32692.585 (OPTIMAL)
+Lex step 4 objective: 43590.113 (OPTIMAL)
+Lex step 5 objective: 54487.641 (OPTIMAL)
+Lex step 6 objective: 65388.166 (OPTIMAL)
+Lex step 7 objective: 76289.691 (OPTIMAL)
+Lex step 8 objective: 87191.216 (OPTIMAL)
+Lex step 9 objective: 98092.74 (OPTIMAL)
+Lex step 10 objective: 108994.438 (OPTIMAL)
+end
+##########################################################
+Running config 120/400 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13695.992 (OPTIMAL)
+Lex step 2 objective: 27391.984 (OPTIMAL)
+Lex step 3 objective: 41087.976 (OPTIMAL)
+Lex step 4 objective: 54783.968 (OPTIMAL)
+Lex step 5 objective: 68482.247 (OPTIMAL)
+Lex step 6 objective: 82181.526 (OPTIMAL)
+Lex step 7 objective: 95880.805 (OPTIMAL)
+Lex step 8 objective: 109580.084 (OPTIMAL)
+Lex step 9 objective: 123279.363 (OPTIMAL)
+Lex step 10 objective: 136978.642 (OPTIMAL)
+end
+##########################################################
+Running config 121/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 556529.519
+Running config 122/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 493263.28
+Running config 123/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 430751.891
+Running config 124/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 542707.186
+Running config 125/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.112910223e6
+Running config 126/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.332843552e6
+Running config 127/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.222861793e6
+Running config 128/400 -> (fairness=NONE, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.209886755e6
+Running config 129/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 715269.873
+Running config 130/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 596305.5
+Running config 131/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 499886.844
+Running config 132/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 671580.216
+Running config 133/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.286007509e6
+Running config 134/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.501454567e6
+Running config 135/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.282407399e6
+Running config 136/400 -> (fairness=PEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.35814812e6
+Running config 137/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 820078.885
+Running config 138/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 668118.502
+Running config 139/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 631607.58
+Running config 140/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 733000.197
+Running config 141/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.375337972e6
+Running config 142/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.556636898e6
+Running config 143/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.382348807e6
+Running config 144/400 -> (fairness=SA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.446796731e6
+Running config 145/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 785127.696
+Running config 146/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 603113.531
+Running config 147/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 524849.055
+Running config 148/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 754373.889
+Running config 149/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.28825898e6
+Running config 150/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.5221079e6
+Running config 151/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.282812602e6
+Running config 152/400 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.390618974e6
+Running config 153/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 22263.57 (OPTIMAL)
+Lex step 2 objective: 44527.139 (OPTIMAL)
+Lex step 3 objective: 66790.709 (OPTIMAL)
+Lex step 4 objective: 89063.534 (OPTIMAL)
+Lex step 5 objective: 111337.483 (OPTIMAL)
+end
+##########################################################
+Running config 154/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 25797.724 (OPTIMAL)
+Lex step 2 objective: 51595.447 (OPTIMAL)
+Lex step 3 objective: 77398.48 (OPTIMAL)
+Lex step 4 objective: 103202.513 (OPTIMAL)
+Lex step 5 objective: 129006.683 (OPTIMAL)
+end
+##########################################################
+Running config 155/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 49550.834 (OPTIMAL)
+Lex step 2 objective: 99101.668 (OPTIMAL)
+Lex step 3 objective: 148658.188 (OPTIMAL)
+Lex step 4 objective: 198215.709 (OPTIMAL)
+Lex step 5 objective: 247773.23 (OPTIMAL)
+end
+##########################################################
+Running config 156/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 24839.669 (OPTIMAL)
+Lex step 2 objective: 49679.339 (OPTIMAL)
+Lex step 3 objective: 74519.008 (OPTIMAL)
+Lex step 4 objective: 99367.722 (OPTIMAL)
+Lex step 5 objective: 124217.538 (OPTIMAL)
+end
+##########################################################
+Running config 157/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 14313.796 (OPTIMAL)
+Lex step 2 objective: 28627.592 (OPTIMAL)
+Lex step 3 objective: 42941.389 (OPTIMAL)
+Lex step 4 objective: 57255.185 (OPTIMAL)
+Lex step 5 objective: 71571.164 (OPTIMAL)
+Lex step 6 objective: 85888.144 (OPTIMAL)
+Lex step 7 objective: 100205.124 (OPTIMAL)
+Lex step 8 objective: 114522.103 (OPTIMAL)
+Lex step 9 objective: 128839.083 (OPTIMAL)
+Lex step 10 objective: 143156.2 (OPTIMAL)
+end
+##########################################################
+Running config 158/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 6437.875 (OPTIMAL)
+Lex step 2 objective: 12875.75 (OPTIMAL)
+Lex step 3 objective: 19313.625 (OPTIMAL)
+Lex step 4 objective: 25751.5 (OPTIMAL)
+Lex step 5 objective: 32189.375 (OPTIMAL)
+Lex step 6 objective: 38627.25 (OPTIMAL)
+Lex step 7 objective: 45065.125 (OPTIMAL)
+Lex step 8 objective: 51508.605 (OPTIMAL)
+Lex step 9 objective: 57953.085 (OPTIMAL)
+Lex step 10 objective: 64397.64 (OPTIMAL)
+end
+##########################################################
+Running config 159/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 15985.8 (OPTIMAL)
+Lex step 2 objective: 31971.6 (OPTIMAL)
+Lex step 3 objective: 47958.832 (OPTIMAL)
+Lex step 4 objective: 63947.064 (OPTIMAL)
+Lex step 5 objective: 79935.296 (OPTIMAL)
+Lex step 6 objective: 95923.528 (OPTIMAL)
+Lex step 7 objective: 111911.76 (OPTIMAL)
+Lex step 8 objective: 127899.991 (OPTIMAL)
+Lex step 9 objective: 143888.255 (OPTIMAL)
+Lex step 10 objective: 159876.693 (OPTIMAL)
+end
+##########################################################
+Running config 160/400 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13165.278 (OPTIMAL)
+Lex step 2 objective: 26330.555 (OPTIMAL)
+Lex step 3 objective: 39495.833 (OPTIMAL)
+Lex step 4 objective: 52661.11 (OPTIMAL)
+Lex step 5 objective: 65828.63 (OPTIMAL)
+Lex step 6 objective: 78997.149 (OPTIMAL)
+Lex step 7 objective: 92165.669 (OPTIMAL)
+Lex step 8 objective: 105334.188 (OPTIMAL)
+Lex step 9 objective: 118502.708 (OPTIMAL)
+Lex step 10 objective: 131671.385 (OPTIMAL)
+end
+##########################################################
+Running config 161/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 464934.596
+Running config 162/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 716603.953
+Running config 163/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 483117.329
+Running config 164/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 471897.167
+Running config 165/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.283782312e6
+Running config 166/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.189662269e6
+Running config 167/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.394114509e6
+Running config 168/400 -> (fairness=NONE, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.101883854e6
+Running config 169/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 577866.105
+Running config 170/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 719607.641
+Running config 171/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 595249.649
+Running config 172/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 575922.125
+Running config 173/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.36738257e6
+Running config 174/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.352990641e6
+Running config 175/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.567997227e6
+Running config 176/400 -> (fairness=PEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.318208663e6
+Running config 177/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 679919.995
+Running config 178/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 728045.371
+Running config 179/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 707150.78
+Running config 180/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 649194.699
+Running config 181/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.438603937e6
+Running config 182/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.423440602e6
+Running config 183/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.594200762e6
+Running config 184/400 -> (fairness=SA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.469882758e6
+Running config 185/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 588568.897
+Running config 186/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 720986.133
+Running config 187/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 645250.293
+Running config 188/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 617345.262
+Running config 189/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.366802302e6
+Running config 190/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.358332151e6
+Running config 191/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.608934666e6
+Running config 192/400 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.354120726e6
+Running config 193/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 24044.483 (OPTIMAL)
+Lex step 2 objective: 48088.966 (OPTIMAL)
+Lex step 3 objective: 72139.278 (OPTIMAL)
+Lex step 4 objective: 96190.59 (OPTIMAL)
+Lex step 5 objective: 120241.996 (OPTIMAL)
+end
+##########################################################
+Running config 194/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 56119.603 (OPTIMAL)
+Lex step 2 objective: 112239.207 (OPTIMAL)
+Lex step 3 objective: 168358.81 (OPTIMAL)
+Lex step 4 objective: 224478.414 (OPTIMAL)
+Lex step 5 objective: 280613.768 (OPTIMAL)
+end
+##########################################################
+Running config 195/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 35733.999 (OPTIMAL)
+Lex step 2 objective: 71467.997 (OPTIMAL)
+Lex step 3 objective: 107208.013 (OPTIMAL)
+Lex step 4 objective: 142949.028 (OPTIMAL)
+Lex step 5 objective: 178690.044 (OPTIMAL)
+end
+##########################################################
+Running config 196/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 31999.998 (OPTIMAL)
+Lex step 2 objective: 63999.996 (OPTIMAL)
+Lex step 3 objective: 96005.485 (OPTIMAL)
+Lex step 4 objective: 128011.975 (OPTIMAL)
+Lex step 5 objective: 160018.622 (OPTIMAL)
+end
+##########################################################
+Running config 197/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 17987.261 (OPTIMAL)
+Lex step 2 objective: 35974.523 (OPTIMAL)
+Lex step 3 objective: 53961.784 (OPTIMAL)
+Lex step 4 objective: 71950.78 (OPTIMAL)
+Lex step 5 objective: 89940.775 (OPTIMAL)
+Lex step 6 objective: 107930.771 (OPTIMAL)
+Lex step 7 objective: 125920.767 (OPTIMAL)
+Lex step 8 objective: 143910.763 (OPTIMAL)
+Lex step 9 objective: 161900.803 (OPTIMAL)
+Lex step 10 objective: 179891.06 (OPTIMAL)
+end
+##########################################################
+Running config 198/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13437.049 (OPTIMAL)
+Lex step 2 objective: 26874.098 (OPTIMAL)
+Lex step 3 objective: 40311.147 (OPTIMAL)
+Lex step 4 objective: 53748.197 (OPTIMAL)
+Lex step 5 objective: 67187.276 (OPTIMAL)
+Lex step 6 objective: 80627.356 (OPTIMAL)
+Lex step 7 objective: 94067.435 (OPTIMAL)
+Lex step 8 objective: 107507.515 (OPTIMAL)
+Lex step 9 objective: 120947.595 (OPTIMAL)
+Lex step 10 objective: 134387.981 (OPTIMAL)
+end
+##########################################################
+Running config 199/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11873.142 (OPTIMAL)
+Lex step 2 objective: 23746.284 (OPTIMAL)
+Lex step 3 objective: 35619.427 (OPTIMAL)
+Lex step 4 objective: 47492.569 (OPTIMAL)
+Lex step 5 objective: 59365.711 (OPTIMAL)
+Lex step 6 objective: 71241.239 (OPTIMAL)
+Lex step 7 objective: 83117.767 (OPTIMAL)
+Lex step 8 objective: 94994.295 (OPTIMAL)
+Lex step 9 objective: 106870.823 (OPTIMAL)
+Lex step 10 objective: 118747.669 (OPTIMAL)
+end
+##########################################################
+Running config 200/400 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 18083.249 (OPTIMAL)
+Lex step 2 objective: 36166.499 (OPTIMAL)
+Lex step 3 objective: 54249.748 (OPTIMAL)
+Lex step 4 objective: 72332.997 (OPTIMAL)
+Lex step 5 objective: 90418.819 (OPTIMAL)
+Lex step 6 objective: 108505.641 (OPTIMAL)
+Lex step 7 objective: 126592.463 (OPTIMAL)
+Lex step 8 objective: 144679.286 (OPTIMAL)
+Lex step 9 objective: 162766.108 (OPTIMAL)
+Lex step 10 objective: 180852.956 (OPTIMAL)
+end
+##########################################################
+Running config 201/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 573131.865
+Running config 202/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 557187.841
+Running config 203/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 413163.359
+Running config 204/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 464784.908
+Running config 205/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.223692833e6
+Running config 206/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.325202809e6
+Running config 207/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.241011977e6
+Running config 208/400 -> (fairness=NONE, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.30323345e6
+Running config 209/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 704726.503
+Running config 210/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 692360.804
+Running config 211/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 498782.137
+Running config 212/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 585263.453
+Running config 213/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.406630261e6
+Running config 214/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.411659017e6
+Running config 215/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.333081638e6
+Running config 216/400 -> (fairness=PEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.359969215e6
+Running config 217/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 753068.821
+Running config 218/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 747499.159
+Running config 219/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 670242.087
+Running config 220/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 692039.107
+Running config 221/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.475565829e6
+Running config 222/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.507674368e6
+Running config 223/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.44537629e6
+Running config 224/400 -> (fairness=SA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.388860137e6
+Running config 225/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 739064.572
+Running config 226/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 736558.853
+Running config 227/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 534388.329
+Running config 228/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 634153.132
+Running config 229/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.419851775e6
+Running config 230/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.412279611e6
+Running config 231/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.335231581e6
+Running config 232/400 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.360352518e6
+Running config 233/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 18932.36 (OPTIMAL)
+Lex step 2 objective: 37864.72 (OPTIMAL)
+Lex step 3 objective: 56797.08 (OPTIMAL)
+Lex step 4 objective: 75737.67 (OPTIMAL)
+Lex step 5 objective: 94679.561 (OPTIMAL)
+end
+##########################################################
+Running config 234/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 20839.757 (OPTIMAL)
+Lex step 2 objective: 41679.514 (OPTIMAL)
+Lex step 3 objective: 62519.27 (OPTIMAL)
+Lex step 4 objective: 83359.027 (OPTIMAL)
+Lex step 5 objective: 104218.735 (OPTIMAL)
+end
+##########################################################
+Running config 235/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 34262.627 (OPTIMAL)
+Lex step 2 objective: 68525.255 (OPTIMAL)
+Lex step 3 objective: 102794.056 (OPTIMAL)
+Lex step 4 objective: 137063.857 (OPTIMAL)
+Lex step 5 objective: 171333.658 (OPTIMAL)
+end
+##########################################################
+Running config 236/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 31921.457 (OPTIMAL)
+Lex step 2 objective: 63842.914 (OPTIMAL)
+Lex step 3 objective: 95769.963 (OPTIMAL)
+Lex step 4 objective: 127698.012 (OPTIMAL)
+Lex step 5 objective: 159626.322 (OPTIMAL)
+end
+##########################################################
+Running config 237/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9799.076 (OPTIMAL)
+Lex step 2 objective: 19598.153 (OPTIMAL)
+Lex step 3 objective: 29397.229 (OPTIMAL)
+Lex step 4 objective: 39196.305 (OPTIMAL)
+Lex step 5 objective: 48995.382 (OPTIMAL)
+Lex step 6 objective: 58797.337 (OPTIMAL)
+Lex step 7 objective: 68600.291 (OPTIMAL)
+Lex step 8 objective: 78403.246 (OPTIMAL)
+Lex step 9 objective: 88206.201 (OPTIMAL)
+Lex step 10 objective: 98009.372 (OPTIMAL)
+end
+##########################################################
+Running config 238/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10265.059 (OPTIMAL)
+Lex step 2 objective: 20530.119 (OPTIMAL)
+Lex step 3 objective: 30795.178 (OPTIMAL)
+Lex step 4 objective: 41060.237 (OPTIMAL)
+Lex step 5 objective: 51325.297 (OPTIMAL)
+Lex step 6 objective: 61593.478 (OPTIMAL)
+Lex step 7 objective: 71862.66 (OPTIMAL)
+Lex step 8 objective: 82131.841 (OPTIMAL)
+Lex step 9 objective: 92401.023 (OPTIMAL)
+Lex step 10 objective: 102670.204 (OPTIMAL)
+end
+##########################################################
+Running config 239/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13202.871 (OPTIMAL)
+Lex step 2 objective: 26405.741 (OPTIMAL)
+Lex step 3 objective: 39610.071 (OPTIMAL)
+Lex step 4 objective: 52815.4 (OPTIMAL)
+Lex step 5 objective: 66020.729 (OPTIMAL)
+Lex step 6 objective: 79226.058 (OPTIMAL)
+Lex step 7 objective: 92431.387 (OPTIMAL)
+Lex step 8 objective: 105636.717 (OPTIMAL)
+Lex step 9 objective: 118842.078 (OPTIMAL)
+Lex step 10 objective: 132047.665 (OPTIMAL)
+end
+##########################################################
+Running config 240/400 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 8324.865 (OPTIMAL)
+Lex step 2 objective: 16649.731 (OPTIMAL)
+Lex step 3 objective: 24976.062 (OPTIMAL)
+Lex step 4 objective: 33303.394 (OPTIMAL)
+Lex step 5 objective: 41630.725 (OPTIMAL)
+Lex step 6 objective: 49958.057 (OPTIMAL)
+Lex step 7 objective: 58285.389 (OPTIMAL)
+Lex step 8 objective: 66612.72 (OPTIMAL)
+Lex step 9 objective: 74940.052 (OPTIMAL)
+Lex step 10 objective: 83267.482 (OPTIMAL)
+end
+##########################################################
+Running config 241/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 700693.992
+Running config 242/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 635996.46
+Running config 243/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 515072.678
+Running config 244/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 543177.167
+Running config 245/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.206603691e6
+Running config 246/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.184191093e6
+Running config 247/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.087612253e6
+Running config 248/400 -> (fairness=NONE, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.144291228e6
+Running config 249/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 701258.419
+Running config 250/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 738752.745
+Running config 251/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 609399.382
+Running config 252/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 701414.796
+Running config 253/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.383379323e6
+Running config 254/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.400238037e6
+Running config 255/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.30505708e6
+Running config 256/400 -> (fairness=PEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.199063838e6
+Running config 257/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 701420.764
+Running config 258/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 779096.827
+Running config 259/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 702901.12
+Running config 260/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 802913.587
+Running config 261/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.45053923e6
+Running config 262/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.477976198e6
+Running config 263/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.446795882e6
+Running config 264/400 -> (fairness=SA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.259013242e6
+Running config 265/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 701258.003
+Running config 266/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 755389.078
+Running config 267/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 653377.037
+Running config 268/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 810536.612
+Running config 269/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.385216355e6
+Running config 270/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.420632975e6
+Running config 271/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.353998842e6
+Running config 272/400 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.199744015e6
+Running config 273/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 74788.518 (OPTIMAL)
+Lex step 2 objective: 149577.035 (OPTIMAL)
+Lex step 3 objective: 224365.553 (OPTIMAL)
+Lex step 4 objective: 299154.07 (OPTIMAL)
+Lex step 5 objective: 373942.986 (OPTIMAL)
+end
+##########################################################
+Running config 274/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13301.492 (OPTIMAL)
+Lex step 2 objective: 26602.985 (OPTIMAL)
+Lex step 3 objective: 39909.412 (OPTIMAL)
+Lex step 4 objective: 53216.84 (OPTIMAL)
+Lex step 5 objective: 66524.405 (OPTIMAL)
+end
+##########################################################
+Running config 275/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 27090.271 (OPTIMAL)
+Lex step 2 objective: 54180.542 (OPTIMAL)
+Lex step 3 objective: 81276.558 (OPTIMAL)
+Lex step 4 objective: 108373.574 (OPTIMAL)
+Lex step 5 objective: 135470.704 (OPTIMAL)
+end
+##########################################################
+Running config 276/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 21910.609 (OPTIMAL)
+Lex step 2 objective: 43821.217 (OPTIMAL)
+Lex step 3 objective: 65731.826 (OPTIMAL)
+Lex step 4 objective: 87651.705 (OPTIMAL)
+Lex step 5 objective: 109572.719 (OPTIMAL)
+end
+##########################################################
+Running config 277/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 14499.477 (OPTIMAL)
+Lex step 2 objective: 28998.954 (OPTIMAL)
+Lex step 3 objective: 43498.432 (OPTIMAL)
+Lex step 4 objective: 57997.909 (OPTIMAL)
+Lex step 5 objective: 72497.386 (OPTIMAL)
+Lex step 6 objective: 86996.863 (OPTIMAL)
+Lex step 7 objective: 101496.34 (OPTIMAL)
+Lex step 8 objective: 116001.721 (OPTIMAL)
+Lex step 9 objective: 130508.102 (OPTIMAL)
+Lex step 10 objective: 145014.483 (OPTIMAL)
+end
+##########################################################
+Running config 278/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11389.359 (OPTIMAL)
+Lex step 2 objective: 22778.717 (OPTIMAL)
+Lex step 3 objective: 34168.076 (OPTIMAL)
+Lex step 4 objective: 45557.435 (OPTIMAL)
+Lex step 5 objective: 56946.794 (OPTIMAL)
+Lex step 6 objective: 68339.156 (OPTIMAL)
+Lex step 7 objective: 79732.518 (OPTIMAL)
+Lex step 8 objective: 91125.88 (OPTIMAL)
+Lex step 9 objective: 102519.243 (OPTIMAL)
+Lex step 10 objective: 113912.725 (OPTIMAL)
+end
+##########################################################
+Running config 279/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 21032.481 (OPTIMAL)
+Lex step 2 objective: 42064.961 (OPTIMAL)
+Lex step 3 objective: 63097.442 (OPTIMAL)
+Lex step 4 objective: 84129.923 (OPTIMAL)
+Lex step 5 objective: 105164.495 (OPTIMAL)
+Lex step 6 objective: 126200.068 (OPTIMAL)
+Lex step 7 objective: 147235.64 (OPTIMAL)
+Lex step 8 objective: 168271.212 (OPTIMAL)
+Lex step 9 objective: 189306.785 (OPTIMAL)
+Lex step 10 objective: 210342.622 (OPTIMAL)
+end
+##########################################################
+Running config 280/400 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 24853.105 (OPTIMAL)
+Lex step 2 objective: 49706.21 (OPTIMAL)
+Lex step 3 objective: 74559.314 (OPTIMAL)
+Lex step 4 objective: 99412.419 (OPTIMAL)
+Lex step 5 objective: 124267.424 (OPTIMAL)
+Lex step 6 objective: 149123.429 (OPTIMAL)
+Lex step 7 objective: 173979.434 (OPTIMAL)
+Lex step 8 objective: 198835.439 (OPTIMAL)
+Lex step 9 objective: 223691.444 (OPTIMAL)
+Lex step 10 objective: 248547.449 (OPTIMAL)
+end
+##########################################################
+Running config 281/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 565012.608
+Running config 282/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 535714.193
+Running config 283/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 435447.492
+Running config 284/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 428475.816
+Running config 285/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.271281618e6
+Running config 286/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.163574053e6
+Running config 287/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.292008665e6
+Running config 288/400 -> (fairness=NONE, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.194052717e6
+Running config 289/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 701539.672
+Running config 290/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 671607.703
+Running config 291/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 488570.216
+Running config 292/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 544767.109
+Running config 293/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.455387939e6
+Running config 294/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.287818597e6
+Running config 295/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.391078028e6
+Running config 296/400 -> (fairness=PEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.395092798e6
+Running config 297/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 748928.955
+Running config 298/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 739157.312
+Running config 299/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 590705.202
+Running config 300/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 695182.249
+Running config 301/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.499020075e6
+Running config 302/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.397034368e6
+Running config 303/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.453385263e6
+Running config 304/400 -> (fairness=SA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.486115827e6
+Running config 305/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 748401.155
+Running config 306/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 717053.876
+Running config 307/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 498229.214
+Running config 308/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 613086.31
+Running config 309/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.486981504e6
+Running config 310/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.287068212e6
+Running config 311/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.394849312e6
+Running config 312/400 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.447224782e6
+Running config 313/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23520.543 (OPTIMAL)
+Lex step 2 objective: 47041.086 (OPTIMAL)
+Lex step 3 objective: 70561.629 (OPTIMAL)
+Lex step 4 objective: 94082.172 (OPTIMAL)
+Lex step 5 objective: 117623.085 (OPTIMAL)
+end
+##########################################################
+Running config 314/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 18887.543 (OPTIMAL)
+Lex step 2 objective: 37775.087 (OPTIMAL)
+Lex step 3 objective: 56662.63 (OPTIMAL)
+Lex step 4 objective: 75559.524 (OPTIMAL)
+Lex step 5 objective: 94457.418 (OPTIMAL)
+end
+##########################################################
+Running config 315/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 42792.266 (OPTIMAL)
+Lex step 2 objective: 85584.532 (OPTIMAL)
+Lex step 3 objective: 128383.078 (OPTIMAL)
+Lex step 4 objective: 171182.624 (OPTIMAL)
+Lex step 5 objective: 213982.17 (OPTIMAL)
+end
+##########################################################
+Running config 316/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 33147.303 (OPTIMAL)
+Lex step 2 objective: 66294.607 (OPTIMAL)
+Lex step 3 objective: 99447.359 (OPTIMAL)
+Lex step 4 objective: 132601.111 (OPTIMAL)
+Lex step 5 objective: 165755.162 (OPTIMAL)
+end
+##########################################################
+Running config 317/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11130.558 (OPTIMAL)
+Lex step 2 objective: 22261.115 (OPTIMAL)
+Lex step 3 objective: 33391.673 (OPTIMAL)
+Lex step 4 objective: 44522.231 (OPTIMAL)
+Lex step 5 objective: 55652.788 (OPTIMAL)
+Lex step 6 objective: 66785.782 (OPTIMAL)
+Lex step 7 objective: 77919.775 (OPTIMAL)
+Lex step 8 objective: 89053.769 (OPTIMAL)
+Lex step 9 objective: 100187.762 (OPTIMAL)
+Lex step 10 objective: 111321.988 (OPTIMAL)
+end
+##########################################################
+Running config 318/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11459.247 (OPTIMAL)
+Lex step 2 objective: 22918.494 (OPTIMAL)
+Lex step 3 objective: 34377.741 (OPTIMAL)
+Lex step 4 objective: 45836.988 (OPTIMAL)
+Lex step 5 objective: 57296.235 (OPTIMAL)
+Lex step 6 objective: 68758.459 (OPTIMAL)
+Lex step 7 objective: 80221.684 (OPTIMAL)
+Lex step 8 objective: 91684.908 (OPTIMAL)
+Lex step 9 objective: 103148.132 (OPTIMAL)
+Lex step 10 objective: 114611.476 (OPTIMAL)
+end
+##########################################################
+Running config 319/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 14286.801 (OPTIMAL)
+Lex step 2 objective: 28573.603 (OPTIMAL)
+Lex step 3 objective: 42860.404 (OPTIMAL)
+Lex step 4 objective: 57147.206 (OPTIMAL)
+Lex step 5 objective: 71436.206 (OPTIMAL)
+Lex step 6 objective: 85726.206 (OPTIMAL)
+Lex step 7 objective: 100016.207 (OPTIMAL)
+Lex step 8 objective: 114306.207 (OPTIMAL)
+Lex step 9 objective: 128596.208 (OPTIMAL)
+Lex step 10 objective: 142886.217 (OPTIMAL)
+end
+##########################################################
+Running config 320/400 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 16797.108 (OPTIMAL)
+Lex step 2 objective: 33594.217 (OPTIMAL)
+Lex step 3 objective: 50391.325 (OPTIMAL)
+Lex step 4 objective: 67188.434 (OPTIMAL)
+Lex step 5 objective: 83987.633 (OPTIMAL)
+Lex step 6 objective: 100787.832 (OPTIMAL)
+Lex step 7 objective: 117588.032 (OPTIMAL)
+Lex step 8 objective: 134388.231 (OPTIMAL)
+Lex step 9 objective: 151188.43 (OPTIMAL)
+Lex step 10 objective: 167988.861 (OPTIMAL)
+end
+##########################################################
+Running config 321/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 507922.716
+Running config 322/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 515611.416
+Running config 323/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 576951.189
+Running config 324/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 591110.01
+Running config 325/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.18474929e6
+Running config 326/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.18297704e6
+Running config 327/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.05742074e6
+Running config 328/400 -> (fairness=NONE, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.208447364e6
+Running config 329/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 563937.224
+Running config 330/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 575670.19
+Running config 331/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 740715.141
+Running config 332/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 730985.985
+Running config 333/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.367985253e6
+Running config 334/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.277874654e6
+Running config 335/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.295375591e6
+Running config 336/400 -> (fairness=PEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.438576135e6
+Running config 337/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 660764.381
+Running config 338/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 677460.605
+Running config 339/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 806110.53
+Running config 340/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 806345.22
+Running config 341/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.428878994e6
+Running config 342/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.391379624e6
+Running config 343/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.503743943e6
+Running config 344/400 -> (fairness=SA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.524321863e6
+Running config 345/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 564435.741
+Running config 346/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 576599.076
+Running config 347/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 853078.105
+Running config 348/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 824458.045
+Running config 349/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.375692834e6
+Running config 350/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.276640445e6
+Running config 351/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.337331215e6
+Running config 352/400 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.494395233e6
+Running config 353/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 25184.708 (OPTIMAL)
+Lex step 2 objective: 50369.416 (OPTIMAL)
+Lex step 3 objective: 75559.491 (OPTIMAL)
+Lex step 4 objective: 100750.566 (OPTIMAL)
+Lex step 5 objective: 125941.641 (OPTIMAL)
+end
+##########################################################
+Running config 354/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 26471.775 (OPTIMAL)
+Lex step 2 objective: 52943.551 (OPTIMAL)
+Lex step 3 objective: 79420.92 (OPTIMAL)
+Lex step 4 objective: 105899.289 (OPTIMAL)
+Lex step 5 objective: 132377.658 (OPTIMAL)
+end
+##########################################################
+Running config 355/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23771.893 (OPTIMAL)
+Lex step 2 objective: 47543.786 (OPTIMAL)
+Lex step 3 objective: 71315.679 (OPTIMAL)
+Lex step 4 objective: 95087.572 (OPTIMAL)
+Lex step 5 objective: 118880.436 (OPTIMAL)
+end
+##########################################################
+Running config 356/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 20549.892 (OPTIMAL)
+Lex step 2 objective: 41099.785 (OPTIMAL)
+Lex step 3 objective: 61649.677 (OPTIMAL)
+Lex step 4 objective: 82208.905 (OPTIMAL)
+Lex step 5 objective: 102769.279 (OPTIMAL)
+end
+##########################################################
+Running config 357/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9258.366 (OPTIMAL)
+Lex step 2 objective: 18516.732 (OPTIMAL)
+Lex step 3 objective: 27775.098 (OPTIMAL)
+Lex step 4 objective: 37033.464 (OPTIMAL)
+Lex step 5 objective: 46291.83 (OPTIMAL)
+Lex step 6 objective: 55552.983 (OPTIMAL)
+Lex step 7 objective: 64815.135 (OPTIMAL)
+Lex step 8 objective: 74077.288 (OPTIMAL)
+Lex step 9 objective: 83339.441 (OPTIMAL)
+Lex step 10 objective: 92601.823 (OPTIMAL)
+end
+##########################################################
+Running config 358/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 15939.788 (OPTIMAL)
+Lex step 2 objective: 31879.576 (OPTIMAL)
+Lex step 3 objective: 47819.364 (OPTIMAL)
+Lex step 4 objective: 63760.949 (OPTIMAL)
+Lex step 5 objective: 79703.535 (OPTIMAL)
+Lex step 6 objective: 95646.121 (OPTIMAL)
+Lex step 7 objective: 111588.707 (OPTIMAL)
+Lex step 8 objective: 127531.293 (OPTIMAL)
+Lex step 9 objective: 143473.879 (OPTIMAL)
+Lex step 10 objective: 159416.703 (OPTIMAL)
+end
+##########################################################
+Running config 359/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 16094.354 (OPTIMAL)
+Lex step 2 objective: 32188.709 (OPTIMAL)
+Lex step 3 objective: 48283.063 (OPTIMAL)
+Lex step 4 objective: 64377.418 (OPTIMAL)
+Lex step 5 objective: 80474.456 (OPTIMAL)
+Lex step 6 objective: 96572.494 (OPTIMAL)
+Lex step 7 objective: 112670.532 (OPTIMAL)
+Lex step 8 objective: 128768.57 (OPTIMAL)
+Lex step 9 objective: 144866.608 (OPTIMAL)
+Lex step 10 objective: 160964.648 (OPTIMAL)
+end
+##########################################################
+Running config 360/400 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 14253.663 (OPTIMAL)
+Lex step 2 objective: 28507.326 (OPTIMAL)
+Lex step 3 objective: 42760.989 (OPTIMAL)
+Lex step 4 objective: 57014.652 (OPTIMAL)
+Lex step 5 objective: 71268.315 (OPTIMAL)
+Lex step 6 objective: 85521.978 (OPTIMAL)
+Lex step 7 objective: 99779.833 (OPTIMAL)
+Lex step 8 objective: 114038.687 (OPTIMAL)
+Lex step 9 objective: 128297.542 (OPTIMAL)
+Lex step 10 objective: 142556.51 (OPTIMAL)
+end
+##########################################################
+Running config 361/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 562438.681
+Running config 362/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 614006.074
+Running config 363/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 660676.739
+Running config 364/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 521098.248
+Running config 365/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.359895019e6
+Running config 366/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.293704391e6
+Running config 367/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.28739924e6
+Running config 368/400 -> (fairness=NONE, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.232383733e6
+Running config 369/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 600303.724
+Running config 370/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 667838.41
+Running config 371/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 730699.462
+Running config 372/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 561294.766
+Running config 373/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.38067407e6
+Running config 374/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.364605955e6
+Running config 375/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.37626725e6
+Running config 376/400 -> (fairness=PEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.324180588e6
+Running config 377/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 676447.314
+Running config 378/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 710884.155
+Running config 379/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 763092.841
+Running config 380/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 598127.36
+Running config 381/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.442872752e6
+Running config 382/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.396690607e6
+Running config 383/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.437425797e6
+Running config 384/400 -> (fairness=SA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.378522949e6
+Running config 385/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 599475.781
+Running config 386/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 667921.505
+Running config 387/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 742980.037
+Running config 388/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 561503.918
+Running config 389/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.380558771e6
+Running config 390/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.364912899e6
+Running config 391/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.376839779e6
+Running config 392/400 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+OPTIMAL
+Objective : 1.325470002e6
+Running config 393/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 29631.133 (OPTIMAL)
+Lex step 2 objective: 59262.265 (OPTIMAL)
+Lex step 3 objective: 88899.505 (OPTIMAL)
+Lex step 4 objective: 118537.745 (OPTIMAL)
+Lex step 5 objective: 148175.985 (OPTIMAL)
+end
+##########################################################
+Running config 394/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 15399.341 (OPTIMAL)
+Lex step 2 objective: 30798.682 (OPTIMAL)
+Lex step 3 objective: 46198.023 (OPTIMAL)
+Lex step 4 objective: 61606.899 (OPTIMAL)
+Lex step 5 objective: 77016.776 (OPTIMAL)
+end
+##########################################################
+Running config 395/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11817.896 (OPTIMAL)
+Lex step 2 objective: 23635.792 (OPTIMAL)
+Lex step 3 objective: 35453.688 (OPTIMAL)
+Lex step 4 objective: 47281.029 (OPTIMAL)
+Lex step 5 objective: 59109.373 (OPTIMAL)
+end
+##########################################################
+Running config 396/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 37954.1 (OPTIMAL)
+Lex step 2 objective: 75908.2 (OPTIMAL)
+Lex step 3 objective: 113867.414 (OPTIMAL)
+Lex step 4 objective: 151827.628 (OPTIMAL)
+Lex step 5 objective: 189787.842 (OPTIMAL)
+end
+##########################################################
+Running config 397/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12757.544 (OPTIMAL)
+Lex step 2 objective: 25515.089 (OPTIMAL)
+Lex step 3 objective: 38272.633 (OPTIMAL)
+Lex step 4 objective: 51032.072 (OPTIMAL)
+Lex step 5 objective: 63792.511 (OPTIMAL)
+Lex step 6 objective: 76552.95 (OPTIMAL)
+Lex step 7 objective: 89313.389 (OPTIMAL)
+Lex step 8 objective: 102073.828 (OPTIMAL)
+Lex step 9 objective: 114834.267 (OPTIMAL)
+Lex step 10 objective: 127594.705 (OPTIMAL)
+end
+##########################################################
+Running config 398/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12447.093 (OPTIMAL)
+Lex step 2 objective: 24894.186 (OPTIMAL)
+Lex step 3 objective: 37341.28 (OPTIMAL)
+Lex step 4 objective: 49788.373 (OPTIMAL)
+Lex step 5 objective: 62235.466 (OPTIMAL)
+Lex step 6 objective: 74682.559 (OPTIMAL)
+Lex step 7 objective: 87133.38 (OPTIMAL)
+Lex step 8 objective: 99585.201 (OPTIMAL)
+Lex step 9 objective: 112037.022 (OPTIMAL)
+Lex step 10 objective: 124488.843 (OPTIMAL)
+end
+##########################################################
+Running config 399/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 6309.649 (OPTIMAL)
+Lex step 2 objective: 12619.298 (OPTIMAL)
+Lex step 3 objective: 18928.946 (OPTIMAL)
+Lex step 4 objective: 25238.595 (OPTIMAL)
+Lex step 5 objective: 31548.244 (OPTIMAL)
+Lex step 6 objective: 37857.893 (OPTIMAL)
+Lex step 7 objective: 44171.717 (OPTIMAL)
+Lex step 8 objective: 50486.54 (OPTIMAL)
+Lex step 9 objective: 56801.364 (OPTIMAL)
+Lex step 10 objective: 63116.439 (OPTIMAL)
+end
+##########################################################
+Running config 400/400 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6, battery_scale=2.0, pv_scale=1.0)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 17133.638 (OPTIMAL)
+Lex step 2 objective: 34267.275 (OPTIMAL)
+Lex step 3 objective: 51400.913 (OPTIMAL)
+Lex step 4 objective: 68534.55 (OPTIMAL)
+Lex step 5 objective: 85670.462 (OPTIMAL)
+Lex step 6 objective: 102807.373 (OPTIMAL)
+Lex step 7 objective: 119944.285 (OPTIMAL)
+Lex step 8 objective: 137081.196 (OPTIMAL)
+Lex step 9 objective: 154218.107 (OPTIMAL)
+Lex step 10 objective: 171355.225 (OPTIMAL)
+end
+##########################################################
+Reporte resumen: fairness_sensitivity_battery_report.csv
+Reporte por casa: fairness_sensitivity_battery_report_by_house.csv

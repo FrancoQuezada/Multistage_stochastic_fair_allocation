@@ -1,0 +1,22 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+RUN ERDINC_ESR C0001 stage=missing (2:2:12, Drahi_51.csv)
+RUN ERDINC_ESR C0002 stage=missing (2:2:12, Drahi_70.csv)
+RUN ERDINC_ESR C0003 stage=missing (2:2:12, Drahi_37.csv)
+RUN ERDINC_ESR C0004 stage=missing (2:2:12, Drahi_95.csv)
+RUN ERDINC_ESR C0005 stage=missing (2:2:12, Drahi_83.csv)
+RUN ERDINC_ESR C0006 stage=missing (6:4:4, Drahi_51.csv)
+RUN ERDINC_ESR C0007 stage=missing (6:4:4, Drahi_70.csv)
+RUN ERDINC_ESR C0008 stage=missing (6:4:4, Drahi_37.csv)
+RUN ERDINC_ESR C0009 stage=missing (6:4:4, Drahi_95.csv)
+RUN ERDINC_ESR C0010 stage=missing (6:4:4, Drahi_83.csv)
+ERDINC_ESR completado: 10 filas de resumen.

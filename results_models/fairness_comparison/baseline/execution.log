@@ -1,0 +1,42 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+RUN NONE C0001 (2:2:12, Drahi_51.csv)
+OPTIMAL
+Objective : 350647.143
+RUN NONE C0002 (2:2:12, Drahi_70.csv)
+OPTIMAL
+Objective : 555981.443
+RUN NONE C0003 (2:2:12, Drahi_37.csv)
+OPTIMAL
+Objective : 788792.427
+RUN NONE C0004 (2:2:12, Drahi_95.csv)
+OPTIMAL
+Objective : 689336.455
+RUN NONE C0005 (2:2:12, Drahi_83.csv)
+OPTIMAL
+Objective : 690780.233
+RUN NONE C0006 (6:4:4, Drahi_51.csv)
+OPTIMAL
+Objective : 475444.919
+RUN NONE C0007 (6:4:4, Drahi_70.csv)
+OPTIMAL
+Objective : 414808.668
+RUN NONE C0008 (6:4:4, Drahi_37.csv)
+OPTIMAL
+Objective : 611928.791
+RUN NONE C0009 (6:4:4, Drahi_95.csv)
+OPTIMAL
+Objective : 678346.258
+RUN NONE C0010 (6:4:4, Drahi_83.csv)
+OPTIMAL
+Objective : 743849.101
+NONE completado: 10 filas de resumen.

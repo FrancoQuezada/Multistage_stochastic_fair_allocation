@@ -1,0 +1,37 @@
+Test Summary:                      | Pass  Total  Time
+Static expected demands and shares |  266    266  0.0s
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+Test Summary:                             | Pass  Total  Time
+Static policy feasibility and diagnostics |  288    288  0.0s
+OPTIMAL
+Objective : 749505.462
+Test Summary:                        | Pass  Total  Time
+Same operational formulation as NONE |    9      9  0.1s
+Test Summary:           | Pass  Total  Time
+Instance seed stability |    5      5  0.0s
+Test Summary:                 | Pass  Total  Time
+Static policy reproducibility |    7      7  0.0s
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 39511.228 (OPTIMAL)
+Lex step 2 objective: 79022.457 (OPTIMAL)
+Lex step 3 objective: 118533.685 (OPTIMAL)
+Lex step 4 objective: 158044.913 (OPTIMAL)
+Lex step 5 objective: 197556.142 (OPTIMAL)
+end
+##########################################################
+Test Summary:                    | Pass  Total  Time
+All existing policies regression |  151    151  0.1s
+Test Summary:         | Pass  Total  Time
+Unrelated file hashes |   20     20  0.0s

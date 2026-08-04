@@ -1,0 +1,31 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+FAIL ERDINC_PESR C0006 stage=missing: InterruptException:
+ERROR: LoadError: ERDINC_PESR registró 1 fallos.
+Stacktrace:
+ [1] error(s::String)
+   @ Base ./error.jl:35
+ [2] run_fairness_policy_worker(policy::String; manifest_path::String, comparison_dir::String, conditional_stages::Vector{Int64}, fairness_mmr::Float64, lex_eps_abs::Float64, cplex_threads::Int64)
+   @ Main ~/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:110
+ [3] top-level scope
+   @ ~/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:118
+in expression starting at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:115
+RUN ERDINC_PESR C0001 stage=missing (2:2:12, Drahi_51.csv)
+RUN ERDINC_PESR C0002 stage=missing (2:2:12, Drahi_70.csv)
+RUN ERDINC_PESR C0003 stage=missing (2:2:12, Drahi_37.csv)
+RUN ERDINC_PESR C0004 stage=missing (2:2:12, Drahi_95.csv)
+RUN ERDINC_PESR C0005 stage=missing (2:2:12, Drahi_83.csv)
+RUN ERDINC_PESR C0006 stage=missing (6:4:4, Drahi_51.csv)
+RUN ERDINC_PESR C0007 stage=missing (6:4:4, Drahi_70.csv)
+RUN ERDINC_PESR C0008 stage=missing (6:4:4, Drahi_37.csv)
+RUN ERDINC_PESR C0009 stage=missing (6:4:4, Drahi_95.csv)
+RUN ERDINC_PESR C0010 stage=missing (6:4:4, Drahi_83.csv)

@@ -1,0 +1,17 @@
+Worker,ExitCode,LogFile
+NONE,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/baseline/execution.log
+PEA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/PEA/execution.log
+SA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/SA/execution.log
+LEXMMFPEA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/LEXMMFPEA/execution.log
+LEXMMFSA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/LEXMMFSA/execution.log
+ERDINC_PSR,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/ERDINC_PSR/execution.log
+ERDINC_ESR,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/ERDINC_ESR/execution.log
+ERDINC_PESR,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/ERDINC_PESR/execution.log
+ERDINC_PC,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/ERDINC_PC/execution.log
+ERDINC_EC,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/ERDINC_EC/execution.log
+ERDINC_PEC,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/ERDINC_PEC/execution.log
+STATIC_DEMAND_SHARE,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/STATIC_DEMAND_SHARE/execution.log
+CPEA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/CPEA/execution.log
+CSA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/CSA/execution.log
+CLEXMMFPEA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/CLEXMMFPEA/execution.log
+CLEXMMFSA,0,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison_smoke/by_policy/CLEXMMFSA/execution.log

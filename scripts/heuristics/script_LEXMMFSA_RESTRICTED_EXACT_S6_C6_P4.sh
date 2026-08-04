@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../common.sh"
+INST_FOLDER="${INST_FOLDER:-$DEFAULT_INST_FOLDER}"
+INSTANCE_FROM="${INSTANCE_FROM:-1}"
+INSTANCE_TO="${INSTANCE_TO:-10}"
+FAIRNESS_SET="${FAIRNESS_SET:-LEXMMFSA}"
+TREE_SET="${TREE_SET:-6:6:4}"
+J_SET="${J_SET:-5,10}"
+THETA_SET="${THETA_SET:-0.2,0.6}"
+AVG_D_SET="${AVG_D_SET:-100.0}"
+DEV_D_SET="${DEV_D_SET:-10.0,20.0}"
+DEMAND_PROFILE_SET="${DEMAND_PROFILE_SET:-mixed}"
+BATTERY_SCALE_SET="${BATTERY_SCALE_SET:-1.0}"
+PV_SCALE_SET="${PV_SCALE_SET:-1.0}"
+OUT_CSV="${OUT_CSV:-$RESULTS_HEURISTICS_DIR/lexmmfsa_restricted_exact_S6_C6_P4.csv}"
+OUT_CSV_HOUSE="${OUT_CSV_HOUSE:-$RESULTS_HEURISTICS_DIR/lexmmfsa_restricted_exact_S6_C6_P4_by_house.csv}"
+OUT_CSV_DIAG="${OUT_CSV_DIAG:-$RESULTS_HEURISTICS_DIR/lexmmfsa_restricted_exact_S6_C6_P4_diagnostics.csv}"
+OUT_CSV_DIAG_HOUSE="${OUT_CSV_DIAG_HOUSE:-$RESULTS_HEURISTICS_DIR/lexmmfsa_restricted_exact_S6_C6_P4_diagnostics_by_house.csv}"
+export INST_FOLDER INSTANCE_FROM INSTANCE_TO FAIRNESS_SET TREE_SET
+export J_SET THETA_SET AVG_D_SET DEV_D_SET DEMAND_PROFILE_SET BATTERY_SCALE_SET PV_SCALE_SET
+export OUT_CSV OUT_CSV_HOUSE OUT_CSV_DIAG OUT_CSV_DIAG_HOUSE
+exec julia --quiet --startup-file=no --history-file=no "$CODES_DIR/run_lex_restricted_exact.jl"

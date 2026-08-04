@@ -1,0 +1,82 @@
+OPTIMAL
+Objective : 570403.977
+OPTIMAL
+Objective : 601372.039
+OPTIMAL
+Objective : 648557.024
+OPTIMAL
+Objective : 599245.667
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23738.353 (OPTIMAL)
+Lex step 2 objective: 47480.322 (OPTIMAL)
+Lex step 3 objective: 71223.29 (OPTIMAL)
+Lex step 4 objective: 94966.259 (OPTIMAL)
+Lex step 5 objective: 118709.227 (OPTIMAL)
+end
+##########################################################
+OPTIMAL
+Objective : 692300.976
+OPTIMAL
+Objective : 706040.985
+OPTIMAL
+Objective : 722377.531
+OPTIMAL
+Objective : 706059.462
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9537.547 (OPTIMAL)
+Lex step 2 objective: 19075.095 (OPTIMAL)
+Lex step 3 objective: 28617.539 (OPTIMAL)
+Lex step 4 objective: 38160.983 (OPTIMAL)
+Lex step 5 objective: 47704.428 (OPTIMAL)
+end
+##########################################################
+OPTIMAL
+Objective : 1.27748834e6
+OPTIMAL
+Objective : 1.329085505e6
+OPTIMAL
+Objective : 1.415208596e6
+OPTIMAL
+Objective : 1.329106802e6
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11507.313 (OPTIMAL)
+Lex step 2 objective: 23014.627 (OPTIMAL)
+Lex step 3 objective: 34521.94 (OPTIMAL)
+Lex step 4 objective: 46029.253 (OPTIMAL)
+Lex step 5 objective: 57539.055 (OPTIMAL)
+Lex step 6 objective: 69049.857 (OPTIMAL)
+Lex step 7 objective: 80560.658 (OPTIMAL)
+Lex step 8 objective: 92071.46 (OPTIMAL)
+Lex step 9 objective: 103582.262 (OPTIMAL)
+Lex step 10 objective: 115093.064 (OPTIMAL)
+end
+##########################################################
+OPTIMAL
+Objective : 1.359504012e6
+OPTIMAL
+Objective : 1.446857363e6
+OPTIMAL
+Objective : 1.479051772e6
+OPTIMAL
+Objective : 1.447675694e6
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 7705.88 (OPTIMAL)
+Lex step 2 objective: 15411.759 (OPTIMAL)
+Lex step 3 objective: 23117.639 (OPTIMAL)
+Lex step 4 objective: 30823.519 (OPTIMAL)
+Lex step 5 objective: 38529.398 (OPTIMAL)
+Lex step 6 objective: 46235.278 (OPTIMAL)
+Lex step 7 objective: 53941.158 (OPTIMAL)
+Lex step 8 objective: 61652.921 (OPTIMAL)
+Lex step 9 objective: 69365.684 (OPTIMAL)
+Lex step 10 objective: 77078.447 (OPTIMAL)
+end
+##########################################################
+Detalle por casa: representative_instance_house_metrics.csv
+Resumen PV autonomy: representative_instance_pv_autonomy_summary.csv
+Resumen savings: representative_instance_savings_summary.csv
+Tablas LaTeX: representative_instance_tables.tex

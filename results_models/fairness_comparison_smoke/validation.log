@@ -1,0 +1,32 @@
+Test Summary: | Pass  Total  Time
+Manifest      |    5      5  0.8s
+Test Summary:                      | Pass  Total  Time
+Per-policy counts and manifest use |   39     39  0.4s
+Test Summary:                  | Pass  Total  Time
+No duplicates and completeness |    6      6  0.9s
+Test Summary:             | Pass  Total  Time
+Conditional probabilities |    2      2  0.2s
+Test Summary:      | Pass  Total  Time
+Fairness residuals |   20     20  0.0s
+Test Summary:       | Pass  Total  Time
+Consolidated unions |    3      3  0.8s
+Test Summary:            | Pass  Total  Time
+Historical source hashes |   14     14  0.0s
+OPTIMAL
+Objective : 482716.984
+OPTIMAL
+Objective : 724981.943
+OPTIMAL
+Objective : 505572.164
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 30345.436 (OPTIMAL)
+Lex step 2 objective: 60690.873 (OPTIMAL)
+Lex step 3 objective: 91041.749 (OPTIMAL)
+Lex step 4 objective: 121393.626 (OPTIMAL)
+Lex step 5 objective: 151745.503 (OPTIMAL)
+end
+##########################################################
+Test Summary:                   | Pass  Total   Time
+Conditional stage 1 equivalence |   10     10  14.1s
+Validación comparativa completada: 16 ejecuciones externas.

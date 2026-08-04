@@ -1,0 +1,46 @@
+Test Summary:             | Pass  Total  Time
+Conditional probabilities |   14     14  0.0s
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+Test Summary:                 | Pass  Total  Time
+Root proportional equivalence |    8      8  5.5s
+OPTIMAL
+Objective : 749505.462
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 39511.228 (OPTIMAL)
+Lex step 2 objective: 79022.457 (OPTIMAL)
+Lex step 3 objective: 118533.685 (OPTIMAL)
+Lex step 4 objective: 158044.913 (OPTIMAL)
+Lex step 5 objective: 197556.142 (OPTIMAL)
+end
+##########################################################
+Test Summary:                        | Pass  Total  Time
+Root lexicographic-level equivalence |    6      6  0.9s
+Test Summary:    | Pass  Total  Time
+Erdinc MMR rules |   30     30  0.4s
+Test Summary:                      | Pass  Total  Time
+Conditional proportional equations |   16     16  0.2s
+Test Summary:                             | Pass  Total  Time
+Weighted conditional lexicographic levels |   20     20  0.1s
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+OPTIMAL
+Objective : 749505.462
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 39511.228 (OPTIMAL)
+Lex step 2 objective: 79022.457 (OPTIMAL)
+Lex step 3 objective: 118533.685 (OPTIMAL)
+Lex step 4 objective: 158044.913 (OPTIMAL)
+Lex step 5 objective: 197556.142 (OPTIMAL)
+end
+##########################################################
+Test Summary:                   | Pass  Total  Time
+Legacy componentwise regression |   55     55  0.2s

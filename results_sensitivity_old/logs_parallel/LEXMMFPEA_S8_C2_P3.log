@@ -1,0 +1,243 @@
+Total configuraciones a ejecutar: 80
+Running config 1/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 642679.588
+Running config 2/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 622286.032
+Running config 3/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 510276.103
+Running config 4/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 676045.492
+Running config 5/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.314801101e6
+Running config 6/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.352478707e6
+Running config 7/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.415689501e6
+Running config 8/80 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.523834992e6
+Running config 9/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 660806.883
+Running config 10/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 750613.487
+Running config 11/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 743460.771
+Running config 12/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 740050.871
+Running config 13/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.453915183e6
+Running config 14/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.454412192e6
+Running config 15/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.473962595e6
+Running config 16/80 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.412276884e6
+Running config 17/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 704643.236
+Running config 18/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 687970.133
+Running config 19/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 720685.9
+Running config 20/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 721779.003
+Running config 21/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.447303636e6
+Running config 22/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.376736786e6
+Running config 23/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.370028508e6
+Running config 24/80 -> (fairness=LEXMMFPEA, file=Drahi_3.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.233011182e6
+Running config 25/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 470774.263
+Running config 26/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 700725.9
+Running config 27/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 803838.774
+Running config 28/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 664486.607
+Running config 29/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.218097652e6
+Running config 30/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.5290818e6
+Running config 31/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.288683349e6
+Running config 32/80 -> (fairness=LEXMMFPEA, file=Drahi_4.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.435578937e6
+Running config 33/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 536044.587
+Running config 34/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 585903.291
+Running config 35/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 690079.025
+Running config 36/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 674109.321
+Running config 37/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.167511236e6
+Running config 38/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.348729615e6
+Running config 39/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.344057794e6
+Running config 40/80 -> (fairness=LEXMMFPEA, file=Drahi_5.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.398897463e6
+Running config 41/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 736491.901
+Running config 42/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 746440.968
+Running config 43/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 714307.266
+Running config 44/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 613146.483
+Running config 45/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.369551561e6
+Running config 46/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.28650731e6
+Running config 47/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.227632344e6
+Running config 48/80 -> (fairness=LEXMMFPEA, file=Drahi_6.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.412464765e6
+Running config 49/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 738352.542
+Running config 50/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 559243.294
+Running config 51/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 854480.822
+Running config 52/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 570768.666
+Running config 53/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.388727872e6
+Running config 54/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.382337504e6
+Running config 55/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.206547779e6
+Running config 56/80 -> (fairness=LEXMMFPEA, file=Drahi_7.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.322938335e6
+Running config 57/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 665961.613
+Running config 58/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 534701.065
+Running config 59/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 528344.458
+Running config 60/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 568385.836
+Running config 61/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.568770343e6
+Running config 62/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.305780102e6
+Running config 63/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.521410701e6
+Running config 64/80 -> (fairness=LEXMMFPEA, file=Drahi_8.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.280650698e6
+Running config 65/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 588072.286
+Running config 66/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 801278.4
+Running config 67/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 709821.06
+Running config 68/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 838829.962
+Running config 69/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.244272961e6
+Running config 70/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.375197107e6
+Running config 71/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.387605055e6
+Running config 72/80 -> (fairness=LEXMMFPEA, file=Drahi_9.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.251591246e6
+Running config 73/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 697101.381
+Running config 74/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=5, theta=0.2)
+OPTIMAL
+Objective : 725395.654
+Running config 75/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 706417.718
+Running config 76/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=5, theta=0.6)
+OPTIMAL
+Objective : 711273.667
+Running config 77/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.361621003e6
+Running config 78/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=10, theta=0.2)
+OPTIMAL
+Objective : 1.447554661e6
+Running config 79/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.267808666e6
+Running config 80/80 -> (fairness=LEXMMFPEA, file=Drahi_10.csv, S=8, C=2, P=3, J=10, theta=0.6)
+OPTIMAL
+Objective : 1.312405492e6
+Reporte resumen: fairness_LEXMMFPEA_report.csv
+Reporte por casa: fairness_LEXMMFPEA_report_by_house.csv

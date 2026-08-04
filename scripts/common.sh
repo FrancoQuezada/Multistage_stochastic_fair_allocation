@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+CODES_DIR="$ROOT_DIR/codes"
+SCRIPTS_DIR="$ROOT_DIR/scripts"
+RESULTS_MODELS_DIR="$ROOT_DIR/results_models"
+RESULTS_HEURISTICS_DIR="$ROOT_DIR/results_heuristics"
+RESULTS_SENSITIVITY_DIR="$ROOT_DIR/results_sensitivity"
+RESULTS_DECOMPOSICION_DIR="$ROOT_DIR/results_decomposicion"
+ARCHIVE_DIR="$ROOT_DIR/archive_legacy"
+DEFAULT_INST_FOLDER="$CODES_DIR/inst/inst2020"
+
+mkdir -p "$RESULTS_MODELS_DIR" "$RESULTS_HEURISTICS_DIR" "$RESULTS_SENSITIVITY_DIR" "$RESULTS_DECOMPOSICION_DIR"

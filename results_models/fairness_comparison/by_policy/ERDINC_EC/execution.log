@@ -1,0 +1,80 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+
+[46631] signal 2: Interrupción
+in expression starting at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:115
+gc_page_data at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gc.h:390 [inlined]
+jl_gc_pool_alloc_inner at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gc.c:1331
+jl_gc_pool_alloc_noinline at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gc.c:1386 [inlined]
+jl_gc_alloc_ at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/julia_internal.h:523 [inlined]
+jl_gc_alloc at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gc.c:3946
+_new_genericmemory_ at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/genericmemory.c:56
+jl_genericmemory_copy_slice at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/genericmemory.c:349
+copy at ./array.jl:350 [inlined]
+copy at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/functions.jl:147 [inlined]
+canonical at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/functions.jl:1050 [inlined]
+_indices_and_coefficients at /home/franco/.julia/packages/CPLEX/5jmjD/src/MOI/MOI_wrapper.jl:619
+add_constraint at /home/franco/.julia/packages/CPLEX/5jmjD/src/MOI/MOI_wrapper.jl:2000
+_copy_constraints at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/copy.jl:180
+_copy_constraints at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/copy.jl:192
+unknown function (ip: 0x7697bab691e2)
+pass_nonvariable_constraints_fallback at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/copy.jl:203
+pass_nonvariable_constraints at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/copy.jl:229 [inlined]
+pass_nonvariable_constraints at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Bridges/bridge_optimizer.jl:432
+_pass_constraints at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/copy.jl:251
+default_copy_to at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/copy.jl:393
+copy_to at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Bridges/bridge_optimizer.jl:448 [inlined]
+optimize! at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/MathOptInterface.jl:121 [inlined]
+optimize! at /home/franco/.julia/packages/MathOptInterface/zq9bo/src/Utilities/cachingoptimizer.jl:370
+unknown function (ip: 0x7697bab65b82)
+#optimize!#105 at /home/franco/.julia/packages/JuMP/N7h14/src/optimizer_interface.jl:609
+optimize! at /home/franco/.julia/packages/JuMP/N7h14/src/optimizer_interface.jl:560 [inlined]
+#solve_erdinc_fairness#281 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/conditional_fairness.jl:400
+solve_erdinc_fairness at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/conditional_fairness.jl:388 [inlined]
+#solve_new_fairness#297 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/conditional_fairness.jl:630
+solve_new_fairness at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/conditional_fairness.jl:619 [inlined]
+#solveMulti#348 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/multi.jl:21
+solveMulti at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/multi.jl:11
+solveMulti at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/multi.jl:11 [inlined]
+#solve_comparison_policy#536 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/fairness_comparison_metrics.jl:189
+solve_comparison_policy at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/fairness_comparison_metrics.jl:163 [inlined]
+#run_fairness_policy_worker#585 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:71
+run_fairness_policy_worker at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:19
+unknown function (ip: 0x7697bab11cf2)
+jl_apply at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/julia.h:2157 [inlined]
+do_call at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:126
+eval_value at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:223
+eval_stmt_value at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:174 [inlined]
+eval_body at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:666
+jl_interpret_toplevel_thunk at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:824
+jl_toplevel_eval_flex at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/toplevel.c:943
+jl_toplevel_eval_flex at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/toplevel.c:886
+ijl_toplevel_eval_in at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/toplevel.c:994
+eval at ./boot.jl:430 [inlined]
+include_string at ./loading.jl:2734
+_include at ./loading.jl:2794
+include at ./Base.jl:562
+jfptr_include_46986.1 at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/lib/julia/sys.so (unknown line)
+exec_options at ./client.jl:323
+_start at ./client.jl:531
+jfptr__start_73684.1 at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/lib/julia/sys.so (unknown line)
+jl_apply at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/julia.h:2157 [inlined]
+true_main at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jlapi.c:900
+jl_repl_entrypoint at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jlapi.c:1059
+main at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/cli/loader_exe.c:58
+unknown function (ip: 0x7697e0c29d8f)
+__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
+unknown function (ip: 0x4010b8)
+unknown function (ip: (nil))
+Allocations: 80528823 (Pool: 80525767; Big: 3056); GC: 31
+RUN ERDINC_EC C0001 stage=missing (2:2:12, Drahi_51.csv)
+RUN ERDINC_EC C0002 stage=missing (2:2:12, Drahi_70.csv)
+RUN ERDINC_EC C0003 stage=missing (2:2:12, Drahi_37.csv)
+RUN ERDINC_EC C0004 stage=missing (2:2:12, Drahi_95.csv)
+RUN ERDINC_EC C0005 stage=missing (2:2:12, Drahi_83.csv)
+RUN ERDINC_EC C0006 stage=missing (6:4:4, Drahi_51.csv)

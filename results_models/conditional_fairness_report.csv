@@ -1,0 +1,2 @@
+InstanceNo,InstanceFile,InstanceID,Fairness,Status,ExpectedCost,ScenarioCostExpected,ScenarioCostMin,ScenarioCostMax,RegretExpected,RegretMin,RegretMax,DemandProfile,BatteryScale,PVScale,RunTimeSec,ModelSolveTimeSec,ConditionalStage,FairnessMMR,FairnessAbsTol,LexEpsAbs,MaxFairnessViolation
+1,Drahi_1.csv,5_56,CPEA,true,749505.4619992657,749505.4619992657,740727.6567222188,753762.5035810599,NaN,NaN,NaN,mixed,1.0,1.0,2.2262020111083984,0.0,2,,0.0,,2.5579538487363607e-13

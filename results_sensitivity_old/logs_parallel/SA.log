@@ -1,0 +1,9 @@
+Total configuraciones a ejecutar: 2
+Running config 1/2 -> (fairness=SA, file=Drahi_1.csv, S=2, C=2, P=12, J=5, theta=0.2)
+OPTIMAL
+Objective : 645580.311
+Running config 2/2 -> (fairness=SA, file=Drahi_2.csv, S=2, C=2, P=12, J=5, theta=0.2)
+OPTIMAL
+Objective : 675983.04
+Reporte resumen: fairness_SA_report.csv
+Reporte por casa: fairness_SA_report_by_house.csv

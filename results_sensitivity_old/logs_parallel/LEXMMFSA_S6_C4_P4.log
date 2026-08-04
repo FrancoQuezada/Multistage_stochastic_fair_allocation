@@ -1,0 +1,1003 @@
+Total configuraciones a ejecutar: 80
+Running config 1/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23738.353 (OPTIMAL)
+Lex step 2 objective: 47480.322 (OPTIMAL)
+Lex step 3 objective: 71223.29 (OPTIMAL)
+Lex step 4 objective: 94966.259 (OPTIMAL)
+Lex step 5 objective: 118709.227 (OPTIMAL)
+end
+##########################################################
+Running config 2/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 21356.717 (OPTIMAL)
+Lex step 2 objective: 42713.433 (OPTIMAL)
+Lex step 3 objective: 64070.15 (OPTIMAL)
+Lex step 4 objective: 85436.042 (OPTIMAL)
+Lex step 5 objective: 106802.934 (OPTIMAL)
+end
+##########################################################
+Running config 3/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9537.547 (OPTIMAL)
+Lex step 2 objective: 19075.095 (OPTIMAL)
+Lex step 3 objective: 28617.539 (OPTIMAL)
+Lex step 4 objective: 38160.983 (OPTIMAL)
+Lex step 5 objective: 47704.428 (OPTIMAL)
+end
+##########################################################
+Running config 4/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 15990.817 (OPTIMAL)
+Lex step 2 objective: 31981.633 (OPTIMAL)
+Lex step 3 objective: 47978.389 (OPTIMAL)
+Lex step 4 objective: 63976.145 (OPTIMAL)
+Lex step 5 objective: 79974.006 (OPTIMAL)
+end
+##########################################################
+Running config 5/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11507.313 (OPTIMAL)
+Lex step 2 objective: 23014.627 (OPTIMAL)
+Lex step 3 objective: 34521.94 (OPTIMAL)
+Lex step 4 objective: 46029.253 (OPTIMAL)
+Lex step 5 objective: 57539.055 (OPTIMAL)
+Lex step 6 objective: 69049.857 (OPTIMAL)
+Lex step 7 objective: 80560.658 (OPTIMAL)
+Lex step 8 objective: 92071.46 (OPTIMAL)
+Lex step 9 objective: 103582.262 (OPTIMAL)
+Lex step 10 objective: 115093.064 (OPTIMAL)
+end
+##########################################################
+Running config 6/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 6514.341 (OPTIMAL)
+Lex step 2 objective: 13028.682 (OPTIMAL)
+Lex step 3 objective: 19543.024 (OPTIMAL)
+Lex step 4 objective: 26057.365 (OPTIMAL)
+Lex step 5 objective: 32573.978 (OPTIMAL)
+Lex step 6 objective: 39091.591 (OPTIMAL)
+Lex step 7 objective: 45609.204 (OPTIMAL)
+Lex step 8 objective: 52126.817 (OPTIMAL)
+Lex step 9 objective: 58644.43 (OPTIMAL)
+Lex step 10 objective: 65162.197 (OPTIMAL)
+end
+##########################################################
+Running config 7/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 7705.88 (OPTIMAL)
+Lex step 2 objective: 15411.759 (OPTIMAL)
+Lex step 3 objective: 23117.639 (OPTIMAL)
+Lex step 4 objective: 30823.519 (OPTIMAL)
+Lex step 5 objective: 38529.398 (OPTIMAL)
+Lex step 6 objective: 46235.278 (OPTIMAL)
+Lex step 7 objective: 53941.158 (OPTIMAL)
+Lex step 8 objective: 61652.921 (OPTIMAL)
+Lex step 9 objective: 69365.684 (OPTIMAL)
+Lex step 10 objective: 77078.447 (OPTIMAL)
+end
+##########################################################
+Running config 8/80 -> (fairness=LEXMMFSA, file=Drahi_1.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 8142.508 (OPTIMAL)
+Lex step 2 objective: 16285.016 (OPTIMAL)
+Lex step 3 objective: 24427.524 (OPTIMAL)
+Lex step 4 objective: 32570.032 (OPTIMAL)
+Lex step 5 objective: 40714.574 (OPTIMAL)
+Lex step 6 objective: 48860.116 (OPTIMAL)
+Lex step 7 objective: 57005.658 (OPTIMAL)
+Lex step 8 objective: 65151.2 (OPTIMAL)
+Lex step 9 objective: 73296.742 (OPTIMAL)
+Lex step 10 objective: 81442.553 (OPTIMAL)
+end
+##########################################################
+Running config 9/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 19729.498 (OPTIMAL)
+Lex step 2 objective: 39462.454 (OPTIMAL)
+Lex step 3 objective: 59196.41 (OPTIMAL)
+Lex step 4 objective: 78930.366 (OPTIMAL)
+Lex step 5 objective: 98664.418 (OPTIMAL)
+end
+##########################################################
+Running config 10/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10458.544 (OPTIMAL)
+Lex step 2 objective: 20917.089 (OPTIMAL)
+Lex step 3 objective: 31381.104 (OPTIMAL)
+Lex step 4 objective: 41846.12 (OPTIMAL)
+Lex step 5 objective: 52311.18 (OPTIMAL)
+end
+##########################################################
+Running config 11/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11863.233 (OPTIMAL)
+Lex step 2 objective: 23726.467 (OPTIMAL)
+Lex step 3 objective: 35595.779 (OPTIMAL)
+Lex step 4 objective: 47466.09 (OPTIMAL)
+Lex step 5 objective: 59336.404 (OPTIMAL)
+end
+##########################################################
+Running config 12/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10078.81 (OPTIMAL)
+Lex step 2 objective: 20157.62 (OPTIMAL)
+Lex step 3 objective: 30241.844 (OPTIMAL)
+Lex step 4 objective: 40327.068 (OPTIMAL)
+Lex step 5 objective: 50412.292 (OPTIMAL)
+end
+##########################################################
+Running config 13/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 5565.248 (OPTIMAL)
+Lex step 2 objective: 11130.495 (OPTIMAL)
+Lex step 3 objective: 16695.743 (OPTIMAL)
+Lex step 4 objective: 22260.991 (OPTIMAL)
+Lex step 5 objective: 27828.109 (OPTIMAL)
+Lex step 6 objective: 33396.228 (OPTIMAL)
+Lex step 7 objective: 38964.347 (OPTIMAL)
+Lex step 8 objective: 44532.466 (OPTIMAL)
+Lex step 9 objective: 50100.585 (OPTIMAL)
+Lex step 10 objective: 55668.878 (OPTIMAL)
+end
+##########################################################
+Running config 14/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 4898.559 (OPTIMAL)
+Lex step 2 objective: 9797.117 (OPTIMAL)
+Lex step 3 objective: 14695.676 (OPTIMAL)
+Lex step 4 objective: 19594.234 (OPTIMAL)
+Lex step 5 objective: 24494.862 (OPTIMAL)
+Lex step 6 objective: 29396.489 (OPTIMAL)
+Lex step 7 objective: 34298.117 (OPTIMAL)
+Lex step 8 objective: 39199.744 (OPTIMAL)
+Lex step 9 objective: 44101.371 (OPTIMAL)
+Lex step 10 objective: 49003.213 (OPTIMAL)
+end
+##########################################################
+Running config 15/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 3700.761 (OPTIMAL)
+Lex step 2 objective: 7401.522 (OPTIMAL)
+Lex step 3 objective: 11102.283 (OPTIMAL)
+Lex step 4 objective: 14803.044 (OPTIMAL)
+Lex step 5 objective: 18506.123 (OPTIMAL)
+Lex step 6 objective: 22210.202 (OPTIMAL)
+Lex step 7 objective: 25914.281 (OPTIMAL)
+Lex step 8 objective: 29618.361 (OPTIMAL)
+Lex step 9 objective: 33322.44 (OPTIMAL)
+Lex step 10 objective: 37026.534 (OPTIMAL)
+end
+##########################################################
+Running config 16/80 -> (fairness=LEXMMFSA, file=Drahi_2.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 6106.781 (OPTIMAL)
+Lex step 2 objective: 12213.562 (OPTIMAL)
+Lex step 3 objective: 18320.344 (OPTIMAL)
+Lex step 4 objective: 24427.125 (OPTIMAL)
+Lex step 5 objective: 30533.906 (OPTIMAL)
+Lex step 6 objective: 36643.41 (OPTIMAL)
+Lex step 7 objective: 42753.914 (OPTIMAL)
+Lex step 8 objective: 48864.418 (OPTIMAL)
+Lex step 9 objective: 54974.922 (OPTIMAL)
+Lex step 10 objective: 61085.664 (OPTIMAL)
+end
+##########################################################
+Running config 17/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 19977.602 (OPTIMAL)
+Lex step 2 objective: 39955.204 (OPTIMAL)
+Lex step 3 objective: 59932.806 (OPTIMAL)
+Lex step 4 objective: 79919.989 (OPTIMAL)
+Lex step 5 objective: 99908.172 (OPTIMAL)
+end
+##########################################################
+Running config 18/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23484.784 (OPTIMAL)
+Lex step 2 objective: 46969.568 (OPTIMAL)
+Lex step 3 objective: 70460.143 (OPTIMAL)
+Lex step 4 objective: 93951.718 (OPTIMAL)
+Lex step 5 objective: 117443.346 (OPTIMAL)
+end
+##########################################################
+Running config 19/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 32729.543 (OPTIMAL)
+Lex step 2 objective: 65459.087 (OPTIMAL)
+Lex step 3 objective: 98194.223 (OPTIMAL)
+Lex step 4 objective: 130930.358 (OPTIMAL)
+Lex step 5 objective: 163666.848 (OPTIMAL)
+end
+##########################################################
+Running config 20/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 16835.227 (OPTIMAL)
+Lex step 2 objective: 33670.455 (OPTIMAL)
+Lex step 3 objective: 50511.351 (OPTIMAL)
+Lex step 4 objective: 67353.247 (OPTIMAL)
+Lex step 5 objective: 84195.268 (OPTIMAL)
+end
+##########################################################
+Running config 21/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13667.252 (OPTIMAL)
+Lex step 2 objective: 27334.505 (OPTIMAL)
+Lex step 3 objective: 41001.757 (OPTIMAL)
+Lex step 4 objective: 54670.966 (OPTIMAL)
+Lex step 5 objective: 68341.174 (OPTIMAL)
+Lex step 6 objective: 82011.382 (OPTIMAL)
+Lex step 7 objective: 95681.591 (OPTIMAL)
+Lex step 8 objective: 109351.799 (OPTIMAL)
+Lex step 9 objective: 123022.008 (OPTIMAL)
+Lex step 10 objective: 136692.302 (OPTIMAL)
+end
+##########################################################
+Running config 22/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 20425.686 (OPTIMAL)
+Lex step 2 objective: 40851.372 (OPTIMAL)
+Lex step 3 objective: 61277.058 (OPTIMAL)
+Lex step 4 objective: 81702.744 (OPTIMAL)
+Lex step 5 objective: 102128.429 (OPTIMAL)
+Lex step 6 objective: 122554.115 (OPTIMAL)
+Lex step 7 objective: 142979.801 (OPTIMAL)
+Lex step 8 objective: 163405.487 (OPTIMAL)
+Lex step 9 objective: 183831.173 (OPTIMAL)
+Lex step 10 objective: 204256.859 (OPTIMAL)
+end
+##########################################################
+Running config 23/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9812.607 (OPTIMAL)
+Lex step 2 objective: 19625.215 (OPTIMAL)
+Lex step 3 objective: 29437.822 (OPTIMAL)
+Lex step 4 objective: 39250.429 (OPTIMAL)
+Lex step 5 objective: 49063.037 (OPTIMAL)
+Lex step 6 objective: 58878.648 (OPTIMAL)
+Lex step 7 objective: 68695.26 (OPTIMAL)
+Lex step 8 objective: 78511.872 (OPTIMAL)
+Lex step 9 objective: 88328.483 (OPTIMAL)
+Lex step 10 objective: 98145.275 (OPTIMAL)
+end
+##########################################################
+Running config 24/80 -> (fairness=LEXMMFSA, file=Drahi_3.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12462.272 (OPTIMAL)
+Lex step 2 objective: 24924.544 (OPTIMAL)
+Lex step 3 objective: 37386.815 (OPTIMAL)
+Lex step 4 objective: 49849.087 (OPTIMAL)
+Lex step 5 objective: 62313.646 (OPTIMAL)
+Lex step 6 objective: 74779.204 (OPTIMAL)
+Lex step 7 objective: 87244.763 (OPTIMAL)
+Lex step 8 objective: 99710.322 (OPTIMAL)
+Lex step 9 objective: 112175.88 (OPTIMAL)
+Lex step 10 objective: 124641.439 (OPTIMAL)
+end
+##########################################################
+Running config 25/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 20387.246 (OPTIMAL)
+Lex step 2 objective: 40774.492 (OPTIMAL)
+Lex step 3 objective: 61161.738 (OPTIMAL)
+Lex step 4 objective: 81558.24 (OPTIMAL)
+Lex step 5 objective: 101955.865 (OPTIMAL)
+end
+##########################################################
+Running config 26/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23151.752 (OPTIMAL)
+Lex step 2 objective: 46303.504 (OPTIMAL)
+Lex step 3 objective: 69460.565 (OPTIMAL)
+Lex step 4 objective: 92618.626 (OPTIMAL)
+Lex step 5 objective: 115776.824 (OPTIMAL)
+end
+##########################################################
+Running config 27/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 47190.946 (OPTIMAL)
+Lex step 2 objective: 94381.891 (OPTIMAL)
+Lex step 3 objective: 141578.524 (OPTIMAL)
+Lex step 4 objective: 188776.157 (OPTIMAL)
+Lex step 5 objective: 235973.789 (OPTIMAL)
+end
+##########################################################
+Running config 28/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23164.584 (OPTIMAL)
+Lex step 2 objective: 46329.168 (OPTIMAL)
+Lex step 3 objective: 69493.752 (OPTIMAL)
+Lex step 4 objective: 92667.498 (OPTIMAL)
+Lex step 5 objective: 115842.375 (OPTIMAL)
+end
+##########################################################
+Running config 29/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13060.31 (OPTIMAL)
+Lex step 2 objective: 26120.619 (OPTIMAL)
+Lex step 3 objective: 39180.929 (OPTIMAL)
+Lex step 4 objective: 52241.238 (OPTIMAL)
+Lex step 5 objective: 65303.737 (OPTIMAL)
+Lex step 6 objective: 78367.235 (OPTIMAL)
+Lex step 7 objective: 91430.733 (OPTIMAL)
+Lex step 8 objective: 104494.232 (OPTIMAL)
+Lex step 9 objective: 117557.73 (OPTIMAL)
+Lex step 10 objective: 130621.362 (OPTIMAL)
+end
+##########################################################
+Running config 30/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 5716.884 (OPTIMAL)
+Lex step 2 objective: 11433.767 (OPTIMAL)
+Lex step 3 objective: 17150.651 (OPTIMAL)
+Lex step 4 objective: 22867.535 (OPTIMAL)
+Lex step 5 objective: 28584.418 (OPTIMAL)
+Lex step 6 objective: 34301.302 (OPTIMAL)
+Lex step 7 objective: 40018.186 (OPTIMAL)
+Lex step 8 objective: 45740.689 (OPTIMAL)
+Lex step 9 objective: 51464.193 (OPTIMAL)
+Lex step 10 objective: 57187.779 (OPTIMAL)
+end
+##########################################################
+Running config 31/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13839.312 (OPTIMAL)
+Lex step 2 objective: 27678.624 (OPTIMAL)
+Lex step 3 objective: 41519.374 (OPTIMAL)
+Lex step 4 objective: 55361.124 (OPTIMAL)
+Lex step 5 objective: 69202.874 (OPTIMAL)
+Lex step 6 objective: 83044.624 (OPTIMAL)
+Lex step 7 objective: 96886.373 (OPTIMAL)
+Lex step 8 objective: 110728.123 (OPTIMAL)
+Lex step 9 objective: 124569.908 (OPTIMAL)
+Lex step 10 objective: 138411.865 (OPTIMAL)
+end
+##########################################################
+Running config 32/80 -> (fairness=LEXMMFSA, file=Drahi_4.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11953.502 (OPTIMAL)
+Lex step 2 objective: 23907.005 (OPTIMAL)
+Lex step 3 objective: 35860.507 (OPTIMAL)
+Lex step 4 objective: 47814.009 (OPTIMAL)
+Lex step 5 objective: 59769.836 (OPTIMAL)
+Lex step 6 objective: 71726.662 (OPTIMAL)
+Lex step 7 objective: 83683.489 (OPTIMAL)
+Lex step 8 objective: 95640.315 (OPTIMAL)
+Lex step 9 objective: 107597.141 (OPTIMAL)
+Lex step 10 objective: 119554.19 (OPTIMAL)
+end
+##########################################################
+Running config 33/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 21664.934 (OPTIMAL)
+Lex step 2 objective: 43329.868 (OPTIMAL)
+Lex step 3 objective: 65000.632 (OPTIMAL)
+Lex step 4 objective: 86672.395 (OPTIMAL)
+Lex step 5 objective: 108344.253 (OPTIMAL)
+end
+##########################################################
+Running config 34/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 54822.122 (OPTIMAL)
+Lex step 2 objective: 109644.244 (OPTIMAL)
+Lex step 3 objective: 164466.365 (OPTIMAL)
+Lex step 4 objective: 219288.487 (OPTIMAL)
+Lex step 5 objective: 274129.37 (OPTIMAL)
+end
+##########################################################
+Running config 35/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 33013.604 (OPTIMAL)
+Lex step 2 objective: 66027.208 (OPTIMAL)
+Lex step 3 objective: 99046.928 (OPTIMAL)
+Lex step 4 objective: 132067.648 (OPTIMAL)
+Lex step 5 objective: 165088.412 (OPTIMAL)
+end
+##########################################################
+Running config 36/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 29844.136 (OPTIMAL)
+Lex step 2 objective: 59688.272 (OPTIMAL)
+Lex step 3 objective: 89537.917 (OPTIMAL)
+Lex step 4 objective: 119388.563 (OPTIMAL)
+Lex step 5 objective: 149239.371 (OPTIMAL)
+end
+##########################################################
+Running config 37/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 16159.991 (OPTIMAL)
+Lex step 2 objective: 32319.982 (OPTIMAL)
+Lex step 3 objective: 48479.973 (OPTIMAL)
+Lex step 4 objective: 64641.604 (OPTIMAL)
+Lex step 5 objective: 80804.235 (OPTIMAL)
+Lex step 6 objective: 96966.865 (OPTIMAL)
+Lex step 7 objective: 113129.496 (OPTIMAL)
+Lex step 8 objective: 129292.126 (OPTIMAL)
+Lex step 9 objective: 145454.95 (OPTIMAL)
+Lex step 10 objective: 161617.879 (OPTIMAL)
+end
+##########################################################
+Running config 38/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12123.15 (OPTIMAL)
+Lex step 2 objective: 24246.3 (OPTIMAL)
+Lex step 3 objective: 36369.45 (OPTIMAL)
+Lex step 4 objective: 48492.6 (OPTIMAL)
+Lex step 5 objective: 60617.781 (OPTIMAL)
+Lex step 6 objective: 72743.962 (OPTIMAL)
+Lex step 7 objective: 84870.142 (OPTIMAL)
+Lex step 8 objective: 96996.323 (OPTIMAL)
+Lex step 9 objective: 109122.503 (OPTIMAL)
+Lex step 10 objective: 121248.991 (OPTIMAL)
+end
+##########################################################
+Running config 39/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10748.626 (OPTIMAL)
+Lex step 2 objective: 21497.253 (OPTIMAL)
+Lex step 3 objective: 32245.879 (OPTIMAL)
+Lex step 4 objective: 42994.506 (OPTIMAL)
+Lex step 5 objective: 53743.132 (OPTIMAL)
+Lex step 6 objective: 64491.758 (OPTIMAL)
+Lex step 7 objective: 75240.385 (OPTIMAL)
+Lex step 8 objective: 85989.011 (OPTIMAL)
+Lex step 9 objective: 96737.638 (OPTIMAL)
+Lex step 10 objective: 107506.505 (OPTIMAL)
+end
+##########################################################
+Running config 40/80 -> (fairness=LEXMMFSA, file=Drahi_5.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 16749.223 (OPTIMAL)
+Lex step 2 objective: 33498.446 (OPTIMAL)
+Lex step 3 objective: 50247.668 (OPTIMAL)
+Lex step 4 objective: 66996.891 (OPTIMAL)
+Lex step 5 objective: 83748.687 (OPTIMAL)
+Lex step 6 objective: 100501.482 (OPTIMAL)
+Lex step 7 objective: 117254.278 (OPTIMAL)
+Lex step 8 objective: 134007.074 (OPTIMAL)
+Lex step 9 objective: 150759.869 (OPTIMAL)
+Lex step 10 objective: 167512.691 (OPTIMAL)
+end
+##########################################################
+Running config 41/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 17099.807 (OPTIMAL)
+Lex step 2 objective: 34199.614 (OPTIMAL)
+Lex step 3 objective: 51299.421 (OPTIMAL)
+Lex step 4 objective: 68407.457 (OPTIMAL)
+Lex step 5 objective: 85516.795 (OPTIMAL)
+end
+##########################################################
+Running config 42/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 18222.538 (OPTIMAL)
+Lex step 2 objective: 36445.076 (OPTIMAL)
+Lex step 3 objective: 54667.614 (OPTIMAL)
+Lex step 4 objective: 72890.152 (OPTIMAL)
+Lex step 5 objective: 91133.941 (OPTIMAL)
+end
+##########################################################
+Running config 43/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 31943.944 (OPTIMAL)
+Lex step 2 objective: 63887.888 (OPTIMAL)
+Lex step 3 objective: 95838.005 (OPTIMAL)
+Lex step 4 objective: 127789.122 (OPTIMAL)
+Lex step 5 objective: 159740.24 (OPTIMAL)
+end
+##########################################################
+Running config 44/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 29248.692 (OPTIMAL)
+Lex step 2 objective: 58497.383 (OPTIMAL)
+Lex step 3 objective: 87746.075 (OPTIMAL)
+Lex step 4 objective: 117004.512 (OPTIMAL)
+Lex step 5 objective: 146263.949 (OPTIMAL)
+end
+##########################################################
+Running config 45/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 8807.404 (OPTIMAL)
+Lex step 2 objective: 17614.808 (OPTIMAL)
+Lex step 3 objective: 26422.212 (OPTIMAL)
+Lex step 4 objective: 35229.615 (OPTIMAL)
+Lex step 5 objective: 44037.019 (OPTIMAL)
+Lex step 6 objective: 52847.301 (OPTIMAL)
+Lex step 7 objective: 61658.584 (OPTIMAL)
+Lex step 8 objective: 70469.866 (OPTIMAL)
+Lex step 9 objective: 79281.148 (OPTIMAL)
+Lex step 10 objective: 88092.647 (OPTIMAL)
+end
+##########################################################
+Running config 46/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 9223.819 (OPTIMAL)
+Lex step 2 objective: 18447.639 (OPTIMAL)
+Lex step 3 objective: 27671.458 (OPTIMAL)
+Lex step 4 objective: 36895.278 (OPTIMAL)
+Lex step 5 objective: 46119.097 (OPTIMAL)
+Lex step 6 objective: 55346.039 (OPTIMAL)
+Lex step 7 objective: 64573.98 (OPTIMAL)
+Lex step 8 objective: 73801.922 (OPTIMAL)
+Lex step 9 objective: 83029.863 (OPTIMAL)
+Lex step 10 objective: 92257.805 (OPTIMAL)
+end
+##########################################################
+Running config 47/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11014.326 (OPTIMAL)
+Lex step 2 objective: 22028.651 (OPTIMAL)
+Lex step 3 objective: 33044.486 (OPTIMAL)
+Lex step 4 objective: 44061.321 (OPTIMAL)
+Lex step 5 objective: 55078.155 (OPTIMAL)
+Lex step 6 objective: 66094.99 (OPTIMAL)
+Lex step 7 objective: 77111.824 (OPTIMAL)
+Lex step 8 objective: 88128.659 (OPTIMAL)
+Lex step 9 objective: 99145.493 (OPTIMAL)
+Lex step 10 objective: 110162.559 (OPTIMAL)
+end
+##########################################################
+Running config 48/80 -> (fairness=LEXMMFSA, file=Drahi_6.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 6235.624 (OPTIMAL)
+Lex step 2 objective: 12471.247 (OPTIMAL)
+Lex step 3 objective: 18708.431 (OPTIMAL)
+Lex step 4 objective: 24946.615 (OPTIMAL)
+Lex step 5 objective: 31184.798 (OPTIMAL)
+Lex step 6 objective: 37422.982 (OPTIMAL)
+Lex step 7 objective: 43661.165 (OPTIMAL)
+Lex step 8 objective: 49899.349 (OPTIMAL)
+Lex step 9 objective: 56137.533 (OPTIMAL)
+Lex step 10 objective: 62375.753 (OPTIMAL)
+end
+##########################################################
+Running config 49/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 73500.315 (OPTIMAL)
+Lex step 2 objective: 147000.631 (OPTIMAL)
+Lex step 3 objective: 220500.946 (OPTIMAL)
+Lex step 4 objective: 294008.767 (OPTIMAL)
+Lex step 5 objective: 367517.588 (OPTIMAL)
+end
+##########################################################
+Running config 50/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10841.214 (OPTIMAL)
+Lex step 2 objective: 21682.428 (OPTIMAL)
+Lex step 3 objective: 32528.577 (OPTIMAL)
+Lex step 4 objective: 43375.727 (OPTIMAL)
+Lex step 5 objective: 54223.013 (OPTIMAL)
+end
+##########################################################
+Running config 51/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 24791.826 (OPTIMAL)
+Lex step 2 objective: 49583.652 (OPTIMAL)
+Lex step 3 objective: 74381.224 (OPTIMAL)
+Lex step 4 objective: 99179.795 (OPTIMAL)
+Lex step 5 objective: 123978.48 (OPTIMAL)
+end
+##########################################################
+Running config 52/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 20180.126 (OPTIMAL)
+Lex step 2 objective: 40360.251 (OPTIMAL)
+Lex step 3 objective: 60540.377 (OPTIMAL)
+Lex step 4 objective: 80729.785 (OPTIMAL)
+Lex step 5 objective: 100920.331 (OPTIMAL)
+end
+##########################################################
+Running config 53/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12933.895 (OPTIMAL)
+Lex step 2 objective: 25867.791 (OPTIMAL)
+Lex step 3 objective: 38801.686 (OPTIMAL)
+Lex step 4 objective: 51735.581 (OPTIMAL)
+Lex step 5 objective: 64669.477 (OPTIMAL)
+Lex step 6 objective: 77603.372 (OPTIMAL)
+Lex step 7 objective: 90537.267 (OPTIMAL)
+Lex step 8 objective: 103477.066 (OPTIMAL)
+Lex step 9 objective: 116417.865 (OPTIMAL)
+Lex step 10 objective: 129358.664 (OPTIMAL)
+end
+##########################################################
+Running config 54/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10436.065 (OPTIMAL)
+Lex step 2 objective: 20872.13 (OPTIMAL)
+Lex step 3 objective: 31308.195 (OPTIMAL)
+Lex step 4 objective: 41744.26 (OPTIMAL)
+Lex step 5 objective: 52180.325 (OPTIMAL)
+Lex step 6 objective: 62619.356 (OPTIMAL)
+Lex step 7 objective: 73059.386 (OPTIMAL)
+Lex step 8 objective: 83499.417 (OPTIMAL)
+Lex step 9 objective: 93939.447 (OPTIMAL)
+Lex step 10 objective: 104379.615 (OPTIMAL)
+end
+##########################################################
+Running config 55/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 19654.148 (OPTIMAL)
+Lex step 2 objective: 39308.297 (OPTIMAL)
+Lex step 3 objective: 58962.445 (OPTIMAL)
+Lex step 4 objective: 78616.594 (OPTIMAL)
+Lex step 5 objective: 98272.906 (OPTIMAL)
+Lex step 6 objective: 117930.219 (OPTIMAL)
+Lex step 7 objective: 137587.532 (OPTIMAL)
+Lex step 8 objective: 157244.844 (OPTIMAL)
+Lex step 9 objective: 176902.157 (OPTIMAL)
+Lex step 10 objective: 196559.803 (OPTIMAL)
+end
+##########################################################
+Running config 56/80 -> (fairness=LEXMMFSA, file=Drahi_7.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 22458.806 (OPTIMAL)
+Lex step 2 objective: 44917.612 (OPTIMAL)
+Lex step 3 objective: 67376.418 (OPTIMAL)
+Lex step 4 objective: 89835.224 (OPTIMAL)
+Lex step 5 objective: 112295.962 (OPTIMAL)
+Lex step 6 objective: 134757.7 (OPTIMAL)
+Lex step 7 objective: 157219.438 (OPTIMAL)
+Lex step 8 objective: 179681.176 (OPTIMAL)
+Lex step 9 objective: 202142.914 (OPTIMAL)
+Lex step 10 objective: 224604.652 (OPTIMAL)
+end
+##########################################################
+Running config 57/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 20821.172 (OPTIMAL)
+Lex step 2 objective: 41642.343 (OPTIMAL)
+Lex step 3 objective: 62463.515 (OPTIMAL)
+Lex step 4 objective: 83284.686 (OPTIMAL)
+Lex step 5 objective: 104126.229 (OPTIMAL)
+end
+##########################################################
+Running config 58/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 17300.129 (OPTIMAL)
+Lex step 2 objective: 34600.257 (OPTIMAL)
+Lex step 3 objective: 51900.386 (OPTIMAL)
+Lex step 4 objective: 69209.865 (OPTIMAL)
+Lex step 5 objective: 86520.344 (OPTIMAL)
+end
+##########################################################
+Running config 59/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 40598.77 (OPTIMAL)
+Lex step 2 objective: 81197.539 (OPTIMAL)
+Lex step 3 objective: 121802.589 (OPTIMAL)
+Lex step 4 objective: 162408.639 (OPTIMAL)
+Lex step 5 objective: 203014.689 (OPTIMAL)
+end
+##########################################################
+Running config 60/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 30719.193 (OPTIMAL)
+Lex step 2 objective: 61438.387 (OPTIMAL)
+Lex step 3 objective: 92163.029 (OPTIMAL)
+Lex step 4 objective: 122888.671 (OPTIMAL)
+Lex step 5 objective: 153614.611 (OPTIMAL)
+end
+##########################################################
+Running config 61/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10063.711 (OPTIMAL)
+Lex step 2 objective: 20127.423 (OPTIMAL)
+Lex step 3 objective: 30191.134 (OPTIMAL)
+Lex step 4 objective: 40254.846 (OPTIMAL)
+Lex step 5 objective: 50318.557 (OPTIMAL)
+Lex step 6 objective: 60384.74 (OPTIMAL)
+Lex step 7 objective: 70451.923 (OPTIMAL)
+Lex step 8 objective: 80519.106 (OPTIMAL)
+Lex step 9 objective: 90586.289 (OPTIMAL)
+Lex step 10 objective: 100653.785 (OPTIMAL)
+end
+##########################################################
+Running config 62/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10382.648 (OPTIMAL)
+Lex step 2 objective: 20765.296 (OPTIMAL)
+Lex step 3 objective: 31147.944 (OPTIMAL)
+Lex step 4 objective: 41530.592 (OPTIMAL)
+Lex step 5 objective: 51913.24 (OPTIMAL)
+Lex step 6 objective: 62298.913 (OPTIMAL)
+Lex step 7 objective: 72685.586 (OPTIMAL)
+Lex step 8 objective: 83072.259 (OPTIMAL)
+Lex step 9 objective: 93458.932 (OPTIMAL)
+Lex step 10 objective: 103845.741 (OPTIMAL)
+end
+##########################################################
+Running config 63/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 12877.483 (OPTIMAL)
+Lex step 2 objective: 25754.966 (OPTIMAL)
+Lex step 3 objective: 38632.449 (OPTIMAL)
+Lex step 4 objective: 51509.931 (OPTIMAL)
+Lex step 5 objective: 64389.624 (OPTIMAL)
+Lex step 6 objective: 77270.317 (OPTIMAL)
+Lex step 7 objective: 90151.01 (OPTIMAL)
+Lex step 8 objective: 103031.703 (OPTIMAL)
+Lex step 9 objective: 115912.396 (OPTIMAL)
+Lex step 10 objective: 128793.103 (OPTIMAL)
+end
+##########################################################
+Running config 64/80 -> (fairness=LEXMMFSA, file=Drahi_8.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 15478.144 (OPTIMAL)
+Lex step 2 objective: 30956.289 (OPTIMAL)
+Lex step 3 objective: 46434.433 (OPTIMAL)
+Lex step 4 objective: 61912.578 (OPTIMAL)
+Lex step 5 objective: 77392.813 (OPTIMAL)
+Lex step 6 objective: 92874.048 (OPTIMAL)
+Lex step 7 objective: 108355.284 (OPTIMAL)
+Lex step 8 objective: 123836.519 (OPTIMAL)
+Lex step 9 objective: 139317.754 (OPTIMAL)
+Lex step 10 objective: 154799.221 (OPTIMAL)
+end
+##########################################################
+Running config 65/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 22426.077 (OPTIMAL)
+Lex step 2 objective: 44852.153 (OPTIMAL)
+Lex step 3 objective: 67283.657 (OPTIMAL)
+Lex step 4 objective: 89716.16 (OPTIMAL)
+Lex step 5 objective: 112148.664 (OPTIMAL)
+end
+##########################################################
+Running config 66/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 23925.748 (OPTIMAL)
+Lex step 2 objective: 47851.497 (OPTIMAL)
+Lex step 3 objective: 71782.839 (OPTIMAL)
+Lex step 4 objective: 95715.181 (OPTIMAL)
+Lex step 5 objective: 119647.523 (OPTIMAL)
+end
+##########################################################
+Running config 67/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 22534.428 (OPTIMAL)
+Lex step 2 objective: 45068.856 (OPTIMAL)
+Lex step 3 objective: 67603.284 (OPTIMAL)
+Lex step 4 objective: 90137.712 (OPTIMAL)
+Lex step 5 objective: 112693.111 (OPTIMAL)
+end
+##########################################################
+Running config 68/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 18710.766 (OPTIMAL)
+Lex step 2 objective: 37421.532 (OPTIMAL)
+Lex step 3 objective: 56132.298 (OPTIMAL)
+Lex step 4 objective: 74851.724 (OPTIMAL)
+Lex step 5 objective: 93572.445 (OPTIMAL)
+end
+##########################################################
+Running config 69/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 8185.041 (OPTIMAL)
+Lex step 2 objective: 16370.082 (OPTIMAL)
+Lex step 3 objective: 24555.122 (OPTIMAL)
+Lex step 4 objective: 32740.163 (OPTIMAL)
+Lex step 5 objective: 40925.204 (OPTIMAL)
+Lex step 6 objective: 49113.07 (OPTIMAL)
+Lex step 7 objective: 57301.937 (OPTIMAL)
+Lex step 8 objective: 65490.803 (OPTIMAL)
+Lex step 9 objective: 73679.67 (OPTIMAL)
+Lex step 10 objective: 81868.802 (OPTIMAL)
+end
+##########################################################
+Running config 70/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 14271.423 (OPTIMAL)
+Lex step 2 objective: 28542.845 (OPTIMAL)
+Lex step 3 objective: 42814.268 (OPTIMAL)
+Lex step 4 objective: 57087.514 (OPTIMAL)
+Lex step 5 objective: 71361.761 (OPTIMAL)
+Lex step 6 objective: 85636.007 (OPTIMAL)
+Lex step 7 objective: 99910.254 (OPTIMAL)
+Lex step 8 objective: 114184.5 (OPTIMAL)
+Lex step 9 objective: 128458.751 (OPTIMAL)
+Lex step 10 objective: 142733.249 (OPTIMAL)
+end
+##########################################################
+Running config 71/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 14726.496 (OPTIMAL)
+Lex step 2 objective: 29452.991 (OPTIMAL)
+Lex step 3 objective: 44179.487 (OPTIMAL)
+Lex step 4 objective: 58905.982 (OPTIMAL)
+Lex step 5 objective: 73635.161 (OPTIMAL)
+Lex step 6 objective: 88365.34 (OPTIMAL)
+Lex step 7 objective: 103095.519 (OPTIMAL)
+Lex step 8 objective: 117825.698 (OPTIMAL)
+Lex step 9 objective: 132555.877 (OPTIMAL)
+Lex step 10 objective: 147286.059 (OPTIMAL)
+end
+##########################################################
+Running config 72/80 -> (fairness=LEXMMFSA, file=Drahi_9.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13397.951 (OPTIMAL)
+Lex step 2 objective: 26795.903 (OPTIMAL)
+Lex step 3 objective: 40193.854 (OPTIMAL)
+Lex step 4 objective: 53591.805 (OPTIMAL)
+Lex step 5 objective: 66989.756 (OPTIMAL)
+Lex step 6 objective: 80387.708 (OPTIMAL)
+Lex step 7 objective: 93789.85 (OPTIMAL)
+Lex step 8 objective: 107192.993 (OPTIMAL)
+Lex step 9 objective: 120596.136 (OPTIMAL)
+Lex step 10 objective: 133999.392 (OPTIMAL)
+end
+##########################################################
+Running config 73/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 27117.235 (OPTIMAL)
+Lex step 2 objective: 54234.469 (OPTIMAL)
+Lex step 3 objective: 81357.851 (OPTIMAL)
+Lex step 4 objective: 108482.232 (OPTIMAL)
+Lex step 5 objective: 135606.614 (OPTIMAL)
+end
+##########################################################
+Running config 74/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 13592.098 (OPTIMAL)
+Lex step 2 objective: 27184.195 (OPTIMAL)
+Lex step 3 objective: 40776.293 (OPTIMAL)
+Lex step 4 objective: 54378.231 (OPTIMAL)
+Lex step 5 objective: 67981.169 (OPTIMAL)
+end
+##########################################################
+Running config 75/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10139.401 (OPTIMAL)
+Lex step 2 objective: 20278.801 (OPTIMAL)
+Lex step 3 objective: 30418.202 (OPTIMAL)
+Lex step 4 objective: 40567.348 (OPTIMAL)
+Lex step 5 objective: 50717.556 (OPTIMAL)
+end
+##########################################################
+Running config 76/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=5, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 33370.042 (OPTIMAL)
+Lex step 2 objective: 66740.085 (OPTIMAL)
+Lex step 3 objective: 100115.384 (OPTIMAL)
+Lex step 4 objective: 133491.683 (OPTIMAL)
+Lex step 5 objective: 166867.983 (OPTIMAL)
+end
+##########################################################
+Running config 77/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 11018.17 (OPTIMAL)
+Lex step 2 objective: 22036.341 (OPTIMAL)
+Lex step 3 objective: 33054.511 (OPTIMAL)
+Lex step 4 objective: 44074.589 (OPTIMAL)
+Lex step 5 objective: 55095.666 (OPTIMAL)
+Lex step 6 objective: 66116.744 (OPTIMAL)
+Lex step 7 objective: 77137.822 (OPTIMAL)
+Lex step 8 objective: 88158.899 (OPTIMAL)
+Lex step 9 objective: 99179.977 (OPTIMAL)
+Lex step 10 objective: 110201.055 (OPTIMAL)
+end
+##########################################################
+Running config 78/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.2)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 10747.965 (OPTIMAL)
+Lex step 2 objective: 21495.931 (OPTIMAL)
+Lex step 3 objective: 32243.896 (OPTIMAL)
+Lex step 4 objective: 42991.862 (OPTIMAL)
+Lex step 5 objective: 53739.827 (OPTIMAL)
+Lex step 6 objective: 64487.793 (OPTIMAL)
+Lex step 7 objective: 75239.734 (OPTIMAL)
+Lex step 8 objective: 85992.674 (OPTIMAL)
+Lex step 9 objective: 96745.615 (OPTIMAL)
+Lex step 10 objective: 107498.556 (OPTIMAL)
+end
+##########################################################
+Running config 79/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 5446.998 (OPTIMAL)
+Lex step 2 objective: 10893.995 (OPTIMAL)
+Lex step 3 objective: 16340.993 (OPTIMAL)
+Lex step 4 objective: 21787.991 (OPTIMAL)
+Lex step 5 objective: 27234.988 (OPTIMAL)
+Lex step 6 objective: 32681.986 (OPTIMAL)
+Lex step 7 objective: 38133.089 (OPTIMAL)
+Lex step 8 objective: 43585.192 (OPTIMAL)
+Lex step 9 objective: 49037.295 (OPTIMAL)
+Lex step 10 objective: 54489.707 (OPTIMAL)
+end
+##########################################################
+Running config 80/80 -> (fairness=LEXMMFSA, file=Drahi_10.csv, S=6, C=4, P=4, J=10, theta=0.6)
+##########################################################
+Lexicographic Algorithm
+Lex step 1 objective: 15692.638 (OPTIMAL)
+Lex step 2 objective: 31385.276 (OPTIMAL)
+Lex step 3 objective: 47077.913 (OPTIMAL)
+Lex step 4 objective: 62770.551 (OPTIMAL)
+Lex step 5 objective: 78463.189 (OPTIMAL)
+Lex step 6 objective: 94155.827 (OPTIMAL)
+Lex step 7 objective: 109852.83 (OPTIMAL)
+Lex step 8 objective: 125550.833 (OPTIMAL)
+Lex step 9 objective: 141248.836 (OPTIMAL)
+Lex step 10 objective: 156946.839 (OPTIMAL)
+end
+##########################################################
+Reporte resumen: fairness_LEXMMFSA_report.csv
+Reporte por casa: fairness_LEXMMFSA_report_by_house.csv

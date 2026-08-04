@@ -1,0 +1,17 @@
+ConfigID,Fairness,ConditionalStage,Present,Status,HouseRows,ExpectedHouseRows,ConditionalRows,ExpectedConditionalRows,Complete,WorkerExitCode
+C0001,NONE,,true,true,5,5,0,0,true,0
+C0001,PEA,,true,true,5,5,0,0,true,0
+C0001,SA,,true,true,5,5,0,0,true,0
+C0001,LEXMMFPEA,,true,true,5,5,0,0,true,0
+C0001,LEXMMFSA,,true,true,5,5,0,0,true,0
+C0001,ERDINC_PSR,,true,true,5,5,0,0,true,0
+C0001,ERDINC_ESR,,true,true,5,5,0,0,true,0
+C0001,ERDINC_PESR,,true,true,5,5,0,0,true,0
+C0001,ERDINC_PC,,true,true,5,5,0,0,true,0
+C0001,ERDINC_EC,,true,true,5,5,0,0,true,0
+C0001,ERDINC_PEC,,true,true,5,5,0,0,true,0
+C0001,STATIC_DEMAND_SHARE,,true,true,5,5,0,0,true,0
+C0001,CPEA,2,true,true,5,5,10,10,true,0
+C0001,CSA,2,true,true,5,5,10,10,true,0
+C0001,CLEXMMFPEA,2,true,true,5,5,10,10,true,0
+C0001,CLEXMMFSA,2,true,true,5,5,10,10,true,0

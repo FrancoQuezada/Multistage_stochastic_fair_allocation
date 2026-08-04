@@ -1,0 +1,9 @@
+Total configuraciones a ejecutar: 2
+Running config 1/2 -> (fairness=LEXMMFPEA, file=Drahi_1.csv, S=2, C=2, P=12, J=5, theta=0.2)
+OPTIMAL
+Objective : 625561.678
+Running config 2/2 -> (fairness=LEXMMFPEA, file=Drahi_2.csv, S=2, C=2, P=12, J=5, theta=0.2)
+OPTIMAL
+Objective : 709660.926
+Reporte resumen: fairness_LEXMMFPEA_report.csv
+Reporte por casa: fairness_LEXMMFPEA_report_by_house.csv

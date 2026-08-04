@@ -1,0 +1,49 @@
+\begin{table}[h]
+\centering
+\caption{Distribution of expected house-level PV autonomy (\%) for the representative instance}
+\label{tab:coverage_PV_repr}
+\begin{tabular}{llcccc|cccc}
+\hline
+ &  & \multicolumn{4}{c|}{$\\sigma = 0.2$} & \multicolumn{4}{c}{$\\sigma = 0.6$} \\
+\hline
+$|J|$ & Policy & Mean & Min & Max & Std & Mean & Min & Max & Std \\
+\hline
+5 & NF & 25.57 & 8.2 & 35.97 & 11.59 & 10.18 & 3.53 & 15.35 & 5.37 \\
+5 & PEA & 25.35 & 25.32 & 25.39 & 0.03 & 10.2 & 10.17 & 10.25 & 0.03 \\
+5 & SA & 25.42 & 13.6 & 67.88 & 21.24 & 10.18 & 6.73 & 15.69 & 4.07 \\
+5 & MMPEA & 25.37 & 23.58 & 26.04 & 0.91 & 10.2 & 10.16 & 10.25 & 0.04 \\
+5 & MMSA & 25.41 & 14.42 & 66.96 & 20.78 & 10.19 & 6.69 & 15.3 & 3.74 \\
+\hline
+10 & NF & 16.12 & 4.4 & 71.61 & 20.98 & 12.51 & 1.12 & 38.69 & 14.23 \\
+10 & PEA & 16.15 & 16.07 & 16.19 & 0.03 & 12.63 & 12.58 & 12.69 & 0.03 \\
+10 & SA & 16.15 & 7.03 & 30.79 & 11.01 & 12.59 & 6.72 & 17.09 & 3.95 \\
+10 & MMPEA & 16.15 & 16.06 & 16.23 & 0.05 & 12.67 & 12.25 & 13.31 & 0.29 \\
+10 & MMSA & 16.15 & 6.15 & 31.88 & 11.32 & 12.7 & 6.33 & 20.42 & 4.82 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Distribution of savings across households (\%) for the representative instance}
+\label{tab:coverage_SA_repr}
+\begin{tabular}{llcccc|cccc}
+\hline
+ &  & \multicolumn{4}{c|}{$\\sigma = 0.2$} & \multicolumn{4}{c}{$\\sigma = 0.6$} \\
+\hline
+$|J|$ & Policy & Mean & Min & Max & Std & Mean & Min & Max & Std \\
+\hline
+5 & NF & 26.09 & 7.89 & 37.23 & 12.0 & 10.1 & 2.81 & 15.26 & 5.54 \\
+5 & PEA & 21.8 & 11.98 & 28.1 & 6.72 & 8.24 & 3.65 & 11.08 & 3.28 \\
+5 & SA & 15.31 & 15.28 & 15.33 & 0.02 & 6.02 & 5.99 & 6.08 & 0.03 \\
+5 & MMPEA & 22.1 & 11.98 & 27.94 & 6.97 & 8.24 & 3.63 & 11.07 & 3.28 \\
+5 & MMSA & 15.56 & 13.86 & 16.31 & 0.94 & 6.21 & 5.97 & 6.4 & 0.19 \\
+\hline
+10 & NF & 16.45 & 4.6 & 71.68 & 20.95 & 12.56 & 0.27 & 39.11 & 14.41 \\
+10 & PEA & 13.17 & 5.77 & 17.92 & 5.58 & 7.04 & 1.32 & 14.45 & 4.82 \\
+10 & SA & 7.62 & 7.61 & 7.64 & 0.01 & 5.0 & 4.9 & 5.13 & 0.07 \\
+10 & MMPEA & 13.17 & 5.77 & 17.88 & 5.58 & 6.99 & 3.47 & 14.35 & 4.71 \\
+10 & MMSA & 7.51 & 7.38 & 7.65 & 0.1 & 4.95 & 4.75 & 5.11 & 0.12 \\
+\hline
+\end{tabular}
+\end{table}

@@ -1,0 +1,69 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+
+[46661] signal 2: Interrupción
+in expression starting at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:115
+_ZN15LiveDebugValues16InstrRefBasedLDV19transferRegisterDefERN4llvm12MachineInstrE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN15LiveDebugValues16InstrRefBasedLDV27produceMLocTransferFunctionERN4llvm15MachineFunctionERNS1_15SmallVectorImplINS1_13SmallDenseMapINS_6LocIdxENS_10ValueIDNumELj4ENS1_12DenseMapInfoIS6_vEENS1_6detail12DenseMapPairIS6_S7_EEEEEEj at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN15LiveDebugValues16InstrRefBasedLDV12ExtendRangesERN4llvm15MachineFunctionEPNS1_20MachineDominatorTreeEPNS1_16TargetPassConfigEjj at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm19MachineFunctionPass13runOnFunctionERNS_8FunctionE.part.0 at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm13FPPassManager13runOnFunctionERNS_8FunctionE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm13FPPassManager11runOnModuleERNS_6ModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm6legacy15PassManagerImpl3runERNS_6ModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc14SimpleCompilerclERNS_6ModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+operator() at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jitlayers.cpp:1388
+_ZN4llvm3orc14IRCompileLayer4emitESt10unique_ptrINS0_29MaterializationResponsibilityESt14default_deleteIS3_EENS0_16ThreadSafeModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16IRTransformLayer4emitESt10unique_ptrINS0_29MaterializationResponsibilityESt14default_deleteIS3_EENS0_16ThreadSafeModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16IRTransformLayer4emitESt10unique_ptrINS0_29MaterializationResponsibilityESt14default_deleteIS3_EENS0_16ThreadSafeModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16IRTransformLayer4emitESt10unique_ptrINS0_29MaterializationResponsibilityESt14default_deleteIS3_EENS0_16ThreadSafeModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16IRTransformLayer4emitESt10unique_ptrINS0_29MaterializationResponsibilityESt14default_deleteIS3_EENS0_16ThreadSafeModuleE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc31BasicIRLayerMaterializationUnit11materializeESt10unique_ptrINS0_29MaterializationResponsibilityESt14default_deleteIS3_EE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc19MaterializationTask3runEv at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm6detail18UniqueFunctionBaseIvJSt10unique_ptrINS_3orc4TaskESt14default_deleteIS4_EEEE8CallImplIPFvS7_EEEvPvRS7_ at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16ExecutionSession22dispatchOutstandingMUsEv at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16ExecutionSession17OL_completeLookupESt10unique_ptrINS0_21InProgressLookupStateESt14default_deleteIS3_EESt10shared_ptrINS0_23AsynchronousSymbolQueryEESt8functionIFvRKNS_8DenseMapIPNS0_8JITDylibENS_8DenseSetINS0_15SymbolStringPtrENS_12DenseMapInfoISF_vEEEENSG_ISD_vEENS_6detail12DenseMapPairISD_SI_EEEEEE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc25InProgressFullLookupState8completeESt10unique_ptrINS0_21InProgressLookupStateESt14default_deleteIS3_EE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16ExecutionSession19OL_applyQueryPhase1ESt10unique_ptrINS0_21InProgressLookupStateESt14default_deleteIS3_EENS_5ErrorE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16ExecutionSession6lookupENS0_10LookupKindERKSt6vectorISt4pairIPNS0_8JITDylibENS0_19JITDylibLookupFlagsEESaIS8_EENS0_15SymbolLookupSetENS0_11SymbolStateENS_15unique_functionIFvNS_8ExpectedINS_8DenseMapINS0_15SymbolStringPtrENS_18JITEvaluatedSymbolENS_12DenseMapInfoISI_vEENS_6detail12DenseMapPairISI_SJ_EEEEEEEEESt8functionIFvRKNSH_IS6_NS_8DenseSetISI_SL_EENSK_IS6_vEENSN_IS6_SV_EEEEEE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+_ZN4llvm3orc16ExecutionSession6lookupERKSt6vectorISt4pairIPNS0_8JITDylibENS0_19JITDylibLookupFlagsEESaIS7_EENS0_15SymbolLookupSetENS0_10LookupKindENS0_11SymbolStateESt8functionIFvRKNS_8DenseMapIS5_NS_8DenseSetINS0_15SymbolStringPtrENS_12DenseMapInfoISI_vEEEENSJ_IS5_vEENS_6detail12DenseMapPairIS5_SL_EEEEEE at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/bin/../lib/julia/libLLVM-16jl.so (unknown line)
+addModule at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jitlayers.cpp:1875
+jl_add_to_ee at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jitlayers.cpp:2306
+_jl_compile_codeinst at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jitlayers.cpp:277
+jl_generate_fptr_impl at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jitlayers.cpp:536
+jl_compile_method_internal at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gf.c:2538 [inlined]
+jl_compile_method_internal at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gf.c:2425
+_jl_invoke at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gf.c:2942 [inlined]
+ijl_apply_generic at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/gf.c:3127
+#write#103 at /home/franco/.julia/packages/CSV/XLcqT/src/write.jl:199
+write at /home/franco/.julia/packages/CSV/XLcqT/src/write.jl:162 [inlined]
+comparison_atomic_write at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/fairness_comparison_metrics.jl:36
+#run_fairness_policy_worker#585 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:92
+run_fairness_policy_worker at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:19
+unknown function (ip: 0x778686311cf2)
+jl_apply at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/julia.h:2157 [inlined]
+do_call at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:126
+eval_value at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:223
+eval_stmt_value at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:174 [inlined]
+eval_body at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:666
+jl_interpret_toplevel_thunk at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/interpreter.c:824
+jl_toplevel_eval_flex at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/toplevel.c:943
+jl_toplevel_eval_flex at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/toplevel.c:886
+ijl_toplevel_eval_in at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/toplevel.c:994
+eval at ./boot.jl:430 [inlined]
+include_string at ./loading.jl:2734
+_include at ./loading.jl:2794
+include at ./Base.jl:562
+jfptr_include_46986.1 at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/lib/julia/sys.so (unknown line)
+exec_options at ./client.jl:323
+_start at ./client.jl:531
+jfptr__start_73684.1 at /home/franco/.julia/juliaup/julia-1.11.7+0.x64.linux.gnu/lib/julia/sys.so (unknown line)
+jl_apply at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/julia.h:2157 [inlined]
+true_main at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jlapi.c:900
+jl_repl_entrypoint at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/src/jlapi.c:1059
+main at /cache/build/builder-demeter6-3/julialang/julia-release-1-dot-11/cli/loader_exe.c:58
+unknown function (ip: 0x7786ac429d8f)
+__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
+unknown function (ip: 0x4010b8)
+unknown function (ip: (nil))
+Allocations: 70224267 (Pool: 70221250; Big: 3017); GC: 25
+RUN CSA C0001 stage=2 (2:2:12, Drahi_51.csv)
