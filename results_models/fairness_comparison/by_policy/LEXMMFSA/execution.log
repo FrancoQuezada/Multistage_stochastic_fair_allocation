@@ -1,114 +1,22 @@
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-FAIL LEXMMFSA C0006 stage=missing: InterruptException:
-ERROR: LoadError: LEXMMFSA registró 1 fallos.
-Stacktrace:
- [1] error(s::String)
-   @ Base ./error.jl:35
- [2] run_fairness_policy_worker(policy::String; manifest_path::String, comparison_dir::String, conditional_stages::Vector{Int64}, fairness_mmr::Float64, lex_eps_abs::Float64, cplex_threads::Int64)
-   @ Main ~/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:110
- [3] top-level scope
-   @ ~/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:118
-in expression starting at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:115
-RUN LEXMMFSA C0001 stage=missing (2:2:12, Drahi_51.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 30345.436 (OPTIMAL)
-Lex step 2 objective: 60690.873 (OPTIMAL)
-Lex step 3 objective: 91041.749 (OPTIMAL)
-Lex step 4 objective: 121393.626 (OPTIMAL)
-Lex step 5 objective: 151745.503 (OPTIMAL)
-end
-##########################################################
-RUN LEXMMFSA C0002 stage=missing (2:2:12, Drahi_70.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 26796.726 (OPTIMAL)
-Lex step 2 objective: 53597.383 (OPTIMAL)
-Lex step 3 objective: 80399.04 (OPTIMAL)
-Lex step 4 objective: 107200.696 (OPTIMAL)
-Lex step 5 objective: 134002.353 (OPTIMAL)
-end
-##########################################################
-RUN LEXMMFSA C0003 stage=missing (2:2:12, Drahi_37.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 72454.6 (OPTIMAL)
-Lex step 2 objective: 144909.2 (OPTIMAL)
-Lex step 3 objective: 217363.801 (OPTIMAL)
-Lex step 4 objective: 289818.401 (OPTIMAL)
-Lex step 5 objective: 362289.782 (OPTIMAL)
-end
-##########################################################
-RUN LEXMMFSA C0004 stage=missing (2:2:12, Drahi_95.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 4031.21 (OPTIMAL)
-Lex step 2 objective: 8062.421 (OPTIMAL)
-Lex step 3 objective: 12093.631 (OPTIMAL)
-Lex step 4 objective: 16124.841 (OPTIMAL)
-Lex step 5 objective: 20174.113 (OPTIMAL)
-end
-##########################################################
-RUN LEXMMFSA C0005 stage=missing (2:2:12, Drahi_83.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 4145.007 (OPTIMAL)
-Lex step 2 objective: 8290.015 (OPTIMAL)
-Lex step 3 objective: 12435.022 (OPTIMAL)
-Lex step 4 objective: 16580.03 (OPTIMAL)
-Lex step 5 objective: 20745.048 (OPTIMAL)
-end
-##########################################################
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+SKIP LEXMMFSA C0001 stage=missing: resultado completo.
+SKIP LEXMMFSA C0002 stage=missing: resultado completo.
+SKIP LEXMMFSA C0003 stage=missing: resultado completo.
+SKIP LEXMMFSA C0004 stage=missing: resultado completo.
+SKIP LEXMMFSA C0005 stage=missing: resultado completo.
 RUN LEXMMFSA C0006 stage=missing (6:4:4, Drahi_51.csv)
 ##########################################################
 Lexicographic Algorithm
-RUN LEXMMFSA C0007 stage=missing (6:4:4, Drahi_70.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 34756.294 (OPTIMAL)
-Lex step 2 objective: 69516.614 (OPTIMAL)
-Lex step 3 objective: 104277.934 (OPTIMAL)
-Lex step 4 objective: 139039.254 (OPTIMAL)
-Lex step 5 objective: 173800.573 (OPTIMAL)
+Lex step 1 objective: 14194.997 (OPTIMAL)
+Lex step 2 objective: 28389.993 (OPTIMAL)
+Lex step 3 objective: 42591.057 (OPTIMAL)
+Lex step 4 objective: 56793.12 (OPTIMAL)
+Lex step 5 objective: 70995.184 (OPTIMAL)
 end
 ##########################################################
-RUN LEXMMFSA C0008 stage=missing (6:4:4, Drahi_37.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 9947.264 (OPTIMAL)
-Lex step 2 objective: 19894.528 (OPTIMAL)
-Lex step 3 objective: 29841.792 (OPTIMAL)
-Lex step 4 objective: 39799.141 (OPTIMAL)
-Lex step 5 objective: 49757.491 (OPTIMAL)
-end
-##########################################################
-RUN LEXMMFSA C0009 stage=missing (6:4:4, Drahi_95.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 4486.88 (OPTIMAL)
-Lex step 2 objective: 8973.76 (OPTIMAL)
-Lex step 3 objective: 13466.559 (OPTIMAL)
-Lex step 4 objective: 17960.358 (OPTIMAL)
-Lex step 5 objective: 22454.292 (OPTIMAL)
-end
-##########################################################
-RUN LEXMMFSA C0010 stage=missing (6:4:4, Drahi_83.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 2853.151 (OPTIMAL)
-Lex step 2 objective: 5706.301 (OPTIMAL)
-Lex step 3 objective: 8559.452 (OPTIMAL)
-Lex step 4 objective: 11421.604 (OPTIMAL)
-Lex step 5 objective: 14284.826 (OPTIMAL)
-end
-##########################################################
+SKIP LEXMMFSA C0007 stage=missing: resultado completo.
+SKIP LEXMMFSA C0008 stage=missing: resultado completo.
+SKIP LEXMMFSA C0009 stage=missing: resultado completo.
+SKIP LEXMMFSA C0010 stage=missing: resultado completo.
+LEXMMFSA completado: 10 filas de resumen.

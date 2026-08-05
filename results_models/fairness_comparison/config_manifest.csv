@@ -1,11 +1,11 @@
 ConfigID,RandomInstanceID,InstanceFile,InstFolder,TreeSpec,NBstage,Childs,Periods,Scenarios,J,Theta,Avg_d,Dev_d,DemandProfile,BatteryScale,PVScale,InstanceSampleSeed
-C0001,R001,Drahi_51.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0002,R002,Drahi_70.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0003,R003,Drahi_37.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0004,R004,Drahi_95.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0005,R005,Drahi_83.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0006,R001,Drahi_51.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0007,R002,Drahi_70.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0008,R003,Drahi_37.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0009,R004,Drahi_95.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
-C0010,R005,Drahi_83.csv,/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0001,R001,Drahi_51.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0002,R002,Drahi_70.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0003,R003,Drahi_37.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0004,R004,Drahi_95.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0005,R005,Drahi_83.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,2:2:12,2,2,12,2,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0006,R001,Drahi_51.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0007,R002,Drahi_70.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0008,R003,Drahi_37.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0009,R004,Drahi_95.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804
+C0010,R005,Drahi_83.csv,/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020,6:4:4,6,4,4,1024,5,0.2,100.0,10.0,mixed,1.0,1.0,20260804

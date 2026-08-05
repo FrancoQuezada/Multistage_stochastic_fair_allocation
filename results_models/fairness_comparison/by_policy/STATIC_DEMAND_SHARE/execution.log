@@ -1,8 +1,33 @@
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-
-[46639] signal 2: Interrupción
-in expression starting at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_fairness_policy_worker.jl:115
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
+SKIP STATIC_DEMAND_SHARE C0001 stage=missing: resultado completo.
+SKIP STATIC_DEMAND_SHARE C0002 stage=missing: resultado completo.
+SKIP STATIC_DEMAND_SHARE C0003 stage=missing: resultado completo.
+RUN STATIC_DEMAND_SHARE C0004 stage=missing (2:2:12, Drahi_95.csv)
+OPTIMAL
+Objective : 689336.455
+RUN STATIC_DEMAND_SHARE C0005 stage=missing (2:2:12, Drahi_83.csv)
+OPTIMAL
+Objective : 690780.233
+RUN STATIC_DEMAND_SHARE C0006 stage=missing (6:4:4, Drahi_51.csv)
+OPTIMAL
+Objective : 477342.328
+RUN STATIC_DEMAND_SHARE C0007 stage=missing (6:4:4, Drahi_70.csv)
+OPTIMAL
+Objective : 415956.521
+RUN STATIC_DEMAND_SHARE C0008 stage=missing (6:4:4, Drahi_37.csv)
+OPTIMAL
+Objective : 612574.736
+RUN STATIC_DEMAND_SHARE C0009 stage=missing (6:4:4, Drahi_95.csv)
+OPTIMAL
+Objective : 678397.928
+RUN STATIC_DEMAND_SHARE C0010 stage=missing (6:4:4, Drahi_83.csv)
+OPTIMAL
+Objective : 743849.101
+STATIC_DEMAND_SHARE completado: 10 filas de resumen.
