@@ -1,6 +1,14 @@
 # Runtime lock files
 *.lock
 
+# Regenerable model-audit exports of the out-of-sample experiment.
+# They are inspection artifacts, reproducible with
+#   bash scripts/oos/export_representative_models.sh
+# and are large (tens of MB), so they are not tracked. The audit *verdicts* live in
+# results_oos/model_audit_summary.csv and results_oos/validation_report.txt, which are.
+results_oos/model_audit/*.lp
+results_oos/model_audit/*.mps
+
 # Editor and operating-system artifacts
 .~lock.*#
 *~

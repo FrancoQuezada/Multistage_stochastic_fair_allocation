@@ -192,6 +192,58 @@ bash scripts/sensitivity/run_parallel_sensitivity_pv_fairness.sh
 bash scripts/sensitivity/run_parallel_sensitivity_demand_profile_fairness.sh
 ```
 
+### 6. Experimento fuera de muestra (receding horizon)
+
+Módulo aditivo que compara reglas de asignación/equidad bajo tres enfoques de decisión sobre las
+mismas trayectorias fuera de muestra: `DETERMINISTIC_RH`, `TWO_STAGE_RH` y `MULTISTAGE_RH`,
+cruzados con `NONE`, `STATIC_DEMAND_SHARE`, `PEA`, `SA`, `LEXMMFPEA` y `LEXMMFSA` (18
+configuraciones). Vive en `codes/oos_experiment/`, `scripts/oos/`, `results_oos/` y `tests/oos/`,
+y no altera los flujos de modelos exactos, heurísticas, sensibilidad ni validación.
+
+Verificación previa completa (entorno, ambas suites, ambas compuertas, matriz por defecto,
+campaña smoke de 18 configuraciones en un directorio nuevo y lector downstream). Devuelve 0
+solo si todo pasa:
+
+```bash
+bash scripts/oos/preflight_oos_campaign.sh
+```
+
+Compuertas individuales:
+
+```bash
+FORMULATION_ID='shared_battery_mode_node_level_v1' \
+bash scripts/oos/validate_shared_battery_formulation.sh
+
+FORMULATION_ID='shared_battery_mode_node_level_v1' \
+bash scripts/oos/export_representative_models.sh
+
+bash scripts/oos/validate_oos_experiment.sh
+```
+
+Campaña completa:
+
+```bash
+FORMULATION_ID='shared_battery_mode_node_level_v1' \
+OOS_REPLICATIONS=1000 \
+CONTROLLER_SET='DETERMINISTIC_RH,TWO_STAGE_RH,MULTISTAGE_RH' \
+FAIRNESS_SET='NONE,STATIC_DEMAND_SHARE,PEA,SA,LEXMMFPEA,LEXMMFSA' \
+TWO_STAGE_SCENARIOS=100 MULTISTAGE_BRANCHING='4,4' \
+EXPERIMENT_SEED=12345 \
+bash scripts/oos/run_oos_experiment.sh
+```
+
+Los resultados van solo a `results_oos/` (nunca a `results_models/` y similares) y cada fila lleva
+`formulation_id`, de modo que resultados de formulaciones distintas nunca se mezclan sin
+etiqueta. El diseño, las desviaciones documentadas, la revisión de escalamiento de parámetros y
+una propiedad importante de `PEA` con igualdad estricta en horizonte deslizante están en
+`docs/oos_experiment.md`.
+
+El único lector sancionado de `results_oos/` es
+`codes/oos_experiment/run_downstream_checks.jl` (esquema, recomputación independiente de las
+tolerancias PEA, secuencias de resolución, recurso y separación NONE/STATIC_DEMAND_SHARE).
+Cualquier análisis nuevo debe seguir sus convenciones: etiquetas semánticas de resolución en
+lugar de enteros de fase, columna `Resource` explícita y filtrado por `CompletionStatus`.
+
 ## Variables de entorno útiles
 
 Comunes a casi todos los scripts:
@@ -221,6 +273,13 @@ Adicionales:
 - El código activo vive en `codes/`, y los scripts siempre ejecutan desde ahí.
 - La familia principal de aproximación es ahora solo la familia `restricted-exact`.
 - La vieja heurística constructiva quedó archivada en `archive_legacy/`.
+- La batería comunitaria usa un único `battery_mode` por nodo del árbol: carga y descarga
+  agregadas no pueden ser positivas simultáneamente. El impacto y la compatibilidad están
+  documentados en `docs/shared_battery_mode_refactor.md`.
+- El experimento fuera de muestra es un módulo paralelo y aditivo con un único constructor físico
+  verificado y capas separadas de controlador y de equidad: `docs/oos_experiment.md`.
+- El `Manifest.toml` está resuelto para una versión de Julia concreta; los scripts de
+  `scripts/oos/` la pasan automáticamente (`JULIA_CHANNEL` la sobreescribe).
 
 ## Archivo legacy
 
