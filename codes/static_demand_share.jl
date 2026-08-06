@@ -54,6 +54,11 @@ function _build_static_demand_share_model(inst::InstanceM, shares::Matrix{Float6
     @variable(model, y[1:inst.J,1:tree.V] >= 0)
     @variable(model, p[1:inst.J,1:tree.V] >= 0)
     @variable(model, lambda[1:inst.J,1:tree.V] >= 0)
+    battery_mode=add_shared_battery_mode_constraints!(
+        model, y, z, 1:inst.J, 1:tree.V;
+        discharge_limit=inst.f_bar,
+        charge_limit=inst.f_under,
+    )
 
     @constraint(model, [j in 1:inst.J, n in 1:tree.V],
         lambda[j,n] == shares[j,time_periods[n]])
@@ -69,8 +74,6 @@ function _build_static_demand_share_model(inst::InstanceM, shares::Matrix{Float6
         s[1] == inst.s_I +
                 inst.delta * inst.e_c * sum(z[j,1] for j in 1:inst.J) -
                 inst.delta * sum(y[j,1] for j in 1:inst.J) / inst.e_d)
-    @constraint(model, [n in 1:tree.V], sum(y[j,n] for j in 1:inst.J) <= inst.f_bar)
-    @constraint(model, [n in 1:tree.V], sum(z[j,n] for j in 1:inst.J) <= inst.f_under)
     @constraint(model, [j in 1:inst.J, n in 1:tree.V],
         inst.d[j,n] == p[j,n] + y[j,n] + I[j,n] - z[j,n] - G[j,n])
     @constraint(model, [n in 1:tree.V; time_periods[n] == inst.T], s[n] == inst.s_I)
@@ -87,7 +90,7 @@ function _build_static_demand_share_model(inst::InstanceM, shares::Matrix{Float6
     set_attribute(model, "CPXPARAM_TimeLimit", 60 * 60)
     set_silent(model)
     return (
-        model=model, s=s, I=I, G=G, z=z, y=y, p=p, lambda=lambda,
+        model=model, s=s, I=I, G=G, battery_mode=battery_mode, z=z, y=y, p=p, lambda=lambda,
         costs=costs, time_periods=time_periods,
     )
 end
@@ -106,7 +109,7 @@ function solve_static_demand_share(inst::InstanceM)
         println("Objective : ", round(objective_value(refs.model), digits=3))
         return SolutionM(
             value.(refs.s), value.(refs.I), value.(refs.G),
-            zeros(inst.J, inst.T), zeros(inst.J, inst.T),
+            collect(value.(refs.battery_mode)), zeros(inst.J, inst.T),
             value.(refs.z), value.(refs.y), value.(refs.p), value.(refs.costs),
             true, round(solver_time, digits=2), run_time, inst.id,
         )
@@ -114,7 +117,7 @@ function solve_static_demand_share(inst::InstanceM)
 
     return SolutionM(
         zeros(inst.tree.V), zeros(inst.J, inst.tree.V), zeros(inst.J, inst.tree.V),
-        zeros(inst.J, inst.T), zeros(inst.J, inst.T),
+        zeros(inst.tree.V), zeros(inst.J, inst.T),
         zeros(inst.J, inst.tree.V), zeros(inst.J, inst.tree.V),
         zeros(inst.J, inst.tree.V), fill(Inf, inst.J),
         false, round(solver_time, digits=2), run_time, inst.id,

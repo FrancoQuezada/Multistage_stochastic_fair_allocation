@@ -35,9 +35,11 @@ function _legacy_snapshot(inst::InstanceM, label::String)
         expected_cost=sum(solution.costs),
         costs=copy(solution.costs),
         s=copy(solution.s), I=copy(solution.I), G=copy(solution.G),
+        battery_mode=copy(solution.battery_mode),
         z=copy(solution.z), y=copy(solution.y), p=copy(solution.p),
         sizes=(
             s=size(solution.s), I=size(solution.I), G=size(solution.G),
+            battery_mode=size(solution.battery_mode),
             z=size(solution.z), y=size(solution.y), p=size(solution.p),
             costs=size(solution.costs),
         ),

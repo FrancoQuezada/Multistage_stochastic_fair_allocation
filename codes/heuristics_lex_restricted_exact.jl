@@ -163,7 +163,7 @@ function solve_lex_sa_restricted_exact(
         copy(baseline_sol.s),
         zeros(inst.J, inst.tree.V),
         zeros(inst.J, inst.tree.V),
-        zeros(inst.J, inst.T),
+        copy(baseline_sol.battery_mode),
         zeros(inst.J, inst.T),
         copy(baseline_sol.z),
         copy(baseline_sol.y),
@@ -195,7 +195,7 @@ function solve_lex_sa_restricted_exact(
             sol.s=copy(baseline_sol.s)
             sol.G=value.(refs.G)
             sol.w=zeros(inst.J, inst.T)
-            sol.x=zeros(inst.J, inst.T)
+            sol.battery_mode=copy(baseline_sol.battery_mode)
             sol.time=step_time
             sol.run_time=step_run_time
             sol.status=true
@@ -210,7 +210,7 @@ function solve_lex_sa_restricted_exact(
             sol.p=zeros(inst.J, inst.tree.V)
             sol.G=zeros(inst.J, inst.tree.V)
             sol.w=zeros(inst.J, inst.T)
-            sol.x=zeros(inst.J, inst.T)
+            sol.battery_mode=copy(baseline_sol.battery_mode)
             sol.time=step_time
             sol.run_time=step_run_time
             sol.status=false

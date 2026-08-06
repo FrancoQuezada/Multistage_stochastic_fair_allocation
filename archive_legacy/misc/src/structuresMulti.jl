@@ -52,8 +52,8 @@ mutable struct InstanceM
     mu::Float64 #maintenance cost
     beta::Float64 #price of selling electricity
     nu::Array{Float64,2} #price of energy
-    f_under::Float64 #discharge limit
-    f_bar::Float64 #charge limit
+    f_under::Float64 #aggregate battery charging-rate limit
+    f_bar::Float64 #aggregate battery discharging-rate limit
     c_pv::Array{Float64,1} #PV production
     timeStamp::Array{String,1} #time stamp for each time step
     tree::Tree #
@@ -70,7 +70,7 @@ mutable struct SolutionM
     s::Array{Float64,1} #total battery level
     I::Array{Float64,2} #import grid
     G::Array{Float64,2} #export grid
-    x::Array{Float64,2} #battery set-up charge
+    battery_mode::Array{Float64,1} #one shared-battery charge-mode value per node
     w::Array{Float64,2} #vender o comprar grid
     z::Array{Float64,2} #charge of battery
     y::Array{Float64,2} #discharge of battery
@@ -88,7 +88,7 @@ mutable struct SolutionM
         sTot::Array{Float64,1}, #total battery level
         I::Array{Float64,2}, #import grid
         G::Array{Float64,2}, #export grid
-        x::Array{Float64,2}, #battery set-up charge
+        batteryMode::Array{Float64,1}, #one shared-battery charge-mode value per node
         w::Array{Float64,2}, #vender o comprar grid
         z::Array{Float64,2}, #charge of battery
         y::Array{Float64,2}, #discharge of battery
@@ -103,7 +103,7 @@ mutable struct SolutionM
         this.s=sTot
         this.I=I 
         this.G=G 
-        this.x=x 
+        this.battery_mode=batteryMode
         this.w=w 
         this.z=z 
         this.y=y 
@@ -189,4 +189,3 @@ end
 #     ss=[sort(s) for s in scenarios if n in s]
 #     return ss
 # end
-

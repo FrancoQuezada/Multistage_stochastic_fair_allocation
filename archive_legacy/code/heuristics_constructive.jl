@@ -447,13 +447,16 @@ function solve_fixed_lambda_policy(inst::InstanceM, lambda_policy::Array{Float64
     @variable(model, G[1:inst.J,1:scenarioTree.V] >= 0)
     @variable(model, z[1:inst.J,1:scenarioTree.V] >= 0)
     @variable(model, y[1:inst.J,1:scenarioTree.V] >= 0)
+    battery_mode=add_shared_battery_mode_constraints!(
+        model, y, z, 1:inst.J, 1:scenarioTree.V;
+        discharge_limit=inst.f_bar,
+        charge_limit=inst.f_under,
+    )
     @expression(model, p[j in 1:inst.J, n in 1:scenarioTree.V], lambda_use[j, n] * inst.c_pv[n])
 
     @constraint(model, [n in 1:scenarioTree.V], s[n] <= inst.s_max)
     @constraint(model, [n in 2:scenarioTree.V], s[n] == s[scenarioTree.parents[n]] + inst.delta * inst.e_c * sum(z[j, n] for j in 1:inst.J) - inst.delta * sum(y[j, n] for j in 1:inst.J) / inst.e_d)
     @constraint(model, s[1] == inst.s_I + inst.delta * inst.e_c * sum(z[j, 1] for j in 1:inst.J) - inst.delta * sum(y[j, 1] for j in 1:inst.J) / inst.e_d)
-    @constraint(model, [n in 1:scenarioTree.V], sum(y[j, n] for j in 1:inst.J) <= inst.f_bar)
-    @constraint(model, [n in 1:scenarioTree.V], sum(z[j, n] for j in 1:inst.J) <= inst.f_under)
     @constraint(model, [j in 1:inst.J, n in 1:scenarioTree.V], inst.d[j, n] == p[j, n] + y[j, n] + I[j, n] - z[j, n] - G[j, n])
     @constraint(model, [n in 1:scenarioTree.V ; timePeriods[n] == inst.T], s[n] == inst.s_I)
     @constraint(model, [n in 1:scenarioTree.V], s[n] >= inst.s_min)
@@ -475,9 +478,9 @@ function solve_fixed_lambda_policy(inst::InstanceM, lambda_policy::Array{Float64
         sTotAux=value.(s)
         GAux=value.(G)
         wAux=zeros(inst.J, inst.T)
-        xAux=zeros(inst.J, inst.T)
+        batteryModeAux=collect(value.(battery_mode))
         solTime=round(solve_time(model), digits=2)
-        return SolutionM(sTotAux, iAux, GAux, xAux, wAux, zAux, yAux, pAux, costsAux, true, solTime, run_time, inst.id)
+        return SolutionM(sTotAux, iAux, GAux, batteryModeAux, wAux, zAux, yAux, pAux, costsAux, true, solTime, run_time, inst.id)
     end
 
     costsAux=fill(Inf, inst.J)
@@ -488,9 +491,9 @@ function solve_fixed_lambda_policy(inst::InstanceM, lambda_policy::Array{Float64
     sTotAux=zeros(inst.tree.V)
     GAux=zeros(inst.J, inst.tree.V)
     wAux=zeros(inst.J, inst.T)
-    xAux=zeros(inst.J, inst.T)
+    batteryModeAux=zeros(inst.tree.V)
     solTime=round(solve_time(model), digits=2)
-    return SolutionM(sTotAux, iAux, GAux, xAux, wAux, zAux, yAux, pAux, costsAux, false, solTime, run_time, inst.id)
+    return SolutionM(sTotAux, iAux, GAux, batteryModeAux, wAux, zAux, yAux, pAux, costsAux, false, solTime, run_time, inst.id)
 end
 
 function solve_constructive_heuristic(

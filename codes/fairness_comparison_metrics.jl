@@ -226,6 +226,11 @@ end
 
 function comparison_common_metrics(inst::InstanceM, sol::SolutionM)
     tree = inst.tree
+    battery_violations = shared_battery_violations(
+        sol.battery_mode, sol.y, sol.z;
+        discharge_limit=inst.f_bar,
+        charge_limit=inst.f_under,
+    )
     probabilities = scenario_probabilities(tree)
     time_periods = createTime(tree)
     expected_pv = Float64[
@@ -281,6 +286,7 @@ function comparison_common_metrics(inst::InstanceM, sol::SolutionM)
         savings_stats=_comparison_vector_stats(savings),
         savings_rate_stats=_comparison_vector_stats(savings_rate),
         savings_negative_count=count(x -> x < 0, savings),
+        battery_violations=battery_violations,
     )
 end
 
@@ -454,6 +460,9 @@ function comparison_summary_row(
         SavingsRateRange=common.savings_rate_stats.range,
         SavingsRateGini=common.savings_rate_stats.gini,
         SavingsRateJain=common.savings_rate_stats.jain,
+        BatterySimultaneousFlowViolation=common.battery_violations.simultaneous_flow,
+        BatteryModeViolation=common.battery_violations.mode_violation,
+        BatteryRateViolation=common.battery_violations.rate_violation,
         FairnessResidualMean=compliance.FairnessResidualMean,
         FairnessResidualMax=compliance.FairnessResidualMax,
         RuleMetricMin=compliance.RuleMetricMin, RuleMetricMax=compliance.RuleMetricMax,

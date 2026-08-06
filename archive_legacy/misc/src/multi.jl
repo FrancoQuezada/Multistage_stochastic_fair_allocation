@@ -15,15 +15,17 @@ function solveMulti(inst::InstanceM,fairness::String,lambdaS=zeros(10,10), EEV=f
     @variable(model, y[1:inst.J,1:scenarioTree.V]>=0) #discharge of battery
     @variable(model, p[1:inst.J,1:scenarioTree.V]>=0) #photovoltaic production
     @variable(model, lambda[1:inst.J,1:scenarioTree.V]>=0)
-    @variable(model, x[1:inst.J,1:scenarioTree.V], Bin) #battery set-up charge
+    @variable(model, battery_mode[1:scenarioTree.V], Bin) #one mode for the shared battery
     @variable(model, g[1:inst.J,1:scenarioTree.V], Bin) #vender o comprar grid
     ################Constraints###################
     if EEV
         lambdaN=[lambdaS[j, timePeriods[t]] for j in 1:inst.J, t in 1:scenarioTree.V]
         fix.(lambda,lambdaN;force = true)
     end
-    @constraint(model, [j in 1:inst.J, t in 1:scenarioTree.V], z[j,t]<=inst.f_under*x[j,t])
-    @constraint(model, [j in 1:inst.J, t in 1:scenarioTree.V], y[j,t]<=(inst.f_bar)*(1-x[j,t]))
+    @constraint(model, battery_discharge_mode[n in 1:scenarioTree.V],
+        sum(y[j,n] for j in 1:inst.J)<=inst.f_bar*(1-battery_mode[n]))
+    @constraint(model, battery_charge_mode[n in 1:scenarioTree.V],
+        sum(z[j,n] for j in 1:inst.J)<=inst.f_under*battery_mode[n])
     @constraint(model, [j in 1:inst.J, t in 1:scenarioTree.V], I[j,t]<=1000000*g[j,t])
     @constraint(model, [j in 1:inst.J, t in 1:scenarioTree.V], G[j,t]<=1000000*(1-g[j,t]))
     @constraint(model, [j in 1:inst.J, n in 1:scenarioTree.V], p[j,n] ==lambda[j,n]*inst.c_pv[n])
@@ -32,8 +34,6 @@ function solveMulti(inst::InstanceM,fairness::String,lambdaS=zeros(10,10), EEV=f
     @constraint(model, [n in 1:scenarioTree.V], s[n]<=inst.s_max)
     @constraint(model, [n in 2:scenarioTree.V], s[n]==s[scenarioTree.parents[n]]+inst.delta*inst.e_c*sum(z[j,n] for j in 1:inst.J)-inst.delta*sum(y[j,n] for j in 1:inst.J)/inst.e_d)
     @constraint(model, s[1]==inst.s_I+inst.delta*inst.e_c*sum(z[j,1] for j in 1:inst.J)-inst.delta*sum(y[j,1] for j in 1:inst.J)/inst.e_d)
-    @constraint(model, [n in 1:scenarioTree.V], sum(y[j,n] for j in 1:inst.J)<=inst.f_bar)
-    @constraint(model, [n in 1:scenarioTree.V], sum(z[j,n] for j in 1:inst.J)<=inst.f_under)
     @constraint(model, [j in 1:inst.J, n in 1:scenarioTree.V], inst.d[j,n]==p[j,n]+y[j,n]+I[j,n]-z[j,n]-G[j,n])
     @constraint(model, [n in 1:scenarioTree.V ; timePeriods[n]==inst.T],s[n]==inst.s_I)
     @constraint(model,[n in 1:scenarioTree.V], s[n]>=inst.s_min)
@@ -135,22 +135,22 @@ function solveMulti(inst::InstanceM,fairness::String,lambdaS=zeros(10,10), EEV=f
         sTotAux=value.(s)
         GAux=value.(G)
         wAux=zeros(inst.J,inst.T)
-        xAux=zeros(inst.J,inst.T)
+        batteryModeAux=collect(value.(battery_mode))
         solTime=round(solve_time(model), digits=2)
-        sol=SolutionM(sTotAux,iAux,GAux,xAux,wAux,zAux,yAux,pAux,costsAux,true,solTime,inst.id)
+        sol=SolutionM(sTotAux,iAux,GAux,batteryModeAux,wAux,zAux,yAux,pAux,costsAux,true,solTime,inst.id)
     else
         costsAux=fill(Inf,inst.J)
-        yAux=zeros(inst.J,inst.T)
-        zAux=zeros(inst.J,inst.T)
-        iAux=zeros(inst.J,inst.T)
-        pAux=zeros(inst.J,inst.T)
-        sTotAux=zeros(inst.T)
-        GAux=zeros(inst.J,inst.T)
+        yAux=zeros(inst.J,scenarioTree.V)
+        zAux=zeros(inst.J,scenarioTree.V)
+        iAux=zeros(inst.J,scenarioTree.V)
+        pAux=zeros(inst.J,scenarioTree.V)
+        sTotAux=zeros(scenarioTree.V)
+        GAux=zeros(inst.J,scenarioTree.V)
         wAux=zeros(inst.J,inst.T)
-        xAux=zeros(inst.J,inst.T)
+        batteryModeAux=zeros(scenarioTree.V)
         regret=fill(Inf,(inst.J,inst.T))
         solTime=round(solve_time(model), digits=2)  
-        sol=SolutionM(sTotAux,iAux,GAux,xAux,wAux,zAux,yAux,pAux,costsAux,false,solTime,inst.id)
+        sol=SolutionM(sTotAux,iAux,GAux,batteryModeAux,wAux,zAux,yAux,pAux,costsAux,false,solTime,inst.id)
     end
     if contains(fairness,"PEA") || contains(fairness,"SA")
         return sol, regret

@@ -8,6 +8,7 @@ function twoS_none(inst::Instance; lambdaS=zeros(inst.J, inst.T), EEV::Bool=fals
     @variable(model, y[1:inst.J, 1:inst.T, 1:inst.Omega] >= 0)
     @variable(model, p[1:inst.J, 1:inst.T, 1:inst.Omega] >= 0)
     @variable(model, lambda[1:inst.J, 1:inst.T] >= 0)
+    @variable(model, battery_mode[1:inst.T, 1:inst.Omega], Bin)
 
     if EEV
         fix.(lambda, lambdaS; force=true)
@@ -17,8 +18,10 @@ function twoS_none(inst::Instance; lambdaS=zeros(inst.J, inst.T), EEV::Bool=fals
     @constraint(model, [t in 1:inst.T], sum(lambda[:, t]) == 1)
     @constraint(model, [t in 2:inst.T, o in 1:inst.Omega], s[t, o] == s[t - 1, o] + inst.delta * inst.e_c * sum(z[j, t, o] for j in 1:inst.J) - inst.delta * sum(y[j, t, o] for j in 1:inst.J) / inst.e_d)
     @constraint(model, [o in 1:inst.Omega], s[1, o] == inst.s_I + inst.delta * inst.e_c * sum(z[j, 1, o] for j in 1:inst.J) - inst.delta * sum(y[j, 1, o] for j in 1:inst.J) / inst.e_d)
-    @constraint(model, [t in 1:inst.T, o in 1:inst.Omega], sum(y[j, t, o] for j in 1:inst.J) <= inst.f_bar)
-    @constraint(model, [t in 1:inst.T, o in 1:inst.Omega], sum(z[j, t, o] for j in 1:inst.J) <= inst.f_under)
+    @constraint(model, battery_discharge_mode[t in 1:inst.T, o in 1:inst.Omega],
+        sum(y[j, t, o] for j in 1:inst.J) <= inst.f_bar * (1 - battery_mode[t, o]))
+    @constraint(model, battery_charge_mode[t in 1:inst.T, o in 1:inst.Omega],
+        sum(z[j, t, o] for j in 1:inst.J) <= inst.f_under * battery_mode[t, o])
     @constraint(model, [j in 1:inst.J, t in 1:inst.T, o in 1:inst.Omega], inst.d[j, t, o] == p[j, t, o] + y[j, t, o] + I[j, t, o] - z[j, t, o] - G[j, t, o])
     @constraint(model, [o in 1:inst.Omega], s[inst.T, o] == inst.s_I)
 
@@ -34,7 +37,7 @@ function twoS_none(inst::Instance; lambdaS=zeros(inst.J, inst.T), EEV::Bool=fals
             value.(s),
             value.(I),
             value.(G),
-            zeros(inst.J, inst.T, inst.Omega),
+            value.(battery_mode),
             zeros(inst.J, inst.T, inst.Omega),
             value.(z),
             value.(y),
@@ -51,7 +54,7 @@ function twoS_none(inst::Instance; lambdaS=zeros(inst.J, inst.T), EEV::Bool=fals
         zeros(inst.T, inst.Omega),
         zeros(inst.J, inst.T, inst.Omega),
         zeros(inst.J, inst.T, inst.Omega),
-        zeros(inst.J, inst.T, inst.Omega),
+        zeros(inst.T, inst.Omega),
         zeros(inst.J, inst.T, inst.Omega),
         zeros(inst.J, inst.T, inst.Omega),
         zeros(inst.J, inst.T, inst.Omega),

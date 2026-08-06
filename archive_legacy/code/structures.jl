@@ -29,8 +29,8 @@ mutable struct Instance
     e_c::Float64# charge efficiency
     e_d::Float64#discharge efficiency
     s_I::Float64 #initial state of the battery
-    f_under::Float64 #discharge limit
-    f_bar::Float64 #charge limit
+    f_under::Float64 #aggregate battery charging-rate limit
+    f_bar::Float64 #aggregate battery discharging-rate limit
     ######Prices#########
     mu::Float64 #maintenance cost
     beta::Float64 #price of selling electricity
@@ -103,7 +103,7 @@ mutable struct Solution
     s::Array{Float64,2} #total battery level
     I::Array{Float64,3} #import grid
     G::Array{Float64,3} #export grid
-    x::Array{Float64,3} #battery set-up charge
+    battery_mode::Array{Float64,2} #one shared-battery charge mode per time and scenario
     w::Array{Float64,3} #vender o comprar grid
     z::Array{Float64,3} #charge of battery
     y::Array{Float64,3} #discharge of battery
@@ -122,7 +122,7 @@ mutable struct Solution
         sTot::Array{Float64,2}, #total battery level
         I::Array{Float64,3}, #import grid
         G::Array{Float64,3}, #export grid
-        x::Array{Float64,3}, #battery set-up charge
+        batteryMode::Array{Float64,2}, #one shared-battery charge mode per time and scenario
         w::Array{Float64,3}, #vender o comprar grid
         z::Array{Float64,3}, #charge of battery
         y::Array{Float64,3}, #discharge of battery
@@ -138,7 +138,7 @@ mutable struct Solution
         this.s=sTot
         this.I=I 
         this.G=G 
-        this.x=x 
+        this.battery_mode=batteryMode
         this.w=w 
         this.z=z 
         this.y=y 

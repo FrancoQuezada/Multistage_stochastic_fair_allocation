@@ -152,7 +152,7 @@ function _assemble_house_recourse(
         copy(sfix),
         I,
         G,
-        zeros(inst.J, inst.T),
+        battery_mode_from_flows(yfix, zfix),
         zeros(inst.J, inst.T),
         copy(zfix),
         copy(yfix),

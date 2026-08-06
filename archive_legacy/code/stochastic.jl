@@ -17,24 +17,21 @@ function twoS(inst::Instance,fairness::String,lambdaS=zeros(10,10),EEV=false)
     @variable(model, y[1:inst.J,1:inst.T,1:inst.Omega]>=0) #discharge of battery
     @variable(model, p[1:inst.J,1:inst.T,1:inst.Omega]>=0) #photovoltaic production
     @variable(model, lambda[1:inst.J,1:inst.T]>=0)
-    # @variable(model, x[1:inst.J,1:inst.T,1:inst.Omega], Bin) #battery set-up charge
-    # @variable(model, g[1:inst.J,1:inst.T,1:inst.Omega], Bin) #vender o comprar grid
+    @variable(model, battery_mode[1:inst.T,1:inst.Omega], Bin)
     ################################################
     if EEV
         fix.(lambda,lambdaS;force = true)
     end
     ################Constraints###################
-    # @constraint(model, [j in 1:inst.J, t in 1:inst.T,o in 1:inst.Omega], z[j,t,o]<=inst.f_under*x[j,t,o])
-    # @constraint(model, [j in 1:inst.J, t in 1:inst.T,o in 1:inst.Omega], y[j,t,o]<=(inst.f_bar)*(1-x[j,t,o]))
-    # @constraint(model, [j in 1:inst.J, t in 1:inst.T,o in 1:inst.Omega], I[j,t,o]<=1000000*g[j,t,o])
-    # @constraint(model, [j in 1:inst.J, t in 1:inst.T,o in 1:inst.Omega], G[j,t,o]<=1000000*(1-g[j,t,o]))
     @constraint(model, [j in 1:inst.J, t in 1:inst.T, o in 1:inst.Omega], p[j,t,o] ==lambda[j,t]*inst.c_pv[t,o])
     @constraint(model, [t in 1:inst.T], sum(lambda[:,t]) == 1)
     # @constraint(model, [t in 1:inst.T, o in 1:Omega], s[t,o]<=inst.s_max)
     @constraint(model, [t in 2:inst.T, o in 1:inst.Omega], s[t,o]==s[t-1,o]+inst.delta*inst.e_c*sum(z[j,t,o] for j in 1:inst.J)-inst.delta*sum(y[j,t,o] for j in 1:inst.J)/inst.e_d)
     @constraint(model, [o in 1:inst.Omega], s[1,o]==inst.s_I+inst.delta*inst.e_c*sum(z[j,1,o] for j in 1:inst.J)-inst.delta*sum(y[j,1,o] for j in 1:inst.J)/inst.e_d)
-    @constraint(model, [t in 1:inst.T, o in 1:inst.Omega], sum(y[j,t,o] for j in 1:inst.J)<=inst.f_bar)
-    @constraint(model, [t in 1:inst.T, o in 1:inst.Omega], sum(z[j,t,o] for j in 1:inst.J)<=inst.f_under)
+    @constraint(model, battery_discharge_mode[t in 1:inst.T, o in 1:inst.Omega],
+        sum(y[j,t,o] for j in 1:inst.J)<=inst.f_bar*(1-battery_mode[t,o]))
+    @constraint(model, battery_charge_mode[t in 1:inst.T, o in 1:inst.Omega],
+        sum(z[j,t,o] for j in 1:inst.J)<=inst.f_under*battery_mode[t,o])
     @constraint(model, [j in 1:inst.J, t in 1:inst.T, o in 1:inst.Omega], inst.d[j,t,o]==p[j,t,o]+y[j,t,o]+I[j,t,o]-z[j,t,o]-G[j,t,o])
     @constraint(model,[o in 1:inst.Omega], s[inst.T, o]==inst.s_I)
     @expression(model, costs[j in 1:inst.J], (inst.delta)*sum((inst.mu*y[j,t,o] +inst.nu[j,t]*I[j,t,o] - inst.beta*G[j,t,o])*inst.rho[o]  for t in 1:inst.T, o in 1:inst.Omega)) 
@@ -77,12 +74,10 @@ function twoS(inst::Instance,fairness::String,lambdaS=zeros(10,10),EEV=false)
         sol.p=value.(p)
         sol.s=value.(s)
         sol.G=value.(G)
-        # sol.w=value.(g)
-        # sol.x=value.(x)
+        sol.battery_mode=value.(battery_mode)
         sol.status=termination_status(model)==OPTIMAL
         sol.time=round(solve_time(model), digits=2)
         sol.id=inst.id
-        # sol=Solution(sTotAux,iAux,GAux,xAux,wAux,zAux,yAux,pAux,costsAux,true,solTime,inst.id)
     else
         println("INFEASIBLE")
         costsAux=fill(Inf,inst.J)
@@ -98,9 +93,6 @@ function twoS(inst::Instance,fairness::String,lambdaS=zeros(10,10),EEV=false)
         # sTotAux=zeros(inst.T)
         # GAux=zeros(inst.J,inst.T)
         # wAux=zeros(inst.J,inst.T)
-        # xAux=zeros(inst.J,inst.T)
-        # solTime=round(solve_time(model), digits=2)  
-        # sol=Solution(sTotAux,iAux,GAux,xAux,wAux,zAux,yAux,pAux,costsAux,false,solTime,inst.id)
     end
     
     return sol

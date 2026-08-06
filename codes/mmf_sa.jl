@@ -14,6 +14,11 @@ function build_lex_sa_model(inst::InstanceM)
     @variable(model, y[1:inst.J,1:scenarioTree.V]>=0) #discharge of battery
     @variable(model, p[1:inst.J,1:scenarioTree.V]>=0) #photovoltaic production
     @variable(model, lambda[1:inst.J,1:scenarioTree.V]>=0)
+    battery_mode=add_shared_battery_mode_constraints!(
+        model, y, z, 1:inst.J, 1:scenarioTree.V;
+        discharge_limit=inst.f_bar,
+        charge_limit=inst.f_under,
+    )
     ##################dual variables##################
     @variable(model,zeta[1:inst.J]) 
     @variable(model,d[1:inst.J,1:inst.J]>=0)
@@ -24,8 +29,6 @@ function build_lex_sa_model(inst::InstanceM)
     @constraint(model, [n in 1:scenarioTree.V], s[n]<=inst.s_max)
     @constraint(model, [n in 2:scenarioTree.V], s[n]==s[scenarioTree.parents[n]]+inst.delta*inst.e_c*sum(z[j,n] for j in 1:inst.J)-inst.delta*sum(y[j,n] for j in 1:inst.J)/inst.e_d)
     @constraint(model, s[1]==inst.s_I+inst.delta*inst.e_c*sum(z[j,1] for j in 1:inst.J)-inst.delta*sum(y[j,1] for j in 1:inst.J)/inst.e_d)
-    @constraint(model, [n in 1:scenarioTree.V], sum(y[j,n] for j in 1:inst.J)<=inst.f_bar)
-    @constraint(model, [n in 1:scenarioTree.V], sum(z[j,n] for j in 1:inst.J)<=inst.f_under)
     @constraint(model, [j in 1:inst.J, n in 1:scenarioTree.V], inst.d[j,n]==p[j,n]+y[j,n]+I[j,n]-z[j,n]-G[j,n])
     @constraint(model, [n in 1:scenarioTree.V ; timePeriods[n]==inst.T],s[n]==inst.s_I)
     @constraint(model,[n in 1:scenarioTree.V], s[n]>=inst.s_min)
@@ -38,7 +41,7 @@ function build_lex_sa_model(inst::InstanceM)
         @constraint(model, zeta[n]-d[n,j] <= savings_rhs[j] - costs[j])
     end
     set_silent(model)
-    return (model=model, s=s, I=I, G=G, z=z, y=y, p=p, costs=costs, zeta=zeta, d=d)
+    return (model=model, s=s, I=I, G=G, battery_mode=battery_mode, z=z, y=y, p=p, costs=costs, zeta=zeta, d=d)
 end 
 
 function lexico(inst::InstanceM)
@@ -74,7 +77,7 @@ function lexico(inst::InstanceM)
             x_sol.s=zeros(inst.tree.V)
             x_sol.G=zeros(inst.J,inst.tree.V)
             x_sol.w=zeros(inst.J,inst.T)
-            x_sol.x=zeros(inst.J,inst.T)
+            x_sol.battery_mode=zeros(inst.tree.V)
             x_sol.time=step_time
             x_sol.run_time=step_run_time
             x_sol.status=false
@@ -91,7 +94,7 @@ function lexico(inst::InstanceM)
         x_sol.s=value.(persistent.s)
         x_sol.G=value.(persistent.G)
         x_sol.w=zeros(inst.J,inst.T)
-        x_sol.x=zeros(inst.J,inst.T)
+        x_sol.battery_mode=collect(value.(persistent.battery_mode))
         x_sol.time=step_time
         x_sol.run_time=step_run_time
         x_sol.status=true

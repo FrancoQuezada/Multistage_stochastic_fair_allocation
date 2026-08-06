@@ -31,7 +31,7 @@ mutable struct Solution
     s::Array{Float64,2}
     I::Array{Float64,3}
     G::Array{Float64,3}
-    x::Array{Float64,3}
+    battery_mode::Array{Float64,2}
     w::Array{Float64,3}
     z::Array{Float64,3}
     y::Array{Float64,3}
@@ -49,7 +49,7 @@ mutable struct Solution
         sTot::Array{Float64,2},
         I::Array{Float64,3},
         G::Array{Float64,3},
-        x::Array{Float64,3},
+        batteryMode::Array{Float64,2},
         w::Array{Float64,3},
         z::Array{Float64,3},
         y::Array{Float64,3},
@@ -65,7 +65,7 @@ mutable struct Solution
         this.s = sTot
         this.I = I
         this.G = G
-        this.x = x
+        this.battery_mode = batteryMode
         this.w = w
         this.z = z
         this.y = y

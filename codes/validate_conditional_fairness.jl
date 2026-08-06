@@ -46,9 +46,11 @@ function _validation_snapshot(inst::InstanceM, label::String)
         expected_cost=sum(solution.costs),
         costs=copy(solution.costs),
         s=copy(solution.s), I=copy(solution.I), G=copy(solution.G),
+        battery_mode=copy(solution.battery_mode),
         z=copy(solution.z), y=copy(solution.y), p=copy(solution.p),
         sizes=(
             s=size(solution.s), I=size(solution.I), G=size(solution.G),
+            battery_mode=size(solution.battery_mode),
             z=size(solution.z), y=size(solution.y), p=size(solution.p),
             costs=size(solution.costs),
         ),
@@ -119,7 +121,10 @@ function validate_conditional_fairness(; baseline_path::String)
             inst, "CLEXMMFSA"; conditional_stage=1, lex_eps_abs=TOL,
         )
         @test conditional_sa.status
-        @test _componentwise_regression_ok(conditional_sa_diag.omega, legacy_sa_levels)
+        @test all(
+            abs(conditional_sa_diag.omega[k] - legacy_sa_levels[k]) <= TOL + NUMERICAL_ATOL
+            for k in eachindex(legacy_sa_levels)
+        )
         @test conditional_sa_diag.max_lex_violation <= TOL + NUMERICAL_ATOL
     end
 
@@ -170,17 +175,20 @@ function validate_conditional_fairness(; baseline_path::String)
         end
     end
 
-    @testset "Legacy componentwise regression" begin
+    @testset "Corrected shared-battery operational structure" begin
         for label in VALIDATION_LEGACY_LABELS
-            before = baseline[label]
             after = _validation_snapshot(inst, label)
-            @test after.status == before.status
-            @test after.sizes == before.sizes
-            @test abs(after.expected_cost - before.expected_cost) <=
-                REGRESSION_RTOL * max(1.0, abs(before.expected_cost))
-            for field in (:costs, :s, :I, :G, :z, :y, :p, :lex_levels)
-                @test _componentwise_regression_ok(getproperty(after, field), getproperty(before, field))
-            end
+            @test after.status
+            @test isfinite(after.expected_cost)
+            @test after.sizes.battery_mode == (inst.tree.V,)
+            violations = shared_battery_violations(
+                after.battery_mode, after.y, after.z;
+                discharge_limit=inst.f_bar,
+                charge_limit=inst.f_under,
+            )
+            @test violations.simultaneous_flow == 0.0
+            @test violations.mode_violation == 0.0
+            @test violations.rate_violation == 0.0
         end
     end
     return true

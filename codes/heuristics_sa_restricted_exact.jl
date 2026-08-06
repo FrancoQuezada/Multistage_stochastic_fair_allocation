@@ -47,6 +47,11 @@ function _build_full_multistage_model(inst::InstanceM)
     @variable(model, y[1:inst.J,1:scenarioTree.V] >= 0)
     @variable(model, p[1:inst.J,1:scenarioTree.V] >= 0)
     @variable(model, lambda[1:inst.J,1:scenarioTree.V] >= 0)
+    battery_mode=add_shared_battery_mode_constraints!(
+        model, y, z, 1:inst.J, 1:scenarioTree.V;
+        discharge_limit=inst.f_bar,
+        charge_limit=inst.f_under,
+    )
 
     @constraint(model, [j in 1:inst.J, n in 1:scenarioTree.V], p[j,n] == lambda[j,n] * inst.c_pv[n])
     @constraint(model, [n in 1:scenarioTree.V], sum(lambda[:,n]) == 1)
@@ -60,8 +65,6 @@ function _build_full_multistage_model(inst::InstanceM)
         inst.delta * inst.e_c * sum(z[j,1] for j in 1:inst.J) -
         inst.delta * sum(y[j,1] for j in 1:inst.J) / inst.e_d
     )
-    @constraint(model, [n in 1:scenarioTree.V], sum(y[j,n] for j in 1:inst.J) <= inst.f_bar)
-    @constraint(model, [n in 1:scenarioTree.V], sum(z[j,n] for j in 1:inst.J) <= inst.f_under)
     @constraint(model, [j in 1:inst.J, n in 1:scenarioTree.V], inst.d[j,n] == p[j,n] + y[j,n] + I[j,n] - z[j,n] - G[j,n])
     @constraint(model, [n in 1:scenarioTree.V; timePeriods[n] == inst.T], s[n] == inst.s_I)
     @constraint(model, [n in 1:scenarioTree.V], s[n] >= inst.s_min)
@@ -82,6 +85,7 @@ function _build_full_multistage_model(inst::InstanceM)
         s=s,
         I=I,
         G=G,
+        battery_mode=battery_mode,
         z=z,
         y=y,
         p=p,
@@ -97,7 +101,7 @@ function _solution_from_full_model(inst::InstanceM, refs; run_time_sec::Float64)
             value.(refs.s),
             value.(refs.I),
             value.(refs.G),
-            zeros(inst.J, inst.T),
+            collect(value.(refs.battery_mode)),
             zeros(inst.J, inst.T),
             value.(refs.z),
             value.(refs.y),
@@ -114,7 +118,7 @@ function _solution_from_full_model(inst::InstanceM, refs; run_time_sec::Float64)
         zeros(refs.scenarioTree.V),
         zeros(inst.J, refs.scenarioTree.V),
         zeros(inst.J, refs.scenarioTree.V),
-        zeros(inst.J, inst.T),
+        zeros(refs.scenarioTree.V),
         zeros(inst.J, inst.T),
         zeros(inst.J, refs.scenarioTree.V),
         zeros(inst.J, refs.scenarioTree.V),
@@ -133,6 +137,7 @@ function _set_start_values_from_solution!(inst::InstanceM, refs, sol::SolutionM)
     set_start_value.(refs.G, sol.G)
     set_start_value.(refs.z, sol.z)
     set_start_value.(refs.y, sol.y)
+    set_start_value.(refs.battery_mode, sol.battery_mode)
     set_start_value.(refs.p, sol.p)
     for n in 1:refs.scenarioTree.V
         if abs(inst.c_pv[n]) > 1e-9
@@ -150,6 +155,7 @@ end
 function _fix_battery_to_baseline!(refs, baseline_sol::SolutionM)
     fix.(refs.y, baseline_sol.y; force=true)
     fix.(refs.z, baseline_sol.z; force=true)
+    fix.(refs.battery_mode, baseline_sol.battery_mode; force=true)
 end
 
 function _solve_baseline_then_restrict(inst::InstanceM)
