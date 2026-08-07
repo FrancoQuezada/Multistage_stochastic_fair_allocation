@@ -1,12 +1,11 @@
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
 SKIP ERDINC_PSR C0001 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0002 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0003 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0004 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0005 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0006 stage=missing: resultado completo.
-RUN ERDINC_PSR C0007 stage=missing (6:4:4, Drahi_70.csv)
+SKIP ERDINC_PSR C0007 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0008 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0009 stage=missing: resultado completo.
 SKIP ERDINC_PSR C0010 stage=missing: resultado completo.

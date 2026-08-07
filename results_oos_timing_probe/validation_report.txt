@@ -1,0 +1,61 @@
+Compuerta de compatibilidad de batería compartida
+formulation_id = shared_battery_mode_node_level_v1
+formulation_variant = aggregate_only
+mode_node_convention = every_information_state
+
+[AVISO]  PEA impone una igualdad sobre el total del horizonte con el pasado realizado fijo. Puede volverse inalcanzable cuando el objetivo proporcional actualizado queda fuera del rango alcanzable con los recursos físicos restantes; una cola sin PV (5 período(s) aquí) es solo el caso extremo. Modo :adaptive_minimum: se intenta primero la igualdad estricta y, solo ante infactibilidad probada atribuida a la regla, se calcula endógenamente la banda mínima común (Fase I) y se reoptimiza el costo con esa banda (Fase II).
+
+[OK]    repository_has_no_obsolete_mode_logic :: Sin declaraciones de modo por hogar en el repositorio (0 línea(s) exentas y visibles en el código).
+[OK]    cross_household_charge_and_discharge_infeasible :: Un hogar cargando mientras otro recibe descarga en el mismo nodo debe ser infactible.
+[OK]    same_household_simultaneous_flow_infeasible :: El mismo hogar no puede cargar y descargar simultáneamente.
+[OK]    multiple_households_charge_within_rate :: Varios hogares pueden aportar carga simultánea dentro de F_c.
+[OK]    multiple_households_discharge_within_rate :: Varios hogares pueden recibir descarga simultánea dentro de F_d.
+[OK]    aggregate_charge_rate_enforced :: La suma de cargas no puede exceder F_c.
+[OK]    aggregate_discharge_rate_enforced :: La suma de descargas no puede exceder F_d.
+[OK]    idle_feasible_in_both_modes :: La operación en reposo es factible con cualquiera de los dos valores binarios.
+[OK]    mode_binary_count_equals_mode_nodes :: Con 3 hogares y 4 nodos se generaron 4 binarios; se esperan 4 (|V_mode|), no 12 (|H||V_mode|).
+[OK]    mode_variable_is_not_household_indexed :: El modo compartido debe llamarse battery_mode[n] y no llevar índice de hogar.
+[OK]    gate_DETERMINISTIC_RH_NONE :: modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_DETERMINISTIC_RH_STATIC_DEMAND_SHARE :: modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_DETERMINISTIC_RH_PEA :: modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_DETERMINISTIC_RH_SA :: modo=1, binarios=24/24, Z=0.8642659279778394, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_DETERMINISTIC_RH_LEXMMFPEA :: modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_DETERMINISTIC_RH_LEXMMFSA :: modo=1, binarios=24/24, Z=0.8642659279778393, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_TWO_STAGE_RH_NONE :: modo=1, binarios=2301/2301, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_TWO_STAGE_RH_STATIC_DEMAND_SHARE :: modo=1, binarios=2301/2301, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_TWO_STAGE_RH_PEA :: modo=1, binarios=2301/2301, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_TWO_STAGE_RH_SA :: modo=1, binarios=2301/2301, Z=3.9999999999999996, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_TWO_STAGE_RH_LEXMMFPEA :: modo=1, binarios=2301/2301, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_TWO_STAGE_RH_LEXMMFSA :: modo=1, binarios=2301/2301, Z=0.8642659279778385, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_MULTISTAGE_RH_NONE :: modo=1, binarios=168/168, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_MULTISTAGE_RH_STATIC_DEMAND_SHARE :: modo=1, binarios=168/168, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_MULTISTAGE_RH_PEA :: modo=1, binarios=168/168, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_MULTISTAGE_RH_SA :: modo=1, binarios=168/168, Z=4.000000000000001, Y=0.0, residuo de vínculo=8.881784197001252e-16
+[OK]    gate_MULTISTAGE_RH_LEXMMFPEA :: modo=1, binarios=168/168, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0
+[OK]    gate_MULTISTAGE_RH_LEXMMFSA :: modo=1, binarios=168/168, Z=3.9999999999999996, Y=0.0, residuo de vínculo=0.0
+
+Modelos representativos exportados: 24
+[OK]    DETERMINISTIC_RH__NONE :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    DETERMINISTIC_RH__STATIC_DEMAND_SHARE :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    DETERMINISTIC_RH__PEA :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    DETERMINISTIC_RH__PEA__adaptive_phase1 :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    DETERMINISTIC_RH__PEA__adaptive_phase2 :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    DETERMINISTIC_RH__SA :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    DETERMINISTIC_RH__LEXMMFPEA__phase1 :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    DETERMINISTIC_RH__LEXMMFSA__phase1 :: 18/18 verificaciones aprobadas | binarios=24/24 | únicos=24 | legacy |H||V_mode|=120
+[OK]    TWO_STAGE_RH__NONE :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    TWO_STAGE_RH__STATIC_DEMAND_SHARE :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    TWO_STAGE_RH__PEA :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    TWO_STAGE_RH__PEA__adaptive_phase1 :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    TWO_STAGE_RH__PEA__adaptive_phase2 :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    TWO_STAGE_RH__SA :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    TWO_STAGE_RH__LEXMMFPEA__phase1 :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    TWO_STAGE_RH__LEXMMFSA__phase1 :: 19/19 verificaciones aprobadas | binarios=2301/2301 | únicos=2301 | legacy |H||V_mode|=11505
+[OK]    MULTISTAGE_RH__NONE :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840
+[OK]    MULTISTAGE_RH__STATIC_DEMAND_SHARE :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840
+[OK]    MULTISTAGE_RH__PEA :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840
+[OK]    MULTISTAGE_RH__PEA__adaptive_phase1 :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840
+[OK]    MULTISTAGE_RH__PEA__adaptive_phase2 :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840
+[OK]    MULTISTAGE_RH__SA :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840
+[OK]    MULTISTAGE_RH__LEXMMFPEA__phase1 :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840
+[OK]    MULTISTAGE_RH__LEXMMFSA__phase1 :: 18/18 verificaciones aprobadas | binarios=168/168 | únicos=168 | legacy |H||V_mode|=840

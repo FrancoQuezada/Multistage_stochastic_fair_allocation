@@ -1,13 +1,10 @@
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
 SKIP SA C0001 stage=missing: resultado completo.
 SKIP SA C0002 stage=missing: resultado completo.
 SKIP SA C0003 stage=missing: resultado completo.
 SKIP SA C0004 stage=missing: resultado completo.
 SKIP SA C0005 stage=missing: resultado completo.
-RUN SA C0006 stage=missing (6:4:4, Drahi_51.csv)
-OPTIMAL
-Objective : 690055.506
+SKIP SA C0006 stage=missing: resultado completo.
 SKIP SA C0007 stage=missing: resultado completo.
 SKIP SA C0008 stage=missing: resultado completo.
 SKIP SA C0009 stage=missing: resultado completo.

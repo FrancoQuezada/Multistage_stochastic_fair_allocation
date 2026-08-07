@@ -1,20 +1,10 @@
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
 SKIP LEXMMFSA C0001 stage=missing: resultado completo.
 SKIP LEXMMFSA C0002 stage=missing: resultado completo.
 SKIP LEXMMFSA C0003 stage=missing: resultado completo.
 SKIP LEXMMFSA C0004 stage=missing: resultado completo.
 SKIP LEXMMFSA C0005 stage=missing: resultado completo.
-RUN LEXMMFSA C0006 stage=missing (6:4:4, Drahi_51.csv)
-##########################################################
-Lexicographic Algorithm
-Lex step 1 objective: 14194.997 (OPTIMAL)
-Lex step 2 objective: 28389.993 (OPTIMAL)
-Lex step 3 objective: 42591.057 (OPTIMAL)
-Lex step 4 objective: 56793.12 (OPTIMAL)
-Lex step 5 objective: 70995.184 (OPTIMAL)
-end
-##########################################################
+SKIP LEXMMFSA C0006 stage=missing: resultado completo.
 SKIP LEXMMFSA C0007 stage=missing: resultado completo.
 SKIP LEXMMFSA C0008 stage=missing: resultado completo.
 SKIP LEXMMFSA C0009 stage=missing: resultado completo.

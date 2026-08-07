@@ -7,17 +7,6 @@ Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_f
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
 FAIL CPEA C0006 stage=5: CPEA terminó sin solución primal.
 FAIL CPEA C0006 stage=6: CPEA terminó sin solución primal.
 FAIL CPEA C0007 stage=5: CPEA terminó sin solución primal.
@@ -56,18 +45,18 @@ SKIP CPEA C0007 stage=3: resultado completo.
 SKIP CPEA C0007 stage=4: resultado completo.
 RUN CPEA C0007 stage=5 (6:4:4, Drahi_70.csv)
 RUN CPEA C0007 stage=6 (6:4:4, Drahi_70.csv)
-RUN CPEA C0008 stage=2 (6:4:4, Drahi_37.csv)
-RUN CPEA C0008 stage=3 (6:4:4, Drahi_37.csv)
-RUN CPEA C0008 stage=4 (6:4:4, Drahi_37.csv)
-RUN CPEA C0008 stage=5 (6:4:4, Drahi_37.csv)
-RUN CPEA C0008 stage=6 (6:4:4, Drahi_37.csv)
-RUN CPEA C0009 stage=2 (6:4:4, Drahi_95.csv)
-RUN CPEA C0009 stage=3 (6:4:4, Drahi_95.csv)
-RUN CPEA C0009 stage=4 (6:4:4, Drahi_95.csv)
+SKIP CPEA C0008 stage=2: resultado completo.
+SKIP CPEA C0008 stage=3: resultado completo.
+SKIP CPEA C0008 stage=4: resultado completo.
+SKIP CPEA C0008 stage=5: resultado completo.
+SKIP CPEA C0008 stage=6: resultado completo.
+SKIP CPEA C0009 stage=2: resultado completo.
+SKIP CPEA C0009 stage=3: resultado completo.
+SKIP CPEA C0009 stage=4: resultado completo.
 RUN CPEA C0009 stage=5 (6:4:4, Drahi_95.csv)
 RUN CPEA C0009 stage=6 (6:4:4, Drahi_95.csv)
-RUN CPEA C0010 stage=2 (6:4:4, Drahi_83.csv)
-RUN CPEA C0010 stage=3 (6:4:4, Drahi_83.csv)
-RUN CPEA C0010 stage=4 (6:4:4, Drahi_83.csv)
+SKIP CPEA C0010 stage=2: resultado completo.
+SKIP CPEA C0010 stage=3: resultado completo.
+SKIP CPEA C0010 stage=4: resultado completo.
 RUN CPEA C0010 stage=5 (6:4:4, Drahi_83.csv)
 RUN CPEA C0010 stage=6 (6:4:4, Drahi_83.csv)

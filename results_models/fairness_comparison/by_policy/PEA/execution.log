@@ -1,42 +1,12 @@
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-RUN PEA C0001 stage=missing (2:2:12, Drahi_51.csv)
-OPTIMAL
-Objective : 482716.984
-RUN PEA C0002 stage=missing (2:2:12, Drahi_70.csv)
-OPTIMAL
-Objective : 577607.68
-RUN PEA C0003 stage=missing (2:2:12, Drahi_37.csv)
-OPTIMAL
-Objective : 789337.987
-RUN PEA C0004 stage=missing (2:2:12, Drahi_95.csv)
-OPTIMAL
-Objective : 723784.262
-RUN PEA C0005 stage=missing (2:2:12, Drahi_83.csv)
-OPTIMAL
-Objective : 718442.964
-RUN PEA C0006 stage=missing (6:4:4, Drahi_51.csv)
-OPTIMAL
-Objective : 586798.964
-RUN PEA C0007 stage=missing (6:4:4, Drahi_70.csv)
-OPTIMAL
-Objective : 457208.702
-RUN PEA C0008 stage=missing (6:4:4, Drahi_37.csv)
-OPTIMAL
-Objective : 684282.937
-RUN PEA C0009 stage=missing (6:4:4, Drahi_95.csv)
-OPTIMAL
-Objective : 709779.696
-RUN PEA C0010 stage=missing (6:4:4, Drahi_83.csv)
-OPTIMAL
-Objective : 762882.367
+SKIP PEA C0001 stage=missing: resultado completo.
+SKIP PEA C0002 stage=missing: resultado completo.
+SKIP PEA C0003 stage=missing: resultado completo.
+SKIP PEA C0004 stage=missing: resultado completo.
+SKIP PEA C0005 stage=missing: resultado completo.
+SKIP PEA C0006 stage=missing: resultado completo.
+SKIP PEA C0007 stage=missing: resultado completo.
+SKIP PEA C0008 stage=missing: resultado completo.
+SKIP PEA C0009 stage=missing: resultado completo.
+SKIP PEA C0010 stage=missing: resultado completo.
 PEA completado: 10 filas de resumen.

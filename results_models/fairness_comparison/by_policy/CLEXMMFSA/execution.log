@@ -1,11 +1,10 @@
 Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
-Reading override parameter file '/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_models/fairness_comparison/cplex_threads_1.prm' succeeded.
 SKIP CLEXMMFSA C0001 stage=2: resultado completo.
 SKIP CLEXMMFSA C0002 stage=2: resultado completo.
 SKIP CLEXMMFSA C0003 stage=2: resultado completo.
 SKIP CLEXMMFSA C0004 stage=2: resultado completo.
 SKIP CLEXMMFSA C0005 stage=2: resultado completo.
-RUN CLEXMMFSA C0006 stage=2 (6:4:4, Drahi_51.csv)
+SKIP CLEXMMFSA C0006 stage=2: resultado completo.
 SKIP CLEXMMFSA C0006 stage=3: resultado completo.
 SKIP CLEXMMFSA C0006 stage=4: resultado completo.
 SKIP CLEXMMFSA C0006 stage=5: resultado completo.

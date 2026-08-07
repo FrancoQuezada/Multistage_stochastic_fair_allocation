@@ -1,9 +1,9 @@
 ConfigID,Fairness,ConditionalStage,ErrorType,ErrorMessage,Timestamp
-C0006,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:30.767
-C0006,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:32.076
-C0007,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:34.450
-C0007,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:35.733
-C0009,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:52.512
-C0009,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:53.271
-C0010,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:57.840
-C0010,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-04T11:13:58.318
+C0006,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:42.799
+C0006,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:43.774
+C0007,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:45.374
+C0007,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:46.199
+C0009,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:47.134
+C0009,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:47.805
+C0010,CPEA,5,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:48.504
+C0010,CPEA,6,ErrorException,CPEA terminó sin solución primal.,2026-08-05T02:57:49.055
