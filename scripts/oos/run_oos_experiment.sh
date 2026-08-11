@@ -85,6 +85,11 @@ export SA_TOLERANCE_MODE="${SA_TOLERANCE_MODE:-adaptive_minimum}"
 # export at the same information state. Added in stage 8 after the Phase-A audit observed the
 # overlap in practice. Configurable so its model-size price stays measurable.
 export GRID_DIRECTION_EXCLUSIVITY="${GRID_DIRECTION_EXCLUSIVITY:-1}"
+# Shared-battery mode exclusivity: v_n in {0,1} (default) forces the whole community into one
+# aggregate mode (charge-only or discharge-only) per node; 0 relaxes v_n to a continuous [0,1]
+# variable over the SAME two rate rows, to measure the price of integrality (decision log,
+# docs/oos_redesign_plan.md).
+export BATTERY_DIRECTION_EXCLUSIVITY="${BATTERY_DIRECTION_EXCLUSIVITY:-1}"
 export LEX_EPS_ABS="${LEX_EPS_ABS:-1.0}"
 # Tolerance defaults live in codes/oos_experiment/types.jl (OOS_DEFAULT_*). They are forwarded
 # only when the caller sets them explicitly, so the shell cannot drift from the Julia default.

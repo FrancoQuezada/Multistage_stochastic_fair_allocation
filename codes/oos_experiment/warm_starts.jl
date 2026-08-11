@@ -116,7 +116,9 @@ end
 Install a mode start on a generated model.
 
 Fails when the start does not cover exactly the model's mode nodes, which is the Phase-5
-failure condition "warm starts contain one mode per relevant node".
+failure condition "warm starts contain one mode per relevant node". `set_start_value` is
+valid whether `refs.v` is `Bin` or its `[0,1]` LP relaxation, so this works unchanged under
+`battery_direction_exclusivity=false`.
 """
 function apply_mode_start!(refs::PhysicalModelRefs, start::ModeStart)
     Set(start.nodes) == Set(refs.mode_nodes) || error(

@@ -365,6 +365,116 @@ tolerancias PEA, secuencias de resolución, recurso y separación NONE/STATIC_DE
 Cualquier análisis nuevo debe seguir sus convenciones: etiquetas semánticas de resolución en
 lugar de enteros de fase, columna `Resource` explícita y filtrado por `CompletionStatus`.
 
+#### Variables de entorno del experimento OOS
+
+`scripts/oos/run_oos_campaign_parallel.sh` (la campaña paralela: `generate_structural_instance_manifest.sh`
+→ N × `run_oos_task.sh` en paralelo → `merge_oos_shards.sh`) no define ningún parámetro propio:
+hereda **todas** las variables de entorno del proceso que lo invoca, exactamente como si se las
+pasaras a mano a cada script hijo. La tabla siguiente cubre esas variables (más las que solo
+aplican al camino de una sola corrida, `run_oos_experiment.sh`, marcadas explícitamente). Los
+valores **obligatorio** no tienen default: el script aborta si faltan.
+
+**Escenarios / árbol de look-ahead**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `MULTISTAGE_BRANCHING` | `[2,2]` | Ramificación del árbol de look-ahead **compartido** por los tres controladores (lista por etapa `"2,2"` o triplete compacto `"stages:children:periods_per_stage"`, ej. `"4:4:6"`). Es EL parámetro real que fija el número de escenarios: `MULTISTAGE_RH` usa el árbol completo, `TWO_STAGE_RH` sus mismas hojas sin no-anticipatividad intermedia, y `DETERMINISTIC_RH` la media ponderada de esas hojas. |
+| `MULTISTAGE_PERIODS_PER_STAGE` | vacío (reparto automático de `LOOKAHEAD_HORIZON`) | Períodos por etapa del árbol; incompatible con la forma compacta S:C:P de `MULTISTAGE_BRANCHING`. |
+| `TWO_STAGE_SCENARIOS` | `20` | **Vestigial desde la etapa 5 del rediseño**: se valida y se guarda por trazabilidad, pero ya no genera escenarios (`common_support.jl` construye la vista two-stage a partir de las hojas del árbol de `MULTISTAGE_BRANCHING`; ver `codes/oos_experiment/output.jl:790-791`, campo `two_stage_scenarios_drives_generation=false`). Cambiarlo no tiene efecto observable en el modelo. |
+| `TREE_SET` | `3:2:8` (S:C:P) | Árbol **in-sample legado** que calibra la instancia base y la tabla `STATIC_DEMAND_SHARE` (`generateInstance`); no es el árbol de look-ahead de la simulación rolling — no confundir con `MULTISTAGE_BRANCHING`. |
+| `OOS_REPLICATIONS` | `20` | Número de trayectorias fuera de muestra (Monte Carlo) simuladas por configuración; es evaluación, no escenarios del recurso two-stage. |
+| `INSTANCE_DRAWS_PER_CELL` | **obligatorio** | K: sorteos estructurales independientes por celda del catálogo (batería × demanda × incertidumbre); multiplica el catálogo, no es un escenario estocástico del optimizador. |
+
+**Formulación / variables binarias**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `FORMULATION_ID` | **obligatorio** en `run_oos_campaign_parallel.sh`/`run_oos_experiment.sh`; `shared_battery_mode_node_level_v1` por defecto en las compuertas de validación | Identificador de la formulación de batería compartida. Único valor implementado: `shared_battery_mode_node_level_v1` (un binario de modo `v_n` por nodo del árbol, nunca por hogar). |
+| `FORMULATION_VARIANT` | `aggregate_only` | `aggregate_plus_redundant_links` agrega filas de enlace redundantes por hogar reutilizando `v_n`; no crea binarias nuevas ni cambia binario-vs-continuo. |
+| `GRID_DIRECTION_EXCLUSIVITY` | `1` | Batería aparte: esta es la binaria de **dirección de compra/venta de energía**. En `1` agrega `grid_import_direction[j,n]` (una por hogar y nodo) que impide importar y exportar simultáneamente en el mismo estado de información. En `0` esa familia desaparece. |
+| `BATTERY_DIRECTION_EXCLUSIVITY` | `1` | Controla el binario de **modo de batería** `v_n` (carga vs. descarga). En `1` (default) `v_n` es binario `{0,1}`, como siempre. En `0` se relaja a una variable continua en `[0,1]` sobre las MISMAS dos restricciones de tasa agregada — mide el precio de la integralidad sin cambiar la estructura del modelo. Aplica uniformemente a todo controlador y política de equidad. Ver la bitácora de decisiones en `docs/oos_redesign_plan.md`. |
+| `ALLOW_LEGACY_CONVERSION` | `0` | No afecta el modelo actual; solo habilita convertir artefactos legacy (warm starts con modo por hogar, pre-rediseño) a la convención nueva. |
+| `REQUIRE_SHARED_BATTERY_VALIDATION` | `1` | Exige que la compuerta Fase-0 de batería compartida pase antes de correr la campaña completa (`run_oos_experiment.sh`). |
+| `OOS_ACKNOWLEDGE_UNVALIDATED` | `0` | Override explícito para correr sin esa validación (resultados marcados como no publicables). |
+
+**Horizonte rolling-horizon (contrato H, L, h)**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `EVALUATION_HORIZON` (`H`) | `24` | Períodos abstractos evaluados. |
+| `LOOKAHEAD_HORIZON` (`L`) | `24` | Períodos abstractos que abarca cada optimización de look-ahead. |
+| `IMPLEMENTATION_STEP` (`h`) | `1` | Períodos implementados por resolución rodante antes de re-optimizar; cualquier entero `1<=h<=min(H,L)`, no necesita dividir a `H`. |
+
+**Controladores y equidad**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `CONTROLLER_SET` | `DETERMINISTIC_RH,TWO_STAGE_RH,MULTISTAGE_RH` | Controladores a evaluar. |
+| `FAIRNESS_SET` | `NONE,STATIC_DEMAND_SHARE,PEA,SA,LEXMMFPEA,LEXMMFSA` | Reglas de equidad/asignación a evaluar. |
+| `PEA_TOLERANCE_MODE` / `SA_TOLERANCE_MODE` | `adaptive_minimum` | `adaptive_minimum`, `strict` o `fixed_band` (deprecated). |
+| `PEA_TOLERANCE_NUMERIC_EPS` | `1e-6` | Holgura numérica absoluta (kWh) del recovery `PEA` Fase II. |
+| `FAIRNESS_ABS_TOL` / `SA_FAIRNESS_ABS_TOL` | `0.0` | Bandas económicas fijas, deprecadas; solo activas con `*_TOLERANCE_MODE=fixed_band`. |
+| `LEX_EPS_ABS` | `1.0` | Épsilon absoluto de la maquinaria lexicográfica max-min (`LEXMMFPEA`/`LEXMMFSA`). |
+
+**Instancia física (hogares, demanda, PV, batería)**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `INST_FOLDER` | `codes/oos_experiment/inst/inst2020` | Carpeta de instancias base candidatas. |
+| `INSTANCE_FROM` / `INSTANCE_TO` | `1` / `INSTANCE_FROM` | Rango de índices (1-based) dentro del listado ordenado de `INST_FOLDER`. |
+| `STRUCTURAL_BASE_INSTANCES` | vacío (usa `INST_FOLDER`) | Lista explícita de archivos de instancia, separada por comas. |
+| `J_SET` | `5` | Número de hogares (solo se usa el primer valor de la lista). |
+| `AVG_D_SET` / `DEV_D_SET` | `100.0` / `10.0` | Media/desviación de la demanda por hogar. |
+| `THETA_SET` | `0.2` | Desviación estándar del ruido PV. |
+| `DEMAND_PROFILE_SET` / `REPOSITORY_DEMAND_PROFILE` | `mixed` | Perfil de actividad de demanda por hogar. |
+| `BATTERY_SCALE_SET` / `PV_SCALE_SET` | `1.0` / `1.0` | Factores de escala de batería/PV. |
+| `LOW_BATTERY_SCALE` / `HIGH_BATTERY_SCALE` | **obligatorio** | Niveles de escala de batería del catálogo estructural (etapa 12 los calibra). |
+| `LOW_UNCERTAINTY_THETA` / `HIGH_UNCERTAINTY_THETA` | **obligatorio** | Niveles de `theta` del catálogo estructural. |
+
+**Solver**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `SOLVER_TIME_LIMIT_SEC` | `600.0` | Límite de tiempo por resolución. |
+| `SOLVER_MIP_GAP` | `1e-6` | Gap relativo de MIP (CPLEX hereda `1e-4`; se declara explícito porque es del mismo orden que los efectos que el estudio estima). |
+| `SOLVER_THREADS` / `OOS_SOLVER_THREADS` | `0` (general) / `1` (fijo por shard) | Hilos de CPLEX; el runner de shard lo fuerza a 1 para reproducibilidad entre procesos paralelos. |
+| `USE_WARM_STARTS` | `0` | Arranques MIP (warm starts) entre resoluciones rodantes. |
+| `FLOW_TOL` / `FEASIBILITY_TOL` / `INTEGRALITY_TOL` | `1e-5` / `1e-5` / `1e-6` | Tolerancias numéricas de validación de la acción implementada. |
+
+**Reproducibilidad / trazabilidad**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `EXPERIMENT_SEED` | `12345` | Semilla maestra de toda la jerarquía de streams. |
+| `EXPERIMENT_ID` | `oos_experiment` | Etiqueta del experimento/campaña, escrita en las salidas. |
+| `PROMPT_VERSION` | `oos_receding_horizon_prompt_v1` | Versión de la especificación que produjo la corrida. |
+
+**Orquestación de la campaña paralela**
+
+| Variable | Predeterminado | Significado |
+|---|---|---|
+| `OOS_SHARDS` | `$(nproc)` | Número de procesos paralelos (shards) del fan-out. |
+| `STRUCTURAL_MANIFEST_PATH` | `results_oos/campaign/structural_manifest.json` | Manifiesto estructural compartido por los tres pasos del pipeline. |
+| `OOS_SHARD_ROOT` | `results_oos/campaign/shards` | Raíz donde cada shard escribe su salida parcial. |
+| `OOS_MERGED_DIR` | `results_oos/campaign/merged` | Directorio de la fusión determinista final. |
+| `OOS_OUTPUT_DIR` | `results_oos` | Directorio base de salida (no puede preexistir como uno de los directorios protegidos). |
+| `OOS_CAMPAIGN_REVIEW` | `1` | Activa la revisión operacional de campaña tras el merge. |
+| `EXPORT_REPRESENTATIVE_MODELS` | `1` | Exporta y audita un modelo LP/MPS representativo por controlador × regla de equidad. |
+| `JULIA_BIN` / `JULIA_CHANNEL` | `julia` / versión fijada en `Manifest.toml` | Ejecutable/canal de Julia usado para invocar cada paso. |
+
+Ejemplo, con `MULTISTAGE_BRANCHING` (no `TWO_STAGE_SCENARIOS`) como la perilla real del número de
+escenarios:
+
+```bash
+FORMULATION_ID='shared_battery_mode_node_level_v1' \
+INSTANCE_DRAWS_PER_CELL=2 LOW_BATTERY_SCALE=0.5 HIGH_BATTERY_SCALE=2.0 \
+LOW_UNCERTAINTY_THETA=0.1 HIGH_UNCERTAINTY_THETA=0.4 \
+OOS_REPLICATIONS=1000 EVALUATION_HORIZON=24 LOOKAHEAD_HORIZON=24 IMPLEMENTATION_STEP=1 \
+MULTISTAGE_BRANCHING='4,4' GRID_DIRECTION_EXCLUSIVITY=1 BATTERY_DIRECTION_EXCLUSIVITY=1 \
+OOS_SHARDS=8 \
+bash scripts/oos/run_oos_campaign_parallel.sh
+```
+
 ## Variables de entorno útiles
 
 Comunes a casi todos los scripts:

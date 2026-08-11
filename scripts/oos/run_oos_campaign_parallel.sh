@@ -10,11 +10,11 @@
 #   FORMULATION_ID='shared_battery_mode_node_level_v1' \
 #   INSTANCE_DRAWS_PER_CELL=2 LOW_BATTERY_SCALE=0.5 HIGH_BATTERY_SCALE=2.0 \
 #   LOW_UNCERTAINTY_THETA=0.1 HIGH_UNCERTAINTY_THETA=0.4 \
-#   OOS_REPLICATIONS=1000 EVALUATION_HORIZON=24 LOOKAHEAD_HORIZON=24 IMPLEMENTATION_STEP=1 \
-#   MULTISTAGE_BRANCHING='4,4' \
+#   OOS_REPLICATIONS=10 EVALUATION_HORIZON=24 LOOKAHEAD_HORIZON=24 IMPLEMENTATION_STEP=4 \
+#   MULTISTAGE_BRANCHING='5:4:4' \
 #   OOS_SHARDS=8 \
 #   bash scripts/oos/run_oos_campaign_parallel.sh
-#
+# 
 # OOS_SHARDS defaults to `nproc` (this machine's core count) if unset — override it to leave
 # headroom or to match a smaller allocation. STRUCTURAL_MANIFEST_PATH, OOS_SHARD_ROOT and
 # OOS_MERGED_DIR default under results_oos/campaign/ and are shared automatically across the
@@ -41,7 +41,7 @@ oos_require_preconditions
 export STRUCTURAL_MANIFEST_PATH="${STRUCTURAL_MANIFEST_PATH:-$RESULTS_OOS_DIR/campaign/structural_manifest.json}"
 export OOS_SHARD_ROOT="${OOS_SHARD_ROOT:-$RESULTS_OOS_DIR/campaign/shards}"
 export OOS_MERGED_DIR="${OOS_MERGED_DIR:-$RESULTS_OOS_DIR/campaign/merged}"
-OOS_SHARDS="${OOS_SHARDS:-8}"
+OOS_SHARDS="${OOS_SHARDS:-$(nproc)}"
 
 echo "======================================================================"
 echo " Campaña OOS en paralelo"

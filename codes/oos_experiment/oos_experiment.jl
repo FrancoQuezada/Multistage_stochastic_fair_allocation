@@ -706,6 +706,7 @@ function oos_config_from_environment()
         pv_scale=first([parse(Float64, x) for x in _env_list("PV_SCALE_SET", ["1.0"])]),
         formulation_variant=Symbol(_env("FORMULATION_VARIANT", "aggregate_only")),
         grid_direction_exclusivity=_env_bool("GRID_DIRECTION_EXCLUSIVITY", true),
+        battery_direction_exclusivity=_env_bool("BATTERY_DIRECTION_EXCLUSIVITY", true),
         use_warm_starts=_env_bool("USE_WARM_STARTS", false),
         solver_threads=_env_int("SOLVER_THREADS", 0),
         require_shared_battery_validation=_env_bool("REQUIRE_SHARED_BATTERY_VALIDATION", true),

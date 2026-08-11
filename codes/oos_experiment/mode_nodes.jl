@@ -45,11 +45,13 @@ mode_node_set(tree::LookaheadTree; convention::Symbol=OOS_MODE_NODE_CONVENTION) 
     mode_node_set(tree.parent, tree.calendar_period; convention=convention)
 
 """
-Expected number of shared-battery mode binaries, `|V_mode|`.
+Expected number of shared-battery mode decision variables, `|V_mode|`.
 
-Under the corrected node-level formulation this equals the number of mode nodes. It is
-*not* multiplied by the number of households: the previous household-indexed convention
-would have produced `|H| * |V_mode|` binaries.
+Under the corrected node-level formulation this equals the number of mode nodes, whether
+`v_n` is declared `Bin` or as its `[0,1]` LP relaxation. It is *not* multiplied by the
+number of households: the previous household-indexed convention would have produced
+`|H| * |V_mode|` binaries. Use `expected_binary_count` when the actual *binary* count is
+needed, since it correctly reports `0` for this family under the relaxation.
 """
 expected_mode_binary_count(tree::LookaheadTree) = length(tree.mode_nodes)
 
@@ -64,9 +66,18 @@ expected_grid_direction_binary_count(
     tree::LookaheadTree, households::Int, enabled::Bool,
 ) = enabled ? households * lookahead_node_count(tree) : 0
 
-"""Total binaries the centralized conventions expect in one generated model."""
-expected_binary_count(tree::LookaheadTree, households::Int, grid_direction_exclusivity::Bool) =
-    expected_mode_binary_count(tree) +
+"""
+Total binaries the centralized conventions expect in one generated model.
+
+`battery_direction_exclusivity` defaults to `true` for backward compatibility with callers
+that only ever built the binary shared-battery formulation; pass `false` to get the count
+expected under the `[0,1]` LP relaxation, where the shared-battery family contributes `0`.
+"""
+expected_binary_count(
+    tree::LookaheadTree, households::Int, grid_direction_exclusivity::Bool,
+    battery_direction_exclusivity::Bool=true,
+) =
+    (battery_direction_exclusivity ? expected_mode_binary_count(tree) : 0) +
     expected_grid_direction_binary_count(tree, households, grid_direction_exclusivity)
 
 """

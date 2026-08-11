@@ -120,7 +120,14 @@ end
 
 const SHARED_BATTERY_FLOW_TOL = 1e-7
 
-"""Add one binary shared-battery mode and its aggregate flow constraints per node."""
+"""
+Add one shared-battery mode and its aggregate flow constraints per node.
+
+`binary=true` (default) declares the mode as `Bin`, exactly as before. `binary=false`
+declares it as a continuous variable in `[0,1]` instead -- an LP relaxation of the same two
+constraint rows, used to measure the cost of integrality without changing the formulation's
+structure.
+"""
 function add_shared_battery_mode_constraints!(
     model::Model,
     y,
@@ -129,10 +136,15 @@ function add_shared_battery_mode_constraints!(
     nodes;
     discharge_limit::Real,
     charge_limit::Real,
+    binary::Bool=true,
 )
     discharge_limit >= 0 || error("The aggregate discharge limit must be nonnegative.")
     charge_limit >= 0 || error("The aggregate charge limit must be nonnegative.")
-    @variable(model, battery_mode[n in nodes], Bin)
+    if binary
+        @variable(model, battery_mode[n in nodes], Bin)
+    else
+        @variable(model, 0 <= battery_mode[n in nodes] <= 1)
+    end
     @constraint(model, battery_discharge_mode[n in nodes],
         sum(y[j,n] for j in households) <= discharge_limit * (1 - battery_mode[n]))
     @constraint(model, battery_charge_mode[n in nodes],

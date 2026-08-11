@@ -75,10 +75,15 @@ is not virtual net billing.
 
 ## Shared-battery formulation
 
-One binary per relevant information state, created only by the repository's verified
-`add_shared_battery_mode_constraints!`:
+One shared-battery operating mode per relevant information state, created only by the
+repository's verified `add_shared_battery_mode_constraints!`:
 
-    sum_j y[j,n] <= F_d (1 - v_n),      sum_j z[j,n] <= F_c v_n,      v_n in {0,1}
+    sum_j y[j,n] <= F_d (1 - v_n),      sum_j z[j,n] <= F_c v_n
+
+By default (`BATTERY_DIRECTION_EXCLUSIVITY=1`, `config.battery_direction_exclusivity=true`)
+`v_n in {0,1}`, exactly as before. Setting `BATTERY_DIRECTION_EXCLUSIVITY=0` relaxes `v_n` to
+a continuous `[0,1]` variable over the SAME two rows, to measure the price of integrality
+without changing the formulation's structure (decision log, `docs/oos_redesign_plan.md`).
 
 There is no household-indexed mode anywhere: not in the models, not in the warm starts, not in
 the outputs. Because the flows are nonnegative, the aggregate rows already imply
@@ -97,6 +102,11 @@ smaller formulation.
 For the node-indexed models built here, generated and unique nonanticipative mode counts
 coincide. A scenario-indexed implementation would report a larger generated count; both columns
 exist so the distinction stays visible.
+
+Under the `[0,1]` relaxation (`BATTERY_DIRECTION_EXCLUSIVITY=0`), `GeneratedModeBinaries`
+correctly reports `0` for the shared-battery family (the mode is no longer `Bin`), while
+`ExpectedModeNodes` stays the topological node count regardless of the toggle. The two must
+never be compared across differing toggle values as if they meant the same claim.
 
 ## Abstract temporal structure (`H`, `L`, `h`)
 

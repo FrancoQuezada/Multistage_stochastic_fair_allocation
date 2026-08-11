@@ -124,6 +124,49 @@ end
 end
 
 # =====================================================================================
+# 22.1b Shared-battery micro-instance, `[0,1]` LP relaxation (binary=false)
+# =====================================================================================
+
+@testset "22.1b shared-battery micro-instance (continuous relaxation)" begin
+    # `binary=false` must produce zero binaries and a real continuous variable, not a no-op.
+    for households in (2, 3, 5), nodes in (1, 3, 7)
+        model = Model(CPLEX.Optimizer)
+        set_silent(model)
+        @variable(model, y[1:households, 1:nodes] >= 0)
+        @variable(model, z[1:households, 1:nodes] >= 0)
+        v = add_shared_battery_mode_constraints!(
+            model, y, z, 1:households, 1:nodes;
+            discharge_limit=4.0, charge_limit=3.0, binary=false,
+        )
+        @test length(v) == nodes
+        @test generated_binary_count(model) == 0
+        @test all(!is_binary(variable) for variable in v)
+        @test all(lower_bound(variable) == 0 && upper_bound(variable) == 1 for variable in v)
+    end
+
+    # The relaxation is a real domain change, not a no-op: at a fractional mode, BOTH
+    # aggregate rate caps must scale by that fraction, exactly as the byte-identical
+    # constraint rows require. Discharge is fixed at zero to isolate the charge row.
+    model = Model(CPLEX.Optimizer)
+    set_silent(model)
+    @variable(model, y[1:2, 1:1] >= 0)
+    @variable(model, z[1:2, 1:1] >= 0)
+    v = add_shared_battery_mode_constraints!(
+        model, y, z, 1:2, 1:1; discharge_limit=4.0, charge_limit=3.0, binary=false,
+    )
+    fix.(y, 0.0; force=true)
+    fix(v[1], 0.5; force=true)
+
+    fix.(z, [1.0; 0.4;;]; force=true)  # sum z = 1.4 <= 3.0 * 0.5 = 1.5: feasible
+    optimize!(model)
+    @test is_solved_and_feasible(model; allow_local=false, dual=false)
+
+    fix.(z, [1.0; 0.6;;]; force=true)  # sum z = 1.6 > 3.0 * 0.5 = 1.5: infeasible
+    optimize!(model)
+    @test !is_solved_and_feasible(model; allow_local=false, dual=false)
+end
+
+# =====================================================================================
 # 22.9 (part) Centralized mode-node convention
 # =====================================================================================
 
@@ -549,7 +592,10 @@ end
         # carries the grid-direction family, so the total is checked through the centralized
         # convention rather than against the mode-node count alone.
         @test generated_binary_count(refs.model) ==
-              expected_binary_count(tree, template.J, config.grid_direction_exclusivity)
+              expected_binary_count(
+                  tree, template.J, config.grid_direction_exclusivity,
+                  config.battery_direction_exclusivity,
+              )
         @test expected_mode_binary_count(tree) == length(tree.mode_nodes)
         structure = audit_shared_battery_structure(refs)
         for finding in structure.findings

@@ -78,15 +78,22 @@ function audit_shared_battery_structure(refs::PhysicalModelRefs)
         tree, J, refs.grid_direction_exclusivity,
     )
 
+    # Both findings below characterize the BINARY family (`is_binary`-filtered, per
+    # `binaries` above). Under the `[0,1]` LP relaxation (`refs.battery_direction_exclusivity
+    # == false`) `battery_mode` is continuous, so `battery_binaries` is correctly empty and
+    # the expected count is `0`, not `length(mode_nodes)`; the second finding is then
+    # vacuously true, since there is no binary family left to match against `mode_variables`.
+    expected_battery_binaries = refs.battery_direction_exclusivity ? length(mode_nodes) : 0
     push!(findings, AuditFinding(
         "binary_count_equals_mode_nodes",
-        length(battery_binaries) == length(mode_nodes),
-        "Binarios de modo compartido: $(length(battery_binaries)); nodos de modo esperados: " *
-        "$(length(mode_nodes)).",
+        length(battery_binaries) == expected_battery_binaries,
+        "Binarios de modo compartido: $(length(battery_binaries)); esperados " *
+        "$expected_battery_binaries (exclusividad de batería " *
+        "$(refs.battery_direction_exclusivity ? "activa" : "inactiva")).",
     ))
     push!(findings, AuditFinding(
         "every_mode_binary_is_a_node_level_mode",
-        Set(battery_binaries) == Set(mode_variables),
+        !refs.battery_direction_exclusivity || Set(battery_binaries) == Set(mode_variables),
         "El conjunto de binarios `battery_mode` debe coincidir exactamente con " *
         "{battery_mode[n] : n in V_mode}.",
     ))
@@ -94,7 +101,7 @@ function audit_shared_battery_structure(refs::PhysicalModelRefs)
         "no_household_indexed_battery_mode",
         all(!occursin(',', name(variable)) for variable in battery_binaries),
         "Ningún binario de modo de batería puede llevar índice de hogar: " *
-        "$(join(unique(name.(battery_binaries))[1:min(3, max(1, length(battery_binaries)))], ", ")).",
+        "$(join(unique(name.(battery_binaries))[1:min(3, length(battery_binaries))], ", ")).",
     ))
     push!(findings, AuditFinding(
         "mode_variable_naming",

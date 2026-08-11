@@ -4,13 +4,17 @@
 # Every controller and every allocation/fairness rule calls this one function, so the
 # shared-battery physics cannot diverge between compared configurations. The shared-battery
 # operating mode is created exclusively by the repository's verified
-# `add_shared_battery_mode_constraints!`, which produces one node-level binary
+# `add_shared_battery_mode_constraints!`, which produces one node-level shared-battery mode
 # `battery_mode[n]` and the two aggregate rate rows
 #
 #     sum_j y[j,n] <= F_d (1 - v_n),      sum_j z[j,n] <= F_c v_n.
 #
-# There is no household-indexed BATTERY mode variable: the shared-battery correction does not
-# imply one, and none exists anywhere in this module.
+# `v_n` is `Bin` by default (`config.battery_direction_exclusivity=true`); setting that flag
+# to `false` builds the same two rows with `v_n` relaxed to a continuous `[0,1]` variable
+# instead, to measure the cost of integrality (see the decision log in
+# `docs/oos_redesign_plan.md`). There is no household-indexed BATTERY mode variable either
+# way: the shared-battery correction does not imply one, and none exists anywhere in this
+# module.
 #
 # There IS, since stage 8, a household-indexed GRID-DIRECTION binary. It is a different family
 # with a different justification: a household has one grid connection point, so it cannot import
@@ -69,6 +73,9 @@ struct PhysicalModelRefs
 
     """Whether this model carries the stage-8 grid-direction binaries."""
     grid_direction_exclusivity::Bool
+
+    """Whether this model's shared-battery mode `v` is `Bin` or its `[0,1]` LP relaxation."""
+    battery_direction_exclusivity::Bool
 
     build_time_sec::Float64
 end
@@ -161,6 +168,7 @@ function build_remaining_horizon_model(
         model, y, z, 1:J, tree.mode_nodes;
         discharge_limit=template.f_bar,
         charge_limit=template.f_under,
+        binary=config.battery_direction_exclusivity,
     )
 
     @expression(model, aggregate_charge[n in 1:N], sum(z[j, n] for j in 1:J))
@@ -236,7 +244,8 @@ function build_remaining_horizon_model(
         aggregate_charge, aggregate_discharge, copy(tree.mode_nodes),
         node_cost, future_cost, expected_future_cost,
         tree, source, template, config.formulation_variant,
-        config.grid_direction_exclusivity, time() - t_build,
+        config.grid_direction_exclusivity, config.battery_direction_exclusivity,
+        time() - t_build,
     )
 end
 

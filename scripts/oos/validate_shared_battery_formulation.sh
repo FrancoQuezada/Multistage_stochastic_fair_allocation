@@ -32,6 +32,9 @@ export PEA_TOLERANCE_MODE="${PEA_TOLERANCE_MODE:-adaptive_minimum}"
 # Absolute numerical allowance in kWh; same unit as epsilon_pea, not dimensionless.
 export PEA_TOLERANCE_NUMERIC_EPS="${PEA_TOLERANCE_NUMERIC_EPS:-1e-6}"
 export FAIRNESS_ABS_TOL="${FAIRNESS_ABS_TOL:-0.0}"
+# The gate must be able to target either formulation variant a campaign might actually run.
+export GRID_DIRECTION_EXCLUSIVITY="${GRID_DIRECTION_EXCLUSIVITY:-1}"
+export BATTERY_DIRECTION_EXCLUSIVITY="${BATTERY_DIRECTION_EXCLUSIVITY:-1}"
 # Abstract temporal contract, in model periods. Forwarded only when set explicitly: the defaults
 # are the Julia constants in codes/oos_experiment/types.jl, so the shell cannot drift from them.
 [[ -n "${EVALUATION_HORIZON:-}" ]] && export EVALUATION_HORIZON
@@ -61,6 +64,8 @@ config = OOSExperimentConfig(
     pea_tolerance_numeric_eps=parse(Float64, get(ENV, "PEA_TOLERANCE_NUMERIC_EPS", "1e-6")),
     formulation_id=ENV["FORMULATION_ID"],
     formulation_variant=Symbol(ENV["FORMULATION_VARIANT"]),
+    grid_direction_exclusivity=_env_bool("GRID_DIRECTION_EXCLUSIVITY", true),
+    battery_direction_exclusivity=_env_bool("BATTERY_DIRECTION_EXCLUSIVITY", true),
     output_directory=ENV["OOS_OUTPUT_DIR"],
     instance_file=joinpath(ENV["INST_FOLDER"], sort(readdir(ENV["INST_FOLDER"]))[parse(Int, ENV["INSTANCE_FROM"])]),
     households=first([parse(Int, strip(x)) for x in split(ENV["J_SET"], ",")]),

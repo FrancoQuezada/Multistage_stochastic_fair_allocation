@@ -354,6 +354,18 @@ struct OOSExperimentConfig
     """
     grid_direction_exclusivity::Bool
 
+    """
+    Whether the shared-battery operating mode `v_n` is a binary (`true`, default) or its
+    `[0,1]` LP relaxation (`false`).
+
+    The two aggregate rate rows (`battery_discharge_mode`, `battery_charge_mode`) are
+    byte-identical in both cases; only the domain of `v_n` changes. Kept configurable, like
+    `grid_direction_exclusivity`, so the price of integrality can be measured rather than
+    assumed. It is a MODELING CHOICE applied uniformly to every controller and fairness
+    policy, never per policy. See the decision log in `docs/oos_redesign_plan.md`.
+    """
+    battery_direction_exclusivity::Bool
+
     use_warm_starts::Bool
     solver_threads::Int
     require_shared_battery_validation::Bool
@@ -404,6 +416,7 @@ function OOSExperimentConfig(;
     pv_scale::Float64=1.0,
     formulation_variant::Symbol=:aggregate_only,
     grid_direction_exclusivity::Bool=true,
+    battery_direction_exclusivity::Bool=true,
     use_warm_starts::Bool=false,
     solver_threads::Int=0,
     require_shared_battery_validation::Bool=true,
@@ -488,6 +501,7 @@ function OOSExperimentConfig(;
         instance_file, in_sample_stages, in_sample_children, in_sample_periods_per_stage,
         households, theta, avg_demand, dev_demand, demand_profile,
         battery_scale, pv_scale, formulation_variant, grid_direction_exclusivity,
+        battery_direction_exclusivity,
         use_warm_starts, solver_threads,
         require_shared_battery_validation, experiment_id, prompt_version,
     )
@@ -682,11 +696,17 @@ The complete current-period action that the simulator implements.
 `shared_battery_mode` is a scalar: one shared-battery operating mode for the current
 physical period. There is no household-indexed mode field, and legacy household-by-time
 fields (`x`, `w`) are never reused to store it.
+
+Under the default binary formulation (`battery_direction_exclusivity=true`) this is always
+exactly `0.0` or `1.0`, up to `integrality_tol` -- unchanged from before. Under the `[0,1]`
+LP relaxation (`battery_direction_exclusivity=false`) it may be any value in `[0,1]` and is
+never rounded: rounding it would silently disagree with the physical link constraints that
+were satisfied using the true fractional value.
 """
 struct PeriodAction
     period::Int
 
-    shared_battery_mode::Int
+    shared_battery_mode::Float64
 
     p::Vector{Float64}
     z::Vector{Float64}

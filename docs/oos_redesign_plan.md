@@ -784,6 +784,8 @@ for `NONE` on the campaign instance.
 
 **Decision gate.** The exact domain-variant set and grid-direction formulation must be approved in the Stage 8 prompt. This master plan does not authorize silently relaxing existing battery-mode binaries or introducing a new experimental factor.
 
+*Addendum (2026-08-11, see decision log §11).* A later, explicitly authorized decision introduces exactly one such factor, `BATTERY_DIRECTION_EXCLUSIVITY`, dated and justified there. Nothing else may relax a battery-mode binary without an equivalent, dated entry.
+
 **Completion record.** Stage 8 was accepted on 2026-08-08 based on
 `docs/oos_stage8_completion_report.md`. Phase A audited 864 implemented periods across 36
 configurations and found **3 household-level simultaneous import/export events, up to 318.52
@@ -1065,6 +1067,7 @@ The report must distinguish “implemented,” “tested,” and “planned.”
 | 2026-08-07 | Stage 8 is conditional: audit first, formulate second. | The grid-direction binary is added only if an audit of implemented actions finds simultaneous import and export; otherwise the absence is documented and the MIP is left unchanged. |
 | 2026-08-07 | The mechanical extension of the `STATIC_DEMAND_SHARE` table moved from Stage 7 to Stage 4. | Stage 4 cannot build a model for a window past `T0` without it. Stage 7 keeps the per-instance definition, immutability, share-table identifier and non-alias tests. |
 | 2026-08-07 | The terminal state-of-charge target binds at the end of each moving look-ahead window. | The state of charge at the end of the evaluation horizon becomes a reported outcome, not a promised value; `PEA` unreachability caused purely by a collapsing horizon disappears. |
+| 2026-08-11 | `BATTERY_DIRECTION_EXCLUSIVITY` (default on) is a new, explicitly authorized experimental factor: an `[0,1]` LP relaxation of the shared-battery mode `v_n`, keeping the two aggregate rate rows byte-identical. | Analogous to `GRID_DIRECTION_EXCLUSIVITY`: kept configurable so the price of integrality can be measured rather than assumed, applied uniformly to every controller and policy. `GeneratedModeBinaries` reports `0` for the shared-battery family under the relaxation; `ExpectedModeNodes` stays the topological node count regardless, so the two must never be compared across differing toggle values as if they meant the same thing. `PeriodAction.shared_battery_mode` and the `SharedBatteryMode` CSV column widen from `Int` to `Float64` to carry a legitimately fractional mode — this changes every shard's raw content digest (`Int` `"1"` vs `Float64` `"1.0"` in the CSV text) even on the unmodified default-on path, though no scientific quantity changes and no test hardcodes a literal digest. The Phase-0 shared-battery micro-gate and its binary-only infeasibility assertions are skipped, not restated, when the toggle is off, since they characterize properties specific to the binary formulation. |
 
 ## 12. Open decisions requiring later approval
 

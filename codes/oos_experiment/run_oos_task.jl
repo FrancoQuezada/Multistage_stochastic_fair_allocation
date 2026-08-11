@@ -24,6 +24,8 @@
 #     SOLVER_TIME_LIMIT_SEC, PEA_TOLERANCE_MODE, MULTISTAGE_BRANCHING, TWO_STAGE_SCENARIOS
 #     OOS_SOLVER_THREADS               CPLEX threads per shard, default 1 (see section 4.9)
 #     SOLVER_MIP_GAP                   relative MIP gap, default 1e-6 (see solver_mip_gap)
+#     GRID_DIRECTION_EXCLUSIVITY       household import/export exclusivity binary, default 1
+#     BATTERY_DIRECTION_EXCLUSIVITY    shared-battery mode binary vs [0,1] relaxation, default 1
 #     OOS_WORKER                       recorded in the execution provenance, never in the science
 # =====================================================================================
 
@@ -95,6 +97,12 @@ function main()
         solver_threads=_opt_int("OOS_SOLVER_THREADS", 1),
         solver_mip_gap=_opt_float("SOLVER_MIP_GAP", 1e-6),
         pea_tolerance_mode=Symbol(_opt("PEA_TOLERANCE_MODE", "adaptive_minimum")),
+        # Reuse `_env_bool` from oos_experiment.jl (included above): before this fix, this
+        # explicit keyword list silently omitted both flags, so every shard of the parallel
+        # campaign always fell back to the compile-time struct default (`true`) regardless of
+        # what a caller exported.
+        grid_direction_exclusivity=_env_bool("GRID_DIRECTION_EXCLUSIVITY", true),
+        battery_direction_exclusivity=_env_bool("BATTERY_DIRECTION_EXCLUSIVITY", true),
         export_representative_models=false,
         require_shared_battery_validation=false,
         instance_file=absolute_base_instance_file(first(design.base_instance_files)),

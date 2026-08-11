@@ -81,13 +81,18 @@ function validate_period_action(
         "$soc_after (residuo $transition_residual).",
     )
 
-    # 14.4 Shared-mode feasibility.
+    # 14.4 Shared-mode feasibility. Both checks below only apply to the binary formulation:
+    # under the `[0,1]` LP relaxation (`battery_direction_exclusivity=false`) a fractional
+    # mode legitimately allows simultaneous nonzero aggregate charge and discharge, bounded
+    # by their own share of the big-M -- that is expected, not a violation.
     mode = Float64(action.shared_battery_mode)
     integrality = min(abs(mode), abs(1 - mode))
-    integrality <= config.integrality_tol ||
-        push!(violations, "El modo compartido no es binario: $mode.")
+    if config.battery_direction_exclusivity
+        integrality <= config.integrality_tol ||
+            push!(violations, "El modo compartido no es binario: $mode.")
+    end
     simultaneous = min(max(charge, 0.0), max(discharge, 0.0))
-    if charge > config.flow_tol && discharge > config.flow_tol
+    if config.battery_direction_exclusivity && charge > config.flow_tol && discharge > config.flow_tol
         push!(violations, "Carga ($charge) y descarga ($discharge) agregadas simultáneas.")
     end
     charge_link = max(charge - template.f_under * mode, 0.0)
@@ -264,8 +269,28 @@ battery-decision nodes: cross-household charge/discharge at the same node is inf
 same-household simultaneous flow is infeasible, several households may share one aggregate
 direction within its rate, idle is feasible under either binary value, and the mode-binary
 count equals `|V_mode|`.
+
+Every case here proves an EXCLUSIVITY property that only holds when the shared-battery mode
+is binary. Under `config.battery_direction_exclusivity=false` (the `[0,1]` LP relaxation)
+none of these infeasibility claims are expected to hold -- a fractional mode legitimately
+permits combinations this gate is designed to reject -- so the gate is skipped rather than
+restated for a domain it was never written to describe.
 """
 function run_shared_battery_micro_gate(config::OOSExperimentConfig)
+    if !config.battery_direction_exclusivity
+        return GateReport(
+            true,
+            [GateCheck(
+                "shared_battery_micro_gate_not_applicable",
+                true,
+                "Compuerta omitida: la campaña usa la relajación continua [0,1] del modo " *
+                "compartido (battery_direction_exclusivity=false), y esta compuerta prueba " *
+                "propiedades de exclusividad que solo aplican a la formulación binaria.",
+            )],
+            config.formulation_id,
+        )
+    end
+
     checks = GateCheck[]
 
     push!(checks, GateCheck(
@@ -363,10 +388,19 @@ function run_controller_fairness_gate(
             continue
         end
         action = result.action
-        mode_ok = action.shared_battery_mode in (0, 1)
-        counts_ok = result.statistics.generated_mode_binaries == result.statistics.expected_mode_nodes
-        simultaneous_ok = !(action.aggregate_charge > config.flow_tol &&
-                            action.aggregate_discharge > config.flow_tol)
+        # The mode/count/simultaneity properties below only characterize the binary
+        # formulation; under the `[0,1]` LP relaxation a fractional mode and simultaneous
+        # nonzero aggregate charge/discharge are both expected, not violations.
+        if config.battery_direction_exclusivity
+            mode_ok = action.shared_battery_mode in (0, 1)
+            counts_ok = result.statistics.generated_mode_binaries == result.statistics.expected_mode_nodes
+            simultaneous_ok = !(action.aggregate_charge > config.flow_tol &&
+                                action.aggregate_discharge > config.flow_tol)
+        else
+            mode_ok = 0.0 <= action.shared_battery_mode <= 1.0
+            counts_ok = result.statistics.generated_mode_binaries == 0
+            simultaneous_ok = true
+        end
         links_ok = max(result.residuals.charge_link, result.residuals.discharge_link) <=
                    config.feasibility_tol
         push!(checks, GateCheck(

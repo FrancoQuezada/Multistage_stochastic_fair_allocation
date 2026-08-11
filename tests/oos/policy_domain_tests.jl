@@ -396,3 +396,68 @@ end
     @test statistics.binary_variables == expected_binary_count(tree, J, true)
     @test statistics.binary_variables > statistics.generated_mode_binaries
 end
+
+# =====================================================================================
+# BD1 The shared-battery mode binary is a modeling choice, applied uniformly, and its
+#     `[0,1]` LP relaxation is a real domain change, not a no-op
+# =====================================================================================
+
+@testset "BD1 the mode relaxation is applied uniformly and is a real domain change" begin
+    config = domain_config(
+        controller_set=[DETERMINISTIC_RH, TWO_STAGE_RH, MULTISTAGE_RH],
+        fairness_set=[NONE, STATIC_DEMAND_SHARE, PEA, SA, LEXMMFPEA, LEXMMFSA],
+    )
+    @test config.battery_direction_exclusivity                  # on (binary) by default
+    common = build_common_objects(config; verbose=false)
+    path = common.oos_paths[1]
+    cache = cache_lookahead_trees(common.provider, common.context, path)
+    state = initial_simulation_state(common.context, path.replication_id)
+    reveal_block!(state, path, implementation_block(config, 1))
+    J = common.template.J
+
+    # Same rule, same binary count, for EVERY controller and EVERY policy: this is a modeling
+    # choice, not a per-policy knob.
+    for controller in config.controller_set
+        tree = cache[(1, controller)]
+        for policy in config.fairness_set
+            refs = build_remaining_horizon_model(common.context, state, tree, config)
+            add_fairness_constraints!(
+                refs, policy, fairness_past_state(state), config;
+                static_shares=common.share_table,
+            )
+            @test refs.battery_direction_exclusivity
+            @test all(is_binary(refs.v[n]) for n in tree.mode_nodes)
+            structure = audit_shared_battery_structure(refs)
+            for finding in structure.findings
+                @test finding.passed
+            end
+        end
+    end
+
+    # Switching it off removes exactly the shared-battery family and nothing else, and `v`
+    # becomes a genuine continuous [0,1] variable rather than disappearing.
+    off = domain_config(battery_direction_exclusivity=false)
+    off_common = build_common_objects(off; verbose=false)
+    off_cache = cache_lookahead_trees(off_common.provider, off_common.context,
+                                       off_common.oos_paths[1])
+    off_state = initial_simulation_state(off_common.context, 1)
+    reveal_block!(off_state, off_common.oos_paths[1], implementation_block(off, 1))
+    off_tree = off_cache[(1, DETERMINISTIC_RH)]
+    off_refs = build_remaining_horizon_model(off_common.context, off_state, off_tree, off)
+    off_J = off_common.template.J
+    @test !off_refs.battery_direction_exclusivity
+    @test all(!is_binary(off_refs.v[n]) for n in off_tree.mode_nodes)
+    @test all(lower_bound(off_refs.v[n]) == 0 && upper_bound(off_refs.v[n]) == 1
+              for n in off_tree.mode_nodes)
+    @test generated_binary_count(off_refs.model) ==
+          expected_grid_direction_binary_count(off_tree, off_J, off.grid_direction_exclusivity)
+    off_structure = audit_shared_battery_structure(off_refs)
+    for finding in off_structure.findings
+        @test finding.passed
+    end
+    # `charge_row_uses_Fc_times_mode` / `discharge_row_uses_Fd_times_one_minus_mode` above
+    # confirm the two rows keep their exact `F_c v_n` / `F_d (1 - v_n)` coefficients on the
+    # now-continuous `v_n` -- the relaxation changes only the variable's domain, not the
+    # constraint it appears in. A numeric probe at a fractional mode (`22.1b`, runtests.jl)
+    # confirms this on a minimal model free of the campaign's other constraints.
+end

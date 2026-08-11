@@ -159,7 +159,7 @@ function period_actions_frame(
         HouseholdCost=Float64[],
         CumulativePV=Float64[], CumulativeDemand=Float64[],
         CumulativeCost=Float64[], CumulativeAllGridCost=Float64[], CumulativeSavings=Float64[],
-        SharedBatteryMode=Int[],
+        SharedBatteryMode=Float64[],
     )
     for run in runs, record in run.records
         for j in eachindex(record.action.p)
@@ -204,7 +204,7 @@ function battery_operation_frame(
         ScenarioSupportID=String[], ObjectiveCriterion=String[],
         Replication=Int[], Controller=String[], Fairness=String[], Resource=String[],
         RollingStart=Int[], Period=Int[], RealizedNode=Int[],
-        SharedBatteryMode=Int[], AggregateCharge=Float64[], AggregateDischarge=Float64[],
+        SharedBatteryMode=Float64[], AggregateCharge=Float64[], AggregateDischarge=Float64[],
         StateOfChargeBefore=Float64[], StateOfChargeAfter=Float64[],
         ChargingLinkResidual=Float64[], DischargingLinkResidual=Float64[],
         SimultaneousFlowFlag=Bool[], SimultaneousFlowResidual=Float64[],
@@ -388,7 +388,7 @@ function run_identity_frame(
         RequiredPeriodSupportEnd=Int[], RealizedPeriodEnd=Int[], RollingSolveCount=Int[],
         ConditionalSupportStream=String[], ConditionalSupportSeedKeys=String[],
         ConditionalSupportSeedExclusions=String[],
-        GridDirectionExclusivity=Bool[],
+        GridDirectionExclusivity=Bool[], BatteryDirectionExclusivity=Bool[],
     )
     for entry in metrics
         push!(frame, (
@@ -412,7 +412,7 @@ function run_identity_frame(
             join(["experiment_seed", "oos_replication", "rolling_start"], "|"),
             join(["controller", "fairness_policy", "solver_phase", "worker", "retry",
                   "execution_order"], "|"),
-            config.grid_direction_exclusivity,
+            config.grid_direction_exclusivity, config.battery_direction_exclusivity,
         ))
     end
     return frame

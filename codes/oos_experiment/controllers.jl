@@ -38,6 +38,7 @@ function solve_current_action(
     expected_modes = expected_mode_binary_count(lookahead_tree)
     expected_binaries = expected_binary_count(
         lookahead_tree, instance_template.J, experiment_config.grid_direction_exclusivity,
+        experiment_config.battery_direction_exclusivity,
     )
     t_build = time()
     refs = try
@@ -299,15 +300,22 @@ function extract_action_at(refs::PhysicalModelRefs, config::OOSExperimentConfig,
     )
 
     mode_value = value(refs.v[root])
-    integrality = min(abs(mode_value), abs(1 - mode_value))
-    if integrality > config.integrality_tol
-        return (
-            nothing,
-            "El modo compartido de la raíz no es binario: v=$mode_value " *
-            "(residuo $integrality > $(config.integrality_tol)).",
-        )
+    local mode::Float64
+    if refs.battery_direction_exclusivity
+        integrality = min(abs(mode_value), abs(1 - mode_value))
+        if integrality > config.integrality_tol
+            return (
+                nothing,
+                "El modo compartido de la raíz no es binario: v=$mode_value " *
+                "(residuo $integrality > $(config.integrality_tol)).",
+            )
+        end
+        mode = Float64(round(mode_value))
+    else
+        # LP relaxation: the solved value may be legitimately fractional in [0,1] and is kept
+        # unrounded, so it stays consistent with the physical link constraints it satisfied.
+        mode = mode_value
     end
-    mode = Int(round(mode_value))
 
     p = [value(refs.p[j, root]) for j in 1:J]
     z = [value(refs.z[j, root]) for j in 1:J]

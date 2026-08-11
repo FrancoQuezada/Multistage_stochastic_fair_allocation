@@ -61,6 +61,8 @@ export OMP_NUM_THREADS=1
 [[ -n "${SOLVER_TIME_LIMIT_SEC:-}" ]] && export SOLVER_TIME_LIMIT_SEC
 [[ -n "${SOLVER_MIP_GAP:-}" ]] && export SOLVER_MIP_GAP
 [[ -n "${PEA_TOLERANCE_MODE:-}" ]] && export PEA_TOLERANCE_MODE
+[[ -n "${GRID_DIRECTION_EXCLUSIVITY:-}" ]] && export GRID_DIRECTION_EXCLUSIVITY
+[[ -n "${BATTERY_DIRECTION_EXCLUSIVITY:-}" ]] && export BATTERY_DIRECTION_EXCLUSIVITY
 [[ -n "${OOS_WORKER:-}" ]] && export OOS_WORKER
 
 echo "=== Shard de campaña OOS ==="

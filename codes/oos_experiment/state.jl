@@ -30,7 +30,7 @@ mutable struct SimulationState
 
     # --- documented additive bookkeeping ------------------------------------------------
     revealed_periods::Int
-    previous_shared_battery_mode::Int   # reporting only; never an optimization state
+    previous_shared_battery_mode::Float64   # reporting only; never an optimization state
 end
 
 """
@@ -56,7 +56,7 @@ function initial_simulation_state(source::OOSPricedSource, replication_id::Int)
         zeros(template.J, horizon),
         nothing,
         0,
-        -1,
+        -1.0,
     )
 end
 
