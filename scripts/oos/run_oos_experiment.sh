@@ -8,6 +8,9 @@
 #   FAIRNESS_SET='NONE,STATIC_DEMAND_SHARE,PEA,SA,LEXMMFPEA,LEXMMFSA' \
 #   TWO_STAGE_SCENARIOS=100 \
 #   MULTISTAGE_BRANCHING='4,4' \
+#   EVALUATION_HORIZON=24 \
+#   LOOKAHEAD_HORIZON=24 \
+#   IMPLEMENTATION_STEP=1 \
 #   EXPERIMENT_SEED=12345 \
 #   PEA_TOLERANCE_MODE=adaptive_minimum \
 #   REQUIRE_SHARED_BATTERY_VALIDATION=1 \
@@ -47,8 +50,24 @@ export OOS_REPLICATIONS="${OOS_REPLICATIONS:-20}"
 export CONTROLLER_SET="${CONTROLLER_SET:-DETERMINISTIC_RH,TWO_STAGE_RH,MULTISTAGE_RH}"
 export FAIRNESS_SET="${FAIRNESS_SET:-NONE,STATIC_DEMAND_SHARE,PEA,SA,LEXMMFPEA,LEXMMFSA}"
 export TWO_STAGE_SCENARIOS="${TWO_STAGE_SCENARIOS:-20}"
+# MULTISTAGE_BRANCHING accepts two notations (see parse_multistage_tree_spec in types.jl):
+#   * a per-transition list, e.g. "2,2" (3 stages, branching 2 each time); combine with
+#     MULTISTAGE_PERIODS_PER_STAGE below for an explicit periods-per-stage split, or leave it
+#     blank for the automatic even split of the remaining look-ahead window.
+#   * a compact SYMMETRIC triplet stages:children:periods_per_stage, e.g. "4:4:6", in the same
+#     S:C:P order as TREE_SET. This form fixes periods_per_stage by itself, so it cannot be
+#     combined with an explicit MULTISTAGE_PERIODS_PER_STAGE.
 export MULTISTAGE_BRANCHING="${MULTISTAGE_BRANCHING:-2,2}"
 export MULTISTAGE_PERIODS_PER_STAGE="${MULTISTAGE_PERIODS_PER_STAGE:-}"
+# Abstract temporal contract, in MODEL PERIODS. Defaults live in codes/oos_experiment/types.jl
+# (OOS_DEFAULT_EVALUATION_HORIZON / _LOOKAHEAD_HORIZON / _IMPLEMENTATION_STEP) and are forwarded
+# only when the caller sets them explicitly, so the shell cannot drift from the Julia default.
+# IMPLEMENTATION_STEP is any integer in 1:min(EVALUATION_HORIZON, LOOKAHEAD_HORIZON); it is not
+# restricted to a fixed set and need not divide EVALUATION_HORIZON. There is deliberately no
+# period-duration or calendar-cycle variable: a period carries no clock-time meaning here.
+[[ -n "${EVALUATION_HORIZON:-}" ]] && export EVALUATION_HORIZON
+[[ -n "${LOOKAHEAD_HORIZON:-}" ]] && export LOOKAHEAD_HORIZON
+[[ -n "${IMPLEMENTATION_STEP:-}" ]] && export IMPLEMENTATION_STEP
 # PEA policy: strict equality first, endogenous minimum band only after a PROVEN fairness
 # infeasibility. FAIRNESS_ABS_TOL is deprecated as a fixed economic band and must stay 0.0
 # unless PEA_TOLERANCE_MODE=fixed_band is selected explicitly.
@@ -57,7 +76,15 @@ export PEA_TOLERANCE_MODE="${PEA_TOLERANCE_MODE:-adaptive_minimum}"
 # cap  epsilon_pea <= epsilon_pea_star + eps.  It is not dimensionless and not an economic band.
 export PEA_TOLERANCE_NUMERIC_EPS="${PEA_TOLERANCE_NUMERIC_EPS:-1e-6}"
 export FAIRNESS_ABS_TOL="${FAIRNESS_ABS_TOL:-0.0}"
-export SA_FAIRNESS_ABS_TOL="${SA_FAIRNESS_ABS_TOL:-1.0}"
+# DEPRECATED AS A FIXED BAND SINCE STAGE 8, exactly like FAIRNESS_ABS_TOL. SA now uses the
+# strict-first / adaptive-minimum workflow: the band is a decision variable minimized in Phase I,
+# not a hand-picked constant. Keep it 0.0 unless SA_TOLERANCE_MODE=fixed_band is selected.
+export SA_FAIRNESS_ABS_TOL="${SA_FAIRNESS_ABS_TOL:-0.0}"
+export SA_TOLERANCE_MODE="${SA_TOLERANCE_MODE:-adaptive_minimum}"
+# Grid-direction exclusivity: a household has one connection point, so it cannot import and
+# export at the same information state. Added in stage 8 after the Phase-A audit observed the
+# overlap in practice. Configurable so its model-size price stays measurable.
+export GRID_DIRECTION_EXCLUSIVITY="${GRID_DIRECTION_EXCLUSIVITY:-1}"
 export LEX_EPS_ABS="${LEX_EPS_ABS:-1.0}"
 # Tolerance defaults live in codes/oos_experiment/types.jl (OOS_DEFAULT_*). They are forwarded
 # only when the caller sets them explicitly, so the shell cannot drift from the Julia default.
@@ -79,6 +106,7 @@ echo "formulation_variant : $FORMULATION_VARIANT"
 echo "controladores       : $CONTROLLER_SET"
 echo "reglas de equidad   : $FAIRNESS_SET"
 echo "política PEA        : $PEA_TOLERANCE_MODE (eps numérico $PEA_TOLERANCE_NUMERIC_EPS kWh)"
+echo "estructura temporal : H=${EVALUATION_HORIZON:-<defecto Julia>} L=${LOOKAHEAD_HORIZON:-<defecto Julia>} h=${IMPLEMENTATION_STEP:-<defecto Julia>} (períodos abstractos del modelo)"
 echo "réplicas OOS        : $OOS_REPLICATIONS"
 echo "salida              : $OOS_OUTPUT_DIR"
 echo "julia               : ${JULIA_ARGV[*]}"

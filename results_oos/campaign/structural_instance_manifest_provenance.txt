@@ -1,0 +1,13 @@
+Reporte de procedencia NO CANÓNICO del manifiesto estructural.
+Este archivo queda deliberadamente fuera del payload canónico y del ManifestID: contiene datos dependientes del momento y de la máquina.
+
+manifest_id        = MF-987c9a306641f4b7
+esquema            = 2
+instancias         = 16
+datos_deterministas= 2
+generado_utc       = 2026-08-10T15:56:42Z
+julia              = 1.12.6
+commit             = b70f94c2f63585406ddf2a04f029c964664701a7
+arbol_sucio        = true
+maquina            = x86_64-linux-gnu
+directorio_destino = /home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/campaign

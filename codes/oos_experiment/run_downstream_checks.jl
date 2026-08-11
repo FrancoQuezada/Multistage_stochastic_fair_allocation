@@ -78,7 +78,7 @@ function main()
 
     # An unweighted mean of replication means must NOT be what the configuration reports.
     for key in sort(collect(keys(recomputed.per_configuration)))
-        key[2] == "PEA" || continue
+        key[2] in OOS_ADAPTIVE_BAND_POLICIES || continue
         per_replication_means = Float64[]
         for ((controller, policy, _), stats) in recomputed.per_replication
             controller == key[1] && policy == key[2] && stats.activations > 0 &&
@@ -95,14 +95,23 @@ function main()
     end
 
     # --- solve sequences, by semantic label ------------------------------------------------
+    # The key MUST carry the fairness policy. Since stage 8 both `PEA` and `SA` run the
+    # adaptive-band workflow, so grouping without it merges two independent solve sequences into
+    # one period and makes the four-solve pattern unreadable.
+    # The key carries the STRUCTURAL INSTANCE as well. A replication number is unique only
+    # within one structural instance, so a campaign merged from the manifest has several rows
+    # per (replication, controller, policy, period) — one per instance — and grouping without it
+    # would splice unrelated solve sequences together.
     activated = Set(
-        (row.Replication, row.Controller, row.Period)
-        for row in eachrow(recovery) if row.Fairness == "PEA" && row.PEA_Tolerance_Activated
+        (_row_instance(row), row.Replication, row.Controller, row.Fairness, row.Period)
+        for row in eachrow(recovery)
+        if row.Fairness in OOS_ADAPTIVE_BAND_POLICIES && row.PEA_Tolerance_Activated
     )
-    grouped = Dict{Tuple{Int,String,Int},Vector{String}}()
+    grouped = Dict{Tuple{String,Int,String,String,Int},Vector{String}}()
     for row in eachrow(solve_log)
-        row.Fairness == "PEA" || continue
-        key = (Int(row.Replication), String(row.Controller), Int(row.Period))
+        row.Fairness in OOS_ADAPTIVE_BAND_POLICIES || continue
+        key = (_row_instance(row), Int(row.Replication), String(row.Controller),
+               String(row.Fairness), Int(row.Period))
         push!(get!(grouped, key, String[]), String(row.PhaseLabel))
     end
     strict_periods = recovered_periods = 0
@@ -118,8 +127,9 @@ function main()
     end
     check(recovered_periods > 0,
           "el smoke no produjo ningún período recuperado; la ruta de recuperación no se ejercitó")
-    println("\nSecuencias de resolución PEA: $strict_periods período(s) estricto(s) con 1 " *
-            "resolución, $recovered_periods recuperado(s) con 4.")
+    println("\nSecuencias de resolución con banda adaptativa (" *
+            join(OOS_ADAPTIVE_BAND_POLICIES, ", ") * "): $strict_periods período(s) " *
+            "estricto(s) con 1 resolución, $recovered_periods recuperado(s) con 4.")
 
     # The diagnostic solve must never be mistaken for a policy action or an operating cost.
     diagnostic_rows = filter(r -> r.PhaseLabel == OOS_SOLVE_LABEL_DIAGNOSTIC, solve_log)
@@ -155,7 +165,7 @@ function main()
 
     # --- non-PEA policies ----------------------------------------------------------------------
     for row in eachrow(recovery)
-        row.Fairness == "PEA" && continue
+        row.Fairness in OOS_ADAPTIVE_BAND_POLICIES && continue
         check(row.PEA_Tolerance_Activated == false,
               "$(row.Fairness) declara activación de tolerancia")
         check(Float64(row.PEA_Tolerance_Used_kWh) == 0.0,

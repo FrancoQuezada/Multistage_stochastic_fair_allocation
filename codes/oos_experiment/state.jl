@@ -33,8 +33,17 @@ mutable struct SimulationState
     previous_shared_battery_mode::Int   # reporting only; never an optimization state
 end
 
-"""Fresh state for one (replication, controller, fairness) configuration."""
-function initial_simulation_state(template::OOSInstanceTemplate, replication_id::Int)
+"""
+Fresh state for one (replication, controller, fairness) configuration.
+
+The realized-history buffers are sized by `priced_realized_end(source)`: with an
+`OOSRollingContext` that is `realized_period_end(config)`, the end of the final full
+implementation block, which can exceed the repository horizon. With a bare template it stays
+`template.T`, preserving the pre-stage-4 sizing.
+"""
+function initial_simulation_state(source::OOSPricedSource, replication_id::Int)
+    template = priced_template(source)
+    horizon = priced_realized_end(source)
     return SimulationState(
         replication_id,
         1,
@@ -43,8 +52,8 @@ function initial_simulation_state(template::OOSInstanceTemplate, replication_id:
         zeros(template.J),
         zeros(template.J),
         zeros(template.J),
-        zeros(template.T),
-        zeros(template.J, template.T),
+        zeros(horizon),
+        zeros(template.J, horizon),
         nothing,
         0,
         -1,
@@ -69,6 +78,43 @@ function reveal_period!(state::SimulationState, path::OOSPath, period::Int)
         state.realized_demand_history[j, period] = path.demand[j, period]
     end
     state.revealed_periods = period
+    return state
+end
+
+"""
+Reveal the complete known prefix of one rolling start, in one step.
+
+Stage 6: at rolling start `t` with implementation step `h`, every controller is given the
+realizations of `t : t+h-1` before it optimizes, and none is given more. Revealing the block as
+a unit is what makes that symmetric by construction — no controller can be handed a longer
+prefix than another because there is only one reveal.
+
+`state.period` is NOT advanced here: the block is revealed once and then implemented period by
+period by `apply_action!`. With `h = 1` this is exactly `reveal_period!`.
+"""
+function reveal_block!(state::SimulationState, path::OOSPath, block::AbstractUnitRange{Int})
+    isempty(block) && error("El bloque de implementación no puede estar vacío.")
+    first(block) == state.period || error(
+        "Se intentó revelar el bloque $block mientras el estado espera el período $(state.period)."
+    )
+    state.revealed_periods == first(block) - 1 || error(
+        "Historia observada inconsistente: revealed_periods=$(state.revealed_periods), " *
+        "bloque=$block."
+    )
+    last(block) <= length(state.realized_pv_history) || error(
+        "El bloque $block excede la historia dimensionada en " *
+        "$(length(state.realized_pv_history)) períodos."
+    )
+    last(block) <= path.horizon || error(
+        "El bloque $block excede la trayectoria realizada de $(path.horizon) períodos."
+    )
+    for period in block
+        state.realized_pv_history[period] = path.pv[period]
+        for j in axes(path.demand, 1)
+            state.realized_demand_history[j, period] = path.demand[j, period]
+        end
+    end
+    state.revealed_periods = last(block)
     return state
 end
 
@@ -102,24 +148,27 @@ value reported by the optimization model.
 """
 function apply_action!(
     state::SimulationState,
-    template::OOSInstanceTemplate,
+    source::OOSPricedSource,
     action::PeriodAction,
     soc_after::Float64,
 )
+    template = priced_template(source)
+    prices = priced_matrix(source)
     t = state.period
     action.period == t || error(
         "La acción corresponde al período $(action.period) pero el estado está en $t."
     )
+    assert_priced_period(source, t)
     demand_t = @view state.realized_demand_history[:, t]
     for j in 1:template.J
         state.cumulative_pv[j] += action.p[j]
         state.cumulative_demand[j] += demand_t[j]
         state.cumulative_operating_cost[j] += template.delta * (
             template.mu * action.y[j] +
-            template.nu[j, t] * action.I[j] -
+            prices[j, t] * action.I[j] -
             template.beta * action.G[j]
         )
-        state.cumulative_all_grid_cost[j] += template.delta * template.nu[j, t] * demand_t[j]
+        state.cumulative_all_grid_cost[j] += template.delta * prices[j, t] * demand_t[j]
     end
     state.soc_before = soc_after
     state.previous_action = action
@@ -138,12 +187,14 @@ function induced_soc(template::OOSInstanceTemplate, soc_before::Float64, charge:
 end
 
 """Per-household operating cost of the implemented action at its own period."""
-function action_household_costs(template::OOSInstanceTemplate, action::PeriodAction)
-    t = action.period
+function action_household_costs(source::OOSPricedSource, action::PeriodAction)
+    template = priced_template(source)
+    prices = priced_matrix(source)
+    t = assert_priced_period(source, action.period)
     return [
         template.delta * (
             template.mu * action.y[j] +
-            template.nu[j, t] * action.I[j] -
+            prices[j, t] * action.I[j] -
             template.beta * action.G[j]
         )
         for j in 1:template.J

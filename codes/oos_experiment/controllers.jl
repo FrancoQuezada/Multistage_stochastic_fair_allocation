@@ -18,7 +18,7 @@ common to every future scenario; in `MULTISTAGE_RH` it belongs to the root infor
 in `DETERMINISTIC_RH` it is the current-period decision of the single forecast path.
 """
 function solve_current_action(
-    instance_template::OOSInstanceTemplate,
+    source::OOSPricedSource,
     simulation_state::SimulationState,
     current_observation::PeriodObservation,
     lookahead_tree::LookaheadTree,
@@ -26,18 +26,23 @@ function solve_current_action(
     fairness_policy::FairnessPolicy,
     experiment_config::OOSExperimentConfig;
     mip_start::Union{Nothing,ModeStart}=nothing,
-    static_shares::Union{Nothing,Matrix{Float64}}=nothing,
+    static_shares::Union{Nothing,Matrix{Float64},OOSStaticShareTable}=nothing,
+    implementation_block::AbstractUnitRange{Int}=simulation_state.period:simulation_state.period,
 )
+    instance_template = priced_template(source)
     _assert_lookahead_consistency(
         instance_template, simulation_state, current_observation, lookahead_tree,
-        controller_kind, experiment_config,
+        controller_kind, experiment_config; implementation_block=implementation_block,
     )
 
     expected_modes = expected_mode_binary_count(lookahead_tree)
+    expected_binaries = expected_binary_count(
+        lookahead_tree, instance_template.J, experiment_config.grid_direction_exclusivity,
+    )
     t_build = time()
     refs = try
         build_remaining_horizon_model(
-            instance_template, simulation_state, lookahead_tree, experiment_config,
+            source, simulation_state, lookahead_tree, experiment_config,
         )
     catch exception
         return _failed_controller_result(
@@ -75,11 +80,12 @@ function solve_current_action(
     # The mode-node count of the generated model must match the centralized expectation before
     # any value is read back.
     generated_before_solve = generated_binary_count(refs.model)
-    if generated_before_solve != expected_modes
+    if generated_before_solve != expected_binaries
         return _failed_controller_result(
             controller_kind, fairness_policy, simulation_state, expected_modes,
-            "El modelo generó $generated_before_solve binarios de modo y la convención " *
-            "centralizada espera $expected_modes.",
+            "El modelo generó $generated_before_solve binarios y la convención centralizada " *
+            "espera $expected_binaries ($expected_modes de modo compartido más " *
+            "$(expected_binaries - expected_modes) de dirección de red).",
             build_time,
         )
     end
@@ -102,16 +108,20 @@ function solve_current_action(
         [_phase_record(refs.model, 0, "single_solve", solve_wall, solver_time)] :
         lex_result.phase_records
     strict_outcome = classify_solve_outcome(refs.model)
-    pea_record = fairness_policy === PEA ?
+    # Stage 8: SA joined PEA in needing an endogenous minimum band, so the recovery workflow —
+    # and the record that reports it — now covers both. The record type is unchanged.
+    recoverable =
+        fairness_policy === PEA ? experiment_config.pea_tolerance_mode === :adaptive_minimum :
+        fairness_policy === SA ? experiment_config.sa_tolerance_mode === :adaptive_minimum : false
+    pea_record = fairness_policy in (PEA, SA) ?
         pea_strict_success(string(strict_outcome)) : pea_not_applicable()
     solve_failed = !has_values(refs.model) || (lex_result !== nothing && !lex_result.solved)
 
     # --- strict-first / adaptive-minimum PEA recovery -----------------------------------
-    if solve_failed && fairness_policy === PEA &&
-       experiment_config.pea_tolerance_mode === :adaptive_minimum
+    if solve_failed && recoverable
         recovery = attempt_adaptive_pea_recovery(
-            instance_template, simulation_state, lookahead_tree, experiment_config, past,
-            string(strict_outcome), strict_outcome,
+            source, simulation_state, lookahead_tree, experiment_config, past,
+            string(strict_outcome), strict_outcome; policy=fairness_policy,
         )
         append!(phases, recovery.phases)
         pea_record = recovery.pea
@@ -128,14 +138,15 @@ function solve_current_action(
             solve_wall += recovery.wall_time_sec
             solver_time += recovery.solver_time_sec
         end
-    elseif solve_failed && fairness_policy === PEA
-        source, detail, diagnostic = attribute_failure_source(
-            instance_template, simulation_state, lookahead_tree, experiment_config; phase=1,
+    elseif solve_failed && fairness_policy in (PEA, SA)
+        # `failure_source`, never `source`: the latter is this function's priced data source.
+        failure_source, detail, diagnostic = attribute_failure_source(
+            source, simulation_state, lookahead_tree, experiment_config; phase=1,
         )
         diagnostic === nothing || push!(phases, diagnostic)
         pea_record = PEARecoveryRecord(
             true, false, false, 0.0, string(strict_outcome), "not_run", "not_run",
-            "recovery_disabled", string(source),
+            "recovery_disabled", string(failure_source),
         )
     end
 
@@ -146,15 +157,15 @@ function solve_current_action(
         message = lex_result !== nothing && !lex_result.solved ?
             lex_result.failure_message :
             "El modelo no produjo valores (terminación $termination, primal $primal)."
-        if fairness_policy === PEA
+        if fairness_policy in (PEA, SA)
             message *= " PEA_RECOVERY=$(pea_record.recovery_status) " *
                        "FAILURE_SOURCE=$(pea_record.failure_source)"
         else
-            source, detail, diagnostic = attribute_failure_source(
-                instance_template, simulation_state, lookahead_tree, experiment_config; phase=1,
+            failure_source, detail, diagnostic = attribute_failure_source(
+                source, simulation_state, lookahead_tree, experiment_config; phase=1,
             )
             diagnostic === nothing || push!(phases, diagnostic)
-            message *= " FAILURE_SOURCE=$(source) ($detail)"
+            message *= " FAILURE_SOURCE=$(failure_source) ($detail)"
         end
         return ControllerResult(
             controller_kind, fairness_policy, simulation_state.period,
@@ -163,11 +174,13 @@ function solve_current_action(
             lex_result === nothing ? Float64[] : lex_result.phase_objectives,
             build_time, solve_wall, solver_time,
             statistics, zero_residuals(), simulation_state.soc_before, message, nothing,
-            phases, pea_record,
+            phases, pea_record, PeriodAction[],
         )
     end
 
-    action, extraction_message = extract_current_action(refs, experiment_config)
+    block_actions, extraction_message =
+        extract_block_actions(refs, experiment_config, implementation_block)
+    action = block_actions === nothing ? nothing : first(block_actions)
     if action === nothing
         return ControllerResult(
             controller_kind, fairness_policy, simulation_state.period,
@@ -176,7 +189,7 @@ function solve_current_action(
             lex_result === nothing ? Float64[] : lex_result.phase_objectives,
             build_time, solve_wall, solver_time,
             statistics, zero_residuals(), simulation_state.soc_before, extraction_message,
-            nothing, phases, pea_record,
+            nothing, phases, pea_record, PeriodAction[],
         )
     end
 
@@ -202,6 +215,7 @@ function solve_current_action(
         phase_objectives,
         build_time, solve_wall, solver_time,
         statistics, residuals, simulation_state.soc_before, "", plan_flows, phases, pea_record,
+        block_actions,
     )
 end
 
@@ -210,19 +224,78 @@ end
 # -------------------------------------------------------------------------------------
 
 """
+Extract the ordered actions of one committed block from the deterministic prefix chain.
+
+Stage 6: the block `t : t+h-1` lives on the known prefix, which is branch-free by construction,
+so exactly one node carries each committed period and the extraction is unambiguous rather than a
+choice among scenarios. A prefix that is not a chain is a contract violation and is reported as
+one; nothing is averaged, selected or repaired.
+
+Returns `(actions, message)`; `actions === nothing` on any failure, with `message` naming it.
+"""
+function extract_block_actions(
+    refs::PhysicalModelRefs,
+    config::OOSExperimentConfig,
+    block::AbstractUnitRange{Int},
+)
+    tree = refs.tree
+    first(block) == tree.calendar_period[tree.root] || return (
+        nothing,
+        "El bloque $block no empieza en la raíz del look-ahead " *
+        "($(tree.calendar_period[tree.root])).",
+    )
+    last(block) <= tree.last_period || return (
+        nothing,
+        "El bloque $block excede la ventana del look-ahead " *
+        "($(tree.first_period):$(tree.last_period)).",
+    )
+
+    node = tree.root
+    actions = PeriodAction[]
+    for period in block
+        tree.calendar_period[node] == period || return (
+            nothing,
+            "El nodo $node del prefijo está en el período $(tree.calendar_period[node]) y el " *
+            "bloque espera $period.",
+        )
+        action, message = extract_action_at(refs, config, node)
+        action === nothing && return (nothing, "Período $period: $message")
+        push!(actions, action)
+        period == last(block) && break
+        children = [n for n in tree.nodes if tree.parent[n] == node]
+        length(children) == 1 || return (
+            nothing,
+            "El prefijo conocido debe ser una cadena determinista: el nodo $node del período " *
+            "$period tiene $(length(children)) hijos, así que el período $(period + 1) no " *
+            "tiene una acción comprometida única.",
+        )
+        node = only(children)
+    end
+    return (actions, "")
+end
+
+"""
 Extract the current-period action from the root information state.
 
-Only the root values are read; every future decision of the solved model is discarded here.
-The shared mode is a scalar and is required to exist at the root.
+Retained shape: it is `extract_action_at` at the root, i.e. the single-period case of
+`extract_block_actions`.
 """
-function extract_current_action(refs::PhysicalModelRefs, config::OOSExperimentConfig)
+extract_current_action(refs::PhysicalModelRefs, config::OOSExperimentConfig) =
+    extract_action_at(refs, config, refs.tree.root)
+
+"""
+Extract the action committed at one information state.
+
+Every future decision of the solved model other than this node's is discarded here. The shared
+mode is a scalar and is required to exist at the node.
+"""
+function extract_action_at(refs::PhysicalModelRefs, config::OOSExperimentConfig, root::Int)
     tree = refs.tree
-    root = tree.root
     J = refs.template.J
 
     root in refs.mode_nodes || return (
         nothing,
-        "El nodo raíz no declara un modo compartido de batería; la acción actual sería incompleta.",
+        "El nodo $root no declara un modo compartido de batería; la acción sería incompleta.",
     )
 
     mode_value = value(refs.v[root])
@@ -304,7 +377,10 @@ function model_side_residuals(
     simultaneous = min(max(charge, 0.0), max(discharge, 0.0))
     integrality = min(abs(mode), abs(1 - mode))
     soc_bounds = max(soc_after - template.s_max, template.s_min - soc_after, 0.0)
-    terminal = tree.calendar_period[root] == template.T ? abs(soc_after - template.s_I) : 0.0
+    # The terminal target binds at the end of this look-ahead window, so the ROOT carries a
+    # terminal residual only in the degenerate case where the window is a single period.
+    terminal = tree.calendar_period[root] == tree.last_period ?
+        abs(soc_after - template.s_I) : 0.0
 
     return ActionResiduals(
         pv_residual, balance_residual, transition_residual,
@@ -362,7 +438,7 @@ Phase II), not three. The record is bookkeeping only: its objective value is dia
 solution is never extracted or implemented.
 """
 function attribute_failure_source(
-    template::OOSInstanceTemplate,
+    source::OOSPricedSource,
     state::SimulationState,
     tree::LookaheadTree,
     config::OOSExperimentConfig;
@@ -370,7 +446,7 @@ function attribute_failure_source(
 )
     t_probe = time()
     try
-        probe = build_remaining_horizon_model(template, state, tree, config)
+        probe = build_remaining_horizon_model(source, state, tree, config)
         optimize!(probe.model)
         wall = time() - t_probe
         record = _phase_record(
@@ -467,29 +543,96 @@ function solve_pea_operational_phase!(
 end
 
 """
+Phase I for SA: minimize the common absolute savings band.
+
+Structurally identical to `solve_minimum_pea_tolerance!`, on the SA outcome measure. `epsilon_sa`
+is the smallest household-level savings deviation that makes the rolling-horizon problem feasible
+given the realized past.
+"""
+function solve_minimum_sa_tolerance!(
+    refs::PhysicalModelRefs,
+    past::FairnessPastState,
+    aggregates,
+    config::OOSExperimentConfig,
+)
+    handles = build_adaptive_sa_constraints!(refs, past, aggregates)
+    @objective(refs.model, Min, handles.epsilon)
+    t_phase = time()
+    optimize!(refs.model)
+    wall = time() - t_phase
+    solver = _safe_solve_time(refs.model)
+    outcome = classify_solve_outcome(refs.model)
+    return (
+        handles=handles,
+        outcome=outcome,
+        epsilon_star=outcome === SOLVE_OK ? value(handles.epsilon) : NaN,
+        wall_time_sec=wall,
+        solver_time_sec=solver,
+        record=_phase_record(refs.model, 2, "pea_phase1_min_tolerance", wall, solver),
+    )
+end
+
+"""
+Phase II for SA: restore the operational objective at the minimum band.
+
+Adds `epsilon_sa <= epsilon_sa_star + pea_tolerance_numeric_eps` and re-optimizes the expected
+remaining operating cost. The Phase-I optimum stays feasible, so the cap cannot make Phase II
+infeasible by itself. The numerical allowance is shared with PEA deliberately: it is a round-off
+guard, not a policy parameter.
+"""
+function solve_sa_operational_phase!(
+    refs::PhysicalModelRefs,
+    handles,
+    epsilon_star::Float64,
+    config::OOSExperimentConfig,
+)
+    @constraint(refs.model, sa_tolerance_cap,
+        handles.epsilon <= epsilon_star + config.pea_tolerance_numeric_eps)
+    set_expected_cost_objective!(refs)
+    t_phase = time()
+    optimize!(refs.model)
+    wall = time() - t_phase
+    solver = _safe_solve_time(refs.model)
+    outcome = classify_solve_outcome(refs.model)
+    return (
+        outcome=outcome,
+        epsilon=outcome === SOLVE_OK ? value(handles.epsilon) : NaN,
+        wall_time_sec=wall,
+        solver_time_sec=solver,
+        record=_phase_record(refs.model, 3, "pea_phase2_operational", wall, solver),
+    )
+end
+
+"""
 Run the adaptive-minimum PEA recovery after a strict solve failed.
 
 Guarded so the band can only be activated when the strict model is proven infeasible *and*
 the same physical model without PEA is feasible. Everything else — time limits, numerical
 errors, unknown statuses, physical infeasibility — returns without activating any tolerance.
 
-The recovery rebuilds the model from the identical template, state, tree and configuration,
+The recovery rebuilds the model from the identical priced source, state, tree and configuration,
 so the strict and adaptive formulations differ only in equality versus optimized band.
 """
 function attempt_adaptive_pea_recovery(
-    template::OOSInstanceTemplate,
+    source::OOSPricedSource,
     state::SimulationState,
     tree::LookaheadTree,
     config::OOSExperimentConfig,
     past::FairnessPastState,
     strict_status::String,
-    strict_outcome::SolveOutcome,
+    strict_outcome::SolveOutcome;
+    policy::FairnessPolicy=PEA,
 )
-    blocked(recovery_status, source) = (
+    policy in (PEA, SA) || error(
+        "La recuperación de banda mínima solo aplica a PEA y SA; se recibió $policy."
+    )
+    phase1_solver = policy === PEA ? solve_minimum_pea_tolerance! : solve_minimum_sa_tolerance!
+    phase2_solver = policy === PEA ? solve_pea_operational_phase! : solve_sa_operational_phase!
+    blocked(recovery_status, failure_source) = (
         solved=false, refs=nothing, context=nothing, phases=SolvePhaseRecord[],
         wall_time_sec=0.0, solver_time_sec=0.0,
         pea=PEARecoveryRecord(true, false, false, 0.0, strict_status, "not_run", "not_run",
-                              recovery_status, string(source)),
+                              recovery_status, string(failure_source)),
     )
 
     # Gate 1: an infeasibility finding is required. No proof, no recovery.
@@ -498,18 +641,22 @@ function attempt_adaptive_pea_recovery(
 
     # Gate 2: the failure must be attributable to the fairness rule, not to the physics.
     # This is solve #2 of the recovered period and is logged as such.
-    source, detail, diagnostic = attribute_failure_source(template, state, tree, config; phase=1)
+    failure_source, detail, diagnostic =
+        attribute_failure_source(source, state, tree, config; phase=1)
     diagnostic_phases = diagnostic === nothing ? SolvePhaseRecord[] : [diagnostic]
-    if source === FAILURE_PHYSICAL_MODEL
-        return (; blocked("blocked_physical_model", source)..., phases=diagnostic_phases)
-    elseif source === FAILURE_UNDETERMINED
-        return (; blocked("blocked_undetermined_source", source)..., phases=diagnostic_phases)
+    if failure_source === FAILURE_PHYSICAL_MODEL
+        return (; blocked("blocked_physical_model", failure_source)..., phases=diagnostic_phases)
+    elseif failure_source === FAILURE_UNDETERMINED
+        return (;
+            blocked("blocked_undetermined_source", failure_source)...,
+            phases=diagnostic_phases,
+        )
     end
 
-    refs = build_remaining_horizon_model(template, state, tree, config)
-    aggregates = scenario_aggregates(template, tree)
+    refs = build_remaining_horizon_model(source, state, tree, config)
+    aggregates = scenario_aggregates(source, tree)
 
-    phase1 = solve_minimum_pea_tolerance!(refs, past, aggregates, config)
+    phase1 = phase1_solver(refs, past, aggregates, config)
     if phase1.outcome !== SOLVE_OK
         return (solved=false, refs=nothing, context=nothing,
                 phases=vcat(diagnostic_phases, [phase1.record]),
@@ -519,7 +666,7 @@ function attempt_adaptive_pea_recovery(
                                       string(FAILURE_FAIRNESS_RULE)))
     end
 
-    phase2 = solve_pea_operational_phase!(refs, phase1.handles, phase1.epsilon_star, config)
+    phase2 = phase2_solver(refs, phase1.handles, phase1.epsilon_star, config)
     total_wall = phase1.wall_time_sec + phase2.wall_time_sec
     total_solver = phase1.solver_time_sec + phase2.solver_time_sec
     if phase2.outcome !== SOLVE_OK
@@ -536,7 +683,7 @@ function attempt_adaptive_pea_recovery(
     activated = tolerance > OOS_PEA_ACTIVATION_THRESHOLD
     return (
         solved=true, refs=refs,
-        context=(policy=PEA, aggregates=aggregates, handles=phase1.handles),
+        context=(policy=policy, aggregates=aggregates, handles=phase1.handles),
         phases=vcat(diagnostic_phases, [phase1.record, phase2.record]),
         wall_time_sec=total_wall, solver_time_sec=total_solver,
         pea=PEARecoveryRecord(true, false, activated, tolerance, strict_status,
@@ -555,7 +702,8 @@ function _assert_lookahead_consistency(
     observation::PeriodObservation,
     tree::LookaheadTree,
     controller::ControllerKind,
-    config::OOSExperimentConfig,
+    config::OOSExperimentConfig;
+    implementation_block::AbstractUnitRange{Int}=state.period:state.period,
 )
     tree.controller === controller || error(
         "El look-ahead fue construido para $(tree.controller) y se solicitó $controller."
@@ -573,6 +721,40 @@ function _assert_lookahead_consistency(
         abs(tree.demand[j, tree.root] - observation.demand[j]) <= config.feasibility_tol || error(
             "La raíz del look-ahead no reproduce la demanda observada del hogar $j."
         )
+    end
+
+    # STAGE 6. Every period of the known prefix — not only the root — must be deterministic and
+    # must reproduce the realization the simulator revealed. Checking the whole prefix is what
+    # rules out a controller silently being handed sampled values where another was handed
+    # realized ones.
+    state.revealed_periods >= last(implementation_block) || error(
+        "El bloque $implementation_block excede la historia revelada " *
+        "($(state.revealed_periods) períodos)."
+    )
+    node = tree.root
+    for period in implementation_block
+        tree.calendar_period[node] == period || error(
+            "El nodo $node del prefijo está en el período $(tree.calendar_period[node]) y el " *
+            "bloque comprometido espera $period."
+        )
+        abs(tree.pv[node] - state.realized_pv_history[period]) <= config.feasibility_tol || error(
+            "El período $period del prefijo usa PV $(tree.pv[node]) y la realización revelada " *
+            "es $(state.realized_pv_history[period])."
+        )
+        for j in 1:template.J
+            abs(tree.demand[j, node] - state.realized_demand_history[j, period]) <=
+                config.feasibility_tol || error(
+                "El período $period del prefijo no reproduce la demanda realizada del hogar $j."
+            )
+        end
+        period == last(implementation_block) && break
+        children = [n for n in tree.nodes if tree.parent[n] == node]
+        length(children) == 1 || error(
+            "El prefijo conocido debe ser determinista y común: el nodo $node del período " *
+            "$period se ramifica en $(length(children)) hijos antes del fin del bloque " *
+            "$implementation_block."
+        )
+        node = only(children)
     end
     return nothing
 end
@@ -594,6 +776,7 @@ function _failed_controller_result(
         state.soc_before, message, nothing, SolvePhaseRecord[],
         PEARecoveryRecord(policy === PEA, false, false, 0.0, "build_failure", "not_run",
                           "not_run", "build_failure", string(FAILURE_UNDETERMINED)),
+        PeriodAction[],
     )
 end
 

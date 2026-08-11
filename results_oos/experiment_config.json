@@ -1,0 +1,585 @@
+{
+  "code_commit": "497a85c85f80b71104a529a43c20a9052233c313",
+  "code_dirty": true,
+  "configuration_count": 18,
+  "controller_parameters": {
+    "multistage_branching": [2,2],
+    "multistage_periods_per_stage": [],
+    "two_stage_scenarios": 4
+  },
+  "controllers": ["DETERMINISTIC_RH","TWO_STAGE_RH","MULTISTAGE_RH"],
+  "date_utc": "2026-08-06T11:47:36Z",
+  "experiment_id": "oos_unit_solvecount_smoke",
+  "fairness_parameters": {
+    "fairness_abs_tol": 0.0,
+    "fairness_abs_tol_deprecated": true,
+    "lex_eps_abs": 1.0,
+    "pea_denominator_floor": 1.0e-9,
+    "pea_recovery_solve_sequence": ["strict","diagnostic_physical","phase1_min_tolerance","phase2_operational"],
+    "pea_recovery_solves_per_recovered_period": 4,
+    "pea_solves_per_strict_feasible_period": 1,
+    "pea_tolerance_activation_threshold": 1.0e-9,
+    "pea_tolerance_mode": "adaptive_minimum",
+    "pea_tolerance_numeric_eps_kwh": 1.0e-6,
+    "pea_tolerance_numeric_eps_unit": "kWh (same unit as epsilon_pea; added to epsilon_pea_star in the Phase-II cap)",
+    "pea_tolerance_unit": "kWh (horizon-total PV allocation band)",
+    "sa_denominator_floor": 1.0,
+    "sa_fairness_abs_tol": 1.0
+  },
+  "fairness_rules": ["NONE","STATIC_DEMAND_SHARE","PEA","SA","LEXMMFPEA","LEXMMFSA"],
+  "formulation_id": "shared_battery_mode_node_level_v1",
+  "formulation_variant": "aggregate_only",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i7-1260P",
+    "cpu_threads": 16,
+    "machine": "x86_64-linux-gnu",
+    "total_memory_gb": 31.05
+  },
+  "instance": {
+    "avg_demand": 100.0,
+    "battery_scale": 1.0,
+    "beta": 10.0,
+    "delta": 1.0,
+    "demand_profile": "mixed",
+    "dev_demand": 10.0,
+    "e_c": 0.95,
+    "e_d": 0.95,
+    "f_bar_discharge_limit": 4.0,
+    "f_under_charge_limit": 4.0,
+    "file": "/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020/Drahi_1.csv",
+    "horizon": 24,
+    "household_profiles": ["night","morning","night","midday"],
+    "households": 4,
+    "id": "4_56",
+    "metadata": {
+      "battery_scale": 1.0,
+      "demand_profile": "mixed",
+      "household_profiles": ["night","morning","night","midday"],
+      "in_sample_nodes": 56,
+      "in_sample_tree": "S=3,C=2,P=8",
+      "instance_file": "/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020/Drahi_1.csv",
+      "instance_id": "4_56",
+      "pv_scale": 1.0
+    },
+    "mu": 5.0,
+    "pv_scale": 1.0,
+    "s_I": 0.2,
+    "s_max": 63.0,
+    "s_min": 0.2,
+    "theta": 0.2
+  },
+  "julia_version": "1.12.6",
+  "mode_node_convention": "every_information_state",
+  "oos_replications": 2,
+  "operating_system": {
+    "description": "Ubuntu 22.04.5 LTS",
+    "kernel": "Linux"
+  },
+  "output_directory": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos",
+  "prompt_version": "oos_receding_horizon_prompt_v1",
+  "seeds": {
+    "demand_profile_stream": "demand_profiles",
+    "experiment_seed": 12345,
+    "fairness_excluded_from_seed": true,
+    "in_sample_stream": "in_sample",
+    "instance_seed": 778301280,
+    "lookahead_stream": "lookahead",
+    "oos_stream": "oos_path"
+  },
+  "solver": "CPLEX 22.1.1",
+  "solver_settings": {
+    "threads": 0,
+    "time_limit_sec": 120.0
+  },
+  "tolerances": {
+    "feasibility_tol": 1.0e-6,
+    "flow_tol": 1.0e-7,
+    "integrality_tol": 1.0e-6
+  },
+  "uncertainty_process": {
+    "pea_repair_per_period": true,
+    "pv_ar_coefficient": 0.8,
+    "pv_ma_coefficient": 0.2,
+    "stochastic_prices": false
+  },
+  "validation": {
+    "export_representative_models": true,
+    "gates": [
+      {
+        "checks": [
+          {
+            "detail": "Sin declaraciones de modo por hogar en el repositorio (0 línea(s) exentas y visibles en el código).",
+            "name": "repository_has_no_obsolete_mode_logic",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "checks": [
+          {
+            "detail": "Un hogar cargando mientras otro recibe descarga en el mismo nodo debe ser infactible.",
+            "name": "cross_household_charge_and_discharge_infeasible",
+            "passed": true
+          },
+          {
+            "detail": "El mismo hogar no puede cargar y descargar simultáneamente.",
+            "name": "same_household_simultaneous_flow_infeasible",
+            "passed": true
+          },
+          {
+            "detail": "Varios hogares pueden aportar carga simultánea dentro de F_c.",
+            "name": "multiple_households_charge_within_rate",
+            "passed": true
+          },
+          {
+            "detail": "Varios hogares pueden recibir descarga simultánea dentro de F_d.",
+            "name": "multiple_households_discharge_within_rate",
+            "passed": true
+          },
+          {
+            "detail": "La suma de cargas no puede exceder F_c.",
+            "name": "aggregate_charge_rate_enforced",
+            "passed": true
+          },
+          {
+            "detail": "La suma de descargas no puede exceder F_d.",
+            "name": "aggregate_discharge_rate_enforced",
+            "passed": true
+          },
+          {
+            "detail": "La operación en reposo es factible con cualquiera de los dos valores binarios.",
+            "name": "idle_feasible_in_both_modes",
+            "passed": true
+          },
+          {
+            "detail": "Con 3 hogares y 4 nodos se generaron 4 binarios; se esperan 4 (|V_mode|), no 12 (|H||V_mode|).",
+            "name": "mode_binary_count_equals_mode_nodes",
+            "passed": true
+          },
+          {
+            "detail": "El modo compartido debe llamarse battery_mode[n] y no llevar índice de hogar.",
+            "name": "mode_variable_is_not_household_indexed",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "checks": [
+          {
+            "detail": "modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_DETERMINISTIC_RH_NONE",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_DETERMINISTIC_RH_STATIC_DEMAND_SHARE",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_DETERMINISTIC_RH_PEA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=24/24, Z=0.0, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_DETERMINISTIC_RH_SA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=24/24, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_DETERMINISTIC_RH_LEXMMFPEA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=24/24, Z=0.0, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_DETERMINISTIC_RH_LEXMMFSA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=93/93, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_TWO_STAGE_RH_NONE",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=93/93, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_TWO_STAGE_RH_STATIC_DEMAND_SHARE",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=93/93, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_TWO_STAGE_RH_PEA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=93/93, Z=0.0, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_TWO_STAGE_RH_SA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=93/93, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_TWO_STAGE_RH_LEXMMFPEA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=93/93, Z=0.0, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_TWO_STAGE_RH_LEXMMFSA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=56/56, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_MULTISTAGE_RH_NONE",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=56/56, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_MULTISTAGE_RH_STATIC_DEMAND_SHARE",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=56/56, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_MULTISTAGE_RH_PEA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=56/56, Z=4.000000000000001, Y=0.0, residuo de vínculo=8.881784197001252e-16",
+            "name": "gate_MULTISTAGE_RH_SA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=56/56, Z=-2.7755575615628914e-17, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_MULTISTAGE_RH_LEXMMFPEA",
+            "passed": true
+          },
+          {
+            "detail": "modo=1, binarios=56/56, Z=3.9999999999999996, Y=0.0, residuo de vínculo=0.0",
+            "name": "gate_MULTISTAGE_RH_LEXMMFSA",
+            "passed": true
+          }
+        ],
+        "passed": true
+      }
+    ],
+    "model_audits": [
+      {
+        "constraints": 961,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__NONE",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__NONE.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__NONE.mps",
+        "nonzeros": 1260,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 624
+      },
+      {
+        "constraints": 1057,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__STATIC_DEMAND_SHARE",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__STATIC_DEMAND_SHARE.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__STATIC_DEMAND_SHARE.mps",
+        "nonzeros": 1356,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 624
+      },
+      {
+        "constraints": 965,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__PEA",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__PEA.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__PEA.mps",
+        "nonzeros": 1356,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 624
+      },
+      {
+        "constraints": 970,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__PEA__adaptive_phase1",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__PEA__adaptive_phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__PEA__adaptive_phase1.mps",
+        "nonzeros": 1460,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 625
+      },
+      {
+        "constraints": 971,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__PEA__adaptive_phase2",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__PEA__adaptive_phase2.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__PEA__adaptive_phase2.mps",
+        "nonzeros": 1461,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 625
+      },
+      {
+        "constraints": 969,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__SA",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__SA.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__SA.mps",
+        "nonzeros": 3564,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 624
+      },
+      {
+        "constraints": 993,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__LEXMMFPEA__phase1",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__LEXMMFPEA__phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__LEXMMFPEA__phase1.mps",
+        "nonzeros": 1676,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 644
+      },
+      {
+        "constraints": 993,
+        "expected_mode_nodes": 24,
+        "generated_mode_binaries": 24,
+        "label": "DETERMINISTIC_RH__LEXMMFSA__phase1",
+        "legacy_household_mode_binaries": 96,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__LEXMMFSA__phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__DETERMINISTIC_RH__LEXMMFSA__phase1.mps",
+        "nonzeros": 2444,
+        "passed": true,
+        "unique_policy_modes": 24,
+        "variables": 644
+      },
+      {
+        "constraints": 3724,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__NONE",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__NONE.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__NONE.mps",
+        "nonzeros": 4893,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2418
+      },
+      {
+        "constraints": 4096,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__STATIC_DEMAND_SHARE",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__STATIC_DEMAND_SHARE.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__STATIC_DEMAND_SHARE.mps",
+        "nonzeros": 5265,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2418
+      },
+      {
+        "constraints": 3728,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__PEA",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__PEA.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__PEA.mps",
+        "nonzeros": 5265,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2418
+      },
+      {
+        "constraints": 3733,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__PEA__adaptive_phase1",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__PEA__adaptive_phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__PEA__adaptive_phase1.mps",
+        "nonzeros": 5645,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2419
+      },
+      {
+        "constraints": 3734,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__PEA__adaptive_phase2",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__PEA__adaptive_phase2.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__PEA__adaptive_phase2.mps",
+        "nonzeros": 5646,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2419
+      },
+      {
+        "constraints": 3732,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__SA",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__SA.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__SA.mps",
+        "nonzeros": 13821,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2418
+      },
+      {
+        "constraints": 3756,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__LEXMMFPEA__phase1",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__LEXMMFPEA__phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__LEXMMFPEA__phase1.mps",
+        "nonzeros": 6413,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2438
+      },
+      {
+        "constraints": 3756,
+        "expected_mode_nodes": 93,
+        "generated_mode_binaries": 93,
+        "label": "TWO_STAGE_RH__LEXMMFSA__phase1",
+        "legacy_household_mode_binaries": 372,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__LEXMMFSA__phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__TWO_STAGE_RH__LEXMMFSA__phase1.mps",
+        "nonzeros": 9389,
+        "passed": true,
+        "unique_policy_modes": 93,
+        "variables": 2438
+      },
+      {
+        "constraints": 2244,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__NONE",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__NONE.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__NONE.mps",
+        "nonzeros": 2931,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1456
+      },
+      {
+        "constraints": 2468,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__STATIC_DEMAND_SHARE",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__STATIC_DEMAND_SHARE.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__STATIC_DEMAND_SHARE.mps",
+        "nonzeros": 3155,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1456
+      },
+      {
+        "constraints": 2248,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__PEA",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__PEA.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__PEA.mps",
+        "nonzeros": 3155,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1456
+      },
+      {
+        "constraints": 2253,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__PEA__adaptive_phase1",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__PEA__adaptive_phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__PEA__adaptive_phase1.mps",
+        "nonzeros": 3387,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1457
+      },
+      {
+        "constraints": 2254,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__PEA__adaptive_phase2",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__PEA__adaptive_phase2.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__PEA__adaptive_phase2.mps",
+        "nonzeros": 3388,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1457
+      },
+      {
+        "constraints": 2252,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__SA",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__SA.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__SA.mps",
+        "nonzeros": 8307,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1456
+      },
+      {
+        "constraints": 2276,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__LEXMMFPEA__phase1",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__LEXMMFPEA__phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__LEXMMFPEA__phase1.mps",
+        "nonzeros": 3859,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1476
+      },
+      {
+        "constraints": 2276,
+        "expected_mode_nodes": 56,
+        "generated_mode_binaries": 56,
+        "label": "MULTISTAGE_RH__LEXMMFSA__phase1",
+        "legacy_household_mode_binaries": 224,
+        "lp_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__LEXMMFSA__phase1.lp",
+        "mps_path": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/model_audit/shared_battery_mode_node_level_v1__MULTISTAGE_RH__LEXMMFSA__phase1.mps",
+        "nonzeros": 5651,
+        "passed": true,
+        "unique_policy_modes": 56,
+        "variables": 1476
+      }
+    ],
+    "require_shared_battery_validation": true
+  },
+  "warm_starts": {
+    "allow_legacy_conversion": false,
+    "enabled": false,
+    "idle_mode_value": 0.0
+  }
+}

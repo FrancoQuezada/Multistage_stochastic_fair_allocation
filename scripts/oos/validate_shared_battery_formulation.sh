@@ -32,6 +32,11 @@ export PEA_TOLERANCE_MODE="${PEA_TOLERANCE_MODE:-adaptive_minimum}"
 # Absolute numerical allowance in kWh; same unit as epsilon_pea, not dimensionless.
 export PEA_TOLERANCE_NUMERIC_EPS="${PEA_TOLERANCE_NUMERIC_EPS:-1e-6}"
 export FAIRNESS_ABS_TOL="${FAIRNESS_ABS_TOL:-0.0}"
+# Abstract temporal contract, in model periods. Forwarded only when set explicitly: the defaults
+# are the Julia constants in codes/oos_experiment/types.jl, so the shell cannot drift from them.
+[[ -n "${EVALUATION_HORIZON:-}" ]] && export EVALUATION_HORIZON
+[[ -n "${LOOKAHEAD_HORIZON:-}" ]] && export LOOKAHEAD_HORIZON
+[[ -n "${IMPLEMENTATION_STEP:-}" ]] && export IMPLEMENTATION_STEP
 
 oos_resolve_julia
 
@@ -43,6 +48,10 @@ include("oos_experiment/oos_experiment.jl")
 config = OOSExperimentConfig(
     experiment_seed=parse(Int, ENV["EXPERIMENT_SEED"]),
     oos_replications=1,
+    # Abstract temporal contract; the defaults are the module constants, never re-declared here.
+    evaluation_horizon=_env_int("EVALUATION_HORIZON", OOS_DEFAULT_EVALUATION_HORIZON),
+    lookahead_horizon=_env_int("LOOKAHEAD_HORIZON", OOS_DEFAULT_LOOKAHEAD_HORIZON),
+    implementation_step=_env_int("IMPLEMENTATION_STEP", OOS_DEFAULT_IMPLEMENTATION_STEP),
     controller_set=collect(instances(ControllerKind)),
     fairness_set=collect(instances(FairnessPolicy)),
     two_stage_scenarios=parse(Int, ENV["TWO_STAGE_SCENARIOS"]),
@@ -80,7 +89,7 @@ push!(reports, GateReport(
 ))
 push!(reports, run_shared_battery_micro_gate(config))
 push!(reports, run_controller_fairness_gate(
-    common.template, common.provider, common.static_shares, config,
+    common.context, common.provider, common.static_shares,
 ))
 
 for report in reports

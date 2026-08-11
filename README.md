@@ -201,8 +201,8 @@ configuraciones). Vive en `codes/oos_experiment/`, `scripts/oos/`, `results_oos/
 y no altera los flujos de modelos exactos, heurísticas, sensibilidad ni validación.
 
 Verificación previa completa (entorno, ambas suites, ambas compuertas, matriz por defecto,
-campaña smoke de 18 configuraciones en un directorio nuevo y lector downstream). Devuelve 0
-solo si todo pasa:
+contrato temporal abstracto, campaña smoke de 18 configuraciones en un directorio nuevo, lector
+downstream y manifiesto estructural). Devuelve 0 solo si todo pasa:
 
 ```bash
 bash scripts/oos/preflight_oos_campaign.sh
@@ -228,9 +228,130 @@ OOS_REPLICATIONS=1000 \
 CONTROLLER_SET='DETERMINISTIC_RH,TWO_STAGE_RH,MULTISTAGE_RH' \
 FAIRNESS_SET='NONE,STATIC_DEMAND_SHARE,PEA,SA,LEXMMFPEA,LEXMMFSA' \
 TWO_STAGE_SCENARIOS=100 MULTISTAGE_BRANCHING='4,4' \
+EVALUATION_HORIZON=24 LOOKAHEAD_HORIZON=24 IMPLEMENTATION_STEP=1 \
 EXPERIMENT_SEED=12345 \
 bash scripts/oos/run_oos_experiment.sh
 ```
+
+`EVALUATION_HORIZON` (`H`), `LOOKAHEAD_HORIZON` (`L`) e `IMPLEMENTATION_STEP` (`h`) se cuentan en
+**períodos abstractos del modelo**: no definen minutos, horas, días ni ningún ciclo de calendario;
+la duración física de un período vive solo en la instancia y `template.delta` se conserva
+exactamente. Se admite cualquier `h` con `1 <= h <= min(H, L)` y no se exige que `h` divida a `H`.
+
+`MULTISTAGE_BRANCHING` admite lista por etapa (`"2,2"`) o triplete compacto simétrico
+`stages:children:periods_per_stage` (`"4:4:6"`), en el mismo orden `S:C:P` que `TREE_SET`; ver
+detalle en [docs/oos_experiment.md](docs/oos_experiment.md).
+
+Las etapas 1 a 11 del rediseño están **COMPLETE**. La etapa 3 separa explícitamente
+`T0 = template.T` (horizonte de la instancia del repositorio), `H` (horizonte de evaluación), `L`
+(longitud de cada futura ventana móvil),
+`Tsupport = required_period_support_end(config)` y
+`Tdata = max(T0, Tsupport)`. Una única función pura,
+`base_period_index(t, T0) = 1 + ((t - 1) mod T0)`, gobierna la repetición: precios, referencia PV
+y actividad de los perfiles ya asignados coinciden exactamente con los datos del repositorio en
+`1:T0` y repiten esos mismos valores hasta `Tdata`, sin volver a muestrear ni reescalar por
+`delta`. El proveedor admite llamadas directas hasta `Tsupport` con RNG explícitos y sin caché
+global mutable.
+
+La etapa 4 consume esa disponibilidad extendida. El simulador itera ahora
+`rolling_iteration_starts(config)`, cada optimización cubre exactamente la ventana móvil fija
+`t : t+L-1` —incluida la del último período evaluado— y el SOC terminal se impone al final de esa
+ventana en lugar de quedar anclado en `template.T`. El modelo físico, la contabilidad de costos
+realizados y los agregados de equidad leen sus precios del soporte extendido a través del único
+accesor `rolling_price`; `Tdata` columnas también para la tabla de cuotas estáticas. `template.T`
+conserva su significado propio: horizonte de la instancia del repositorio y largo del perfil base.
+
+Dos consecuencias deliberadas: el SOC al final del horizonte de evaluación pasa a ser un
+**resultado** de la política rodante (se reporta como diagnóstico, solo se exige que sea
+físicamente admisible), y la igualdad estricta `PEA` deja de volverse inalcanzable por agotamiento
+del horizonte, que era un artefacto de la ventana decreciente.
+
+La etapa 5 elimina el confusor central de la comparación: en lugar de tres muestras de look-ahead
+independientes hay **un solo soporte condicional** por `(réplica, inicio de iteración)`, del que
+los tres métodos son vistas —el árbol completo, sus mismas hojas sin no-anticipatividad
+intermedia, y la media ponderada de esas mismas hojas—. El controlador ya no entra en la semilla.
+Consecuencia: `two_stage_scenarios` deja de generar escenarios (el conteo de hojas lo fija
+`multistage_branching`) y el controlador determinista pasa de la media condicional analítica a la
+media empírica de las hojas comunes.
+
+La etapa 6 generaliza el prefijo conocido y el bloque comprometido a cualquier
+`implementation_step` admisible: se revela `t:t+h-1` completo antes de que ningún controlador
+optimice, la primera etapa del árbol es determinista y común, un solo solve entrega el bloque
+ordenado de acciones, se validan e implementan en orden, y un bloque final no divisible se
+compromete completo aunque solo su intersección con `1:H` se evalúe.
+
+La etapa 7 convierte los coeficientes de `STATIC_DEMAND_SHARE` en una tabla identificada
+(`ShareTableID`), resuelta una vez por instancia estructural e independiente de réplica,
+controlador y política.
+
+La etapa 8 auditó el dominio de decisión y encontró **importación y exportación simultáneas por
+hogar** —hasta 318 kWh en un período, siempre bajo `SA`—: inflar el costo propio era una forma de
+bajar los ahorros hasta el objetivo de equidad. Como un hogar tiene un solo punto de conexión, se
+añadió exclusividad de dirección de red (un binario por hogar y nodo, uniforme para todos los
+controladores y políticas). Cerrar ese canal dejó la igualdad de `SA` estructuralmente inalcanzable
+—ni una banda fija de 1e5 la restaura—, así que `SA` recibió la misma banda mínima endógena que ya
+tenía `PEA`: `sa_tolerance_mode=:adaptive_minimum` y `sa_fairness_abs_tol` en desuso.
+
+El manifiesto estructural sigue sin ser consumido por el runner activo. Detalles y hoja de ruta en
+`docs/oos_experiment.md` y `docs/oos_redesign_plan.md`.
+
+Catálogo de instancias estructurales (etapa 2, **COMPLETE**) y aislamiento determinista
+(etapa 3, **COMPLETE**). Una **instancia estructural** fija
+las características físicas y de composición de demanda que permanecen constantes; una **réplica
+OOS** es una trayectoria estocástica *dentro* de una instancia estructural fija. El diseño primario
+es `B instancias base x 2 niveles de batería x 2 regímenes de demanda x 2 niveles de incertidumbre
+x K sorteos`, con etiquetas tipadas `LOW_BATTERY`/`HIGH_BATTERY`,
+`HOMOGENEOUS`/`HETEROGENEOUS` y `LOW_UNCERTAINTY`/`HIGH_UNCERTAINTY`:
+
+```bash
+# Generar el manifiesto canónico. Los cuatro niveles numéricos y K son OBLIGATORIOS y no tienen
+# valor por defecto: los de abajo son fixtures, NO niveles de campaña (los calibra la etapa 12).
+INSTANCE_DRAWS_PER_CELL=2 \
+LOW_BATTERY_SCALE=0.5 HIGH_BATTERY_SCALE=2.0 \
+LOW_UNCERTAINTY_THETA=0.1 HIGH_UNCERTAINTY_THETA=0.4 \
+STRUCTURAL_MANIFEST_PATH=results_oos_structural/structural_instance_manifest.json \
+bash scripts/oos/generate_structural_instance_manifest.sh
+
+# Validar un manifiesto guardado de forma independiente (sin correr ninguna campaña).
+bash scripts/oos/validate_structural_instance_manifest.sh \
+  results_oos_structural/structural_instance_manifest.json
+```
+
+Cada `PairedBaseID` corresponde exactamente a dos instancias estructurales (una por nivel de
+batería) que comparten asignación de hogares, semilla de asignación y semillas planificadas de
+trayectoria y soporte. El nivel de batería sigue excluido de esas tres semillas. La etapa 2
+descubrió que la ruta por defecto de `generateInstance` construye su semilla con `theta`, por lo
+que bajo el contrato legacy también cambiaba la matriz determinista de precios `nu`; además,
+`generateInstance` resembra el `TaskLocalRNG` de Julia y por eso el catálogo se materializa
+secuencialmente.
+
+La etapa 3 elimina ese confusor **solo en la ruta estructural OOS** mediante
+`repository_seed_override`: cada bloque `(instancia base, sorteo estructural)` recibe un
+`DeterministicDataID` y una semilla real independiente de batería, régimen de demanda e
+incertidumbre. El bloque incluye exactamente `experiment_seed`, instancia base normalizada,
+sorteo estructural, `in_sample_stages`, `in_sample_children`,
+`in_sample_periods_per_stage`, hogares, `avg_demand`, `dev_demand`, `pv_scale` y el argumento
+fijo `repository_demand_profile`. Excluye exactamente nivel y escala de batería, régimen de
+demanda, `DemandAssignmentID`, nivel de incertidumbre, `theta`, réplica OOS, inicio rodante,
+controlador, política de equidad, fase del solver, worker, reintento y orden de ejecución. Con una
+instancia base y `K=2` hay 2 bloques deterministas y 16 instancias; cada bloque se comparte entre
+sus ocho variantes `2 × 2 × 2`.
+
+La llamada legacy sin override conserva exactamente la construcción y el comportamiento
+anteriores, incluida su semilla contrafactual dependiente de `theta`; el manifiesto distingue
+`legacy_default_repository_instance_seed` de `actual_repository_generator_seed`. El JSON
+canónico usa `structural_manifest_schema_version = 2`, mientras `output_schema_version` sigue en
+2. Un manifiesto v1 conserva significado histórico de etapa 2, pero el validador lo rechaza como
+no listo para etapa 3 con la instrucción explícita de regenerarlo como v2.
+
+Los valores numéricos de batería, `theta` y `K` siguen siendo
+`PROVISIONAL_UNCALIBRATED`. La etapa 12 solo puede calibrar `theta` después de superar el
+aislamiento determinista, y debe juzgar cada nivel de batería por el vector físico resuelto
+`(s_min, s_max, s_I, f_under, f_bar)`, incluidas las discontinuidades de `scaleInstance!`, no por
+`battery_scale` solamente. El manifiesto **todavía no lo consume el simulador activo**. La
+ejecución multiproceso, los shards reiniciables y el merge determinista siguen reservados sin
+cambios a la etapa 13. Detalles en `docs/oos_experiment.md`,
+`docs/oos_stage2_completion_report.md` y `docs/oos_stage3_completion_report.md`.
 
 Los resultados van solo a `results_oos/` (nunca a `results_models/` y similares) y cada fila lleva
 `formulation_id`, de modo que resultados de formulaciones distintas nunca se mezclan sin

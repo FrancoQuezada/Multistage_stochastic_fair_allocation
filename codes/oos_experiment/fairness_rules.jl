@@ -14,6 +14,125 @@ const OOS_SA_DENOMINATOR_FLOOR = 1.0
 """Smallest admissible community demand denominator of the PEA rule."""
 const OOS_PEA_DENOMINATOR_FLOOR = 1e-9
 
+"""Identifier prefix of a resolved static demand-share table."""
+const OOS_SHARE_TABLE_ID_PREFIX = "ST"
+
+"""Length of the digest inside a `ShareTableID`."""
+const OOS_SHARE_TABLE_DIGEST_LENGTH = 12
+
+"""Algorithm tag of the resolved share table, versioned with its contract."""
+const OOS_SHARE_TABLE_ALGORITHM = "static_demand_share_table_v1"
+
+"""
+Largest admissible departure from `sum_j lambda[j, tau] = 1` in a resolved share table.
+
+The repository's `static_demand_shares` normalizes per period, so the residual is pure
+floating-point round-off. The bound is deliberately far below any economically meaningful
+allocation and far above the round-off of a `J`-term division.
+"""
+const OOS_SHARE_TABLE_SUM_TOL = 1e-9
+
+"""
+One resolved `STATIC_DEMAND_SHARE` table: the benchmark's coefficients plus their identity.
+
+Immutable and task-local. Resolved once per structural instance from the common ex-ante
+in-sample expected demand, then repeated through `base_period_index`. It is a function of the
+instance and the temporal contract alone: not of the OOS replication, not of the controller, not
+of the fairness policy being solved, and never of a realized future.
+
+`base_shares` is the `J x T0` table the repository's verified `static_demand_shares` produced;
+`shares` is its repetition over `1:period_end`. Keeping both is what lets an audit separate "the
+benchmark changed" from "the window got longer".
+"""
+struct OOSStaticShareTable
+    share_table_id::String
+    algorithm::String
+    households::Int
+    base_horizon::Int
+    period_end::Int
+    base_shares::Matrix{Float64}
+    shares::Matrix{Float64}
+
+    function OOSStaticShareTable(
+        households::Int,
+        base_horizon::Int,
+        period_end::Int,
+        base_shares::AbstractMatrix{Float64},
+        shares::AbstractMatrix{Float64},
+    )
+        households >= 1 || error("Se requiere al menos un hogar.")
+        base_horizon >= 1 || error("El horizonte base debe ser >= 1.")
+        period_end >= base_horizon || error(
+            "El extremo de la tabla ($period_end) no puede ser menor que el horizonte base " *
+            "($base_horizon)."
+        )
+        size(base_shares) == (households, base_horizon) || error(
+            "La tabla base tiene dimensión $(size(base_shares)); se esperaba " *
+            "($households, $base_horizon)."
+        )
+        size(shares) == (households, period_end) || error(
+            "La tabla extendida tiene dimensión $(size(shares)); se esperaba " *
+            "($households, $period_end)."
+        )
+        all(isfinite, shares) || error("La tabla de cuotas contiene valores no finitos.")
+        all(>=(-OOS_SHARE_TABLE_SUM_TOL), shares) || error(
+            "La tabla de cuotas contiene un coeficiente negativo."
+        )
+        shares[:, 1:base_horizon] == base_shares || error(
+            "La tabla extendida altera la tabla base dentro de 1:$base_horizon."
+        )
+        for period in 1:period_end
+            total = sum(@view shares[:, period])
+            abs(total - 1.0) <= OOS_SHARE_TABLE_SUM_TOL || error(
+                "Los coeficientes del período $period suman $total en lugar de 1."
+            )
+            base = base_period_index(period, base_horizon)
+            shares[:, period] == shares[:, base] || error(
+                "El período $period no repite exactamente el período base $base."
+            )
+        end
+        identifier = share_table_id(
+            households, base_horizon, period_end, base_shares,
+        )
+        return new(
+            identifier, OOS_SHARE_TABLE_ALGORITHM, households, base_horizon, period_end,
+            Matrix{Float64}(base_shares), Matrix{Float64}(shares),
+        )
+    end
+end
+
+"""
+Deterministic identifier of a resolved share table.
+
+Digested from the BASE coefficients and the mapping contract through the canonical JSON writer
+and the repository's persisted digest. Two contracts that differ only in window length therefore
+share an identifier prefix component but not the identifier, because `period_end` is part of the
+payload — a reader can tell "same benchmark, longer window" from "different benchmark".
+"""
+function share_table_id(
+    households::Int,
+    base_horizon::Int,
+    period_end::Int,
+    base_shares::AbstractMatrix{Float64},
+)
+    payload = Dict{String,Any}(
+        "algorithm" => OOS_SHARE_TABLE_ALGORITHM,
+        "households" => households,
+        "base_horizon" => base_horizon,
+        "period_end" => period_end,
+        "period_mapping_name" => OOS_PERIOD_MAPPING_NAME,
+        "period_mapping_version" => OOS_PERIOD_MAPPING_VERSION,
+        "base_shares" => [
+            [Float64(base_shares[j, t]) for t in 1:base_horizon] for j in 1:households
+        ],
+    )
+    digest = oos_stable_digest(canonical_json(payload))
+    return string(
+        OOS_SHARE_TABLE_ID_PREFIX, "-",
+        digest[1:min(OOS_SHARE_TABLE_DIGEST_LENGTH, length(digest))],
+    )
+end
+
 """
 Fixed realized past entering the fairness expressions.
 
@@ -47,9 +166,16 @@ past_savings(past::FairnessPastState) = past.benchmark .- past.cost
 Constant scenario aggregates of the look-ahead's exogenous data.
 
 `pv_total[s]`, `demand[j,s]` and `benchmark[j,s]` accumulate over the nodes of scenario `s`,
-i.e. over the remaining horizon only.
+i.e. over the look-ahead window only.
+
+Prices come from the context's extended support, so a window that reaches past the repository
+horizon T0 prices its benchmark with the repeated base entries rather than running off the end
+of `template.nu`.
 """
-function scenario_aggregates(template::OOSInstanceTemplate, tree::LookaheadTree)
+function scenario_aggregates(source::OOSPricedSource, tree::LookaheadTree)
+    template = priced_template(source)
+    prices = priced_matrix(source)
+    assert_priced_period(source, tree.last_period)
     S = lookahead_scenario_count(tree)
     J = template.J
     pv_total = zeros(S)
@@ -58,10 +184,10 @@ function scenario_aggregates(template::OOSInstanceTemplate, tree::LookaheadTree)
     for (s, path) in enumerate(tree.scenarios)
         for n in path
             pv_total[s] += tree.pv[n]
+            tau = tree.calendar_period[n]
             for j in 1:J
                 demand[j, s] += tree.demand[j, n]
-                benchmark[j, s] += template.delta * template.nu[j, tree.calendar_period[n]] *
-                                   tree.demand[j, n]
+                benchmark[j, s] += template.delta * prices[j, tau] * tree.demand[j, n]
             end
         end
     end
@@ -235,6 +361,46 @@ function build_adaptive_pea_constraints!(
 end
 
 """
+Adaptive SA with an endogenous common band, one nonnegative scalar for the whole solve:
+
+    -epsilon_sa <= S_j - Target_j <= epsilon_sa,   epsilon_sa >= 0
+
+`epsilon_sa` is the maximum absolute household-level savings deviation admitted at this
+rolling-horizon step, in the same monetary unit as the operating cost. Exactly like
+`epsilon_pea`, it is a DECISION VARIABLE minimized in Phase I, never a value picked from a grid.
+
+STAGE 8 introduced this. Before grid-direction exclusivity, the strict savings equality was
+reachable because a household could burn energy through the grid — importing and exporting at the
+same node — to inflate its own operating cost down onto the target. Closing that channel made the
+equality structurally unreachable on a rolling window with a fixed realized past, exactly as it
+already was for `PEA`. Widening the hand-picked `sa_fairness_abs_tol` is the wrong lever: a
+bounded probe found that even `1e5` did not restore feasibility, because the shortfall is
+structural rather than marginal. The endogenous minimum is the same remedy the project already
+approved for `PEA`, applied to the policy that turned out to need it too.
+"""
+function build_adaptive_sa_constraints!(
+    refs::PhysicalModelRefs,
+    past::FairnessPastState,
+    aggregates,
+)
+    J = refs.template.J
+    tree = refs.tree
+    coefficients = sa_target_coefficients(refs.template, past, aggregates)
+    savings = expected_savings_expressions(refs, past, aggregates)
+    community = scenario_community_savings_expressions(refs, past, aggregates)
+    targets = [
+        sum(aggregates.probability[s] * coefficients.share[j, s] * community[s]
+            for s in eachindex(tree.scenarios))
+        for j in 1:J
+    ]
+    model = refs.model
+    @variable(model, epsilon_sa >= 0)
+    @constraint(model, sa_band_upper[j in 1:J], savings[j] - targets[j] <= epsilon_sa)
+    @constraint(model, sa_band_lower[j in 1:J], targets[j] - savings[j] <= epsilon_sa)
+    return (coefficients=coefficients, targets=targets, epsilon=epsilon_sa, mode=:adaptive)
+end
+
+"""
 DEPRECATED fixed economic band, honoured only under `pea_tolerance_mode === :fixed_band`.
 
 A fixed band changes the economic meaning of PEA and is never used by the default campaign.
@@ -273,12 +439,15 @@ function add_fairness_constraints!(
     policy::FairnessPolicy,
     past::FairnessPastState,
     config::OOSExperimentConfig;
-    static_shares::Union{Nothing,Matrix{Float64}}=nothing,
+    static_shares::Union{Nothing,Matrix{Float64},OOSStaticShareTable}=nothing,
 )
+    # Stage 7: a resolved table may be passed directly. Its coefficients are the same matrix, so
+    # everything downstream is unchanged; what the object adds is the identity and the contract.
+    static_shares = static_shares isa OOSStaticShareTable ? static_shares.shares : static_shares
     tree = refs.tree
     template = refs.template
     J = template.J
-    aggregates = scenario_aggregates(template, tree)
+    aggregates = scenario_aggregates(refs.source, tree)
 
     if policy === NONE
         return (policy=policy, aggregates=aggregates, handles=nothing)
@@ -287,9 +456,19 @@ function add_fairness_constraints!(
         static_shares === nothing && error(
             "STATIC_DEMAND_SHARE requiere los coeficientes estáticos calculados ex ante."
         )
-        size(static_shares) == (J, template.T) || error(
-            "Los coeficientes estáticos deben tener dimensión ($J, $(template.T))."
+        # With a moving look-ahead a window can reach past T0, so the requirement is that the
+        # share table COVER every abstract period of this window — not that its width equal
+        # `template.T`. A campaign table spans the whole materialized support and therefore
+        # covers every window; a narrower table is rejected by naming the period it lacks.
+        size(static_shares, 1) == J || error(
+            "Los coeficientes estáticos declaran $(size(static_shares, 1)) hogares y el modelo " *
+            "declara $J."
         )
+        size(static_shares, 2) >= tree.last_period || error(
+            "Los coeficientes estáticos cubren $(size(static_shares, 2)) períodos y el " *
+            "look-ahead llega al período $(tree.last_period)."
+        )
+        assert_priced_period(refs.source, tree.last_period)
         model = refs.model
         @constraint(model, static_share_fix[j in 1:J, n in tree.nodes],
             refs.lambda[j, n] == static_shares[j, tree.calendar_period[n]])
@@ -316,7 +495,10 @@ function add_fairness_constraints!(
                 for s in eachindex(tree.scenarios))
             for j in 1:J
         ]
-        if config.sa_fairness_abs_tol > 0
+        # Mirrors PEA. `:adaptive_minimum` and `:strict` both start from the exact equality; the
+        # endogenous band is only ever built afterwards, on a fresh model, and only after a proven
+        # fairness infeasibility. `:fixed_band` honours the deprecated hand-picked constant.
+        if config.sa_tolerance_mode === :fixed_band && config.sa_fairness_abs_tol > 0
             @constraint(model, sa_upper[j in 1:J],
                 savings[j] - target[j] <= config.sa_fairness_abs_tol)
             @constraint(model, sa_lower[j in 1:J],
@@ -324,7 +506,10 @@ function add_fairness_constraints!(
         else
             @constraint(model, sa_balance[j in 1:J], savings[j] == target[j])
         end
-        return (policy=policy, aggregates=aggregates, handles=(coefficients=coefficients,))
+        return (
+            policy=policy, aggregates=aggregates,
+            handles=(coefficients=coefficients, targets=target, epsilon=nothing, mode=:strict),
+        )
 
     elseif is_lexicographic_policy(policy)
         # Installed phase by phase in `lexicographic.jl`, on this same physical model.
@@ -452,13 +637,23 @@ The computation delegates to the repository's verified `static_demand_shares`, s
 benchmark keeps its published definition. The coefficients are a static rule inspired by
 ex-ante energy-sharing coefficients; they are identical across replications and controllers,
 are never updated from realized information, and do not determine the battery mode.
+
+The base table is computed on `1:T0` from the in-sample tree, exactly as before, and is then
+repeated through the same centralized `base_period_index` the deterministic data uses. The rule
+therefore keeps fixing an allocation when a moving look-ahead reaches past the repository
+horizon, and it still never reads an out-of-sample realization.
 """
 function compute_static_demand_shares(
     template::OOSInstanceTemplate,
     provider::RepositoryUncertaintyProvider,
     tree::Tree,
-    rng::AbstractRNG,
+    rng::AbstractRNG;
+    period_end::Int=template.T,
 )
+    period_end >= template.T || error(
+        "El extremo de las cuotas estáticas ($period_end) no puede ser menor que el horizonte " *
+        "base T0=$(template.T)."
+    )
     data = in_sample_tree_data(provider, tree, rng)
     instance = InstanceM()
     instance.id = template.id
@@ -469,10 +664,88 @@ function compute_static_demand_shares(
     instance.d = data.demand
     instance.delta = template.delta
     instance.nu = template.nu
-    shares = static_demand_shares(instance)
-    size(shares) == (template.J, template.T) || error(
-        "Los coeficientes estáticos tienen dimensión $(size(shares)) y se esperaba " *
+    base_shares = static_demand_shares(instance)
+    size(base_shares) == (template.J, template.T) || error(
+        "Los coeficientes estáticos tienen dimensión $(size(base_shares)) y se esperaba " *
         "($(template.J), $(template.T))."
     )
-    return (shares=shares, in_sample=data)
+    shares = extend_static_demand_shares(base_shares, template.T, period_end)
+    return (shares=shares, base_shares=base_shares, in_sample=data)
+end
+
+# -------------------------------------------------------------------------------------
+# Static share table (OOS redesign stage 7)
+#
+# Stage 4 made the coefficients repeat past the repository horizon so a moving window could be
+# priced at all. Stage 7 turns them into an auditable, immutable object with an identity: the
+# table is resolved ONCE per structural instance from the ex-ante in-sample reference, it never
+# reads an out-of-sample realization, and every result can name the exact table it used.
+# -------------------------------------------------------------------------------------
+
+"""
+Resolve the static share table of one structural instance, once.
+
+Delegates to `compute_static_demand_shares`, so the benchmark keeps the repository's published
+definition, and then wraps the result in the immutable contract above. The `rng` is the common
+ex-ante in-sample stream: the same one for every replication, controller and policy.
+"""
+function resolve_static_share_table(
+    template::OOSInstanceTemplate,
+    provider::RepositoryUncertaintyProvider,
+    tree::Tree,
+    rng::AbstractRNG;
+    period_end::Int=template.T,
+)
+    resolved = compute_static_demand_shares(
+        template, provider, tree, rng; period_end=period_end,
+    )
+    return OOSStaticShareTable(
+        template.J, template.T, period_end, resolved.base_shares, resolved.shares,
+    )
+end
+
+"""Compact manifest-ready description of a resolved share table."""
+share_table_summary(table::OOSStaticShareTable) = Dict{String,Any}(
+    "share_table_id" => table.share_table_id,
+    "algorithm" => table.algorithm,
+    "households" => table.households,
+    "base_horizon" => table.base_horizon,
+    "period_end" => table.period_end,
+    "period_mapping_name" => OOS_PERIOD_MAPPING_NAME,
+    "period_mapping_version" => OOS_PERIOD_MAPPING_VERSION,
+    "depends_on_oos_replication" => false,
+    "depends_on_controller" => false,
+    "depends_on_fairness_policy" => false,
+    "reads_realized_future" => false,
+)
+
+"""
+Repeat a base `J x T0` share table over `1:period_end`.
+
+Uses `base_period_index`, the one abstract-period mapping of the data layer, so the shares
+repeat in lockstep with prices, the deterministic PV reference and household activity. The
+first `T0` columns are preserved exactly — with `==`, not a tolerance, because this copies
+values rather than recomputing them.
+"""
+function extend_static_demand_shares(
+    base_shares::AbstractMatrix{Float64},
+    base_horizon::Int,
+    period_end::Int,
+)
+    J = size(base_shares, 1)
+    size(base_shares, 2) == base_horizon || error(
+        "La tabla base de cuotas tiene $(size(base_shares, 2)) columnas y el horizonte base " *
+        "es $base_horizon."
+    )
+    period_end >= base_horizon || error(
+        "El extremo solicitado ($period_end) es menor que el horizonte base ($base_horizon)."
+    )
+    extended = Matrix{Float64}(undef, J, period_end)
+    for period in 1:period_end
+        extended[:, period] .= @view base_shares[:, base_period_index(period, base_horizon)]
+    end
+    extended[:, 1:base_horizon] == base_shares || error(
+        "La extensión alteró la tabla base de cuotas estáticas."
+    )
+    return extended
 end

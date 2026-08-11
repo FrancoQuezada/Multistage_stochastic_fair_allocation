@@ -130,13 +130,20 @@ function apply_mode_start!(refs::PhysicalModelRefs, start::ModeStart)
 end
 
 """
-Build a mode start for the period-`t+1` look-ahead from the period-`t` solve.
+Build a mode start for the next rolling start's look-ahead from the previous solve.
 
-The previous solve is mapped forward by calendar period along its reference scenario, which
-is a heuristic: a MIP start affects solver effort only, never feasibility or optimality of the
-returned action. The start is always validated against the corrected constraints before use,
-and the aggregate flows of the *previous* tree are the only input, so no household mode is
-ever consulted.
+The previous solve is mapped forward BY CALENDAR PERIOD along its reference scenario. That is
+what makes it correct for a shifted fixed window: the previous window `t : t+L-1` and the new one
+`t+h : t+h+L-1` overlap on `t+h : t+L-1`, those periods map across by their own labels, and the
+`h` newly entered periods at the tail simply have no predecessor and fall back to the documented
+idle value. Nothing is aligned by node index, which would be wrong the moment the window moves.
+
+It is a heuristic: a MIP start affects solver effort only, never the feasibility or optimality of
+the returned action. A warm start that fails is a performance problem and never permission to
+change the model or the implemented action — the simulator catches the failure and solves cold.
+
+The start is always validated against the corrected constraints before use, and the aggregate
+flows of the *previous* tree are the only input, so no household mode is ever consulted.
 """
 function derive_mode_start_from_previous(
     previous_tree::LookaheadTree,
@@ -158,17 +165,30 @@ function derive_mode_start_from_previous(
     nodes = copy(new_tree.mode_nodes)
     charge = zeros(length(nodes))
     discharge = zeros(length(nodes))
+    carried = 0
     for (index, node) in enumerate(nodes)
         period = new_tree.calendar_period[node]
         if haskey(by_period, period)
             charge[index], discharge[index] = by_period[period]
+            carried += 1
         end
     end
-    return mode_start_from_flows(
+    start = mode_start_from_flows(
         nodes, charge, discharge;
         flow_tol=flow_tol, on_simultaneous=:repair, source="current_formulation",
     )
+    return (start=start, carried_nodes=carried, fresh_nodes=length(nodes) - carried)
 end
+
+"""
+Overlap between two successive look-ahead windows, in abstract periods.
+
+`max(0, previous_last - new_first + 1)`. With a fixed window of length `L` shifted by `h` this is
+`L - h`, and it is zero exactly when `h >= L`, i.e. when the next window starts at or after the
+previous one ended and no warm-start information can carry across.
+"""
+lookahead_window_overlap(previous_tree::LookaheadTree, new_tree::LookaheadTree) =
+    max(0, previous_tree.last_period - new_tree.first_period + 1)
 
 """Aggregate flows of a solved model, indexed by node; the canonical warm-start input."""
 function aggregate_flows_from_solution(refs::PhysicalModelRefs)

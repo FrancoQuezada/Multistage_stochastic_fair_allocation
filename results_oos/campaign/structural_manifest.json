@@ -1,0 +1,4793 @@
+{
+  "demand_assignments": [
+    {
+      "assignment_seed": 1984710398,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "materialized_data_end": 44,
+      "profile_count_labels": ["morning", "midday", "night"],
+      "profile_counts": [0, 0, 5],
+      "repository_instance_horizon": 24,
+      "required_period_support_end": 44,
+      "structural_draw": 1
+    },
+    {
+      "assignment_seed": 186436782,
+      "base_demand_activity_digest": "d8ae738c922bed6e",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "demand_activity_digest": "d1502498adebc2a7",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "household_profiles": ["midday", "morning", "morning", "night", "night"],
+      "materialized_data_end": 44,
+      "profile_count_labels": ["morning", "midday", "night"],
+      "profile_counts": [2, 1, 2],
+      "repository_instance_horizon": 24,
+      "required_period_support_end": 44,
+      "structural_draw": 1
+    },
+    {
+      "assignment_seed": 1984711345,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "materialized_data_end": 44,
+      "profile_count_labels": ["morning", "midday", "night"],
+      "profile_counts": [0, 0, 5],
+      "repository_instance_horizon": 24,
+      "required_period_support_end": 44,
+      "structural_draw": 2
+    },
+    {
+      "assignment_seed": 186433941,
+      "base_demand_activity_digest": "c85af82038d1937a",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "demand_activity_digest": "ae9b0cd20e959fb3",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "household_profiles": ["night", "night", "midday", "morning", "morning"],
+      "materialized_data_end": 44,
+      "profile_count_labels": ["morning", "midday", "night"],
+      "profile_counts": [2, 1, 2],
+      "repository_instance_horizon": 24,
+      "required_period_support_end": 44,
+      "structural_draw": 2
+    }
+  ],
+  "design": {
+    "actual_deterministic_data_count": 2,
+    "actual_structural_instance_count": 16,
+    "assignment_algorithm": "structural_demand_assignment_v1",
+    "avg_demand": 100.0,
+    "base_instance_count": 1,
+    "base_instance_files": ["codes/inst/inst2020/Drahi_1.csv"],
+    "base_instance_ids": ["Drahi_1"],
+    "battery_level_order": ["LOW_BATTERY", "HIGH_BATTERY"],
+    "battery_level_scales": {
+      "HIGH_BATTERY": 2.0,
+      "LOW_BATTERY": 0.5
+    },
+    "canonical_json_version": "canonical_json_v1",
+    "canonical_ordering": ["normalized_base_instance_id", "structural_draw", "demand_regime", "uncertainty_level", "battery_level"],
+    "consumed_by_active_simulator": true,
+    "demand_regimes": ["HOMOGENEOUS", "HETEROGENEOUS"],
+    "deterministic_base_isolation_status": "passed",
+    "dev_demand": 10.0,
+    "digest_algorithm": "fnv1a64_v1",
+    "evaluation_horizon": 24,
+    "expected_demand_assignment_count": 4,
+    "expected_deterministic_data_count": 2,
+    "expected_paired_base_count": 8,
+    "expected_structural_instance_count": 16,
+    "experiment_seed": 12345,
+    "factor_level_note": "The battery scales and uncertainty intensities below are explicit inputs, not repository defaults and not calibrated recommendations. Stage 12 fixes the campaign levels; any value recorded here is provisional.",
+    "factor_level_status": "PROVISIONAL_UNCALIBRATED",
+    "households": 5,
+    "identifier_algorithm": "structural_identifiers_v1",
+    "implementation_step": 4,
+    "in_sample_children": 2,
+    "in_sample_periods_per_stage": 8,
+    "in_sample_stages": 3,
+    "known_prefix_length": 4,
+    "lookahead_horizon": 24,
+    "materialized_data_end": 44,
+    "oos_replication_count": 10,
+    "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+    "period_mapping_name": "repository_base_period_repeat",
+    "period_mapping_version": "base_period_index_v1",
+    "period_semantics": "abstract model period; no clock-time interpretation is implied",
+    "pv_scale": 1.0,
+    "repository_demand_profile": "mixed",
+    "repository_instance_horizon": 24,
+    "required_period_support_end": 44,
+    "rolling_iteration_starts": [1, 5, 9, 13, 17, 21],
+    "rolling_solve_count": 6,
+    "scope_note": "Structural catalog, deterministic period-data support and seed contract. Since stage 13 the campaign runner enumerates its tasks from this document and verifies the regenerated catalog against the identifiers recorded here. The manifest still generates no scenario support: the conditional support is drawn per task from the seed contract below, and its ScenarioSupportID is produced at run time.",
+    "stage3_ready": true,
+    "structural_demand_profiles": ["morning", "midday", "night"],
+    "structural_draws_per_cell": 2,
+    "structural_manifest_schema_version": 2,
+    "uncertainty_level_order": ["LOW_UNCERTAINTY", "HIGH_UNCERTAINTY"],
+    "uncertainty_level_thetas": {
+      "HIGH_UNCERTAINTY": 0.4,
+      "LOW_UNCERTAINTY": 0.1
+    }
+  },
+  "deterministic_data_blocks": [
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "avg_demand": 100.0,
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "demand_activity_digest": "a30c4228cf3b34f9",
+      "demand_activity_digests": [
+        {
+          "base_demand_activity_digest": "d8ae738c922bed6e",
+          "demand_activity_digest": "d1502498adebc2a7",
+          "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+          "demand_regime": "HETEROGENEOUS"
+        },
+        {
+          "base_demand_activity_digest": "90580f4f2cef6d28",
+          "demand_activity_digest": "27ce700234c169a4",
+          "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+          "demand_regime": "HOMOGENEOUS"
+        }
+      ],
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "excluded_seed_keys": ["battery_level", "battery_scale", "demand_regime", "demand_assignment_id", "uncertainty_level", "theta", "oos_replication", "rolling_start", "controller", "fairness_policy", "solver_phase", "worker", "retry", "execution_order"],
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "included_seed_keys": ["experiment_seed", "normalized_base_instance_file", "structural_draw", "in_sample_stages", "in_sample_children", "in_sample_periods_per_stage", "households", "avg_demand", "dev_demand", "pv_scale", "repository_demand_profile"],
+      "materialized_data_end": 44,
+      "normalized_base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "required_period_support_end": 44,
+      "structural_draw": 1
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "avg_demand": 100.0,
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "demand_activity_digest": "82a10a4ebd631446",
+      "demand_activity_digests": [
+        {
+          "base_demand_activity_digest": "c85af82038d1937a",
+          "demand_activity_digest": "ae9b0cd20e959fb3",
+          "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+          "demand_regime": "HETEROGENEOUS"
+        },
+        {
+          "base_demand_activity_digest": "90580f4f2cef6d28",
+          "demand_activity_digest": "27ce700234c169a4",
+          "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+          "demand_regime": "HOMOGENEOUS"
+        }
+      ],
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "excluded_seed_keys": ["battery_level", "battery_scale", "demand_regime", "demand_assignment_id", "uncertainty_level", "theta", "oos_replication", "rolling_start", "controller", "fairness_policy", "solver_phase", "worker", "retry", "execution_order"],
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "included_seed_keys": ["experiment_seed", "normalized_base_instance_file", "structural_draw", "in_sample_stages", "in_sample_children", "in_sample_periods_per_stage", "households", "avg_demand", "dev_demand", "pv_scale", "repository_demand_profile"],
+      "materialized_data_end": 44,
+      "normalized_base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "required_period_support_end": 44,
+      "structural_draw": 2
+    }
+  ],
+  "manifest_id": "MF-987c9a306641f4b7",
+  "planned_conditional_support_keys": [
+    {
+      "conditional_support_seed": 713865180,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 713861392,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 713872756,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 589823763,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 589819975,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 590462216,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1964821639,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1964817851,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1964814063,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 2011754915,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 2011758703,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 2011089946,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1495361674,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1495357886,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1495354098,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 765073417,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 765069629,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 763199726,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 436329942,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 436333730,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 436322366,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1177521585,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1177525373,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1179482400,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 124297201,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 124300989,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 124304777,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 104099350,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 104103138,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 104646891,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1212658204,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1212661992,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1212650628,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 455589370,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 455585582,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 454924401,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 905672479,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 905676267,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 905664903,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 197990668,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 197994456,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 196147281,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1994124394,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1994120606,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1994131970,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 610469140,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 610465352,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 612429955,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1682121957,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1682118169,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1682114381,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1704779224,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1704775436,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1705447981,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 663474431,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 663470643,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 663482007,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1729682668,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1729678880,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1730321121,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 668151678,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 668147890,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 668144102,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1005681725,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1005677937,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1003808034,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 361283381,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 361279593,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 361275805,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 826811787,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 826807999,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 828802906,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 49250640,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 49246852,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 49258216,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1900903499,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1900899711,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1901541952,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 385569424,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 385573212,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 385561848,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 777556010,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 777552222,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 776891041,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 78583699,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 78587487,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 78576123,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 519957312,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 519961100,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 517992709,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1919077833,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1919081621,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1919070257,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 259880558,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 259884346,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 261720157,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1444570852,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1444574640,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1444578428,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 344707654,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 344711442,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 345376411,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1943363876,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1943360088,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1943371452,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 210473261,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 210477049,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 209838596,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1636378151,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1636374363,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1636385727,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 2100388514,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 2100384726,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 2098545127,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1875047414,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1875051202,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1875039838,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1339308969,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1339312757,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1337344366,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 2016501499,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 2016497711,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 2016509075,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 134722963,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 134719175,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 136683778,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 176007365,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 176003577,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 176014941,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 394920933,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 394917145,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 392956330,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 645467330,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 645463542,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 645474906,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1641602431,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1641606219,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1640967766,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 952335627,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 952339415,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 952328051,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1820472365,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1820476153,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1821019906,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1426933520,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1426937308,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1426941096,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1796482197,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1796485985,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1798352100,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1733801817,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1733805605,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1733809393,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1975352135,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1975355923,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1973478444,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 2040787542,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 2040791330,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 2040795118,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 85436886,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 85433098,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 84771917,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 736242289,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 736238501,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 736249865,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 114077586,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 114073798,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 114716039,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1210749270,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1210745482,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1210741694,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 29220186,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 29216398,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 31090089,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1407911333,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1407907545,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1407918909,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1042838048,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1042841836,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1042203383,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1682242074,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1682245862,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1682249650,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 516196069,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 516199857,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 518065972,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 4222180,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 4225968,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 4229756,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1765416227,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1765420015,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1763542536,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 311086689,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 311090477,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 311094265,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1941747501,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1941743713,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1941082532,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1959807616,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1959803828,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1959800040,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 2096351782,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 2096347994,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 2096899323,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 286800646,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 286796858,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 286808222,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1991154798,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1991151010,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1992994397,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 593790159,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 593786371,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 593797735,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 103747905,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 103744117,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 101783302,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 900775884,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 900772096,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 900783460,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 361316299,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 361320087,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 360681634,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 564457100,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 564460888,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 564464676,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1484663788,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1484667576,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1485332545,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 876489841,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 876493629,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 876482265,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 410602380,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 410606168,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 412563195,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1483235772,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1483239560,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1483228196,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1534264315,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1534260527,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1533599346,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 757674808,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 757678596,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 757682384,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 31048869,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 31052657,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 29175178,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 288211055,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 288214843,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 288218631,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 929312358,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 929316146,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 931303477,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 2123692265,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 2123696053,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 2123684689,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 2023652746,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 2023656534,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 2024321503,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1816702752,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1816698964,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1816710328,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1763545688,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1763549476,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1762911023,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1347242787,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1347238999,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1347250363,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 516864194,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 516860406,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 515020807,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1040374490,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1040370702,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1040382066,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 338024560,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 338020772,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 339864159,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 565776597,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 565772809,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 565769021,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 361984424,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 361980636,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 362653181,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 258908300,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 258912088,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 258900724,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 183144790,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 183141002,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 182479821,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 2099406222,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 2099410010,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 2099398646,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 2073029735,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 2073033523,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 2071065132,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1226842201,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1226838413,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1226849777,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1107275139,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1107271351,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1105431752,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 13264015,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 13260227,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 13256439,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 477532287,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 477528499,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 478079828,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1101715930,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1101712142,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1101723506,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 889980455,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 889984243,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 889345790,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 632255965,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 632252177,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 632263541,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1790782608,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1790778820,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1788818005,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1883182120,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1883185908,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1883189696,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1044860225,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1044864013,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1046730128,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1408705443,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1408709231,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1408697867,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1150087513,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1150091301,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1150756270,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 349552495,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 349556283,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 349560071,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1481298561,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1481294773,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1480633592,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 42687986,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 42691774,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 42695562,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1304967283,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1304971071,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1303093592,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1666997870,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1666994082,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1666990294,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1425081857,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1425078069,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1426951760,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1354965129,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1354961341,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1354972705,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 351568710,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 351564922,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 352207163,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1658006535,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1658002747,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1657998959,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1653232954,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1653229166,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1653901711,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1882687815,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1882684027,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1882680239,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1774215354,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1774211566,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1772341663,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1575698302,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1575694514,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1575690726,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1514108296,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1514104508,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1515978199,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1263665561,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1263661773,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1263673137,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 440595145,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 440591357,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 441233598,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1599984345,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1599988133,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1599976769,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1464731303,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1464727515,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1464187550,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1293119836,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1293123624,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1293112260,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1288490941,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1288494729,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1286526338,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 823656083,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 823659871,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 823648507,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 39179871,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 39183659,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 41140686,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 511623342,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 511627130,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 511630918,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1113241283,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1113245071,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1113910040,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1010416362,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1010412574,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1010423938,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 979006890,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 979010678,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 978372225,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 540956397,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 540952609,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 540963973,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1879809043,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1879805255,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1877844440,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 577213300,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 577217088,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 577205724,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1308113561,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1308117349,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1306270174,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1670569460,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1670573248,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1670577036,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 477329148,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 477332936,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 477997905,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 611446816,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 611450604,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 611439240,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 828819172,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 828815384,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 828275419,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 304582307,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 304586095,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 304574731,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 652578806,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 652582594,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 650614203,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 587160773,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 587156985,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 587153197,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 878196161,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 878192373,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 880066064,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 275128032,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 275124244,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 275135608,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1952166661,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1952162873,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1952805114,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 1363610251,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 1363606463,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 1363602675,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 237501066,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 237504854,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 236836097,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 894150286,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 894146498,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 894142710,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 1138303219,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 1138299431,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 1136429528,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 803345027,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 803348815,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 803352603,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 497974529,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 497978317,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 499844432,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 328868350,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 328872138,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 328860774,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 603201817,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 603205605,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 603870574,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    },
+    {
+      "conditional_support_seed": 907097612,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 1
+    },
+    {
+      "conditional_support_seed": 907101400,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 5
+    },
+    {
+      "conditional_support_seed": 907090036,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 9
+    },
+    {
+      "conditional_support_seed": 514678512,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 13
+    },
+    {
+      "conditional_support_seed": 514682300,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 17
+    },
+    {
+      "conditional_support_seed": 515347269,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "rolling_start": 21
+    }
+  ],
+  "planned_oos_replication_keys": [
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940799676,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940796835,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940797782,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940802517,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940803464,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940800623,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940801570,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940791153,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 940792100,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1342173162,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248321613,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248318772,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248319719,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248316878,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248317825,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248314984,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248315931,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248328242,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1248329189,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 473793559,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372563778,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372562831,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372561884,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372568513,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372567566,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372566619,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372565672,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372572301,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1372571354,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2117128250,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "structural_draw": 1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929008745,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929011586,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929010639,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929005904,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929004957,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929007798,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929006851,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929017268,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 929016321,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1521223408,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "structural_draw": 1,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117848267,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117849214,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117850161,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117843532,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117844479,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117845426,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117846373,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117839744,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1117840691,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 538398007,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645298061,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645299008,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645299955,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645300902,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645301849,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645302796,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645303743,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645289538,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1645290485,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "oos_path_seed": 1958093584,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017912562,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017913509,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017914456,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017915403,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017916350,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017917297,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017918244,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017919191,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2017920138,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 2121878102,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "structural_draw": 2,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784719036,
+      "oos_replication": 1,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784719983,
+      "oos_replication": 2,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784720930,
+      "oos_replication": 3,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784714301,
+      "oos_replication": 4,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784715248,
+      "oos_replication": 5,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784716195,
+      "oos_replication": 6,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784717142,
+      "oos_replication": 7,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784725665,
+      "oos_replication": 8,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1784726612,
+      "oos_replication": 9,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "base_instance_id": "Drahi_1",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "oos_path_seed": 1089892770,
+      "oos_replication": 10,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "structural_draw": 2,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    }
+  ],
+  "seed_contract": [
+    {
+      "enforced_exclusions": ["battery_level", "uncertainty_level", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["battery_level", "battery_scale", "uncertainty_level", "theta", "oos_replication", "rolling_start", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["experiment_seed", "base_instance_id", "demand_regime", "structural_draw"],
+      "purpose": "household demand-profile assignment of one structural cell",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "stage2_contract",
+      "stream": "structural_assignment"
+    },
+    {
+      "enforced_exclusions": ["battery_level", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["battery_level", "battery_scale", "theta", "rolling_start", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["experiment_seed", "base_instance_id", "demand_assignment_id", "demand_regime", "structural_draw", "uncertainty_level", "oos_replication"],
+      "note": "The uncertainty LEVEL is a key; its numeric theta is not, so a stage-12 recalibration of the level values does not renumber the common streams. Excluding battery level is what pairs a low/high battery comparison on one exogenous trajectory. Stage 2 does not introduce common random numbers across different uncertainty levels.",
+      "purpose": "future realized out-of-sample trajectory of one replication",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "stage2_contract",
+      "stream": "structural_oos_path"
+    },
+    {
+      "enforced_exclusions": ["battery_level", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["battery_level", "battery_scale", "theta", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["experiment_seed", "base_instance_id", "demand_assignment_id", "demand_regime", "structural_draw", "uncertainty_level", "oos_replication", "rolling_start"],
+      "purpose": "future conditional stochastic support at one rolling start",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "stage2_contract",
+      "stream": "conditional_support"
+    },
+    {
+      "enforced_exclusions": ["battery_level", "battery_scale", "demand_regime", "demand_assignment_id", "uncertainty_level", "theta", "oos_replication", "rolling_start", "controller", "fairness_policy", "solver_phase", "worker", "retry", "execution_order"],
+      "excluded_keys": ["battery_level", "battery_scale", "demand_regime", "demand_assignment_id", "uncertainty_level", "theta", "oos_replication", "rolling_start", "controller", "fairness_policy", "solver_phase", "worker", "retry", "execution_order"],
+      "included_keys": ["experiment_seed", "normalized_base_instance_file", "structural_draw", "in_sample_stages", "in_sample_children", "in_sample_periods_per_stage", "households", "avg_demand", "dev_demand", "pv_scale", "repository_demand_profile"],
+      "note": "This is the actual seed passed through repository_seed_override by the Stage-3 structural materializer. It excludes theta and every experimental factor other than structural_draw, so changing uncertainty cannot change prices or any other deterministic repository input.",
+      "purpose": "uncertainty-independent repository base data shared across the eight battery, demand-regime and uncertainty variants of one structural draw",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "stage3_active_structural_materializer",
+      "stream": "structural_deterministic_base"
+    },
+    {
+      "enforced_exclusions": ["battery_scale", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["pv_scale", "battery_scale", "structural_draw", "demand_regime", "oos_replication", "rolling_start", "controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["in_sample_stages", "in_sample_children", "in_sample_periods_per_stage", "households", "base_instance_file_basename", "theta", "avg_demand", "dev_demand", "repository_demand_profile"],
+      "note": "The ordinary repository caller still uses this theta-dependent seed exactly as before. Schema-v2 rows retain it only to audit the legacy default and the Stage-2 confound; the structural materializer uses the separate Stage-3 deterministic-base seed recorded as actual_repository_generator_seed.",
+      "purpose": "counterfactual seed of the unchanged default generateInstance path",
+      "seed_algorithm": "fnv1a_deterministic_seed_v1",
+      "status": "legacy_default_active_outside_structural_materializer",
+      "stream": "repository_instance_seed"
+    },
+    {
+      "enforced_exclusions": ["controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["experiment_seed", "oos_replication"],
+      "note": "Unchanged by stage 2. Replacing it with the structural key belongs to the later catalog/campaign wiring.",
+      "purpose": "the single-instance simulator's current realized trajectory stream",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "legacy_active",
+      "stream": "oos_path"
+    },
+    {
+      "enforced_exclusions": ["fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["experiment_seed", "oos_replication", "period", "controller"],
+      "note": "Deliberately still INCLUDES the controller. Removing it, so all methods share one conditional support, is stage 5 and is not done here.",
+      "purpose": "the single-instance simulator's current controller-specific look-ahead",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "legacy_active",
+      "stream": "lookahead"
+    },
+    {
+      "enforced_exclusions": ["controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["experiment_seed"],
+      "purpose": "static demand-share calibration objects",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "legacy_active",
+      "stream": "in_sample"
+    },
+    {
+      "enforced_exclusions": ["controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "excluded_keys": ["controller", "fairness_policy", "solver_phase", "worker", "execution_order"],
+      "included_keys": ["experiment_seed"],
+      "note": "Superseded on the structural path by structural_assignment, which is controlled rather than an independent per-household draw. Left untouched for the legacy runner.",
+      "purpose": "the legacy single-instance ex-ante household profile draw",
+      "seed_algorithm": "fnv1a_oos_stream_seed_v1",
+      "status": "legacy_active",
+      "stream": "demand_profiles"
+    }
+  ],
+  "structural_instances": [
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 1984710398,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 1,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HOM-ULO-BLO-2b7217f211",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 1984710398,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 2,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-ULO-d69028dd90",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HOM-ULO-BHI-0e8ef1d852",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 1984710398,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 3,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HOM-UHI-BLO-2e8cab1949",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 1984710398,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d1-0c238d3a08",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 4,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HOM-UHI-79830456b8",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HOM-UHI-BHI-9dd97ae39a",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 186436782,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "d8ae738c922bed6e",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "d1502498adebc2a7",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["midday", "morning", "morning", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 5,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HET-ULO-BLO-a84e7e5a68",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 186436782,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "d8ae738c922bed6e",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "d1502498adebc2a7",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["midday", "morning", "morning", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 6,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HET-ULO-9e14d1bfb1",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HET-ULO-BHI-19d4dbabf1",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 186436782,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "d8ae738c922bed6e",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "d1502498adebc2a7",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["midday", "morning", "morning", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 7,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HET-UHI-BLO-a2a2b24b7c",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 1387209819,
+      "assignment_seed": 186436782,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "d8ae738c922bed6e",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "68094ff462759142",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "d1502498adebc2a7",
+      "demand_assignment_id": "DA-Drahi_1-HET-d1-50d6ae2b74",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d1-d3bdb6ae75",
+      "dev_demand": 10.0,
+      "extended_price_digest": "7752071f5cf21f1a",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["midday", "morning", "morning", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 8,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d1-HET-UHI-ecb4d7be94",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 1,
+      "structural_instance_id": "SI-Drahi_1-d1-HET-UHI-BHI-3c909a552c",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 1984711345,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 9,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HOM-ULO-BLO-18b7e8b8e5",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 1984711345,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 10,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-ULO-976e82fc38",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HOM-ULO-BHI-e2181f5537",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 1984711345,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 11,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HOM-UHI-BLO-2a0359a635",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 1984711345,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "90580f4f2cef6d28",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "27ce700234c169a4",
+      "demand_assignment_id": "DA-Drahi_1-HOM-d2-d93748376e",
+      "demand_regime": "HOMOGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "night", "night", "night"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 12,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HOM-UHI-b5ceca13bf",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HOM-UHI-BHI-ab6a2f02fb",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 186433941,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "c85af82038d1937a",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "ae9b0cd20e959fb3",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "midday", "morning", "morning"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 13,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HET-ULO-BLO-b92c871682",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 186433941,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "c85af82038d1937a",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "ae9b0cd20e959fb3",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "midday", "morning", "morning"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 442122406,
+      "manifest_ordinal": 14,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HET-ULO-1fb507b711",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HET-ULO-BHI-08b6f11b06",
+      "theta": 0.1,
+      "uncertainty_level": "LOW_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 186433941,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "c85af82038d1937a",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "LOW_BATTERY",
+      "battery_scale": 0.5,
+      "demand_activity_digest": "ae9b0cd20e959fb3",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "midday", "morning", "morning"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 15,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 8.0,
+      "resolved_f_under": 8.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 31.5,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HET-UHI-BLO-fbb28ca1a3",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    },
+    {
+      "actual_repository_generator_seed": 917309722,
+      "assignment_seed": 186433941,
+      "avg_demand": 100.0,
+      "base_demand_activity_digest": "c85af82038d1937a",
+      "base_instance_file": "codes/inst/inst2020/Drahi_1.csv",
+      "base_instance_id": "Drahi_1",
+      "base_price_digest": "c53d74e6aca0431e",
+      "base_pv_reference_digest": "83eacc7ebcd15be2",
+      "battery_level": "HIGH_BATTERY",
+      "battery_scale": 2.0,
+      "demand_activity_digest": "ae9b0cd20e959fb3",
+      "demand_assignment_id": "DA-Drahi_1-HET-d2-401a1dc502",
+      "demand_regime": "HETEROGENEOUS",
+      "deterministic_data_id": "DD-Drahi_1-d2-3687e300b3",
+      "dev_demand": 10.0,
+      "extended_price_digest": "613245b84169f33e",
+      "extended_pv_reference_digest": "073aca60f96fb8df",
+      "household_profiles": ["night", "night", "midday", "morning", "morning"],
+      "households": 5,
+      "in_sample_children": 2,
+      "in_sample_periods_per_stage": 8,
+      "in_sample_stages": 3,
+      "instance_period_length_delta": 1.0,
+      "legacy_default_repository_instance_seed": 497706974,
+      "manifest_ordinal": 16,
+      "materialized_data_end": 44,
+      "paired_base_id": "PB-Drahi_1-d2-HET-UHI-17833fabe7",
+      "period_mapping_formula": "1 + ((period - 1) mod repository_instance_horizon)",
+      "period_mapping_name": "repository_base_period_repeat",
+      "period_mapping_version": "base_period_index_v1",
+      "pv_scale": 1.0,
+      "repository_demand_profile": "mixed",
+      "repository_instance_horizon": 24,
+      "repository_instance_id": "5_56",
+      "required_period_support_end": 44,
+      "resolved_beta": 10.0,
+      "resolved_e_c": 0.95,
+      "resolved_e_d": 0.95,
+      "resolved_f_bar": 32.0,
+      "resolved_f_under": 32.0,
+      "resolved_mu": 5.0,
+      "resolved_s_I": 0.2,
+      "resolved_s_max": 126.0,
+      "resolved_s_min": 0.2,
+      "structural_draw": 2,
+      "structural_instance_id": "SI-Drahi_1-d2-HET-UHI-BHI-960250dacf",
+      "theta": 0.4,
+      "uncertainty_level": "HIGH_UNCERTAINTY"
+    }
+  ]
+}

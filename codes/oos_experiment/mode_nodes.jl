@@ -54,6 +54,22 @@ would have produced `|H| * |V_mode|` binaries.
 expected_mode_binary_count(tree::LookaheadTree) = length(tree.mode_nodes)
 
 """
+Number of grid-direction binaries the model generates: `J` per node, or none.
+
+Kept beside the mode-node convention so the two binary families are counted in ONE place and a
+model whose totals drift is detected rather than accommodated. The direction family is a grid
+operating rule, so it is present or absent for every controller and policy alike.
+"""
+expected_grid_direction_binary_count(
+    tree::LookaheadTree, households::Int, enabled::Bool,
+) = enabled ? households * lookahead_node_count(tree) : 0
+
+"""Total binaries the centralized conventions expect in one generated model."""
+expected_binary_count(tree::LookaheadTree, households::Int, grid_direction_exclusivity::Bool) =
+    expected_mode_binary_count(tree) +
+    expected_grid_direction_binary_count(tree, households, grid_direction_exclusivity)
+
+"""
 Number of unique nonanticipative shared-mode decisions of the policy.
 
 For the node-indexed models built by this module every mode binary already corresponds to

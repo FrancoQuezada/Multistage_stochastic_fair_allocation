@@ -43,10 +43,15 @@ end
 zero_uncertainty_config(; kwargs...) =
     test_config(; theta=0.0, dev_demand=0.0, kwargs...)
 
+# As of redesign stage 4 these helpers exercise the CAMPAIGN path: they read the rolling
+# context, size the realized history from the temporal contract, and build every look-ahead over
+# the fixed moving window `t : t+L-1`. Tests that deliberately probe the retained pre-stage-4
+# shape pass a bare `common.template` instead.
+
 """Reveal period `t` and return `(state, observation)` without implementing anything."""
 function state_at_first_period(common, config)
     path = common.oos_paths[1]
-    state = initial_simulation_state(common.template, path.replication_id)
+    state = initial_simulation_state(common.context, path.replication_id)
     reveal_period!(state, path, 1)
     return (state, PeriodObservation(1, path.pv[1], collect(path.demand[:, 1])), path)
 end
@@ -59,27 +64,34 @@ the beginning of period `periods + 1`.
 """
 function replay_state(common, run, periods::Int)
     path = common.oos_paths[1]
-    state = initial_simulation_state(common.template, path.replication_id)
+    state = initial_simulation_state(common.context, path.replication_id)
     for t in 1:periods
         reveal_period!(state, path, t)
         record = run.records[t]
-        apply_action!(state, common.template, record.action, record.soc_after)
+        apply_action!(state, common.context, record.action, record.soc_after)
     end
-    state.period <= common.template.T && reveal_period!(state, path, state.period)
+    state.period <= rolling_realized_end(common.context) &&
+        reveal_period!(state, path, state.period)
     return state
 end
 
-"""Solve the current action of one controller/rule pair on a given state."""
+"""
+Solve the current action of one controller/rule pair on a given state.
+
+The look-ahead spans the fixed moving window anchored at the state's period, so this is the
+same model the simulator solves at that rolling start.
+"""
 function solve_at(common, config, state, controller, policy)
     path = common.oos_paths[1]
     t = state.period
     history = observed_history(state)
+    horizon_end = lookahead_end_period(config, t)
     tree = build_lookahead_tree(
-        common.provider, config, controller, history, t, common.template.T, path.replication_id,
+        common.provider, config, controller, history, t, horizon_end, path.replication_id,
     )
     observation = PeriodObservation(t, path.pv[t], collect(path.demand[:, t]))
     result = solve_current_action(
-        common.template, state, observation, tree, controller, policy, config;
+        common.context, state, observation, tree, controller, policy, config;
         static_shares=common.static_shares,
     )
     return (result=result, tree=tree)
@@ -217,28 +229,37 @@ end
 end
 
 # =====================================================================================
-# 22.4 One-period horizon
+# 22.4 One-period look-ahead
+#
+# MIGRATED IN STAGE 4. "No future to represent" used to be produced by standing at the last
+# calendar period of a shrinking horizon. With a fixed moving window every rolling start has a
+# full `L`-period look-ahead, so the degenerate case is now expressed where it belongs — in the
+# temporal contract, as `L = 1`. The scientific content is unchanged: with no future, the three
+# information structures collapse to the same single-node problem.
 # =====================================================================================
 
-@testset "22.4 one-period horizon solves the same problem for every controller" begin
-    config = test_config()
+@testset "22.4 one-period look-ahead solves the same problem for every controller" begin
+    config = test_config(lookahead_horizon=1)
     common = build_common_objects(config; verbose=false)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
+    cache = cache_lookahead_trees(common.provider, common.context, path)
     baseline = simulate_configuration(
-        common.template, config, path, cache, DETERMINISTIC_RH, NONE, common.static_shares,
+        common.context, path, cache, DETERMINISTIC_RH, NONE, common.static_shares,
     )
     @test baseline.completed
 
-    T = common.template.T
-    state = replay_state(common, baseline, T - 1)
-    @test state.period == T
+    # With L = 1 the support never reaches past the repository horizon.
+    @test required_period_support_end(config) == config.evaluation_horizon
+    H = config.evaluation_horizon
+    state = replay_state(common, baseline, H - 1)
+    @test state.period == H
 
     outcomes = Dict{ControllerKind,Any}()
     for controller in config.controller_set
         solved = solve_at(common, config, state, controller, NONE)
         @test solved.result.solved
-        # At the final period there is no future, so all three structures collapse to one node.
+        # The window is a single period, so all three structures collapse to one node.
+        @test solved.tree.first_period == solved.tree.last_period == H
         @test lookahead_node_count(solved.tree) == 1
         @test length(solved.tree.mode_nodes) == 1
         outcomes[controller] = solved.result
@@ -251,7 +272,8 @@ end
         @test isapprox(candidate.action.p, reference.action.p; atol=1e-7)
         @test isapprox(candidate.action.y, reference.action.y; atol=1e-7)
         @test isapprox(candidate.action.z, reference.action.z; atol=1e-7)
-        # The terminal battery target binds on the same calendar endpoint.
+        # The terminal target binds at the end of the window, which here IS the current period,
+        # so every controller must return the battery to s_I.
         @test isapprox(candidate.action.soc_after_model, common.template.s_I; atol=1e-6)
     end
 end
@@ -278,8 +300,8 @@ end
     @test path.pv[1:current] == perturbed.pv[1:current]
     @test path.demand[:, 1:current] == perturbed.demand[:, 1:current]
 
-    original_state = initial_simulation_state(common.template, path.replication_id)
-    perturbed_state = initial_simulation_state(common.template, path.replication_id)
+    original_state = initial_simulation_state(common.context, path.replication_id)
+    perturbed_state = initial_simulation_state(common.context, path.replication_id)
     for t in 1:(current-1)
         reveal_period!(original_state, path, t)
         reveal_period!(perturbed_state, perturbed, t)
@@ -345,14 +367,18 @@ end
 # =====================================================================================
 
 @testset "22.6 two-stage root is one common first stage" begin
-    config = test_config(two_stage_scenarios=4)
+    # MIGRATED IN STAGE 5. The leaf count is no longer set by `two_stage_scenarios`: the
+    # two-stage view uses the leaves of the one common conditional support, so the count follows
+    # `multistage_branching`. `[4]` gives the four scenarios this test was written around.
+    config = test_config(multistage_branching=[4], two_stage_scenarios=99)
     common = build_common_objects(config; verbose=false)
     state, _, path = state_at_first_period(common, config)
     tree = build_lookahead_tree(
         common.provider, config, TWO_STAGE_RH, observed_history(state), 1,
-        common.template.T, path.replication_id,
+        lookahead_end_period(config, 1), path.replication_id,
     )
     @test lookahead_scenario_count(tree) == 4
+    @test lookahead_scenario_count(tree) != config.two_stage_scenarios
     @test all(scenario[1] == tree.root for scenario in tree.scenarios)
     @test length(lookahead_root_children(tree)) == 4
     # Immediate branching after the root and no shared node afterwards.
@@ -362,7 +388,7 @@ end
         @test shared == Set([tree.root])
     end
 
-    refs = build_remaining_horizon_model(common.template, state, tree, config)
+    refs = build_remaining_horizon_model(common.context, state, tree, config)
     @test audit_two_stage_first_stage(refs)
     # One first-stage decision per quantity, including exactly one shared mode.
     @test length(unique([refs.v[tree.root]])) == 1
@@ -385,7 +411,7 @@ end
     )
     @test lookahead_scenario_count(tree) == 4
 
-    refs = build_remaining_horizon_model(common.template, state, tree, config)
+    refs = build_remaining_horizon_model(common.context, state, tree, config)
     @test audit_nonanticipativity(refs)
 
     # Scenarios sharing a history literally share the node, hence the mode variable.
@@ -422,15 +448,15 @@ end
     config = test_config(fairness_set=[NONE, SA, LEXMMFSA])
     common = build_common_objects(config; verbose=false)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
+    cache = cache_lookahead_trees(common.provider, common.context, path)
     template = common.template
 
     for controller in config.controller_set, policy in config.fairness_set
         run = simulate_configuration(
-            template, config, path, cache, controller, policy, common.static_shares,
+            common.context, path, cache, controller, policy, common.static_shares,
         )
         @test run.completed
-        @test run.periods_completed == template.T
+        @test run.periods_completed == rolling_solve_count(config)
 
         soc = template.s_I
         for record in run.records
@@ -458,7 +484,14 @@ end
             @test record.validation.valid
             soc = record.soc_after
         end
-        @test isapprox(soc, template.s_I; atol=config.feasibility_tol)
+        # MIGRATED IN STAGE 4. The terminal target now binds at the end of each MOVING window,
+        # never at the evaluation horizon, so the state of charge reached after the last
+        # evaluated period is an outcome of the rolling policy rather than a promised value.
+        # What must still hold is that it is a feasible, physically reachable state.
+        @test template.s_min - config.feasibility_tol <= soc <= template.s_max + config.feasibility_tol
+        @test soc == run.records[end].soc_after
+        # The realized action of a non-final window carries no terminal requirement at all.
+        @test all(r.validation.residuals.terminal == 0.0 for r in run.records)
 
         # Cumulative bookkeeping equals a direct recomputation from the implemented actions.
         state = run.final_state
@@ -512,8 +545,12 @@ end
         refs = build_remaining_horizon_model(template, state, tree, config)
         past = fairness_past_state(state)
         add_fairness_constraints!(refs, STATIC_DEMAND_SHARE, past, config; static_shares=shares)
-        # The benchmark keeps the shared-mode physical constraints.
-        @test generated_binary_count(refs.model) == length(tree.mode_nodes)
+        # The benchmark keeps the shared-mode physical constraints. Since stage 8 the model also
+        # carries the grid-direction family, so the total is checked through the centralized
+        # convention rather than against the mode-node count alone.
+        @test generated_binary_count(refs.model) ==
+              expected_binary_count(tree, template.J, config.grid_direction_exclusivity)
+        @test expected_mode_binary_count(tree) == length(tree.mode_nodes)
         structure = audit_shared_battery_structure(refs)
         for finding in structure.findings
             @test finding.passed
@@ -548,9 +585,9 @@ end
     common = build_common_objects(config; verbose=false)
     template = common.template
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
+    cache = cache_lookahead_trees(common.provider, common.context, path)
     baseline = simulate_configuration(
-        template, config, path, cache, DETERMINISTIC_RH, NONE, common.static_shares,
+        common.context, path, cache, DETERMINISTIC_RH, NONE, common.static_shares,
     )
     @test baseline.completed
 
@@ -673,7 +710,7 @@ end
         common.provider, config, DETERMINISTIC_RH, observed_history(state), 1,
         common.template.T, path.replication_id,
     )
-    refs = build_remaining_horizon_model(common.template, state, tree, config)
+    refs = build_remaining_horizon_model(common.context, state, tree, config)
     full_start = mode_start_from_flows(
         tree.mode_nodes, fill(1.0, length(tree.mode_nodes)), zeros(length(tree.mode_nodes)),
     )
@@ -687,12 +724,19 @@ end
     solved = solve_at(common, config, state, DETERMINISTIC_RH, NONE)
     @test solved.result.solved
     @test solved.result.plan_aggregate_flows !== nothing
+    # MIGRATED IN STAGE 9: the deriver now also reports how many nodes carried across from the
+    # previous window and how many are newly entered, so it returns a named tuple.
     forward = derive_mode_start_from_previous(
         tree, solved.result.plan_aggregate_flows.charge,
         solved.result.plan_aggregate_flows.discharge, tree,
     )
-    @test mode_start_length(forward) == length(tree.mode_nodes)
-    @test all(v in (0.0, 1.0) for v in forward.values)
+    @test mode_start_length(forward.start) == length(tree.mode_nodes)
+    @test all(v in (0.0, 1.0) for v in forward.start.values)
+    # Mapping a window onto ITSELF carries every node and enters none.
+    @test forward.carried_nodes == length(tree.mode_nodes)
+    @test forward.fresh_nodes == 0
+    @test lookahead_window_overlap(tree, tree) ==
+          tree.last_period - tree.first_period + 1
 end
 
 # =====================================================================================
@@ -819,7 +863,27 @@ end
     template = common.template
     state, _, path = state_at_first_period(common, config)
     history = observed_history(state)
-    forecast = conditional_mean_path(common.provider, history, 1, template.T)
+
+    # MIGRATED IN STAGE 5. The reference must be built from the forecast the controller actually
+    # solves. `DETERMINISTIC_RH` no longer follows the ANALYTIC conditional mean
+    # (`conditional_mean_path`); it follows the probability-weighted mean of the common support's
+    # leaves, which is what plan section 4.3 requires so that the three methods differ only in
+    # information structure. Feeding the reference the analytic mean would compare two different
+    # problems and say nothing about the formulation.
+    support = build_common_conditional_support(
+        common.provider, config, history, 1, lookahead_end_period(config, 1),
+        path.replication_id,
+    )
+    deterministic_view = deterministic_support_view(support)
+    @test deterministic_view.last_period == template.T   # L = T0 here, so the windows coincide
+    forecast = ForecastPath(
+        deterministic_view.first_period, deterministic_view.last_period,
+        copy(deterministic_view.pv), copy(deterministic_view.demand),
+    )
+    # It really is the weighted mean of the leaves, not the analytic one.
+    analytic = conditional_mean_path(common.provider, history, 1, template.T)
+    @test forecast.pv[1] == analytic.pv[1]               # the observed root is shared
+    @test forecast.pv != analytic.pv                     # the futures are not
 
     module_result = solve_at(common, config, state, DETERMINISTIC_RH, NONE).result
     @test module_result.solved
@@ -883,12 +947,12 @@ end
         common.provider, config, DETERMINISTIC_RH, observed_history(state), 1,
         common.template.T, path.replication_id,
     )
-    aggregate_only = build_remaining_horizon_model(common.template, state, tree, config)
+    aggregate_only = build_remaining_horizon_model(common.context, state, tree, config)
 
     redundant_config = test_config(
         fairness_set=[NONE], formulation_variant=:aggregate_plus_redundant_links,
     )
-    redundant = build_remaining_horizon_model(common.template, state, tree, redundant_config)
+    redundant = build_remaining_horizon_model(common.context, state, tree, redundant_config)
 
     # Same binaries, more rows: the redundant links are a named variant, never a default.
     @test generated_binary_count(aggregate_only.model) == generated_binary_count(redundant.model)
@@ -944,6 +1008,553 @@ end
     @test length(branching) == length(periods) - 1
 end
 
+@testset "multistage tree spec: list and compact S:C:P notations" begin
+    # List notation, unchanged: periods_per_stage comes back empty (automatic split).
+    @test parse_multistage_tree_spec("2,2") == ([2, 2], Int[])
+    @test parse_multistage_tree_spec(" 4 , 4 ") == ([4, 4], Int[])
+    @test parse_multistage_tree_spec("6") == ([6], Int[])
+
+    # Compact symmetric triplet, in the same S:C:P order as TREE_SET.
+    @test parse_multistage_tree_spec("4:4:6") == (fill(4, 3), fill(6, 4))
+    @test parse_multistage_tree_spec("1:5:24") == (Int[], [24])
+    @test parse_multistage_tree_spec("3:2:8") == ([2, 2], [8, 8, 8])
+
+    for malformed in ("4:4", "4:4:6:1", "0:4:6", "4:0:6", "4:4:0", "4:4:x")
+        @test_throws ErrorException parse_multistage_tree_spec(malformed)
+    end
+    @test_throws ErrorException parse_multistage_tree_spec("2,2:3")
+    @test_throws ErrorException parse_multistage_tree_spec("")
+    @test_throws ErrorException parse_multistage_tree_spec(",")
+end
+
+@testset "multistage tree spec reaches the environment-resolved configuration" begin
+    for key in ("MULTISTAGE_BRANCHING", "MULTISTAGE_PERIODS_PER_STAGE")
+        haskey(ENV, key) && delete!(ENV, key)
+    end
+    probe = ("FORMULATION_ID" => "multistage_tree_probe", "OOS_OUTPUT_DIR" => TEST_OUTPUT)
+
+    # Absent: the documented default, exactly as before this feature existed.
+    withenv(probe...) do
+        config = oos_config_from_environment()
+        @test config.multistage_branching == [2, 2]
+        @test config.multistage_periods_per_stage == Int[]
+    end
+
+    # List notation still behaves exactly as before, alone or paired with an explicit split.
+    withenv(probe..., "MULTISTAGE_BRANCHING" => "2,2") do
+        config = oos_config_from_environment()
+        @test config.multistage_branching == [2, 2]
+        @test config.multistage_periods_per_stage == Int[]
+    end
+    withenv(probe..., "MULTISTAGE_BRANCHING" => "4,4",
+            "MULTISTAGE_PERIODS_PER_STAGE" => "1,1,22") do
+        config = oos_config_from_environment()
+        @test config.multistage_branching == [4, 4]
+        @test config.multistage_periods_per_stage == [1, 1, 22]
+    end
+
+    # Compact notation expands to a symmetric branching + periods-per-stage pair.
+    withenv(probe..., "MULTISTAGE_BRANCHING" => "4:4:6") do
+        config = oos_config_from_environment()
+        @test config.multistage_branching == fill(4, 3)
+        @test config.multistage_periods_per_stage == fill(6, 4)
+    end
+
+    # Combining the compact form with an explicit periods-per-stage list is ambiguous and
+    # must fail rather than let one of the two win silently.
+    withenv(probe..., "MULTISTAGE_BRANCHING" => "4:4:6",
+            "MULTISTAGE_PERIODS_PER_STAGE" => "1,1,1,1") do
+        @test_throws ErrorException oos_config_from_environment()
+    end
+end
+
+# =====================================================================================
+# T1..T9 Abstract temporal configuration contract (redesign stage 1)
+#
+#   H = evaluation_horizon    L = lookahead_horizon    h = implementation_step
+#
+# All three are counted in ABSTRACT MODEL PERIODS. `h` may be any integer in
+# 1:min(H, L); it is NOT restricted to a fixed set and need NOT divide H. The final full
+# committed block may run past H and must never be silently truncated.
+#
+# See docs/oos_redesign_plan.md §3-§4 and codes/oos_experiment/temporal.jl.
+# =====================================================================================
+
+@testset "T1 default temporal configuration" begin
+    config = test_config()
+    @test config.evaluation_horizon == 24
+    @test config.lookahead_horizon == 24
+    @test config.implementation_step == 1
+    @test known_prefix_length(config) == 1
+    @test rolling_solve_count(config) == 24
+
+    # One source of truth for the defaults: struct keywords reference the module constants.
+    @test config.evaluation_horizon == OOS_DEFAULT_EVALUATION_HORIZON
+    @test config.lookahead_horizon == OOS_DEFAULT_LOOKAHEAD_HORIZON
+    @test config.implementation_step == OOS_DEFAULT_IMPLEMENTATION_STEP
+end
+
+@testset "T2 implementation_step = 1" begin
+    config = test_config(evaluation_horizon=24, lookahead_horizon=24, implementation_step=1)
+    @test rolling_iteration_starts(config) == collect(1:24)
+    @test implementation_block(config, 10) == 10:10
+    @test evaluation_block(config, 10) == 10:10
+    @test lookahead_periods(config, 10) == 10:33
+    @test lookahead_end_period(config, 10) == 33
+    @test required_period_support_end(config) == 47
+    @test rolling_solve_count(config) == 24
+    @test known_prefix_length(config) == 1
+
+    # Every start is valid and every block is a single period.
+    for t in rolling_iteration_starts(config)
+        @test is_rolling_iteration_start(config, t)
+        @test implementation_block(config, t) == t:t
+        @test evaluation_block(config, t) == t:t
+        @test length(lookahead_periods(config, t)) == config.lookahead_horizon
+    end
+end
+
+@testset "T3 implementation_step = 4" begin
+    config = test_config(evaluation_horizon=24, lookahead_horizon=24, implementation_step=4)
+    @test rolling_iteration_starts(config) == [1, 5, 9, 13, 17, 21]
+    @test implementation_block(config, 5) == 5:8
+    @test evaluation_block(config, 5) == 5:8
+    @test lookahead_end_period(config, 5) == 28
+    @test lookahead_periods(config, 5) == 5:28
+    @test required_period_support_end(config) == 44
+    @test rolling_solve_count(config) == 6
+    @test known_prefix_length(config) == 4
+
+    # 24 is divisible by 4, so here — and only here — every block stays inside 1:H.
+    for t in rolling_iteration_starts(config)
+        @test implementation_block(config, t) == evaluation_block(config, t)
+    end
+end
+
+@testset "T4 non-divisible implementation_step = 10" begin
+    # The essential case: divisibility is not required and the final block is not truncated.
+    config = test_config(evaluation_horizon=24, lookahead_horizon=24, implementation_step=10)
+    @test config.evaluation_horizon % config.implementation_step != 0
+    @test rolling_iteration_starts(config) == [1, 11, 21]
+    @test implementation_block(config, 21) == 21:30      # full committed block, past H
+    @test evaluation_block(config, 21) == 21:24          # evaluated portion only
+    @test lookahead_periods(config, 21) == 21:44
+    @test lookahead_end_period(config, 21) == 44
+    @test required_period_support_end(config) == 44
+    @test rolling_solve_count(config) == 3
+    @test known_prefix_length(config) == 10
+
+    # The full block is longer than its evaluated portion exactly at the tail.
+    @test length(implementation_block(config, 1)) == 10
+    @test implementation_block(config, 1) == evaluation_block(config, 1)
+    @test implementation_block(config, 11) == evaluation_block(config, 11)
+    @test last(implementation_block(config, 21)) > config.evaluation_horizon
+    @test last(evaluation_block(config, 21)) == config.evaluation_horizon
+    @test length(implementation_block(config, 21)) == config.implementation_step
+end
+
+@testset "T5 arbitrary valid implementation_step = 6" begin
+    # Guards against accidentally encoding a fixed allowed set such as {1, 4} or {1, 4, 10}.
+    config = test_config(evaluation_horizon=24, lookahead_horizon=24, implementation_step=6)
+    @test rolling_iteration_starts(config) == [1, 7, 13, 19]
+    @test rolling_solve_count(config) == 4
+    @test known_prefix_length(config) == 6
+    @test implementation_block(config, 19) == 19:24
+    @test evaluation_block(config, 19) == 19:24
+    @test lookahead_end_period(config, 19) == 42
+    @test required_period_support_end(config) == 42
+
+    # Every step admissible against the default horizons really is accepted, and every helper
+    # stays internally consistent for each of them.
+    for h in 1:24
+        candidate = test_config(implementation_step=h)
+        @test candidate.implementation_step == h
+        starts = rolling_iteration_starts(candidate)
+        @test rolling_solve_count(candidate) == length(starts)
+        @test first(starts) == 1
+        @test all(t -> 1 <= t <= candidate.evaluation_horizon, starts)
+        @test all(t -> length(implementation_block(candidate, t)) == h, starts)
+        @test required_period_support_end(candidate) ==
+              maximum(starts) + candidate.lookahead_horizon - 1
+    end
+end
+
+@testset "T6 invalid temporal configurations are rejected" begin
+    @test_throws ErrorException test_config(evaluation_horizon=0)
+    @test_throws ErrorException test_config(evaluation_horizon=-3)
+    @test_throws ErrorException test_config(lookahead_horizon=0)
+    @test_throws ErrorException test_config(lookahead_horizon=-1)
+    @test_throws ErrorException test_config(implementation_step=0)
+    @test_throws ErrorException test_config(implementation_step=-2)
+    # h must not exceed either horizon.
+    @test_throws ErrorException test_config(evaluation_horizon=5, implementation_step=6)
+    @test_throws ErrorException test_config(lookahead_horizon=4, implementation_step=6)
+    # ... but h == min(H, L) is admissible, so the bound is not off by one.
+    @test test_config(evaluation_horizon=5, lookahead_horizon=5,
+                      implementation_step=5).implementation_step == 5
+    # Divisibility is NOT a validation rule.
+    @test test_config(evaluation_horizon=24, implementation_step=10).implementation_step == 10
+    @test test_config(evaluation_horizon=24, implementation_step=7).implementation_step == 7
+
+    # Invalid rolling starts: off the h-grid, and outside 1:H.
+    stepped = test_config(implementation_step=4)
+    @test !is_rolling_iteration_start(stepped, 2)
+    for t in (2, 3, 4, 6, 24)
+        @test_throws ErrorException implementation_block(stepped, t)
+        @test_throws ErrorException evaluation_block(stepped, t)
+        @test_throws ErrorException lookahead_periods(stepped, t)
+        @test_throws ErrorException lookahead_end_period(stepped, t)
+    end
+    for t in (0, -1, 25, 48)
+        @test !is_rolling_iteration_start(stepped, t)
+        @test_throws ErrorException implementation_block(stepped, t)
+        @test_throws ErrorException lookahead_periods(stepped, t)
+    end
+    # A valid final block is never rejected for extending beyond the evaluation horizon.
+    tail = test_config(evaluation_horizon=24, implementation_step=10)
+    @test implementation_block(tail, 21) == 21:30
+    @test lookahead_periods(tail, 21) == 21:44
+end
+
+@testset "T7 temporal metadata section" begin
+    config = test_config(evaluation_horizon=24, lookahead_horizon=24, implementation_step=10)
+    template = build_instance_template(config).template
+    document = experiment_config_dictionary(config, template)
+
+    @test haskey(document, "temporal_structure")
+    temporal = document["temporal_structure"]
+
+    # Configured values are recorded verbatim.
+    @test temporal["evaluation_horizon"] == config.evaluation_horizon
+    @test temporal["lookahead_horizon"] == config.lookahead_horizon
+    @test temporal["implementation_step"] == config.implementation_step
+    # Derived values match the helper functions, not a second implementation.
+    @test temporal["known_prefix_length"] == known_prefix_length(config)
+    @test temporal["rolling_solve_count"] == rolling_solve_count(config)
+    @test temporal["rolling_iteration_starts"] == rolling_iteration_starts(config)
+    @test temporal["required_period_support_end"] == required_period_support_end(config)
+    @test temporal["final_rolling_iteration_start"] == 21
+    @test temporal["final_implementation_block"] == collect(21:30)
+    @test temporal["final_evaluation_block"] == collect(21:24)
+    # Stage-4 additions: the realized endpoint and the final moving window are reported
+    # separately from the support endpoint, so no reader has to re-derive them.
+    @test temporal["realized_period_end"] == realized_period_end(config) == 30
+    @test temporal["final_lookahead_window"] == collect(21:44)
+
+    # The repository instance horizon stays separately identified and is not reinterpreted.
+    @test document["instance"]["horizon"] == template.T
+    @test temporal["repository_instance_horizon"] == template.T
+    # They are distinct entries even when numerically equal on this instance.
+    @test haskey(temporal, "evaluation_horizon") && haskey(temporal, "repository_instance_horizon")
+
+    # No clock-time or calendar field is introduced anywhere in the temporal section.
+    for key in keys(temporal)
+        lowered = lowercase(String(key))
+        for forbidden in ("minute", "hour", "day", "week", "month", "cycle", "duration", "clock")
+            @test !occursin(forbidden, lowered)
+        end
+    end
+
+    # The machine-generated JSON round-trips through the sanctioned flat reader.
+    rendered = _json_pretty(document)
+    for forbidden in ("period_duration_minutes", "profile_cycle", "PERIOD_DURATION_MINUTES",
+                      "PROFILE_CYCLE")
+        @test !occursin(forbidden, rendered)
+    end
+    metadata_path = joinpath(mktempdir(; prefix="oos_temporal_meta_"), "experiment_config.json")
+    open(metadata_path, "w") do io
+        write(io, rendered, "\n")
+    end
+    flat = read_experiment_metadata(metadata_path)
+    @test flat["evaluation_horizon"] == "24"
+    @test flat["lookahead_horizon"] == "24"
+    @test flat["implementation_step"] == "10"
+    @test flat["known_prefix_length"] == "10"
+    @test flat["rolling_solve_count"] == "3"
+    @test flat["required_period_support_end"] == "44"
+    @test flat["repository_instance_horizon"] == string(template.T)
+    @test flat["realized_period_end"] == "30"
+    # MIGRATED IN STAGES 4 AND 6. The marker no longer says "contract only" and no longer
+    # excludes `h > 1`: the loop, the window, the optimization horizon, the terminal target, the
+    # known prefix and the committed block are all wired.
+    @test occursin("wired_rolling_blocks", flat["contract_status"])
+    @test !occursin("configuration_contract_only", flat["contract_status"])
+    @test occursin("known prefix", flat["contract_status"])
+
+    # Adding the section did not change any CSV schema, so the schema version is untouched.
+    @test document["output_schema_version"] == OOS_OUTPUT_SCHEMA_VERSION
+
+    # No source file of the module declares a clock-time or calendar parameter.
+    for file in readdir(joinpath(REPO_ROOT, "codes", "oos_experiment"); join=true)
+        endswith(file, ".jl") || continue
+        text = read(file, String)
+        @test !occursin("PERIOD_DURATION_MINUTES", text)
+        @test !occursin("PROFILE_CYCLE", text)
+    end
+end
+
+@testset "T8 the temporal contract is parsed from the environment" begin
+    for key in ("EVALUATION_HORIZON", "LOOKAHEAD_HORIZON", "IMPLEMENTATION_STEP",
+                "CONTROLLER_SET", "FAIRNESS_SET", "PEA_TOLERANCE_MODE", "FAIRNESS_ABS_TOL")
+        haskey(ENV, key) && delete!(ENV, key)
+    end
+    probe = ("FORMULATION_ID" => "temporal_probe", "OOS_OUTPUT_DIR" => TEST_OUTPUT)
+
+    # An absent variable uses the documented Julia default: the shell cannot drift from it.
+    withenv(probe...) do
+        config = oos_config_from_environment()
+        @test config.evaluation_horizon == OOS_DEFAULT_EVALUATION_HORIZON
+        @test config.lookahead_horizon == OOS_DEFAULT_LOOKAHEAD_HORIZON
+        @test config.implementation_step == OOS_DEFAULT_IMPLEMENTATION_STEP
+    end
+
+    # Explicit values reach the configuration, including a non-divisible step.
+    withenv(probe..., "EVALUATION_HORIZON" => "18", "LOOKAHEAD_HORIZON" => "12",
+            "IMPLEMENTATION_STEP" => "6") do
+        config = oos_config_from_environment()
+        @test config.evaluation_horizon == 18
+        @test config.lookahead_horizon == 12
+        @test config.implementation_step == 6
+        @test rolling_iteration_starts(config) == [1, 7, 13]
+        @test rolling_solve_count(config) == 3
+        @test implementation_block(config, 13) == 13:18
+        @test evaluation_block(config, 13) == 13:18
+        @test lookahead_end_period(config, 13) == 24
+        @test required_period_support_end(config) == 24
+    end
+    withenv(probe..., "EVALUATION_HORIZON" => "24", "LOOKAHEAD_HORIZON" => "24",
+            "IMPLEMENTATION_STEP" => "10") do
+        config = oos_config_from_environment()
+        @test rolling_iteration_starts(config) == [1, 11, 21]
+        @test implementation_block(config, 21) == 21:30
+        @test evaluation_block(config, 21) == 21:24
+    end
+
+    # A malformed value fails, naming the variable; it is never absorbed into a default.
+    for malformed in ("cuatro", "4.5", "1,2", "1e3", "--4")
+        withenv(probe..., "IMPLEMENTATION_STEP" => malformed) do
+            @test_throws ErrorException oos_config_from_environment()
+        end
+    end
+    withenv(probe..., "EVALUATION_HORIZON" => "veinticuatro") do
+        @test_throws ErrorException oos_config_from_environment()
+    end
+    withenv(probe..., "LOOKAHEAD_HORIZON" => "24h") do
+        @test_throws ErrorException oos_config_from_environment()
+    end
+    # An empty value is an absent value, not a malformed one.
+    withenv(probe..., "IMPLEMENTATION_STEP" => "") do
+        @test oos_config_from_environment().implementation_step ==
+              OOS_DEFAULT_IMPLEMENTATION_STEP
+    end
+
+    # An invalid combination fails during configuration construction.
+    withenv(probe..., "EVALUATION_HORIZON" => "6", "IMPLEMENTATION_STEP" => "8") do
+        @test_throws ErrorException oos_config_from_environment()
+    end
+    withenv(probe..., "LOOKAHEAD_HORIZON" => "4", "IMPLEMENTATION_STEP" => "8") do
+        @test_throws ErrorException oos_config_from_environment()
+    end
+    withenv(probe..., "EVALUATION_HORIZON" => "0") do
+        @test_throws ErrorException oos_config_from_environment()
+    end
+
+    # No clock-time or calendar variable is consulted, so setting one changes nothing.
+    withenv(probe..., "PERIOD_DURATION_MINUTES" => "15", "PROFILE_CYCLE" => "24") do
+        config = oos_config_from_environment()
+        @test config.evaluation_horizon == OOS_DEFAULT_EVALUATION_HORIZON
+        @test config.lookahead_horizon == OOS_DEFAULT_LOOKAHEAD_HORIZON
+        @test config.implementation_step == OOS_DEFAULT_IMPLEMENTATION_STEP
+    end
+
+    # The runner forwards the three variables without re-declaring a numeric default.
+    runner = read(joinpath(REPO_ROOT, "scripts", "oos", "run_oos_experiment.sh"), String)
+    for name in ("EVALUATION_HORIZON", "LOOKAHEAD_HORIZON", "IMPLEMENTATION_STEP")
+        @test occursin("export $name", runner)
+        @test !occursin(Regex("$name:-[0-9]"), runner)
+    end
+    # The pre-flight covers the contract as a blocking check.
+    preflight = read(joinpath(REPO_ROOT, "scripts", "oos", "preflight_oos_campaign.sh"), String)
+    @test occursin("IMPLEMENTATION_STEP", preflight)
+end
+
+@testset "T9 the temporal contract drives the simulator" begin
+    # REPLACED IN STAGE 4. The stage-1 version of this test asserted the opposite — that H, L and
+    # h were configuration only and could not reach the simulator. Stage 4 wired them, so this is
+    # now the gate that they DO drive the loop, the window, the optimization horizon and the
+    # terminal target, while leaving the instance and the calibrated process alone.
+    base = test_config(controller_set=[DETERMINISTIC_RH], fairness_set=[NONE])
+    shifted = test_config(
+        controller_set=[DETERMINISTIC_RH], fairness_set=[NONE],
+        evaluation_horizon=12, lookahead_horizon=8, implementation_step=1,
+    )
+    base_common = build_common_objects(base; verbose=false)
+    shifted_common = build_common_objects(shifted; verbose=false)
+
+    # What the temporal contract must NOT touch: the instance and the calibrated process.
+    template = base_common.template
+    @test shifted_common.template.T == template.T
+    @test shifted_common.template.delta == template.delta
+    @test shifted_common.template.nu == template.nu
+    @test shifted_common.template.pv_det == template.pv_det
+    # The realized trajectory is drawn from a stream keyed only by (seed, replication), so the
+    # shorter contract's path is a strict prefix of the longer one's.
+    @test shifted_common.oos_paths[1].pv ==
+          base_common.oos_paths[1].pv[1:rolling_realized_end(shifted_common.context)]
+    # The static share table repeats one base table; only its width follows the contract.
+    @test shifted_common.static_shares[:, 1:template.T] ==
+          base_common.static_shares[:, 1:template.T]
+
+    # What the temporal contract MUST drive: endpoints, window length and solve count.
+    @test rolling_realized_end(base_common.context) == 24
+    @test rolling_realized_end(shifted_common.context) == 12
+    @test rolling_support_end(base_common.context) == 47
+    @test rolling_support_end(shifted_common.context) == 19
+    @test size(base_common.static_shares, 2) == rolling_data_end(base_common.context) == 47
+    @test size(shifted_common.static_shares, 2) == rolling_data_end(shifted_common.context) == 24
+
+    base_path = base_common.oos_paths[1]
+    base_cache = cache_lookahead_trees(base_common.provider, base_common.context, base_path)
+    shifted_cache = cache_lookahead_trees(
+        shifted_common.provider, shifted_common.context, shifted_common.oos_paths[1],
+    )
+
+    # Every window spans exactly L periods and starts at its own rolling start — never the
+    # shrinking interval `t:template.T`.
+    for t in (1, 3, 12, 24)
+        tree = base_cache[(t, DETERMINISTIC_RH)]
+        @test tree.first_period == t
+        @test tree.last_period == t + base.lookahead_horizon - 1
+        @test tree.last_period != template.T || t == 1
+    end
+    for t in (1, 3, 12)
+        tree = shifted_cache[(t, DETERMINISTIC_RH)]
+        @test tree.first_period == t
+        @test tree.last_period == t + shifted.lookahead_horizon - 1
+    end
+    @test length(base_cache) == rolling_solve_count(base)
+    @test length(shifted_cache) == rolling_solve_count(shifted)
+    @test length(base_cache) != length(shifted_cache)
+
+    base_run = simulate_configuration(
+        base_common.context, base_path, base_cache, DETERMINISTIC_RH, NONE,
+        base_common.static_shares,
+    )
+    shifted_run = simulate_configuration(
+        shifted_common.context, shifted_common.oos_paths[1], shifted_cache,
+        DETERMINISTIC_RH, NONE, shifted_common.static_shares,
+    )
+    @test base_run.completed && shifted_run.completed
+    # The loop runs over the rolling starts of its own contract, not over `1:template.T`.
+    @test base_run.periods_completed == rolling_solve_count(base) == 24
+    @test shifted_run.periods_completed == rolling_solve_count(shifted) == 12
+    @test last(shifted_run.records).period == shifted.evaluation_horizon == 12
+    @test last(shifted_run.records).period != template.T
+
+    # A shorter look-ahead is a genuinely different optimization problem, so the two contracts
+    # must NOT agree period by period. Anything else would mean L never reached the model.
+    @test base_run.records[1].result.objective_value !=
+          shifted_run.records[1].result.objective_value
+
+    # No implemented action carries a terminal requirement: with h = 1 < L the implemented period
+    # is never the end of its window.
+    for run in (base_run, shifted_run)
+        @test all(r.validation.residuals.terminal == 0.0 for r in run.records)
+    end
+
+    # MIGRATED IN STAGE 6. `h > 1` used to be rejected here; it is now simulated. The claim this
+    # block defends is unchanged — the contract drives the loop — so it now checks that a larger
+    # step produces fewer solves over the same evaluated horizon.
+    stepped = test_config(
+        controller_set=[DETERMINISTIC_RH], fairness_set=[NONE], implementation_step=4,
+    )
+    stepped_common = build_common_objects(stepped; verbose=false)
+    stepped_cache = cache_lookahead_trees(
+        stepped_common.provider, stepped_common.context, stepped_common.oos_paths[1],
+    )
+    @test length(stepped_cache.supports) == rolling_solve_count(stepped) == 6
+    stepped_run = simulate_configuration(
+        stepped_common.context, stepped_common.oos_paths[1], stepped_cache,
+        DETERMINISTIC_RH, NONE, stepped_common.static_shares,
+    )
+    @test stepped_run.completed
+    # Six solves, twenty-four implemented and evaluated periods. pea_tolerances is period-counted
+    # (each solve's tolerance decision is recorded once per period it covers), so its length
+    # tracks periods_completed, not the six solves.
+    @test stepped_run.periods_completed == stepped.evaluation_horizon == 24
+    @test length(stepped_run.pea_tolerances) == stepped.evaluation_horizon == 24
+    @test [r.period for r in stepped_run.records] == collect(1:24)
+end
+
+# =====================================================================================
+# S0..S11 Structural instance catalog and seed hierarchy (redesign stage 2)
+#
+# Kept in its own file because it is a self-contained layer with its own vocabulary; it runs
+# inside this one sanctioned gate and reuses the helpers defined above.
+# =====================================================================================
+
+include(joinpath(@__DIR__, "structural_catalog_tests.jl"))
+
+# =====================================================================================
+# P0..P10 Extended period support and deterministic-base isolation (redesign stage 3)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "period_support_tests.jl"))
+
+# =====================================================================================
+# R0..R9 Fixed moving look-ahead (redesign stage 4)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "rolling_horizon_tests.jl"))
+
+# =====================================================================================
+# CS0..CS8 Common conditional stochastic support (redesign stage 5)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "common_support_tests.jl"))
+
+# =====================================================================================
+# B0..B6 Arbitrary implementation blocks and known prefixes (redesign stage 6)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "block_implementation_tests.jl"))
+
+# =====================================================================================
+# ST0..ST3 static share table (stage 7) and GD0..GD4 grid direction (stage 8)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "policy_domain_tests.jl"))
+
+# =====================================================================================
+# RC0..RC4 Block recoverability and warm starts (redesign stage 9)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "recoverability_tests.jl"))
+
+# =====================================================================================
+# OS0..OS5 Output schema, identifiers and policy-aligned metrics (redesign stage 10)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "result_schema_tests.jl"))
+
+# =====================================================================================
+# IV0..IV6 Integrated validation and reproducibility (redesign stage 11)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "integrated_validation_tests.jl"))
+
+# =====================================================================================
+# TR0..TR7 Manifest-driven campaign runner, shards and deterministic merge (stage 13)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "campaign_shard_tests.jl"))
+
+# =====================================================================================
+# CR0..CR5 Campaign freeze, operational review and paired analysis (stage 14)
+# =====================================================================================
+
+include(joinpath(@__DIR__, "campaign_review_tests.jl"))
+
 # =====================================================================================
 # 22.14 The existing repository validation suite still passes
 # =====================================================================================
@@ -969,30 +1580,60 @@ println("\nDirectorio temporal de salidas de prueba: ", TEST_OUTPUT)
 # Strict-first / adaptive-minimum PEA recovery
 # =====================================================================================
 
-"""Advance a configuration to the start of period `upto + 1`, returning the state."""
+"""
+Advance a configuration to the start of period `upto + 1`, returning the state.
+
+Stage 4: this drives the campaign path, so it reads the rolling context and each solve spans the
+fixed moving window of its own rolling start.
+"""
 function advance_state(common, config, controller, policy, upto::Int)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
-    state = initial_simulation_state(common.template, path.replication_id)
+    cache = cache_lookahead_trees(common.provider, common.context, path)
+    state = initial_simulation_state(common.context, path.replication_id)
     for t in 1:upto
         reveal_period!(state, path, t)
         observation = PeriodObservation(t, path.pv[t], collect(path.demand[:, t]))
+        tree = cache[(t, controller)]
         result = solve_current_action(
-            common.template, state, observation, cache[(t, controller)], controller, policy,
+            common.context, state, observation, tree, controller, policy,
             config; static_shares=common.static_shares,
         )
         result.solved || error("La preparación del estado falló en t=$t: $(result.failure_message)")
-        validation = validate_period_action(common.template, state, result.action, config)
-        apply_action!(state, common.template, result.action, validation.soc_after)
+        validation = validate_period_action(
+            common.context, state, result.action, config; lookahead_end=tree.last_period,
+        )
+        apply_action!(state, common.context, result.action, validation.soc_after)
     end
-    state.period <= common.template.T && reveal_period!(state, path, state.period)
+    state.period <= rolling_realized_end(common.context) &&
+        reveal_period!(state, path, state.period)
     return (state=state, cache=cache, path=path)
 end
 
-"""Configuration used by the PEA recovery tests: J=4, seed 12345, campaign policy."""
+"""
+Configuration used by the PEA recovery tests: J=4, seed 12345, campaign policy.
+
+MIGRATED IN STAGE 4: `lookahead_horizon = 4`. Under the old shrinking horizon the strict PEA
+equality became unreachable near the end simply because the remaining horizon ran out of PV — an
+artefact of the horizon collapsing, not of the rule. A fixed 24-period moving window removes that
+artefact entirely (a welcome consequence of the redesign: at t = 19 the controller now still sees
+24 periods and the equality stays reachable).
+
+The recovery machinery must still be exercised, so these tests now produce genuine fairness
+infeasibility the way it will actually arise in the campaign: a short look-ahead leaves too
+little remaining capacity to reconcile the moving proportional target with an already-realized
+past that cannot be taken back.
+"""
 pea_config(; kwargs...) = test_config(;
     experiment_seed=12345, households=4, fairness_set=[NONE, PEA],
-    controller_set=[DETERMINISTIC_RH], kwargs...)
+    controller_set=[DETERMINISTIC_RH], lookahead_horizon=4, kwargs...)
+
+"""
+A rolling start of `pea_config()` where the strict PEA equality is *proven* infeasible while the
+physical model without any distributive rule stays feasible.
+
+Verified by `5.2`, which asserts both halves rather than assuming them.
+"""
+const PEA_INFEASIBLE_START = 19
 
 @testset "5.1 strict PEA feasible: no recovery, no tolerance" begin
     config = pea_config()
@@ -1024,19 +1665,19 @@ end
 @testset "5.2 strict PEA fairness-infeasible, physical feasible: Phase I + Phase II" begin
     config = pea_config()
     common = build_common_objects(config; verbose=false)
-    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, 18)
+    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, PEA_INFEASIBLE_START - 1)
     state = prepared.state
-    @test state.period == 19
+    @test state.period == PEA_INFEASIBLE_START
 
-    tree = prepared.cache[(19, DETERMINISTIC_RH)]
+    tree = prepared.cache[(PEA_INFEASIBLE_START, DETERMINISTIC_RH)]
     past = fairness_past_state(state)
 
     # The strict model really is infeasible, and the physical model really is feasible.
-    strict = build_remaining_horizon_model(common.template, state, tree, config)
+    strict = build_remaining_horizon_model(common.context, state, tree, config)
     add_fairness_constraints!(strict, PEA, past, config; static_shares=common.static_shares)
     optimize!(strict.model)
     @test classify_solve_outcome(strict.model) === SOLVE_PROVEN_INFEASIBLE
-    source, _ = attribute_failure_source(common.template, state, tree, config)
+    source, _ = attribute_failure_source(common.context, state, tree, config)
     @test source === FAILURE_FAIRNESS_RULE
 
     solved = solve_at(common, config, state, DETERMINISTIC_RH, PEA)
@@ -1066,34 +1707,34 @@ end
     @test length(solved.result.phases) - length(strict_solved.result.phases) == 3
     # The implemented action exists and is physically valid.
     @test solved.result.action !== nothing
-    @test validate_period_action(common.template, state, solved.result.action, config).valid
+    @test validate_period_action(common.context, state, solved.result.action, config).valid
 
     # The reported band matches the realized fairness deviation of the implemented model.
-    aggregates = scenario_aggregates(common.template, tree)
+    aggregates = scenario_aggregates(common.context, tree)
     targets = pea_targets(common.template, past, aggregates)
     reachable_violation = maximum(max.(past.pv .- targets, 0.0))
     @test pea.tolerance_used >= reachable_violation - 1e-6
 
     # And the whole replication now completes instead of aborting.
     run = simulate_configuration(
-        common.template, config, prepared.path, prepared.cache, DETERMINISTIC_RH, PEA,
+        common.context, prepared.path, prepared.cache, DETERMINISTIC_RH, PEA,
         common.static_shares,
     )
     @test run.completed
-    @test run.periods_completed == common.template.T
+    @test run.periods_completed == rolling_solve_count(config)
     @test count(x -> x > OOS_PEA_ACTIVATION_THRESHOLD, run.pea_tolerances) > 0
 end
 
 @testset "5.3 epsilon_pea_star is minimal" begin
     config = pea_config()
     common = build_common_objects(config; verbose=false)
-    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, 18)
+    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, PEA_INFEASIBLE_START - 1)
     state = prepared.state
-    tree = prepared.cache[(19, DETERMINISTIC_RH)]
+    tree = prepared.cache[(PEA_INFEASIBLE_START, DETERMINISTIC_RH)]
     past = fairness_past_state(state)
-    aggregates = scenario_aggregates(common.template, tree)
+    aggregates = scenario_aggregates(common.context, tree)
 
-    refs = build_remaining_horizon_model(common.template, state, tree, config)
+    refs = build_remaining_horizon_model(common.context, state, tree, config)
     phase1 = solve_minimum_pea_tolerance!(refs, past, aggregates, config)
     @test phase1.outcome === SOLVE_OK
     epsilon_star = phase1.epsilon_star
@@ -1109,7 +1750,7 @@ end
     # Independent check: a band strictly below the optimum must be infeasible. delta is 1% of
     # epsilon_star, two orders of magnitude above CPLEX's default relative MIP gap.
     delta = 0.01 * epsilon_star
-    tightened = build_remaining_horizon_model(common.template, state, tree, config)
+    tightened = build_remaining_horizon_model(common.context, state, tree, config)
     handles = build_adaptive_pea_constraints!(tightened, past, aggregates)
     @constraint(tightened.model, handles.epsilon <= epsilon_star - delta)
     @objective(tightened.model, Min, 0)
@@ -1121,13 +1762,13 @@ end
 @testset "5.4 Phase II preserves the minimum tolerance" begin
     config = pea_config()
     common = build_common_objects(config; verbose=false)
-    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, 18)
+    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, PEA_INFEASIBLE_START - 1)
     state = prepared.state
-    tree = prepared.cache[(19, DETERMINISTIC_RH)]
+    tree = prepared.cache[(PEA_INFEASIBLE_START, DETERMINISTIC_RH)]
     past = fairness_past_state(state)
-    aggregates = scenario_aggregates(common.template, tree)
+    aggregates = scenario_aggregates(common.context, tree)
 
-    refs = build_remaining_horizon_model(common.template, state, tree, config)
+    refs = build_remaining_horizon_model(common.context, state, tree, config)
     phase1 = solve_minimum_pea_tolerance!(refs, past, aggregates, config)
     @test phase1.outcome === SOLVE_OK
     phase1_objective = objective_value(refs.model)
@@ -1152,9 +1793,9 @@ end
     config = pea_config()
     common = build_common_objects(config; verbose=false)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
+    cache = cache_lookahead_trees(common.provider, common.context, path)
     run = simulate_configuration(
-        common.template, config, path, cache, DETERMINISTIC_RH, PEA, common.static_shares,
+        common.context, path, cache, DETERMINISTIC_RH, PEA, common.static_shares,
     )
     @test run.completed
     active = [t for t in eachindex(run.pea_tolerances)
@@ -1191,7 +1832,7 @@ end
     broken = deepcopy(prepared.state)
     broken.soc_before = common.template.s_max + 500.0
 
-    source, detail = attribute_failure_source(common.template, broken, tree, config)
+    source, detail = attribute_failure_source(common.context, broken, tree, config)
     @test source === FAILURE_PHYSICAL_MODEL
 
     recovery = attempt_adaptive_pea_recovery(
@@ -1222,8 +1863,8 @@ end
 @testset "5.7 solver-status safety" begin
     config = pea_config()
     common = build_common_objects(config; verbose=false)
-    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, 18)
-    tree = prepared.cache[(19, DETERMINISTIC_RH)]
+    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, PEA_INFEASIBLE_START - 1)
+    tree = prepared.cache[(PEA_INFEASIBLE_START, DETERMINISTIC_RH)]
     past = fairness_past_state(prepared.state)
 
     # Only an infeasibility finding may open the gate.
@@ -1258,13 +1899,13 @@ end
                         two_stage_scenarios=2, multistage_branching=[2])
     common = build_common_objects(config; verbose=false)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
+    cache = cache_lookahead_trees(common.provider, common.context, path)
     for controller in config.controller_set
         run = simulate_configuration(
-            common.template, config, path, cache, controller, PEA, common.static_shares,
+            common.context, path, cache, controller, PEA, common.static_shares,
         )
         @test run.completed
-        @test run.periods_completed == common.template.T
+        @test run.periods_completed == rolling_solve_count(config)
         @test length(run.pea_tolerances) == common.template.T
         activations = count(x -> x > OOS_PEA_ACTIVATION_THRESHOLD, run.pea_tolerances)
         @test activations > 0
@@ -1297,15 +1938,15 @@ end
     for controller in config.controller_set
         tree = build_lookahead_tree(
             common.provider, config, controller, observed_history(state), state.period,
-            common.template.T, prepared.path.replication_id,
+            lookahead_end_period(config, state.period), prepared.path.replication_id,
         )
         N = lookahead_node_count(tree)
         J = common.template.J
-        aggregates = scenario_aggregates(common.template, tree)
+        aggregates = scenario_aggregates(common.context, tree)
         targets = pea_targets(common.template, past, aggregates)
 
         # --- strict ---------------------------------------------------------------------
-        strict = build_remaining_horizon_model(common.template, state, tree, config)
+        strict = build_remaining_horizon_model(common.context, state, tree, config)
         build_strict_pea_constraints!(strict, past, aggregates)
         rows = strict.model[:pea_balance]
         @test length(rows) == J                      # one family indexed by household only
@@ -1325,7 +1966,7 @@ end
         end
 
         # --- adaptive -------------------------------------------------------------------
-        adaptive = build_remaining_horizon_model(common.template, state, tree, config)
+        adaptive = build_remaining_horizon_model(common.context, state, tree, config)
         handles = build_adaptive_pea_constraints!(adaptive, past, aggregates)
         upper = adaptive.model[:pea_band_upper]
         lower = adaptive.model[:pea_band_lower]
@@ -1365,9 +2006,9 @@ end
     for controller in config.controller_set
         tree = build_lookahead_tree(
             common.provider, config, controller, observed_history(state), state.period,
-            common.template.T, prepared.path.replication_id,
+            lookahead_end_period(config, state.period), prepared.path.replication_id,
         )
-        refs = build_remaining_horizon_model(common.template, state, tree, config)
+        refs = build_remaining_horizon_model(common.context, state, tree, config)
         before = sum(num_constraints(refs.model, F, S)
                      for (F, S) in list_of_constraint_types(refs.model))
         objective_before = objective_function(refs.model)
@@ -1400,10 +2041,10 @@ end
     for controller in config.controller_set
         tree = build_lookahead_tree(
             common.provider, config, controller, observed_history(state), state.period,
-            common.template.T, prepared.path.replication_id,
+            lookahead_end_period(config, state.period), prepared.path.replication_id,
         )
         N = lookahead_node_count(tree)
-        refs = build_remaining_horizon_model(common.template, state, tree, config)
+        refs = build_remaining_horizon_model(common.context, state, tree, config)
         before = sum(num_constraints(refs.model, F, S)
                      for (F, S) in list_of_constraint_types(refs.model))
         add_fairness_constraints!(refs, STATIC_DEMAND_SHARE, past, config;
@@ -1446,11 +2087,11 @@ end
     state = prepared.state
     past = fairness_past_state(state)
     tree = prepared.cache[(11, DETERMINISTIC_RH)]
-    aggregates = scenario_aggregates(common.template, tree)
+    aggregates = scenario_aggregates(common.context, tree)
 
     # No PEA machinery leaks into any other rule.
     for policy in (SA, LEXMMFPEA, LEXMMFSA)
-        refs = build_remaining_horizon_model(common.template, state, tree, config)
+        refs = build_remaining_horizon_model(common.context, state, tree, config)
         add_fairness_constraints!(refs, policy, past, config)
         @test !haskey(refs.model, :epsilon_pea)
         @test !haskey(refs.model, :pea_band_upper)
@@ -1459,7 +2100,7 @@ end
     end
 
     # SA outcome definition: savings, realized past once, no PV proxy.
-    refs = build_remaining_horizon_model(common.template, state, tree, config)
+    refs = build_remaining_horizon_model(common.context, state, tree, config)
     savings = expected_savings_expressions(refs, past, aggregates)
     saving_past = past_savings(past)
     for j in 1:common.template.J
@@ -1473,7 +2114,7 @@ end
 
     # Max-min outcome definitions and the lexicographic order are unchanged.
     for policy in (LEXMMFPEA, LEXMMFSA)
-        fresh = build_remaining_horizon_model(common.template, state, tree, config)
+        fresh = build_remaining_horizon_model(common.context, state, tree, config)
         context = add_fairness_constraints!(fresh, policy, past, config)
         outcomes = lexicographic_outcome_expressions(fresh, policy, past, context.aggregates)
         expected = policy === LEXMMFPEA ? past.pv :
@@ -1496,11 +2137,12 @@ end
     # Savings history stays realized: it does not move when only the forecast changes.
     other_tree = build_lookahead_tree(
         common.provider, test_config(experiment_seed=778_899), TWO_STAGE_RH,
-        observed_history(state), state.period, common.template.T, prepared.path.replication_id,
+        observed_history(state), state.period, lookahead_end_period(config, state.period),
+        prepared.path.replication_id,
     )
     @test past_savings(fairness_past_state(state)) == saving_past
-    other_aggregates = scenario_aggregates(common.template, other_tree)
-    other_refs = build_remaining_horizon_model(common.template, state, other_tree, config)
+    other_aggregates = scenario_aggregates(common.context, other_tree)
+    other_refs = build_remaining_horizon_model(common.context, state, other_tree, config)
     other_savings = expected_savings_expressions(other_refs, past, other_aggregates)
     for j in 1:common.template.J
         other_future = sum(other_aggregates.probability[s] * other_aggregates.benchmark[j, s]
@@ -1550,6 +2192,15 @@ end
         summarize_pea_tolerances(tolerances).mean_all_periods,
         summarize_pea_tolerances(tolerances).maximum,
         count(iszero, tolerances), collect(Float64, tolerances), HouseholdMetrics[],
+        # Stage 10 added the policy-aligned diagnostics. This fixture exercises only the pooled
+        # PEA arithmetic, so an empty-household diagnostic bundle is the right stand-in.
+        policy_fairness_diagnostics(
+            ReplicationRun(id, DETERMINISTIC_RH, PEA, true, length(tolerances),
+                           PeriodRecord[], initial_simulation_state(
+                               build_instance_template(test_config()).template, id),
+                           "", 0, 0, 0.0, 0.0, Float64[], 0),
+            Float64[], Float64[], Float64[], Float64[], nothing,
+        ),
     )
     pooled = configuration_pea_summaries([
         template_metrics(1, [0.0, 2.0, 4.0]),     # 2 active, mean 3
@@ -1606,8 +2257,8 @@ end
     strict = pea_config(pea_tolerance_mode=:strict)
     common = build_common_objects(strict; verbose=false)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, strict, common.template, path)
-    run = simulate_configuration(common.template, strict, path, cache, DETERMINISTIC_RH, PEA,
+    cache = cache_lookahead_trees(common.provider, common.context, path)
+    run = simulate_configuration(common.context, path, cache, DETERMINISTIC_RH, PEA,
                                  common.static_shares)
     @test !run.completed
     @test occursin("recovery_disabled", run.failure_message)
@@ -1625,8 +2276,8 @@ end
     config = pea_config(pea_tolerance_mode=:strict)
     common = build_common_objects(config; verbose=false)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
-    aborted = simulate_configuration(common.template, config, path, cache, DETERMINISTIC_RH,
+    cache = cache_lookahead_trees(common.provider, common.context, path)
+    aborted = simulate_configuration(common.context, path, cache, DETERMINISTIC_RH,
                                      PEA, common.static_shares)
     @test !aborted.completed
     metrics = compute_replication_metrics(common.template, aborted, config)
@@ -1669,13 +2320,13 @@ end
     @test custom.pea_tolerance_numeric_eps == 2.5e-7        # configured value preserved exactly
 
     common = build_common_objects(config; verbose=false)
-    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, 18)
+    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, PEA_INFEASIBLE_START - 1)
     state = prepared.state
-    tree = prepared.cache[(19, DETERMINISTIC_RH)]
+    tree = prepared.cache[(PEA_INFEASIBLE_START, DETERMINISTIC_RH)]
     past = fairness_past_state(state)
-    aggregates = scenario_aggregates(common.template, tree)
+    aggregates = scenario_aggregates(common.context, tree)
 
-    refs = build_remaining_horizon_model(common.template, state, tree, config)
+    refs = build_remaining_horizon_model(common.context, state, tree, config)
     phase1 = solve_minimum_pea_tolerance!(refs, past, aggregates, config)
     @test phase1.outcome === SOLVE_OK
     epsilon_star = phase1.epsilon_star
@@ -1687,15 +2338,19 @@ end
     cap = refs.model[:pea_tolerance_cap]
     @test isapprox(normalized_rhs(cap), epsilon_star + config.pea_tolerance_numeric_eps;
                    rtol=1e-12)
+    # Recovering the allowance by subtraction cancels `epsilon_star`'s leading digits, so the
+    # achievable accuracy is set by that band's own magnitude, not by an absolute constant. The
+    # stage-4 look-ahead produces a larger band than the pre-stage-4 fixture did, which is
+    # precisely why a fixed 1e-15 atol was the wrong yardstick here.
     @test isapprox(normalized_rhs(cap) - epsilon_star, config.pea_tolerance_numeric_eps;
-                   atol=1e-15)
+                   atol=8 * eps(epsilon_star))
 
     # The allowance is negligible against the band it protects: numerical, not economic.
     @test config.pea_tolerance_numeric_eps < 1e-5 * epsilon_star
 
     # Changing only the numeric allowance must not move epsilon_pea_star.
     other = pea_config(pea_tolerance_numeric_eps=1e-8)
-    refs_other = build_remaining_horizon_model(common.template, state, tree, other)
+    refs_other = build_remaining_horizon_model(common.context, state, tree, other)
     phase1_other = solve_minimum_pea_tolerance!(refs_other, past, aggregates, other)
     @test phase1_other.outcome === SOLVE_OK
     @test isapprox(phase1_other.epsilon_star, epsilon_star; rtol=1e-9)
@@ -1737,8 +2392,8 @@ end
 
     # Output schema carries the unit in the column name.
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
-    run = simulate_configuration(common.template, config, path, cache, DETERMINISTIC_RH, PEA,
+    cache = cache_lookahead_trees(common.provider, common.context, path)
+    run = simulate_configuration(common.context, path, cache, DETERMINISTIC_RH, PEA,
                                  common.static_shares)
     frame = pea_recovery_frame(config, [run])
     @test "PEA_Tolerance_Numeric_Eps_kWh" in names(frame)
@@ -1776,8 +2431,8 @@ end
     config = pea_config()
     common = build_common_objects(config; verbose=false)
     path = common.oos_paths[1]
-    cache = cache_lookahead_trees(common.provider, config, common.template, path)
-    run = simulate_configuration(common.template, config, path, cache, DETERMINISTIC_RH, PEA,
+    cache = cache_lookahead_trees(common.provider, common.context, path)
+    run = simulate_configuration(common.context, path, cache, DETERMINISTIC_RH, PEA,
                                  common.static_shares)
     @test run.completed
 
@@ -1815,15 +2470,15 @@ end
 @testset "C2 Phase I is never implemented; the action comes from Phase II" begin
     config = pea_config()
     common = build_common_objects(config; verbose=false)
-    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, 18)
+    prepared = advance_state(common, config, DETERMINISTIC_RH, PEA, PEA_INFEASIBLE_START - 1)
     state = prepared.state
-    tree = prepared.cache[(19, DETERMINISTIC_RH)]
+    tree = prepared.cache[(PEA_INFEASIBLE_START, DETERMINISTIC_RH)]
     past = fairness_past_state(state)
-    aggregates = scenario_aggregates(common.template, tree)
+    aggregates = scenario_aggregates(common.context, tree)
 
     # Phase I alone, solved in isolation: its action is a min-tolerance action, not the one
     # the simulator implements.
-    isolated = build_remaining_horizon_model(common.template, state, tree, config)
+    isolated = build_remaining_horizon_model(common.context, state, tree, config)
     phase1 = solve_minimum_pea_tolerance!(isolated, past, aggregates, config)
     @test phase1.outcome === SOLVE_OK
     phase1_action, _ = extract_current_action(isolated, config)
@@ -1881,9 +2536,13 @@ end
 """Generate a real small campaign into a fresh directory and return its path."""
 function generate_smoke_outputs(; replications::Int=2)
     directory = mktempdir(; prefix="oos_downstream_")
+    # `lookahead_horizon = 4` since stage 4, for the same reason as `pea_config`: the downstream
+    # reader tests need a campaign whose PEA rows contain BOTH strict-feasible periods and
+    # recovered ones, and a full 24-period moving window keeps the strict equality reachable
+    # throughout. A short window exercises both branches of the solve-sequence schema.
     config = test_config(
         experiment_seed=12345, households=4, oos_replications=replications,
-        two_stage_scenarios=3, multistage_branching=[2, 2],
+        two_stage_scenarios=3, multistage_branching=[2, 2], lookahead_horizon=4,
         output_directory=directory, export_representative_models=false,
         experiment_id="oos_downstream_test",
     )
@@ -1891,9 +2550,9 @@ function generate_smoke_outputs(; replications::Int=2)
     runs = ReplicationRun[]
     metrics = ReplicationMetrics[]
     for path in common.oos_paths
-        cache = cache_lookahead_trees(common.provider, config, common.template, path)
+        cache = cache_lookahead_trees(common.provider, common.context, path)
         for policy in config.fairness_set, controller in config.controller_set
-            run = simulate_configuration(common.template, config, path, cache, controller,
+            run = simulate_configuration(common.context, path, cache, controller,
                                          policy, common.static_shares)
             push!(runs, run)
             push!(metrics, compute_replication_metrics(common.template, run, config))
@@ -1974,12 +2633,16 @@ end
     recovery = CSV.read(joinpath(DOWNSTREAM_SMOKE.directory, "pea_recovery.csv"), DataFrame)
     solve_log = CSV.read(joinpath(DOWNSTREAM_SMOKE.directory, "solve_log.csv"), DataFrame)
 
-    activated = Set((r.Replication, r.Controller, r.Period) for r in eachrow(recovery)
-                    if r.Fairness == "PEA" && r.PEA_Tolerance_Activated)
-    grouped = Dict{Tuple{Int,String,Int},Vector{Tuple{Int,String}}}()
+    # MIGRATED IN STAGE 8: `SA` joined `PEA` in running the adaptive-band workflow, so the key
+    # must carry the FAIRNESS POLICY too. Without it the two policies' solve sequences would be
+    # merged into one group and the four-solve pattern would be unreadable.
+    activated = Set((r.Replication, r.Controller, r.Fairness, r.Period) for r in eachrow(recovery)
+                    if r.Fairness in OOS_ADAPTIVE_BAND_POLICIES && r.PEA_Tolerance_Activated)
+    grouped = Dict{Tuple{Int,String,String,Int},Vector{Tuple{Int,String}}}()
     for row in eachrow(solve_log)
-        row.Fairness == "PEA" || continue
-        key = (Int(row.Replication), String(row.Controller), Int(row.Period))
+        row.Fairness in OOS_ADAPTIVE_BAND_POLICIES || continue
+        key = (Int(row.Replication), String(row.Controller), String(row.Fairness),
+               Int(row.Period))
         push!(get!(grouped, key, Tuple{Int,String}[]), (Int(row.Phase), String(row.PhaseLabel)))
     end
     @test !isempty(activated)                       # the recovery path really was exercised
@@ -2016,7 +2679,8 @@ end
     # Phase-I objectives are bands (kWh), not operating costs: orders of magnitude apart.
     @test maximum(phase1.Objective) < minimum(phase2.Objective)
     # Phase-I and Phase-II are separately timed rows.
-    @test nrow(unique(phase2, [:Replication, :Controller, :Period])) == nrow(phase2)
+    @test nrow(unique(phase2, [:Replication, :Controller, :Fairness, :Period])) ==
+          nrow(phase2)
 end
 
 @testset "D8 configuration aggregation matches the raw recovery rows" begin
@@ -2201,12 +2865,12 @@ end
     config = test_config(households=10)
     common = build_common_objects(config; verbose=false)
     path = common.oos_paths[1]
-    state = initial_simulation_state(common.template, path.replication_id)
+    state = initial_simulation_state(common.context, path.replication_id)
     reveal_period!(state, path, 1)
     action = PeriodAction(1, 0, fill(path.pv[1] / 10, 10), zeros(10), zeros(10),
                           collect(path.demand[:, 1]) .- path.pv[1] / 10, zeros(10),
                           fill(0.1, 10), 0.0, 0.0, common.template.s_I)
-    validation = validate_period_action(common.template, state, action, config)
+    validation = validate_period_action(common.context, state, action, config)
     @test validation.valid
     @test validation.residuals.pv_allocation <= max(config.feasibility_tol,
                                                     11 * OOS_SOLVER_FEASIBILITY_TOL)

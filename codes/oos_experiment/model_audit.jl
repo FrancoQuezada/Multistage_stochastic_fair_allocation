@@ -62,26 +62,60 @@ function audit_shared_battery_structure(refs::PhysicalModelRefs)
     binaries = [variable for variable in binaries if is_binary(variable)]
     mode_variables = [refs.v[n] for n in mode_nodes]
 
+    # STAGE 8. The model now has TWO binary families with different justifications, so the audit
+    # partitions them by their solver-visible name and checks each against its own convention.
+    # The original claim is unchanged and is still enforced below: there is no household-indexed
+    # BATTERY mode. What changed is that a household-indexed GRID-DIRECTION binary is expected
+    # when the exclusivity rule is on, because a household has one grid connection point.
+    battery_binaries = [b for b in binaries if startswith(name(b), "battery_mode[")]
+    direction_binaries = [b for b in binaries if startswith(name(b), "grid_import_direction[")]
+    other_binaries = [
+        b for b in binaries
+        if !startswith(name(b), "battery_mode[") &&
+           !startswith(name(b), "grid_import_direction[")
+    ]
+    expected_directions = expected_grid_direction_binary_count(
+        tree, J, refs.grid_direction_exclusivity,
+    )
+
     push!(findings, AuditFinding(
         "binary_count_equals_mode_nodes",
-        length(binaries) == length(mode_nodes),
-        "Binarios generados: $(length(binaries)); nodos de modo esperados: $(length(mode_nodes)).",
+        length(battery_binaries) == length(mode_nodes),
+        "Binarios de modo compartido: $(length(battery_binaries)); nodos de modo esperados: " *
+        "$(length(mode_nodes)).",
     ))
     push!(findings, AuditFinding(
-        "every_binary_is_a_node_level_mode",
-        Set(binaries) == Set(mode_variables),
-        "El conjunto de binarios debe coincidir exactamente con {battery_mode[n] : n in V_mode}.",
+        "every_mode_binary_is_a_node_level_mode",
+        Set(battery_binaries) == Set(mode_variables),
+        "El conjunto de binarios `battery_mode` debe coincidir exactamente con " *
+        "{battery_mode[n] : n in V_mode}.",
     ))
     push!(findings, AuditFinding(
-        "no_household_indexed_binary",
-        all(!occursin(',', name(variable)) for variable in binaries),
-        "Ningún binario puede llevar dos índices: " *
-        "$(join(unique(name.(binaries))[1:min(3, length(binaries))], ", ")).",
+        "no_household_indexed_battery_mode",
+        all(!occursin(',', name(variable)) for variable in battery_binaries),
+        "Ningún binario de modo de batería puede llevar índice de hogar: " *
+        "$(join(unique(name.(battery_binaries))[1:min(3, max(1, length(battery_binaries)))], ", ")).",
     ))
     push!(findings, AuditFinding(
         "mode_variable_naming",
-        all(startswith(name(variable), "battery_mode[") for variable in binaries),
-        "Los binarios deben usar el nombre visible para el solver `battery_mode[n]`.",
+        all(startswith(name(variable), "battery_mode[") for variable in battery_binaries),
+        "Los binarios de modo deben usar el nombre visible para el solver `battery_mode[n]`.",
+    ))
+    push!(findings, AuditFinding(
+        "grid_direction_binary_count",
+        length(direction_binaries) == expected_directions,
+        "Binarios de dirección de red: $(length(direction_binaries)); esperados " *
+        "$expected_directions (exclusividad " *
+        "$(refs.grid_direction_exclusivity ? "activa" : "inactiva")).",
+    ))
+    push!(findings, AuditFinding(
+        "no_unrecognized_binary_family",
+        isempty(other_binaries),
+        isempty(other_binaries) ?
+        "El modelo declara exactamente dos familias de binarios: modo compartido y dirección " *
+        "de red." :
+        "Familia de binarios no reconocida: " *
+        "$(join(unique(name.(other_binaries))[1:min(3, length(other_binaries))], ", ")).",
     ))
 
     charge_rows = haskey(model, :battery_charge_mode) ? model[:battery_charge_mode] : nothing
@@ -304,7 +338,12 @@ function audit_and_export_model(
         append!(findings, audit_exported_model_file(mps_path, length(refs.mode_nodes)))
     end
 
-    binaries = generated_binary_count(refs.model)
+    # SHARED-BATTERY binaries only. Since stage 8 the model also carries the grid-direction
+    # family; folding it in here would corrupt the `|V_mode|` vs `|H||V_mode|` model-size claim
+    # this field exists to support.
+    binaries = generated_binary_count(refs.model) - expected_grid_direction_binary_count(
+        refs.tree, refs.template.J, refs.grid_direction_exclusivity,
+    )
     return ModelAudit(
         label, refs.tree.controller, NONE, all(f -> f.passed, findings), findings,
         expected_mode_binary_count(refs.tree), binaries, unique_policy_mode_count(refs.tree),

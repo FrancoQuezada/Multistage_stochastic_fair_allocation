@@ -1,0 +1,19 @@
+ExperimentID,ParallelTaskID,ShardID,Replication,Controller,Fairness,Worker,Retry,TotalBuildTimeSec,TotalSolveTimeSec,OptimizationFailures,PhysicalViolations,CompletionStatus,FailureMessage
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,DETERMINISTIC_RH,LEXMMFPEA,8,0,0.03315091133117676,3.511525869369507,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,DETERMINISTIC_RH,LEXMMFSA,8,0,0.020841360092163086,5.724648475646973,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,DETERMINISTIC_RH,NONE,8,0,4.834508180618286,3.163761615753174,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,DETERMINISTIC_RH,PEA,8,0,0.3470432758331299,0.28295016288757324,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,DETERMINISTIC_RH,SA,8,0,0.9165120124816895,1.0136148929595947,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,DETERMINISTIC_RH,STATIC_DEMAND_SHARE,8,0,0.28087282180786133,0.08706808090209961,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,MULTISTAGE_RH,LEXMMFPEA,8,0,0.08808112144470215,610.1790063381195,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,MULTISTAGE_RH,LEXMMFSA,8,0,0.02971792221069336,1325.7381598949432,1,0,aborted,"Bloque 5:8: La fase lexicográfica 2 no produjo valores (estado TIME_LIMIT). FAILURE_SOURCE=FAILURE_FAIRNESS_RULE (el modelo físico sin regla distributiva es factible en este período, así que la regla es inalcanzable dado el pasado realizado fijo)"
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,MULTISTAGE_RH,NONE,8,0,0.15694618225097656,0.5692832469940186,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,MULTISTAGE_RH,PEA,8,0,0.2139112949371338,162.26722502708435,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,MULTISTAGE_RH,SA,8,0,0.4897575378417969,1273.3230648040771,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,MULTISTAGE_RH,STATIC_DEMAND_SHARE,8,0,0.1427171230316162,0.4672517776489258,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,TWO_STAGE_RH,LEXMMFPEA,8,0,0.3039538860321045,1247.5951499938965,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,TWO_STAGE_RH,LEXMMFSA,8,0,0.05432915687561035,1873.6673021316528,1,0,aborted,"Bloque 5:8: La fase lexicográfica 3 no produjo valores (estado TIME_LIMIT). FAILURE_SOURCE=FAILURE_FAIRNESS_RULE (el modelo físico sin regla distributiva es factible en este período, así que la regla es inalcanzable dado el pasado realizado fijo)"
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,TWO_STAGE_RH,NONE,8,0,0.16522884368896484,1.1557347774505615,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,TWO_STAGE_RH,PEA,8,0,0.7288491725921631,643.4185254573822,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,TWO_STAGE_RH,SA,8,0,0.8974578380584717,3043.2267887592316,0,0,completed,
+oos_experiment,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r7,7,TWO_STAGE_RH,STATIC_DEMAND_SHARE,8,0,0.24014019966125488,0.9252369403839111,0,0,completed,

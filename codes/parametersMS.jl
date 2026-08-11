@@ -303,10 +303,29 @@ function generateInstance(
     avg::Float64,
     dev::Float64;
     pv_scale::Float64=1.0,
-    demand_profile::String="mixed"
+    demand_profile::String="mixed",
+    repository_seed_override::Union{Nothing,Int}=nothing
 )
     # nodes=Int(periods*((1-childs^NBstage)/(1-childs)))
-    Random.seed!(deterministic_seed(NBstage, childs, periods, J, inFile, theta, avg, dev; demand_profile=demand_profile))
+    repository_seed = if repository_seed_override === nothing
+        # Exact legacy default: ordinary repository callers retain the theta-dependent seed and
+        # therefore the same generated instances and TaskLocalRNG side effect as before.
+        deterministic_seed(
+            NBstage, childs, periods, J, inFile, theta, avg, dev;
+            demand_profile=demand_profile,
+        )
+    else
+        repository_seed_override >= 1 || error(
+            "repository_seed_override debe ser un entero positivo; se recibió " *
+            "$repository_seed_override."
+        )
+        repository_seed_override
+    end
+    # Deliberately keep the repository's implicit default-RNG contract. The OOS structural
+    # catalog supplies an explicit deterministic-base seed, but catalog materialization remains
+    # sequential while this verified legacy generator reseeds and consumes the current task's
+    # TaskLocalRNG.
+    Random.seed!(repository_seed)
     pv_scale > 0 || error("pv_scale debe ser positivo.")
     inst=InstanceM()
     inst.J=J

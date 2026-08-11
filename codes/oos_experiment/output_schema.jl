@@ -25,7 +25,7 @@ to `experiment_config.json` so a result directory can always be matched to a rea
           `pea_tolerance_numeric_eps_kwh` / `pea_tolerance_numeric_eps_unit`, and the
           four-solve recovery sequence `0=strict, 1=diagnostic, 2=Phase I, 3=Phase II`.
 """
-const OOS_OUTPUT_SCHEMA_VERSION = 2
+const OOS_OUTPUT_SCHEMA_VERSION = 3
 
 """Semantic solve labels. Downstream code must match on these, not on `Phase` integers."""
 const OOS_SOLVE_LABEL_STRICT = "single_solve"
@@ -54,6 +54,58 @@ const OOS_IMPLEMENTED_ACTION_SOURCE = OOS_SOLVE_LABEL_PHASE2
 const OOS_RESOURCE_VALUES = ("none", "pv", "savings")
 
 """
+Policies that run the strict-first / adaptive-minimum band workflow.
+
+`PEA` from the start; `SA` since stage 8, when closing the grid-direction channel made its
+savings equality structurally unreachable on a rolling window and the endogenous minimum band
+became the same remedy it already was for `PEA`. Every other policy must report
+`not_applicable`, which is what the checks below enforce.
+"""
+const OOS_ADAPTIVE_BAND_POLICIES = ("PEA", "SA")
+
+"""
+Files introduced by schema v3 (stage 10).
+
+A directory that declares v1 or v2 predates them, so their absence is reported as a warning
+naming the version rather than as a missing-file error. A directory that declares v3 must have
+them.
+"""
+const OOS_SCHEMA_V3_FILES = (
+    "run_identity.csv", "fairness_diagnostics.csv", "execution_provenance.csv",
+    "solve_provenance.csv",
+)
+
+"""
+Files that carry EXECUTION PROVENANCE rather than scientific content.
+
+They are the only outputs allowed to differ between two runs that computed the same thing:
+worker, retry, wall clock, solver time and peak memory legitimately vary with scheduling and
+machine load. Every comparison of scientific equality — reordered execution, resumption, and the
+stage-13 parallel-versus-sequential gate — excludes exactly this list, and nothing else.
+"""
+const OOS_PROVENANCE_FILES = ("execution_provenance.csv", "solve_provenance.csv")
+
+"""
+Structural instance a result row belongs to, or a single-instance placeholder.
+
+A replication number identifies a trajectory only WITHIN one structural instance, so any grouping
+that reasons about "one period of one configuration" must carry this too. Rows written before the
+column existed fall back to the placeholder, which keeps a legacy single-instance directory
+readable without pretending it had a structural design.
+"""
+_row_instance(row) =
+    hasproperty(row, :StructuralInstanceID) ? String(row.StructuralInstanceID) :
+    OOS_SINGLE_INSTANCE_STRUCTURAL_ID
+
+"""Columns added to pre-existing files by schema v3, for the same migration reason."""
+const OOS_SCHEMA_V3_COLUMNS = (
+    "StructuralInstanceID", "PairedBaseID", "ParallelTaskID", "ScenarioSupportID",
+    "RollingStart",
+    "BandPolicy", "BandToleranceMode", "ComparisonKind", "MeanRelativePercent",
+    "ZeroDenominatorObservations", "RelativeDenominatorFloor",
+)
+
+"""
 Columns every reader may rely on, per file.
 
 A missing required column is an error, never a silent fallback: an analysis that cannot see
@@ -61,18 +113,42 @@ A missing required column is an error, never a silent fallback: an analysis that
 """
 const OOS_REQUIRED_COLUMNS = Dict(
     "replication_summary.csv" => [
-        "ExperimentID", "Replication", "Controller", "Fairness", "FormulationID",
+        "ExperimentID", "StructuralInstanceID", "PairedBaseID", "ParallelTaskID",
+        "Replication", "Controller", "Fairness", "FormulationID",
         "FormulationVariant", "Resource", "CompletionStatus", "PeriodsCompleted",
         "HorizonCovered", "TotalOperatingCost", "AllGridBenchmark", "TotalSavings",
         "PEAToleranceActivations", "PEAToleranceActivationRate", "PEAToleranceMeanActive",
         "PEAToleranceMeanAllPeriods", "PEAToleranceMax", "PEAStrictFeasiblePeriods",
     ],
     "household_summary.csv" => [
-        "ExperimentID", "Replication", "Controller", "Fairness", "FormulationID",
+        "ExperimentID", "StructuralInstanceID", "ParallelTaskID",
+        "Replication", "Controller", "Fairness", "FormulationID",
         "Resource", "House", "Demand", "PVAllocation", "OperatingCost", "Savings",
     ],
+    "run_identity.csv" => [
+        "ExperimentID", "FormulationID", "StructuralInstanceID", "PairedBaseID",
+        "ShareTableID", "ParallelTaskID", "ShardID", "Replication", "Controller", "Fairness",
+        "Resource", "ApplicableDiagnostic", "ObjectiveCriterion",
+        "RepositoryHorizon", "EvaluationHorizon", "LookaheadHorizon", "ImplementationStep",
+        "RequiredPeriodSupportEnd", "RealizedPeriodEnd",
+    ],
+    "fairness_diagnostics.csv" => [
+        "ExperimentID", "FormulationID", "StructuralInstanceID", "ParallelTaskID",
+        "Replication", "Controller", "Fairness", "Resource", "ApplicableDiagnostic", "House",
+        "PVAllocation", "PVRate", "PVProportionalTarget", "PVDeviation",
+        "Savings", "SavingsRate", "SavingsProportionalTarget", "SavingsDeviation",
+        "StaticShareTarget", "StaticShareDeviation",
+        "MinHouseholdPV", "MinHouseholdSavings",
+        "LexicographicPVShortfall", "LexicographicSavingsShortfall",
+    ],
+    "execution_provenance.csv" => [
+        "ExperimentID", "ParallelTaskID", "ShardID", "Replication", "Controller", "Fairness",
+        "Worker", "Retry", "TotalBuildTimeSec", "TotalSolveTimeSec", "CompletionStatus",
+    ],
     "pea_recovery.csv" => [
-        "FormulationID", "Replication", "Controller", "Fairness", "Resource", "Period",
+        "FormulationID", "StructuralInstanceID", "ParallelTaskID",
+        "Replication", "Controller", "Fairness", "Resource", "RollingStart", "Period",
+        "BandPolicy", "BandToleranceMode",
         "PEA_Applicable", "PEA_Strict_Feasible", "PEA_Tolerance_Activated",
         "PEA_Tolerance_Used_kWh", "PEA_Strict_Status", "PEA_Phase1_Status",
         "PEA_Phase2_Status", "PEA_Recovery_Status", "Failure_Source",
@@ -80,8 +156,13 @@ const OOS_REQUIRED_COLUMNS = Dict(
     ],
     "solve_log.csv" => [
         "Replication", "Period", "Controller", "Fairness", "FormulationID",
+        "StructuralInstanceID", "ParallelTaskID", "ScenarioSupportID", "RollingStart",
         "Phase", "PhaseLabel", "TerminationStatus", "Objective",
-        "SolveWallTimeSec", "SolverTimeSec",
+    ],
+    "solve_provenance.csv" => [
+        "ExperimentID", "ParallelTaskID", "Replication", "Controller", "Fairness",
+        "Period", "Phase", "PhaseLabel",
+        "BuildTimeSec", "SolveWallTimeSec", "SolverTimeSec",
     ],
     "configuration_summary.csv" => [
         "ExperimentID", "FormulationID", "Controller", "Fairness", "Resource",
@@ -93,6 +174,8 @@ const OOS_REQUIRED_COLUMNS = Dict(
     "paired_statistics.csv" => [
         "ExperimentID", "FormulationID", "Metric", "Baseline", "Comparison",
         "Observations", "Mean", "StandardDeviation", "StandardError",
+        "ComparisonKind", "MeanRelativePercent", "ZeroDenominatorObservations",
+        "RelativeDenominatorFloor",
     ],
 )
 
@@ -256,12 +339,33 @@ function validate_output_directory(
         counts, metadata,
     )
 
+    # EXPLICIT SCHEMA MIGRATION (stage 10). A directory written under schema v2 predates the
+    # identity, fairness-diagnostic and execution-provenance files. It stays readable: its
+    # missing files are a WARNING naming the version, not an error. A directory that claims v3
+    # must have them. Nothing is silently reinterpreted.
+    metadata_path = joinpath(directory, OOS_OUTPUT_FILES.experiment_config)
+    declared_version = 0
+    if isfile(metadata_path)
+        try
+            raw = read_experiment_metadata(metadata_path)
+            declared_version = something(tryparse(Int, get(raw, "output_schema_version", "")), 0)
+        catch
+            declared_version = 0
+        end
+    end
+    legacy_directory = declared_version in (1, 2)
+
     frames = Dict{String,DataFrame}()
     complete_files = Set{String}()
     for (file, required) in OOS_REQUIRED_COLUMNS
         path = joinpath(directory, file)
         if !isfile(path)
-            fail(file, "falta el archivo de salida")
+            if legacy_directory && file in OOS_SCHEMA_V3_FILES
+                warn(file, "ausente en un directorio de esquema v$declared_version; " *
+                           "este archivo se introdujo en el esquema v3 (etapa 10)")
+            else
+                fail(file, "falta el archivo de salida")
+            end
             continue
         end
         frame = CSV.read(path, DataFrame)
@@ -277,6 +381,9 @@ function validate_output_directory(
                 end
                 if historical !== nothing && historical in present
                     warn(file, "columna histórica `$historical` en lugar de `$column`")
+                elseif legacy_directory && column in OOS_SCHEMA_V3_COLUMNS
+                    warn(file, "columna `$column` ausente en un directorio de esquema " *
+                               "v$declared_version; se introdujo en el esquema v3 (etapa 10)")
                 else
                     fail(file, "falta la columna requerida `$column`")
                     missing_required = true
@@ -338,18 +445,23 @@ function validate_output_directory(
     if "solve_log.csv" in complete_files && "pea_recovery.csv" in complete_files
         solve_log = frames["solve_log.csv"]
         recovery = frames["pea_recovery.csv"]
-        activated = Set{Tuple{Int,String,String,Int}}()
+        # Keyed by the STRUCTURAL INSTANCE as well: a replication number identifies a trajectory
+        # only within one instance, so a dataset merged from the manifest legitimately has one row
+        # per instance for the same (replication, controller, policy, period). Grouping without it
+        # splices unrelated solve sequences together and reports them as a malformed sequence.
+        activated = Set{Tuple{String,Int,String,String,Int}}()
         for row in eachrow(recovery)
             row.PEA_Tolerance_Activated === true && push!(
                 activated,
-                (Int(row.Replication), String(row.Controller), String(row.Fairness), Int(row.Period)),
+                (_row_instance(row), Int(row.Replication), String(row.Controller),
+                 String(row.Fairness), Int(row.Period)),
             )
         end
-        grouped = Dict{Tuple{Int,String,String,Int},Vector{Tuple{Int,String}}}()
+        grouped = Dict{Tuple{String,Int,String,String,Int},Vector{Tuple{Int,String}}}()
         for row in eachrow(solve_log)
-            String(row.Fairness) == "PEA" || continue
-            key = (Int(row.Replication), String(row.Controller), String(row.Fairness),
-                   Int(row.Period))
+            String(row.Fairness) in OOS_ADAPTIVE_BAND_POLICIES || continue
+            key = (_row_instance(row), Int(row.Replication), String(row.Controller),
+                   String(row.Fairness), Int(row.Period))
             push!(get!(grouped, key, Tuple{Int,String}[]), (Int(row.Phase), String(row.PhaseLabel)))
         end
         for (key, entries) in grouped
@@ -398,14 +510,14 @@ function validate_output_directory(
                  "se encontró una banda PEA de exactamente 100.0 kWh: posible tolerancia fija")
 
         for row in eachrow(recovery)
-            String(row.Fairness) == "PEA" && continue
+            String(row.Fairness) in OOS_ADAPTIVE_BAND_POLICIES && continue
             row.PEA_Tolerance_Activated === false || fail(
                 "pea_recovery.csv",
-                "la política no-PEA $(row.Fairness) declara una activación de tolerancia",
+                "la política $(row.Fairness), que no usa banda adaptativa, declara una activación",
             )
             Float64(row.PEA_Tolerance_Used_kWh) == 0.0 || fail(
                 "pea_recovery.csv",
-                "la política no-PEA $(row.Fairness) reporta banda $(row.PEA_Tolerance_Used_kWh)",
+                "la política $(row.Fairness), que no usa banda adaptativa, reporta banda $(row.PEA_Tolerance_Used_kWh)",
             )
         end
 

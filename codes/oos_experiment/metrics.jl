@@ -12,6 +12,15 @@
 """Small floor protecting relative-deviation denominators."""
 const OOS_RELATIVE_FLOOR = 1e-9
 
+"""
+Floor below which a paired relative comparison is refused rather than reported.
+
+Plan section 4.8 requires a stated rule for a zero or near-zero denominator. This is it: a
+percentage whose baseline is smaller than the floor is written as `NaN` and counted in
+`ZeroDenominatorObservations`, never as a large or infinite number.
+"""
+const OOS_RELATIVE_COMPARATOR_FLOOR = 1e-6
+
 """Household-level realized outcome of one completed configuration."""
 struct HouseholdMetrics
     household::Int
@@ -29,6 +38,80 @@ struct HouseholdMetrics
     pv_order_statistic::Int
     savings_order_statistic::Int
 end
+
+# -------------------------------------------------------------------------------------
+# Policy-aligned fairness diagnostics (OOS redesign stage 10)
+#
+# Plan section 4.8: a fairness statistic must match the mathematical definition of the policy it
+# is reported against. A proportional-rate dispersion does not validate a max-min rule, and a
+# max-min shortfall does not validate a proportional one. Every diagnostic family below is
+# computed for every run — they are cheap and comparable — but `applicable_diagnostic` names the
+# ONE family that validates this policy, so a reader cannot present an incompatible statistic as
+# validation.
+# -------------------------------------------------------------------------------------
+
+"""Which diagnostic family validates a policy, and which are merely descriptive."""
+function applicable_fairness_diagnostic(policy::FairnessPolicy)
+    policy === PEA && return "proportional_pv"
+    policy === SA && return "proportional_savings"
+    policy === LEXMMFPEA && return "lexicographic_pv"
+    policy === LEXMMFSA && return "lexicographic_savings"
+    policy === STATIC_DEMAND_SHARE && return "static_share_residual"
+    policy === NONE && return "descriptive_only"
+    error("Familia de diagnóstico no definida para la regla $policy.")
+end
+
+"""
+Realized fairness diagnostics of one configuration, by family.
+
+`NONE` receives `descriptive_only`. That is not a formality: with no distributive rule the
+household split of the community PV is a DEGENERATE optimum — total cost depends on the
+aggregates alone, so any split with the same community total is equally optimal, and stage 9
+observed cold and warm runs landing on different vertices of that face. `NONE` household
+allocations are therefore outcomes of an arbitrary optimum and must never be read as a
+distributive result or as a violation of a rule that does not exist.
+"""
+struct PolicyFairnessDiagnostics
+    policy::FairnessPolicy
+    resource::String
+    applicable_diagnostic::String
+
+    # proportional PV: target `alpha_real * D_j` with `alpha_real = sum_t C_t / sum_j D_j`
+    pv_rate::Vector{Float64}
+    pv_proportional_target::Vector{Float64}
+    pv_deviation::Vector{Float64}
+
+    # proportional savings: target `gamma_real * B_j` with `gamma_real = sum_j S_j / sum_j B_j`
+    savings_rate::Vector{Float64}
+    savings_proportional_target::Vector{Float64}
+    savings_deviation::Vector{Float64}
+
+    # static shares: what the ex-ante table would have allocated from the REALIZED PV
+    static_share_target::Vector{Float64}
+    static_share_deviation::Vector{Float64}
+    max_static_share_deviation::Float64
+
+    # lexicographic: the ordered outcome vector, its cumulative sums, and the worst-off gap
+    sorted_pv::Vector{Float64}
+    sorted_savings::Vector{Float64}
+    cumulative_pv_order::Vector{Float64}
+    cumulative_savings_order::Vector{Float64}
+    min_pv::Float64
+    min_savings::Float64
+    lexicographic_pv_shortfall::Float64
+    lexicographic_savings_shortfall::Float64
+end
+
+"""
+Absolute gap of the worst-off household from the mean outcome.
+
+`max(0, mean - min)`. This is the realized max-min diagnostic: a perfectly equal allocation gives
+zero, and the value is the amount by which the least-served household falls below the average.
+It is reported in the resource's own unit, never as a dispersion ratio, because a max-min rule is
+not a statement about dispersion.
+"""
+lexicographic_shortfall(values::AbstractVector{Float64}) =
+    isempty(values) ? NaN : max(0.0, sum(values) / length(values) - minimum(values))
 
 """Replication-level realized outcome, including the fairness diagnostics."""
 struct ReplicationMetrics
@@ -93,6 +176,10 @@ struct ReplicationMetrics
     pea_tolerances::Vector{Float64}
 
     households::Vector{HouseholdMetrics}
+
+    """Policy-aligned fairness diagnostics (stage 10); `applicable_diagnostic` names the one
+    family that validates this run's policy."""
+    fairness_diagnostics::PolicyFairnessDiagnostics
 end
 
 # -------------------------------------------------------------------------------------
@@ -163,11 +250,68 @@ function summarize_pea_tolerances(tolerances::AbstractVector{<:Real})
     )
 end
 
+
+"""Compute every fairness diagnostic family for one completed configuration."""
+function policy_fairness_diagnostics(
+    run::ReplicationRun,
+    pv_allocation::Vector{Float64},
+    demand::Vector{Float64},
+    benchmark::Vector{Float64},
+    cost::Vector{Float64},
+    share_table::Union{Nothing,OOSStaticShareTable},
+)
+    J = length(pv_allocation)
+    total_pv = sum(pv_allocation)
+    savings = benchmark .- cost
+    total_savings = sum(savings)
+    total_benchmark = sum(benchmark)
+
+    pv_diagnostics = realized_pv_deviation(pv_allocation, demand, total_pv)
+    pv_target = [pv_diagnostics.alpha * demand[j] for j in 1:J]
+    pv_rate = [total_pv > OOS_RELATIVE_FLOOR ? pv_allocation[j] / total_pv : NaN for j in 1:J]
+
+    gamma = abs(total_benchmark) > OOS_RELATIVE_FLOOR ? total_savings / total_benchmark : 0.0
+    savings_target = [gamma * benchmark[j] for j in 1:J]
+    savings_rate = [
+        abs(total_savings) > OOS_RELATIVE_FLOOR ? savings[j] / total_savings : NaN for j in 1:J
+    ]
+
+    # What the ex-ante static table would have allocated out of the REALIZED community PV. This
+    # is the only residual that validates `STATIC_DEMAND_SHARE`, and it is defined even for the
+    # policies that do not use the table, where it is descriptive.
+    static_target = zeros(J)
+    if share_table !== nothing
+        for record in run.records, j in 1:J
+            static_target[j] += share_table.shares[j, record.period] * record.realized_pv
+        end
+    else
+        fill!(static_target, NaN)
+    end
+    static_deviation = pv_allocation .- static_target
+    max_static = isempty(static_deviation) || any(isnan, static_deviation) ?
+        NaN : maximum(abs.(static_deviation))
+
+    sorted_pv = sort(pv_allocation)
+    sorted_savings = sort(savings)
+    return PolicyFairnessDiagnostics(
+        run.fairness, policy_resource(run.fairness),
+        applicable_fairness_diagnostic(run.fairness),
+        pv_rate, pv_target, pv_allocation .- pv_target,
+        savings_rate, savings_target, savings .- savings_target,
+        static_target, static_deviation, max_static,
+        sorted_pv, sorted_savings, cumsum(sorted_pv), cumsum(sorted_savings),
+        isempty(pv_allocation) ? NaN : minimum(pv_allocation),
+        isempty(savings) ? NaN : minimum(savings),
+        lexicographic_shortfall(pv_allocation), lexicographic_shortfall(savings),
+    )
+end
+
 """Aggregate one configuration's implemented trajectory into its realized metrics."""
 function compute_replication_metrics(
     template::OOSInstanceTemplate,
     run::ReplicationRun,
-    config::OOSExperimentConfig,
+    config::OOSExperimentConfig;
+    share_table::Union{Nothing,OOSStaticShareTable}=nothing,
 )
     J = template.J
     state = run.final_state
@@ -220,14 +364,25 @@ function compute_replication_metrics(
     savings_diagnostics = realized_savings_deviation(benchmark, cost)
     savings = savings_diagnostics.savings
 
+    # Completeness is measured against the EVALUATION HORIZON, not against the repository
+    # horizon and not against the number of solves. With `h = 1` there is one solve per evaluated
+    # period and the two coincide; with `h > 1` one solve commits `h` periods, of which only the
+    # ones inside `1:H` are recorded. `template.T` is the base profile length and says nothing
+    # about either.
+    expected_records = config.evaluation_horizon
+
     terminal_soc = isempty(run.records) ? template.s_I : run.records[end].soc_after
-    terminal_residual = run.periods_completed == template.T ?
+    # Reported as a DIAGNOSTIC, not as a constraint residual. Stage 4 moved the terminal target
+    # to the end of each look-ahead window, so the state of charge reached at the end of the
+    # evaluation horizon is an outcome of the rolling policy rather than something the model
+    # promised. It is still recorded so the drift is visible.
+    terminal_residual = run.periods_completed == expected_records ?
         abs(terminal_soc - template.s_I) : NaN
 
     # Horizon-total diagnostics are only meaningful over a complete horizon. On an aborted
     # run they are set to NaN so a truncated trajectory can never be compared against a
     # complete one; the raw accumulations are kept and labelled by HorizonCovered.
-    complete = run.completed && run.periods_completed == template.T
+    complete = run.completed && run.periods_completed == expected_records
     partial(value) = complete ? value : NaN
     tolerance_stats = summarize_pea_tolerances(run.pea_tolerances)
 
@@ -265,12 +420,13 @@ function compute_replication_metrics(
         run.optimization_failures, run.physical_violations,
         run.total_build_time_sec, run.total_solve_time_sec, run.failure_message,
         policy_resource(run.fairness),
-        template.T == 0 ? 0.0 : run.periods_completed / template.T,
+        expected_records == 0 ? 0.0 : run.periods_completed / expected_records,
         tolerance_stats.activations, tolerance_stats.activation_rate,
         tolerance_stats.mean_active, tolerance_stats.mean_all_periods,
         tolerance_stats.maximum, run.pea_strict_feasible_periods,
         copy(run.pea_tolerances),
         households,
+        policy_fairness_diagnostics(run, pv_allocation, demand, benchmark, cost, share_table),
     )
 end
 
@@ -282,6 +438,108 @@ function _order_statistics(values::Vector{Float64})
         ranks[index] = rank
     end
     return ranks
+end
+
+# =====================================================================================
+# Grid-direction audit (OOS redesign stage 8, Phase A)
+#
+# The approved formulation has NO grid-direction binary: `I[j,n]` and `G[j,n]` are independent
+# nonnegative variables, so a household importing and exporting in the same information state is
+# not structurally excluded. Whether it ever HAPPENS is an empirical question, and stage 8 answers
+# it before deciding whether to pay for a binary.
+#
+# The economics say it should not: a household's node cost is
+# `delta * (mu*y + nu*I - beta*G)`, so simultaneous import and export costs `nu - beta` per unit
+# of the overlap while changing nothing physical. Whenever `beta <= nu` the overlap is weakly
+# dominated and cost minimization removes it. The audit measures that instead of asserting it.
+#
+# Phase A is diagnostic only. It adds no variable, no constraint and no binary. Phase B — an
+# explicit exclusivity formulation — is authorized only if this audit finds overlap.
+# =====================================================================================
+
+"""
+Simultaneous grid import and export measured on one implemented action.
+
+`household_overlap` is `max_j min(I_j, G_j)` and `aggregate_overlap` is
+`min(sum_j I_j, sum_j G_j)`. Both are in kWh and both are zero for an action that trades in one
+direction only. The aggregate figure is reported separately because a community can legitimately
+have one household importing while another exports; only the HOUSEHOLD figure is evidence that
+the missing exclusivity rule bites.
+"""
+function grid_direction_overlap(action::PeriodAction)
+    household = 0.0
+    for j in eachindex(action.I)
+        household = max(household, min(action.I[j], action.G[j]))
+    end
+    return (
+        household_overlap=household,
+        aggregate_overlap=min(sum(action.I), sum(action.G)),
+    )
+end
+
+"""One configuration's grid-direction audit, pooled over its implemented periods."""
+struct GridDirectionAudit
+    controller::ControllerKind
+    fairness::FairnessPolicy
+    periods::Int
+    household_violations::Int
+    aggregate_overlaps::Int
+    max_household_overlap::Float64
+    max_aggregate_overlap::Float64
+    tolerance::Float64
+end
+
+"""
+Audit one completed configuration for simultaneous household import and export.
+
+A *violation* is a period in which some household's `min(I_j, G_j)` exceeds `flow_tol`. Counting
+against the flow tolerance rather than against zero keeps solver round-off out of the statistic,
+exactly as the shared-mode simultaneity check does.
+"""
+function audit_grid_direction(run::ReplicationRun, config::OOSExperimentConfig)
+    household_violations = 0
+    aggregate_overlaps = 0
+    max_household = 0.0
+    max_aggregate = 0.0
+    for record in run.records
+        overlap = grid_direction_overlap(record.action)
+        max_household = max(max_household, overlap.household_overlap)
+        max_aggregate = max(max_aggregate, overlap.aggregate_overlap)
+        overlap.household_overlap > config.flow_tol && (household_violations += 1)
+        overlap.aggregate_overlap > config.flow_tol && (aggregate_overlaps += 1)
+    end
+    return GridDirectionAudit(
+        run.controller, run.fairness, length(run.records),
+        household_violations, aggregate_overlaps,
+        max_household, max_aggregate, config.flow_tol,
+    )
+end
+
+"""`true` when no household imported and exported simultaneously beyond the flow tolerance."""
+grid_direction_clean(audit::GridDirectionAudit) = audit.household_violations == 0
+
+"""
+Turn a set of configuration audits into a gate report.
+
+The check PASSES when no household overlap was observed, which is the evidence that the approved
+formulation needs no direction binary. It FAILS — and therefore authorizes the stage-8 Phase-B
+decision — the moment one is observed, naming the configuration and the magnitude.
+"""
+function grid_direction_gate(audits::Vector{GridDirectionAudit}, formulation_id::String)
+    checks = GateCheck[]
+    for audit in audits
+        push!(checks, GateCheck(
+            "grid_direction_$(audit.controller)_$(audit.fairness)",
+            grid_direction_clean(audit),
+            grid_direction_clean(audit) ?
+            "Sin importación y exportación simultáneas por hogar en $(audit.periods) período(s); " *
+            "solape máximo por hogar $(audit.max_household_overlap) <= $(audit.tolerance) kWh." :
+            "$(audit.household_violations)/$(audit.periods) período(s) con un hogar importando y " *
+            "exportando a la vez; solape máximo $(audit.max_household_overlap) kWh. Esto habilita " *
+            "la decisión de la Fase B de la etapa 8 (exclusividad explícita de dirección de red).",
+        ))
+    end
+    return GateReport(all(check -> check.passed, checks), checks, formulation_id)
 end
 
 # -------------------------------------------------------------------------------------
@@ -347,14 +605,39 @@ struct PairedSummary
     standard_error::Float64
     confidence_low::Float64
     confidence_high::Float64
+
+    """
+    `level` or `difference` (stage 10).
+
+    A `level` row reports one configuration's own metric and has no comparator, so its relative
+    fields are `NaN` by construction. A `difference` row always names both sides in `baseline`
+    and `comparison`, which is what makes `mean_relative_percent` readable — plan section 4.8
+    forbids an unlabelled percentage.
+    """
+    comparison_kind::String
+
+    """`100 * mean((C - B) / |B|)` over the paired observations whose baseline clears the
+    floor. `NaN` for a level row or when no observation clears it."""
+    mean_relative_percent::Float64
+
+    """Paired observations whose baseline was too small to divide by, excluded from the
+    percentage above rather than producing a large or infinite value."""
+    zero_denominator_observations::Int
 end
 
 """Mean, standard deviation, standard error and a normal-approximation interval."""
 function summarize_sample(values::Vector{Float64}, label::String, baseline::String, comparison::String;
-    confidence_z::Float64=1.96)
+    confidence_z::Float64=1.96,
+    comparison_kind::String="level",
+    relative_values::Vector{Float64}=Float64[],
+    zero_denominator_observations::Int=0,
+)
+    relative = isempty(relative_values) ? NaN :
+        sum(relative_values) / length(relative_values)
     n = length(values)
     if n == 0
-        return PairedSummary(label, baseline, comparison, 0, NaN, NaN, NaN, NaN, NaN)
+        return PairedSummary(label, baseline, comparison, 0, NaN, NaN, NaN, NaN, NaN,
+                             comparison_kind, relative, zero_denominator_observations)
     end
     average = sum(values) / n
     deviation = n > 1 ? sqrt(sum((v - average)^2 for v in values) / (n - 1)) : 0.0
@@ -362,7 +645,31 @@ function summarize_sample(values::Vector{Float64}, label::String, baseline::Stri
     return PairedSummary(
         label, baseline, comparison, n, average, deviation, error_of_mean,
         average - confidence_z * error_of_mean, average + confidence_z * error_of_mean,
+        comparison_kind, relative, zero_denominator_observations,
     )
+end
+
+"""
+Paired relative difference `100 * (comparison - baseline) / |baseline|`, with the floor rule.
+
+Returns `(relative_values, zero_denominator_observations)`. An observation whose baseline is
+below `OOS_RELATIVE_COMPARATOR_FLOOR` is EXCLUDED and counted, never reported as a large or
+infinite percentage.
+"""
+function paired_relative_differences(
+    baseline_values::Vector{Float64},
+    comparison_values::Vector{Float64},
+)
+    relative = Float64[]
+    excluded = 0
+    for (b, c) in zip(baseline_values, comparison_values)
+        if abs(b) < OOS_RELATIVE_COMPARATOR_FLOOR
+            excluded += 1
+        else
+            push!(relative, 100.0 * (c - b) / abs(b))
+        end
+    end
+    return (relative, excluded)
 end
 
 """
@@ -404,16 +711,25 @@ function paired_comparisons(
     for policy in policies, a in eachindex(controllers), b in eachindex(controllers)
         a < b || continue
         values = Float64[]
+        baselines = Float64[]
+        comparisons = Float64[]
         for r in replications
             first_entry = get(indexed, (r, controllers[a], policy), nothing)
             second_entry = get(indexed, (r, controllers[b], policy), nothing)
             (first_entry === nothing || second_entry === nothing) && continue
             (first_entry.completed && second_entry.completed) || continue
-            push!(values, Float64(extractor(second_entry)) - Float64(extractor(first_entry)))
+            base = Float64(extractor(first_entry))
+            comparison = Float64(extractor(second_entry))
+            push!(baselines, base)
+            push!(comparisons, comparison)
+            push!(values, comparison - base)
         end
+        relative, excluded = paired_relative_differences(baselines, comparisons)
         push!(summaries, summarize_sample(
             values, "$(metric_name)__controller_difference",
-            "$(controllers[a])|$(policy)", "$(controllers[b])|$(policy)",
+            "$(controllers[a])|$(policy)", "$(controllers[b])|$(policy)";
+            comparison_kind="difference", relative_values=relative,
+            zero_denominator_observations=excluded,
         ))
     end
 
@@ -421,16 +737,25 @@ function paired_comparisons(
     for controller in controllers, a in eachindex(policies), b in eachindex(policies)
         a < b || continue
         values = Float64[]
+        baselines = Float64[]
+        comparisons = Float64[]
         for r in replications
             first_entry = get(indexed, (r, controller, policies[a]), nothing)
             second_entry = get(indexed, (r, controller, policies[b]), nothing)
             (first_entry === nothing || second_entry === nothing) && continue
             (first_entry.completed && second_entry.completed) || continue
-            push!(values, Float64(extractor(second_entry)) - Float64(extractor(first_entry)))
+            base = Float64(extractor(first_entry))
+            comparison = Float64(extractor(second_entry))
+            push!(baselines, base)
+            push!(comparisons, comparison)
+            push!(values, comparison - base)
         end
+        relative, excluded = paired_relative_differences(baselines, comparisons)
         push!(summaries, summarize_sample(
             values, "$(metric_name)__fairness_difference",
-            "$(controller)|$(policies[a])", "$(controller)|$(policies[b])",
+            "$(controller)|$(policies[a])", "$(controller)|$(policies[b])";
+            comparison_kind="difference", relative_values=relative,
+            zero_denominator_observations=excluded,
         ))
     end
 
@@ -446,6 +771,9 @@ function campaign_statistics(metrics::Vector{ReplicationMetrics})
     append!(summaries, paired_comparisons(metrics, "max_savings_relative_deviation", m -> m.max_savings_relative_deviation))
     append!(summaries, paired_comparisons(metrics, "min_household_pv", m -> m.min_household_pv))
     append!(summaries, paired_comparisons(metrics, "min_household_savings", m -> m.min_household_savings))
-    append!(summaries, paired_comparisons(metrics, "total_solve_time_sec", m -> m.total_solve_time_sec))
+    # STAGE 11. `total_solve_time_sec` was here and is deliberately gone: solver time is
+    # EXECUTION PROVENANCE, not a scientific outcome, and including it made `paired_statistics.csv`
+    # differ between two runs that computed exactly the same thing. Runtime is measured from
+    # `execution_provenance.csv` and `solve_provenance.csv` instead.
     return summaries
 end

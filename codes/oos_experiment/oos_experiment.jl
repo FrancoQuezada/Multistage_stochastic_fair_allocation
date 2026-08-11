@@ -37,10 +37,19 @@ const MOI = JuMP.MOI
 
 # --- additive experiment layers ---------------------------------------------------------
 include(joinpath(OOS_MODULE_DIRECTORY, "types.jl"))
+include(joinpath(OOS_MODULE_DIRECTORY, "temporal.jl"))
+include(joinpath(OOS_MODULE_DIRECTORY, "canonical_json.jl"))
+include(joinpath(OOS_MODULE_DIRECTORY, "period_support.jl"))
+# Binds the temporal contract, the repository instance and the extended data support into the
+# one immutable object every stage-4 consumer reads its prices and endpoints from.
+include(joinpath(OOS_MODULE_DIRECTORY, "rolling_context.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "state.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "mode_nodes.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "lookahead_tree.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "uncertainty_provider.jl"))
+# One conditional support per rolling start, shared by all three methods. Loaded after the
+# provider and the look-ahead adapter, whose objects it composes.
+include(joinpath(OOS_MODULE_DIRECTORY, "common_support.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "physical_model.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "fairness_rules.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "lexicographic.jl"))
@@ -50,25 +59,71 @@ include(joinpath(OOS_MODULE_DIRECTORY, "controllers.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "model_audit.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "validation.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "simulator.jl"))
+# Scientific identity of a result plus the shard interfaces. Loaded after the fairness layer
+# (it references the resolved share table) and before the outputs that write its columns.
+include(joinpath(OOS_MODULE_DIRECTORY, "result_identity.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "metrics.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "output.jl"))
 include(joinpath(OOS_MODULE_DIRECTORY, "output_schema.jl"))
+# Independent recomputation of every reported summary from the period-level rows. Deliberately
+# shares no accumulator with `metrics.jl`: sharing would make the check vacuous.
+include(joinpath(OOS_MODULE_DIRECTORY, "independent_recompute.jl"))
+# Factor-level calibration: derives the battery and uncertainty levels from their approved
+# meanings and MEASURES what was achieved. Pure measurement; the simulator never consults it.
+include(joinpath(OOS_MODULE_DIRECTORY, "calibration.jl"))
+# Structural catalog and Stage-3 deterministic period-data manifest. Loaded last: they build on
+# the configuration, temporal contract, seed streams and instance-template pipeline above. This
+# remains an additive pre-campaign layer — the active campaign below never consults it.
+include(joinpath(OOS_MODULE_DIRECTORY, "structural_catalog.jl"))
+include(joinpath(OOS_MODULE_DIRECTORY, "structural_manifest.jl"))
+# Manifest-driven task runner, isolated shards and deterministic merge. Loaded last: it composes
+# the catalog, the rolling context, the common support and the output writer.
+include(joinpath(OOS_MODULE_DIRECTORY, "task_runner.jl"))
+include(joinpath(OOS_MODULE_DIRECTORY, "campaign_review.jl"))
 
 # =====================================================================================
 # Common in-sample objects
 # =====================================================================================
 
-"""Everything computed once, before any configuration runs."""
+"""
+Everything computed once, before any configuration runs.
+
+`context` binds the temporal contract, the instance and the stage-3 extended data support. It is
+the object every simulation layer reads its prices and endpoints from; `template` remains
+available as its readability alias.
+"""
 struct OOSCommonObjects
+    context::OOSRollingContext
     template::OOSInstanceTemplate
     provider::RepositoryUncertaintyProvider
     in_sample_tree::Tree
+
+    """
+    The resolved `STATIC_DEMAND_SHARE` table of this structural instance (stage 7).
+
+    Immutable, identified by `share_table_id`, and resolved once from the common ex-ante
+    in-sample reference — never from an OOS replication, a controller or a realized future.
+    """
+    share_table::OOSStaticShareTable
+
+    """Its coefficients. Retained under the original name so every existing consumer is
+    unchanged; it is exactly `share_table.shares`."""
     static_shares::Matrix{Float64}
+
     oos_paths::Vector{OOSPath}
 end
 
 """
 Precompute the common in-sample objects and cache every out-of-sample trajectory.
+
+Stage 4 resolves three distinct endpoints here instead of reusing `template.T` for all of them:
+
+  * the deterministic data support reaches `required_period_support_end(config)`, so every
+    moving look-ahead — including the one anchored at the last rolling start — is fully priced;
+  * the static demand-share table spans the same materialized range, repeated through the same
+    centralized base-profile mapping; and
+  * each realized out-of-sample trajectory covers `realized_period_end(config)`, the end of the
+    final full implementation block.
 
 The static demand-share coefficients are computed once from the common in-sample expected
 demand. The out-of-sample trajectories are generated once, cached, identical across all
@@ -77,23 +132,35 @@ configurations, and drawn from a stream that is independent of every in-sample s
 function build_common_objects(config::OOSExperimentConfig; verbose::Bool=true)
     bundle = build_instance_template(config)
     template = bundle.template
-    provider = RepositoryUncertaintyProvider(template)
-    static = compute_static_demand_shares(
-        template, provider, bundle.in_sample_tree, in_sample_rng(config),
+    support = build_period_data_support(template, required_period_support_end(config))
+    context = OOSRollingContext(config, template, support)
+    provider = RepositoryUncertaintyProvider(template; data_support=support)
+    share_table = resolve_static_share_table(
+        template, provider, bundle.in_sample_tree, in_sample_rng(config);
+        period_end=rolling_data_end(context),
     )
+    realized_end = rolling_realized_end(context)
     paths = [
-        sample_oos_path(provider, template.T, oos_path_rng(config, r); replication_id=r)
+        sample_oos_path(provider, realized_end, oos_path_rng(config, r); replication_id=r)
         for r in 1:config.oos_replications
     ]
     if verbose
-        println("Instancia $(template.id): J=$(template.J), T=$(template.T), " *
+        println("Instancia $(template.id): J=$(template.J), T0=$(template.T), " *
                 "F_c=$(template.f_under), F_d=$(template.f_bar)")
+        println("Contrato temporal: H=$(config.evaluation_horizon), " *
+                "L=$(config.lookahead_horizon), h=$(config.implementation_step); " *
+                "inicios=$(rolling_solve_count(config)), realizado hasta $realized_end, " *
+                "soporte hasta $(rolling_support_end(context)), " *
+                "datos materializados hasta $(rolling_data_end(context))")
+        println("Tabla de cuotas estáticas: $(share_table.share_table_id) " *
+                "($(share_table.algorithm), $(share_table.households)x$(share_table.period_end))")
         println("Perfiles de demanda por hogar: " *
                 join([model.profile for model in template.demand_models], ", "))
         println("Trayectorias fuera de muestra generadas y cacheadas: $(length(paths))")
     end
     return OOSCommonObjects(
-        template, provider, bundle.in_sample_tree, static.shares, paths,
+        context, template, provider, bundle.in_sample_tree,
+        share_table, share_table.shares, paths,
     )
 end
 
@@ -142,7 +209,7 @@ function run_preflight(config::OOSExperimentConfig, common::OOSCommonObjects; ve
 
     push!(reports, run_shared_battery_micro_gate(config))
     push!(reports, run_controller_fairness_gate(
-        common.template, common.provider, common.static_shares, config,
+        common.context, common.provider, common.static_shares,
     ))
 
     for report in reports
@@ -204,10 +271,14 @@ function fairness_reachability_advisories(config::OOSExperimentConfig, common::O
 
     if PEA in config.fairness_set
         reachability =
-            "PEA impone una igualdad sobre el total del horizonte con el pasado realizado fijo. " *
-            "Puede volverse inalcanzable cuando el objetivo proporcional actualizado queda fuera " *
-            "del rango alcanzable con los recursos físicos restantes; una cola sin PV " *
-            "($zero_pv_tail período(s) aquí) es solo el caso extremo."
+            "PEA impone una igualdad sobre el total de la ventana de look-ahead con el pasado " *
+            "realizado fijo. Puede volverse inalcanzable cuando el objetivo proporcional " *
+            "actualizado queda fuera del rango alcanzable con los recursos físicos restantes de " *
+            "esa ventana. Desde la etapa 4 la ventana es fija (L=$(config.lookahead_horizon) " *
+            "períodos), así que ya NO se agota por avanzar en el horizonte; el riesgo real es " *
+            "una L corta frente a un pasado realizado grande. El perfil base tiene " *
+            "$zero_pv_tail período(s) finales sin PV, que es solo el caso extremo dentro de una " *
+            "ventana."
         if config.pea_tolerance_mode === :adaptive_minimum
             push!(advisories, reachability *
                 " Modo :adaptive_minimum: se intenta primero la igualdad estricta y, solo ante " *
@@ -224,11 +295,29 @@ function fairness_reachability_advisories(config::OOSExperimentConfig, common::O
         end
     end
 
-    if SA in config.fairness_set && config.sa_fairness_abs_tol <= 0
-        push!(advisories,
-            "SA con sa_fairness_abs_tol=0 impone una igualdad exacta de ahorros sobre el total del " *
-            "horizonte; la calibración del repositorio usa una banda de 1.0.",
-        )
+    if SA in config.fairness_set
+        reachability =
+            "SA impone una igualdad de ahorros sobre el total de la ventana con el pasado " *
+            "realizado fijo, así que puede volverse inalcanzable por la misma razón estructural " *
+            "que PEA. La etapa 8 lo hizo visible: al cerrar la exclusividad de dirección de red " *
+            "desapareció el canal por el que un hogar inflaba su costo para bajar sus ahorros " *
+            "hasta el objetivo."
+        if config.sa_tolerance_mode === :adaptive_minimum
+            push!(advisories, reachability *
+                " Modo :adaptive_minimum: se intenta primero la igualdad estricta y, solo ante " *
+                "infactibilidad probada atribuida a la regla, se calcula endógenamente la banda " *
+                "mínima común (Fase I) y se reoptimiza el costo con esa banda (Fase II).")
+        elseif config.sa_tolerance_mode === :strict
+            push!(advisories, reachability *
+                " Modo :strict: sin recuperación; se espera que las configuraciones SA aborten " *
+                "cuando el objetivo deje de ser alcanzable.")
+        else
+            push!(advisories, reachability *
+                " Modo :fixed_band (EN DESUSO) con sa_fairness_abs_tol=" *
+                "$(config.sa_fairness_abs_tol): es una relajación económica fija de la regla. " *
+                "Una prueba acotada mostró que ni 1e5 restaura la factibilidad, porque el " *
+                "faltante es estructural y no marginal.")
+        end
     end
     return advisories
 end
@@ -247,20 +336,25 @@ function export_representative_models(
     verbose::Bool=true,
 )
     template = common.template
+    rolling = common.context
     audits = ModelAudit[]
     path = common.oos_paths[1]
-    state = initial_simulation_state(template, path.replication_id)
+    state = initial_simulation_state(rolling, path.replication_id)
     reveal_period!(state, path, period)
     history = observed_history(state)
     past = fairness_past_state(state)
+    # The exported model must be the one the campaign actually solves, so it spans the same
+    # fixed moving window rather than the old shrinking interval.
+    horizon_end = lookahead_end_period(config, period)
 
     for controller in config.controller_set
         tree = build_lookahead_tree(
-            common.provider, config, controller, history, period, template.T, path.replication_id,
+            common.provider, config, controller, history, period, horizon_end,
+            path.replication_id,
         )
         for policy in config.fairness_set
-            refs = build_remaining_horizon_model(template, state, tree, config)
-            context = add_fairness_constraints!(
+            refs = build_remaining_horizon_model(rolling, state, tree, config)
+            fairness_context = add_fairness_constraints!(
                 refs, policy, past, config; static_shares=common.static_shares,
             )
             label = "$(controller)__$(policy)"
@@ -268,7 +362,9 @@ function export_representative_models(
                 # Install the envelope and the first phase objective so the exported file is the
                 # actual phase model, not the cost model.
                 J = template.J
-                outcome = lexicographic_outcome_expressions(refs, policy, past, context.aggregates)
+                outcome = lexicographic_outcome_expressions(
+                    refs, policy, past, fairness_context.aggregates,
+                )
                 @variable(refs.model, lex_zeta[1:J])
                 @variable(refs.model, lex_slack[1:J, 1:J] >= 0)
                 @constraint(refs.model, lex_envelope[k in 1:J, j in 1:J],
@@ -285,8 +381,8 @@ function export_representative_models(
             # PEA has three model shapes worth inspecting: the strict equality just exported,
             # the Phase-I minimum-band model and the Phase-II operational model at that band.
             if policy === PEA && config.pea_tolerance_mode === :adaptive_minimum
-                adaptive = build_remaining_horizon_model(template, state, tree, config)
-                aggregates = scenario_aggregates(template, adaptive.tree)
+                adaptive = build_remaining_horizon_model(rolling, state, tree, config)
+                aggregates = scenario_aggregates(rolling, adaptive.tree)
                 phase1 = solve_minimum_pea_tolerance!(adaptive, past, aggregates, config)
                 push!(audits, audit_and_export_model(
                     adaptive, "$(controller)__PEA__adaptive_phase1", config; export_files=true,
@@ -330,12 +426,12 @@ Run the full out-of-sample experiment.
     export and inspect representative LP/MPS models
     abort unless all validation gates pass
 
-    precompute the common in-sample objects
-    compute the STATIC_DEMAND_SHARE coefficients once
-    generate and cache all out-of-sample paths
+    precompute the common in-sample objects and the extended data support
+    compute the STATIC_DEMAND_SHARE coefficients once, over the materialized support
+    generate and cache all out-of-sample paths through realized_period_end
 
     for each replication
-        cache the look-ahead information by period and controller
+        cache one look-ahead per (rolling start, controller) over the fixed L-period window
         for each allocation/fairness rule
             for each controller
                 initialize an identical, unshared state and simulate the horizon
@@ -359,14 +455,16 @@ function run_oos_experiment(
 
     for path in common.oos_paths
         verbose && println("--- réplica $(path.replication_id) ---")
-        cache = cache_lookahead_trees(common.provider, config, common.template, path)
+        cache = cache_lookahead_trees(common.provider, common.context, path)
         for policy in config.fairness_set, controller in config.controller_set
             run = simulate_configuration(
-                common.template, config, path, cache, controller, policy,
+                common.context, path, cache, controller, policy,
                 common.static_shares; verbose=verbose,
             )
             push!(runs, run)
-            push!(metrics, compute_replication_metrics(common.template, run, config))
+            push!(metrics, compute_replication_metrics(
+                common.template, run, config; share_table=common.share_table,
+            ))
             verbose && println(
                 "  $(controller) / $(policy): ",
                 run.completed ? "completada" : "abortada en el período $(run.periods_completed + 1)",
@@ -384,6 +482,7 @@ function run_oos_experiment(
             config, common.template, runs, metrics, statistics,
             preflight.audits, preflight.reports; validation_text=preflight.report_text,
             configuration_summaries=configuration_summaries,
+            identity=run_identity(config, common.context, common.share_table, 0),
         )
         verbose && println("Archivos escritos: ", join(written, ", "))
     end
@@ -482,7 +581,49 @@ function _env_list(name::AbstractString, default::Vector{String})
     return [String(strip(item)) for item in split(raw, ',') if !isempty(strip(item))]
 end
 
-_env_int(name, default::Int) = parse(Int, _env(name, string(default)))
+"""
+Resolve the multistage look-ahead tree from `MULTISTAGE_BRANCHING` (list or compact `S:C:P`
+form, see `parse_multistage_tree_spec`) and `MULTISTAGE_PERIODS_PER_STAGE` (list form only).
+
+The compact form fixes `periods_per_stage` by itself; combining it with an explicit
+`MULTISTAGE_PERIODS_PER_STAGE` would leave one of the two silently ignored, so that combination
+is rejected instead.
+"""
+function _env_multistage_tree(default_branching::Vector{Int})
+    branching_raw = strip(_env("MULTISTAGE_BRANCHING", ""))
+    periods_raw = strip(_env("MULTISTAGE_PERIODS_PER_STAGE", ""))
+    isempty(branching_raw) &&
+        return (default_branching, _env_int_list("MULTISTAGE_PERIODS_PER_STAGE", Int[]))
+
+    branching, periods_from_spec = parse_multistage_tree_spec(branching_raw)
+    if !isempty(periods_from_spec)
+        isempty(periods_raw) || error(
+            "MULTISTAGE_BRANCHING=\"$branching_raw\" usa el formato compacto " *
+            "stages:children:periods_per_stage, que ya fija periods_per_stage. No lo combines " *
+            "con MULTISTAGE_PERIODS_PER_STAGE=\"$periods_raw\"; usa el formato de lista (por " *
+            "ejemplo \"2,2\") si necesitas fijar periods_per_stage por separado."
+        )
+        return (branching, periods_from_spec)
+    end
+    return (branching, _env_int_list("MULTISTAGE_PERIODS_PER_STAGE", Int[]))
+end
+
+"""
+Integer environment variable, defaulting to the documented Julia-side default.
+
+An absent or blank variable uses `default`. An explicitly supplied malformed value fails
+immediately and names the variable, so a typo in a launch script can never be silently absorbed
+into a default value.
+"""
+function _env_int(name, default::Int)
+    raw = strip(_env(name, string(default)))
+    isempty(raw) && return default
+    parsed = tryparse(Int, raw)
+    parsed === nothing && error(
+        "La variable de entorno $name debe ser un entero; se recibió \"$raw\"."
+    )
+    return parsed
+end
 _env_float(name, default::Float64) = parse(Float64, _env(name, string(default)))
 _env_bool(name, default::Bool) = lowercase(_env(name, default ? "1" : "0")) in ("1", "true", "yes", "si", "sí")
 
@@ -493,6 +634,10 @@ Supports the repository's usual instance variables (`INST_FOLDER`, `INSTANCE_FRO
 `TREE_SET`, `J_SET`, `THETA_SET`, `AVG_D_SET`, `DEV_D_SET`, `DEMAND_PROFILE_SET`,
 `BATTERY_SCALE_SET`, `PV_SCALE_SET`) using their first entry, since one campaign runs on one
 instance configuration.
+
+The abstract temporal contract is read from `EVALUATION_HORIZON`, `LOOKAHEAD_HORIZON` and
+`IMPLEMENTATION_STEP`, all counted in model periods. There is deliberately no period-duration or
+calendar-cycle variable: a period has no clock-time meaning here.
 """
 function oos_config_from_environment()
     instance_folder = _env("INST_FOLDER", joinpath(OOS_CODES_DIRECTORY, "inst", "inst2020"))
@@ -519,19 +664,26 @@ function oos_config_from_environment()
     policies = [parse_fairness_policy(label) for label in
                 _env_list("FAIRNESS_SET",
                           ["NONE", "STATIC_DEMAND_SHARE", "PEA", "SA", "LEXMMFPEA", "LEXMMFSA"])]
+    multistage_branching, multistage_periods_per_stage = _env_multistage_tree([2, 2])
 
     return OOSExperimentConfig(
         experiment_seed=_env_int("EXPERIMENT_SEED", 12345),
         oos_replications=_env_int("OOS_REPLICATIONS", 20),
+        # Abstract temporal contract, in model periods only. No clock-time variable exists and
+        # none may be added: see `temporal.jl` and docs/oos_redesign_plan.md §3.
+        evaluation_horizon=_env_int("EVALUATION_HORIZON", OOS_DEFAULT_EVALUATION_HORIZON),
+        lookahead_horizon=_env_int("LOOKAHEAD_HORIZON", OOS_DEFAULT_LOOKAHEAD_HORIZON),
+        implementation_step=_env_int("IMPLEMENTATION_STEP", OOS_DEFAULT_IMPLEMENTATION_STEP),
         controller_set=controllers,
         fairness_set=policies,
         two_stage_scenarios=_env_int("TWO_STAGE_SCENARIOS", 20),
-        multistage_branching=_env_int_list("MULTISTAGE_BRANCHING", [2, 2]),
-        multistage_periods_per_stage=_env_int_list("MULTISTAGE_PERIODS_PER_STAGE", Int[]),
+        multistage_branching=multistage_branching,
+        multistage_periods_per_stage=multistage_periods_per_stage,
         fairness_abs_tol=_env_float("FAIRNESS_ABS_TOL", 0.0),
         pea_tolerance_mode=Symbol(_env("PEA_TOLERANCE_MODE", "adaptive_minimum")),
         pea_tolerance_numeric_eps=_env_float("PEA_TOLERANCE_NUMERIC_EPS", 1e-6),
-        sa_fairness_abs_tol=_env_float("SA_FAIRNESS_ABS_TOL", 1.0),
+        sa_fairness_abs_tol=_env_float("SA_FAIRNESS_ABS_TOL", 0.0),
+        sa_tolerance_mode=Symbol(_env("SA_TOLERANCE_MODE", "adaptive_minimum")),
         lex_eps_abs=_env_float("LEX_EPS_ABS", 1.0),
         flow_tol=_env_float("FLOW_TOL", OOS_DEFAULT_FLOW_TOL),
         feasibility_tol=_env_float("FEASIBILITY_TOL", OOS_DEFAULT_FEASIBILITY_TOL),
@@ -553,6 +705,7 @@ function oos_config_from_environment()
         battery_scale=first([parse(Float64, x) for x in _env_list("BATTERY_SCALE_SET", ["1.0"])]),
         pv_scale=first([parse(Float64, x) for x in _env_list("PV_SCALE_SET", ["1.0"])]),
         formulation_variant=Symbol(_env("FORMULATION_VARIANT", "aggregate_only")),
+        grid_direction_exclusivity=_env_bool("GRID_DIRECTION_EXCLUSIVITY", true),
         use_warm_starts=_env_bool("USE_WARM_STARTS", false),
         solver_threads=_env_int("SOLVER_THREADS", 0),
         require_shared_battery_validation=_env_bool("REQUIRE_SHARED_BATTERY_VALIDATION", true),

@@ -18,6 +18,10 @@ const OOS_OUTPUT_FILES = (
     solve_log="solve_log.csv",
     pea_recovery="pea_recovery.csv",
     configuration_summary="configuration_summary.csv",
+    run_identity="run_identity.csv",
+    fairness_diagnostics="fairness_diagnostics.csv",
+    execution_provenance="execution_provenance.csv",
+    solve_provenance="solve_provenance.csv",
     paired_statistics="paired_statistics.csv",
     experiment_config="experiment_config.json",
     validation_report="validation_report.txt",
@@ -37,9 +41,15 @@ end
 # 18.1 replication_summary.csv
 # -------------------------------------------------------------------------------------
 
-function replication_summary_frame(config::OOSExperimentConfig, metrics::Vector{ReplicationMetrics})
+function replication_summary_frame(
+    config::OOSExperimentConfig,
+    metrics::Vector{ReplicationMetrics},
+    identity::OOSRunIdentity,
+)
     frame = DataFrame(
-        ExperimentID=String[], Replication=Int[], Controller=String[], Fairness=String[],
+        ExperimentID=String[], StructuralInstanceID=String[], PairedBaseID=String[],
+        ParallelTaskID=String[],
+        Replication=Int[], Controller=String[], Fairness=String[],
         FormulationID=String[], FormulationVariant=String[], Resource=String[],
         CompletionStatus=String[], PeriodsCompleted=Int[], HorizonCovered=Float64[],
         TotalOperatingCost=Float64[], AllGridBenchmark=Float64[], TotalSavings=Float64[],
@@ -57,13 +67,14 @@ function replication_summary_frame(config::OOSExperimentConfig, metrics::Vector{
         PEAToleranceActivations=Int[], PEAToleranceActivationRate=Float64[],
         PEAToleranceMeanActive=Float64[], PEAToleranceMeanAllPeriods=Float64[],
         PEAToleranceMax=Float64[], PEAStrictFeasiblePeriods=Int[],
-        TotalBuildTimeSec=Float64[], TotalSolveTimeSec=Float64[],
         OptimizationFailures=Int[], PhysicalViolations=Int[],
         FailureMessage=String[],
     )
     for entry in metrics
         push!(frame, (
-            config.experiment_id, entry.replication_id, string(entry.controller),
+            config.experiment_id, identity.structural_instance_id, identity.paired_base_id,
+            identity.parallel_task_id,
+            entry.replication_id, string(entry.controller),
             string(entry.fairness), config.formulation_id, string(config.formulation_variant),
             entry.resource,
             entry.completed ? "completed" : "aborted", entry.periods_completed,
@@ -83,7 +94,6 @@ function replication_summary_frame(config::OOSExperimentConfig, metrics::Vector{
             entry.pea_tolerance_activations, entry.pea_tolerance_activation_rate,
             entry.pea_tolerance_mean_active, entry.pea_tolerance_mean_all_periods,
             entry.pea_tolerance_max, entry.pea_strict_feasible_periods,
-            entry.total_build_time_sec, entry.total_solve_time_sec,
             entry.optimization_failures, entry.physical_violations,
             entry.failure_message,
         ))
@@ -95,9 +105,14 @@ end
 # 18.2 household_summary.csv
 # -------------------------------------------------------------------------------------
 
-function household_summary_frame(config::OOSExperimentConfig, metrics::Vector{ReplicationMetrics})
+function household_summary_frame(
+    config::OOSExperimentConfig,
+    metrics::Vector{ReplicationMetrics},
+    identity::OOSRunIdentity,
+)
     frame = DataFrame(
-        ExperimentID=String[], Replication=Int[], Controller=String[], Fairness=String[],
+        ExperimentID=String[], StructuralInstanceID=String[], ParallelTaskID=String[],
+        Replication=Int[], Controller=String[], Fairness=String[],
         FormulationID=String[], Resource=String[], House=Int[],
         Demand=Float64[], PVAllocation=Float64[], DemandNormalizedPV=Float64[],
         ChargeContribution=Float64[], DischargeAllocation=Float64[],
@@ -108,7 +123,8 @@ function household_summary_frame(config::OOSExperimentConfig, metrics::Vector{Re
     )
     for entry in metrics, household in entry.households
         push!(frame, (
-            config.experiment_id, entry.replication_id, string(entry.controller),
+            config.experiment_id, identity.structural_instance_id, identity.parallel_task_id,
+            entry.replication_id, string(entry.controller),
             string(entry.fairness), config.formulation_id, entry.resource, household.household,
             household.demand, household.pv_allocation, household.demand_normalized_pv,
             household.charge_contribution, household.discharge_allocation,
@@ -125,9 +141,17 @@ end
 # 18.3 period_actions.csv
 # -------------------------------------------------------------------------------------
 
-function period_actions_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun})
+function period_actions_frame(
+    config::OOSExperimentConfig,
+    runs::Vector{ReplicationRun},
+    identity::OOSRunIdentity,
+)
     frame = DataFrame(
-        FormulationID=String[], Replication=Int[], Controller=String[], Fairness=String[],
+        FormulationID=String[], StructuralInstanceID=String[], ParallelTaskID=String[],
+        ScenarioSupportID=String[], ObjectiveCriterion=String[],
+        Replication=Int[], Controller=String[], Fairness=String[], Resource=String[],
+        RollingStart=Int[], BlockFirstPeriod=Int[], BlockLastPeriod=Int[],
+        EvaluatedFirstPeriod=Int[], EvaluatedLastPeriod=Int[],
         Period=Int[], House=Int[],
         RealizedPV=Float64[], RealizedDemand=Float64[],
         ImplementedP=Float64[], ImplementedZ=Float64[], ImplementedY=Float64[],
@@ -139,9 +163,17 @@ function period_actions_frame(config::OOSExperimentConfig, runs::Vector{Replicat
     )
     for run in runs, record in run.records
         for j in eachindex(record.action.p)
+            block = implementation_block(config, record.rolling_start)
+            evaluated = evaluation_block(config, record.rolling_start)
             push!(frame, (
-                config.formulation_id, record.replication_id, string(record.controller),
-                string(record.fairness), record.period, j,
+                config.formulation_id, identity.structural_instance_id,
+                identity.parallel_task_id, record.scenario_support_id,
+                identity.objective_criterion,
+                record.replication_id, string(record.controller),
+                string(record.fairness), policy_resource(record.fairness),
+                record.rolling_start, first(block), last(block),
+                first(evaluated), last(evaluated),
+                record.period, j,
                 record.realized_pv, record.realized_demand[j],
                 record.action.p[j], record.action.z[j], record.action.y[j],
                 record.action.I[j], record.action.G[j], record.action.lambda[j],
@@ -162,10 +194,16 @@ end
 # 18.4 battery_operation.csv
 # -------------------------------------------------------------------------------------
 
-function battery_operation_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun})
+function battery_operation_frame(
+    config::OOSExperimentConfig,
+    runs::Vector{ReplicationRun},
+    identity::OOSRunIdentity,
+)
     frame = DataFrame(
-        FormulationID=String[], Replication=Int[], Controller=String[], Fairness=String[],
-        Period=Int[], RealizedNode=Int[],
+        FormulationID=String[], StructuralInstanceID=String[], ParallelTaskID=String[],
+        ScenarioSupportID=String[], ObjectiveCriterion=String[],
+        Replication=Int[], Controller=String[], Fairness=String[], Resource=String[],
+        RollingStart=Int[], Period=Int[], RealizedNode=Int[],
         SharedBatteryMode=Int[], AggregateCharge=Float64[], AggregateDischarge=Float64[],
         StateOfChargeBefore=Float64[], StateOfChargeAfter=Float64[],
         ChargingLinkResidual=Float64[], DischargingLinkResidual=Float64[],
@@ -176,8 +214,11 @@ function battery_operation_frame(config::OOSExperimentConfig, runs::Vector{Repli
     for run in runs, record in run.records
         residuals = record.validation.residuals
         push!(frame, (
-            config.formulation_id, record.replication_id, string(record.controller),
-            string(record.fairness), record.period,
+            config.formulation_id, identity.structural_instance_id, identity.parallel_task_id,
+            record.scenario_support_id, identity.objective_criterion,
+            record.replication_id, string(record.controller),
+            string(record.fairness), policy_resource(record.fairness),
+            record.rolling_start, record.period,
             # The realized information state of a receding-horizon simulation is always the
             # root of that period's look-ahead.
             1,
@@ -197,13 +238,18 @@ end
 # 18.5 solve_log.csv
 # -------------------------------------------------------------------------------------
 
-function solve_log_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun})
+function solve_log_frame(
+    config::OOSExperimentConfig,
+    runs::Vector{ReplicationRun},
+    identity::OOSRunIdentity,
+)
     frame = DataFrame(
         Replication=Int[], Period=Int[], Controller=String[], Fairness=String[],
-        FormulationID=String[], Phase=Int[], PhaseLabel=String[],
+        FormulationID=String[], StructuralInstanceID=String[], ParallelTaskID=String[],
+        ScenarioSupportID=String[], RollingStart=Int[],
+        Phase=Int[], PhaseLabel=String[],
         TerminationStatus=String[], PrimalStatus=String[],
         Objective=Float64[], ObjectiveBound=Float64[],
-        BuildTimeSec=Float64[], SolveWallTimeSec=Float64[], SolverTimeSec=Float64[],
         BinaryVariables=Int[], ContinuousVariables=Int[], TotalVariables=Int[],
         Constraints=Int[], Nonzeros=Int[],
         ExpectedModeNodes=Int[], GeneratedModeBinaries=Int[], UniquePolicyModes=Int[],
@@ -211,7 +257,6 @@ function solve_log_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRu
         LookaheadNodes=Int[], LookaheadScenarios=Int[],
         PresolveReducedVariables=Int[], PresolveReducedConstraints=Int[],
         RootRelaxation=Float64[], BranchAndBoundNodes=Int[], FinalGap=Float64[],
-        PeakMemoryMB=Float64[],
         MaxPhysicalResidual=Float64[], FairnessResidual=Float64[],
         FailureMessage=String[],
     )
@@ -222,10 +267,12 @@ function solve_log_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRu
         for phase in result.phases
             push!(frame, (
                 record.replication_id, record.period, string(record.controller),
-                string(record.fairness), config.formulation_id, phase.phase, phase.label,
+                string(record.fairness), config.formulation_id,
+                identity.structural_instance_id, identity.parallel_task_id,
+                record.scenario_support_id, record.rolling_start,
+                phase.phase, phase.label,
                 phase.termination_status, phase.primal_status,
                 phase.objective_value, phase.objective_bound,
-                result.build_time_sec, phase.wall_time_sec, phase.solver_time_sec,
                 phase.binary_variables, phase.continuous_variables, phase.variables,
                 phase.constraints, phase.nonzeros,
                 statistics.expected_mode_nodes, statistics.generated_mode_binaries,
@@ -233,7 +280,6 @@ function solve_log_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRu
                 record.lookahead_nodes, record.lookahead_scenarios,
                 statistics.presolve_reduced_variables, statistics.presolve_reduced_constraints,
                 phase.root_relaxation, phase.branch_and_bound_nodes, phase.final_gap,
-                statistics.peak_memory_mb,
                 max_residual(record.validation.residuals), result.residuals.fairness,
                 result.failure_message,
             ))
@@ -277,10 +323,16 @@ quantity, not a solver feasibility tolerance.
 **same unit, kWh** — it is not dimensionless. It differs from the band in magnitude and purpose
 (default `1e-6` kWh), never in dimension.
 """
-function pea_recovery_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun})
+function pea_recovery_frame(
+    config::OOSExperimentConfig,
+    runs::Vector{ReplicationRun},
+    identity::OOSRunIdentity,
+)
     frame = DataFrame(
-        FormulationID=String[], Replication=Int[], Controller=String[], Fairness=String[],
-        Resource=String[], Period=Int[],
+        FormulationID=String[], StructuralInstanceID=String[], ParallelTaskID=String[],
+        Replication=Int[], Controller=String[], Fairness=String[],
+        Resource=String[], RollingStart=Int[], Period=Int[],
+        BandPolicy=Bool[], BandToleranceMode=String[],
         PEA_Applicable=Bool[], PEA_Strict_Feasible=Bool[],
         PEA_Tolerance_Activated=Bool[], PEA_Tolerance_Used_kWh=Float64[],
         PEA_Strict_Status=String[], PEA_Phase1_Status=String[], PEA_Phase2_Status=String[],
@@ -289,15 +341,206 @@ function pea_recovery_frame(config::OOSExperimentConfig, runs::Vector{Replicatio
     )
     for run in runs, record in run.records
         pea = record.result.pea
+        band_policy = string(record.fairness) in OOS_ADAPTIVE_BAND_POLICIES
         push!(frame, (
-            config.formulation_id, record.replication_id, string(record.controller),
-            string(record.fairness), policy_resource(record.fairness), record.period,
+            config.formulation_id, identity.structural_instance_id, identity.parallel_task_id,
+            record.replication_id, string(record.controller),
+            string(record.fairness), policy_resource(record.fairness),
+            record.rolling_start, record.period,
+            band_policy,
+            record.fairness === SA ? string(config.sa_tolerance_mode) :
+                record.fairness === PEA ? string(config.pea_tolerance_mode) : "not_applicable",
             pea.applicable, pea.strict_feasible,
             pea.tolerance_activated, pea.tolerance_used,
             pea.strict_status, pea.phase1_status, pea.phase2_status,
             pea.recovery_status, pea.failure_source,
             string(config.pea_tolerance_mode), config.pea_tolerance_numeric_eps,
         ))
+    end
+    return frame
+end
+
+
+# -------------------------------------------------------------------------------------
+# run_identity.csv  (stage 10)
+#
+# The complete scientific identity of every configuration, once. It keeps the six temporal
+# quantities separate — repository horizon, base profile length, evaluation horizon, look-ahead
+# horizon, implementation step and required support end — so no reader has to re-derive one from
+# another, and it records the seed-key CONTRACT without exposing any mutable execution detail.
+# -------------------------------------------------------------------------------------
+
+function run_identity_frame(
+    config::OOSExperimentConfig,
+    metrics::Vector{ReplicationMetrics},
+    identity::OOSRunIdentity,
+)
+    frame = DataFrame(
+        ExperimentID=String[], FormulationID=String[], FormulationVariant=String[],
+        StructuralInstanceID=String[], PairedBaseID=String[], DeterministicDataID=String[],
+        DemandAssignmentID=String[], ShareTableID=String[], RepositoryInstanceID=String[],
+        ParallelTaskID=String[], ShardID=String[],
+        Replication=Int[], Controller=String[], Fairness=String[], Resource=String[],
+        FairnessFamily=String[], ApplicableDiagnostic=String[],
+        ObjectiveCriterion=String[],
+        RepositoryHorizon=Int[], BaseProfileLength=Int[], EvaluationHorizon=Int[],
+        LookaheadHorizon=Int[], ImplementationStep=Int[],
+        RequiredPeriodSupportEnd=Int[], RealizedPeriodEnd=Int[], RollingSolveCount=Int[],
+        ConditionalSupportStream=String[], ConditionalSupportSeedKeys=String[],
+        ConditionalSupportSeedExclusions=String[],
+        GridDirectionExclusivity=Bool[],
+    )
+    for entry in metrics
+        push!(frame, (
+            identity.experiment_id, identity.formulation_id, identity.formulation_variant,
+            identity.structural_instance_id, identity.paired_base_id,
+            identity.deterministic_data_id, identity.demand_assignment_id,
+            identity.share_table_id, identity.repository_instance_id,
+            identity.parallel_task_id, identity.shard_id,
+            entry.replication_id, string(entry.controller), string(entry.fairness),
+            entry.resource,
+            entry.fairness_diagnostics.applicable_diagnostic == "descriptive_only" ?
+                "none" : entry.resource,
+            entry.fairness_diagnostics.applicable_diagnostic,
+            identity.objective_criterion,
+            identity.repository_instance_horizon, identity.base_profile_length,
+            identity.evaluation_horizon, identity.lookahead_horizon,
+            identity.implementation_step,
+            identity.required_period_support_end, identity.realized_period_end,
+            rolling_solve_count(config),
+            OOS_LOOKAHEAD_SUPPORT_STREAM,
+            join(["experiment_seed", "oos_replication", "rolling_start"], "|"),
+            join(["controller", "fairness_policy", "solver_phase", "worker", "retry",
+                  "execution_order"], "|"),
+            config.grid_direction_exclusivity,
+        ))
+    end
+    return frame
+end
+
+# -------------------------------------------------------------------------------------
+# fairness_diagnostics.csv  (stage 10)
+#
+# One row per household per configuration, carrying EVERY diagnostic family together with the
+# name of the one that validates this policy. Plan section 4.8: a proportional-rate dispersion
+# does not validate a max-min rule, so `ApplicableDiagnostic` exists to stop a reader presenting
+# an incompatible statistic as validation.
+# -------------------------------------------------------------------------------------
+
+function fairness_diagnostics_frame(
+    config::OOSExperimentConfig,
+    metrics::Vector{ReplicationMetrics},
+    identity::OOSRunIdentity,
+)
+    frame = DataFrame(
+        ExperimentID=String[], FormulationID=String[], StructuralInstanceID=String[],
+        ParallelTaskID=String[], Replication=Int[], Controller=String[], Fairness=String[],
+        Resource=String[], ApplicableDiagnostic=String[], House=Int[],
+        PVAllocation=Float64[], PVRate=Float64[], PVProportionalTarget=Float64[],
+        PVDeviation=Float64[],
+        Savings=Float64[], SavingsRate=Float64[], SavingsProportionalTarget=Float64[],
+        SavingsDeviation=Float64[],
+        StaticShareTarget=Float64[], StaticShareDeviation=Float64[],
+        PVOrderStatistic=Int[], SavingsOrderStatistic=Int[],
+        SortedPV=Float64[], SortedSavings=Float64[],
+        CumulativePVOrder=Float64[], CumulativeSavingsOrder=Float64[],
+        MinHouseholdPV=Float64[], MinHouseholdSavings=Float64[],
+        LexicographicPVShortfall=Float64[], LexicographicSavingsShortfall=Float64[],
+    )
+    for entry in metrics
+        diagnostics = entry.fairness_diagnostics
+        for household in entry.households
+            j = household.household
+            push!(frame, (
+                identity.experiment_id, identity.formulation_id,
+                identity.structural_instance_id, identity.parallel_task_id,
+                entry.replication_id, string(entry.controller), string(entry.fairness),
+                entry.resource, diagnostics.applicable_diagnostic, j,
+                household.pv_allocation, diagnostics.pv_rate[j],
+                diagnostics.pv_proportional_target[j], diagnostics.pv_deviation[j],
+                household.savings, diagnostics.savings_rate[j],
+                diagnostics.savings_proportional_target[j], diagnostics.savings_deviation[j],
+                diagnostics.static_share_target[j], diagnostics.static_share_deviation[j],
+                household.pv_order_statistic, household.savings_order_statistic,
+                diagnostics.sorted_pv[j], diagnostics.sorted_savings[j],
+                diagnostics.cumulative_pv_order[j], diagnostics.cumulative_savings_order[j],
+                diagnostics.min_pv, diagnostics.min_savings,
+                diagnostics.lexicographic_pv_shortfall,
+                diagnostics.lexicographic_savings_shortfall,
+            ))
+        end
+    end
+    return frame
+end
+
+# -------------------------------------------------------------------------------------
+# execution_provenance.csv  (stage 10)
+#
+# Everything that describes HOW a run executed rather than WHAT it computed: wall clock, solver
+# time, worker, retry. Kept in its own file precisely so a sequential run and a parallel run can
+# be compared for scientific equality without these fields taking part (plan section 4.9). No
+# scientific row key ever references them.
+# -------------------------------------------------------------------------------------
+
+function execution_provenance_frame(
+    config::OOSExperimentConfig,
+    metrics::Vector{ReplicationMetrics},
+    identity::OOSRunIdentity;
+    worker::Int=0,
+    retry::Int=0,
+)
+    frame = DataFrame(
+        ExperimentID=String[], ParallelTaskID=String[], ShardID=String[],
+        Replication=Int[], Controller=String[], Fairness=String[],
+        Worker=Int[], Retry=Int[],
+        TotalBuildTimeSec=Float64[], TotalSolveTimeSec=Float64[],
+        OptimizationFailures=Int[], PhysicalViolations=Int[],
+        CompletionStatus=String[], FailureMessage=String[],
+    )
+    for entry in metrics
+        push!(frame, (
+            identity.experiment_id, identity.parallel_task_id, identity.shard_id,
+            entry.replication_id, string(entry.controller), string(entry.fairness),
+            worker, retry,
+            entry.total_build_time_sec, entry.total_solve_time_sec,
+            entry.optimization_failures, entry.physical_violations,
+            entry.completed ? "completed" : "aborted", entry.failure_message,
+        ))
+    end
+    return frame
+end
+
+# -------------------------------------------------------------------------------------
+# solve_provenance.csv  (stage 11)
+#
+# Per-phase timing and memory. It lives here, and NOT in `solve_log.csv`, for the same reason
+# `execution_provenance.csv` exists: these numbers legitimately differ between two runs that
+# computed exactly the same thing, so keeping them in a scientific file made byte-equality
+# impossible to claim. Stage 12 measures runtime from this file.
+# -------------------------------------------------------------------------------------
+
+function solve_provenance_frame(
+    config::OOSExperimentConfig,
+    runs::Vector{ReplicationRun},
+    identity::OOSRunIdentity,
+)
+    frame = DataFrame(
+        ExperimentID=String[], ParallelTaskID=String[],
+        Replication=Int[], Controller=String[], Fairness=String[],
+        Period=Int[], Phase=Int[], PhaseLabel=String[],
+        BuildTimeSec=Float64[], SolveWallTimeSec=Float64[], SolverTimeSec=Float64[],
+        PeakMemoryMB=Float64[],
+    )
+    for run in runs, record in run.records
+        for phase in record.result.phases
+            push!(frame, (
+                identity.experiment_id, identity.parallel_task_id,
+                record.replication_id, string(record.controller), string(record.fairness),
+                record.period, phase.phase, phase.label,
+                record.result.build_time_sec, phase.wall_time_sec, phase.solver_time_sec,
+                record.result.statistics.peak_memory_mb,
+            ))
+        end
     end
     return frame
 end
@@ -341,6 +584,8 @@ function paired_statistics_frame(config::OOSExperimentConfig, summaries::Vector{
         Baseline=String[], Comparison=String[], Observations=Int[],
         Mean=Float64[], StandardDeviation=Float64[], StandardError=Float64[],
         ConfidenceLow=Float64[], ConfidenceHigh=Float64[],
+        ComparisonKind=String[], MeanRelativePercent=Float64[],
+        ZeroDenominatorObservations=Int[], RelativeDenominatorFloor=Float64[],
     )
     for summary in summaries
         push!(frame, (
@@ -348,6 +593,8 @@ function paired_statistics_frame(config::OOSExperimentConfig, summaries::Vector{
             summary.baseline, summary.comparison, summary.observations,
             summary.mean, summary.standard_deviation, summary.standard_error,
             summary.confidence_low, summary.confidence_high,
+            summary.comparison_kind, summary.mean_relative_percent,
+            summary.zero_denominator_observations, OOS_RELATIVE_COMPARATOR_FLOOR,
         ))
     end
     return frame
@@ -473,17 +720,76 @@ function experiment_config_dictionary(
                 demand_profile=config.demand_profile,
             ),
             "oos_stream" => "oos_path",
-            "lookahead_stream" => "lookahead",
+            # Stage 5 retired the `lookahead` stream, whose key included the controller. The
+            # conditional support is now keyed by (experiment seed, replication, rolling start)
+            # only, so the three methods are views of one object rather than three samples.
+            "conditional_support_stream" => OOS_LOOKAHEAD_SUPPORT_STREAM,
+            "conditional_support_seed_keys" =>
+                ["experiment_seed", "oos_replication", "rolling_start"],
+            "conditional_support_seed_exclusions" =>
+                ["controller", "fairness_policy", "solver_phase", "worker", "retry",
+                 "execution_order"],
             "in_sample_stream" => "in_sample",
             "demand_profile_stream" => "demand_profiles",
             "fairness_excluded_from_seed" => true,
+            "controller_excluded_from_seed" => true,
+        ),
+        # Abstract temporal contract. Counted in MODEL PERIODS: this section deliberately
+        # contains no period duration and no calendar cycle, because a period has no clock-time
+        # meaning in this experiment. The repository instance horizon stays separately reported
+        # as `instance.horizon` (= template.T) and is never renamed or reinterpreted here.
+        "temporal_structure" => Dict{String,Any}(
+            "period_semantics" => "abstract model period; no clock-time interpretation is implied",
+            "period_unit" => "model periods",
+            "evaluation_horizon" => config.evaluation_horizon,
+            "lookahead_horizon" => config.lookahead_horizon,
+            "implementation_step" => config.implementation_step,
+            "known_prefix_length" => known_prefix_length(config),
+            "rolling_solve_count" => rolling_solve_count(config),
+            "rolling_iteration_starts" => rolling_iteration_starts(config),
+            "required_period_support_end" => required_period_support_end(config),
+            "realized_period_end" => realized_period_end(config),
+            # Auditability of the final block: it may legitimately run past the evaluation
+            # horizon, and only its evaluated portion contributes to reported metrics.
+            "final_rolling_iteration_start" => final_rolling_iteration_start(config),
+            "final_implementation_block" =>
+                collect(implementation_block(config, final_rolling_iteration_start(config))),
+            "final_evaluation_block" =>
+                collect(evaluation_block(config, final_rolling_iteration_start(config))),
+            "final_lookahead_window" =>
+                collect(lookahead_periods(config, final_rolling_iteration_start(config))),
+            # Kept separate from every endpoint above: T0 is the repository instance horizon and
+            # the length of the repeated base deterministic profile, never the evaluation or
+            # support horizon. It is recorded exactly once, under this name; the repetition rule
+            # itself is identified by the mapping fields below. No second key restates it, and
+            # deliberately none of them carries a clock-time or calendar word.
+            "repository_instance_horizon" => template.T,
+            "period_mapping_name" => OOS_PERIOD_MAPPING_NAME,
+            "period_mapping_version" => OOS_PERIOD_MAPPING_VERSION,
+            # Honest scope marker. Stage 4 wired the loop, the look-ahead window, the
+            # optimization horizon and the terminal target; stage 6 wired the known prefix and
+            # multi-period implementation blocks, so every admissible `h` is now simulated.
+            "contract_status" => "wired_rolling_blocks: the simulator iterates the rolling " *
+                                 "starts, every solve spans exactly lookahead_horizon abstract " *
+                                 "periods, the terminal state of charge binds at the end of " *
+                                 "each window, the complete known prefix of length " *
+                                 "implementation_step is revealed to every controller before it " *
+                                 "optimizes, and the whole committed block is implemented and " *
+                                 "validated while only its intersection with 1:H is evaluated",
         ),
         "controllers" => [string(controller) for controller in config.controller_set],
         "fairness_rules" => [string(policy) for policy in config.fairness_set],
         "configuration_count" => configuration_count(config),
         "oos_replications" => config.oos_replications,
         "controller_parameters" => Dict{String,Any}(
+            # DEPRECATED SINCE STAGE 5. `TWO_STAGE_RH` no longer draws its own scenarios: it uses
+            # the leaf paths and leaf probabilities of the one common conditional support, whose
+            # leaf count follows `multistage_branching` and `multistage_periods_per_stage`. The
+            # configured value is preserved for provenance and is not used for generation; the
+            # campaign leaf count is a stage-12 calibration decision.
             "two_stage_scenarios" => config.two_stage_scenarios,
+            "two_stage_scenarios_drives_generation" => false,
+            "two_stage_leaves_derived_from" => "common_conditional_support",
             "multistage_branching" => config.multistage_branching,
             "multistage_periods_per_stage" => config.multistage_periods_per_stage,
         ),
@@ -513,6 +819,7 @@ function experiment_config_dictionary(
         "solver_settings" => Dict{String,Any}(
             "time_limit_sec" => config.solver_time_limit_sec,
             "threads" => config.solver_threads,
+            "mip_gap" => config.solver_mip_gap,
         ),
         "instance" => Dict{String,Any}(
             "id" => template.id,
@@ -653,6 +960,32 @@ end
 # Writer
 # -------------------------------------------------------------------------------------
 
+"""
+Column priority that defines the canonical row order of every output frame.
+
+Stage 11 found that two SERIAL runs differing only in the order of the controller/policy loop
+produced byte-different CSVs with identical content, because rows were written in production
+order. That would have made the stage-13 "identical merged content" gate impossible to satisfy
+honestly. Sorting every frame by its scientific key before writing makes the files
+order-invariant BY CONSTRUCTION rather than by luck.
+
+Only the columns a frame actually has are used, in this order. Execution provenance never
+appears here: it is not a scientific key.
+"""
+const OOS_CANONICAL_ROW_ORDER = [
+    "StructuralInstanceID", "ParallelTaskID", "ExperimentID", "FormulationID",
+    "Metric", "Baseline", "Comparison", "ComparisonKind",
+    "Label", "Replication", "Controller", "Fairness",
+    "RollingStart", "Period", "Phase", "PhaseLabel", "House",
+]
+
+"""Sort a frame into the canonical row order, using whichever key columns it carries."""
+function canonical_row_sort(frame::DataFrame)
+    keys = [column for column in OOS_CANONICAL_ROW_ORDER if column in names(frame)]
+    isempty(keys) && return frame
+    return sort(frame, keys)
+end
+
 """Write every campaign artefact. Existing model-result directories are never touched."""
 function write_campaign_outputs(
     config::OOSExperimentConfig,
@@ -664,30 +997,62 @@ function write_campaign_outputs(
     gate_reports::Vector{GateReport};
     validation_text::String="",
     configuration_summaries::Vector{ConfigurationPEASummary}=ConfigurationPEASummary[],
+    identity::Union{Nothing,OOSRunIdentity}=nothing,
+    worker::Int=0,
+    retry::Int=0,
+    write_aggregates::Bool=true,
 )
     ensure_output_directory(config)
     written = String[]
+    # The identity is a deterministic function of the configuration and the instance, so a caller
+    # that does not supply one gets exactly the same object the campaign would have built.
+    resolved_identity = identity === nothing ?
+        run_identity(
+            config, OOSRollingContext(config, template),
+            resolve_static_share_table_placeholder(config, template), 0,
+        ) : identity
 
     for (key, frame) in (
-        (:replication_summary, replication_summary_frame(config, metrics)),
-        (:household_summary, household_summary_frame(config, metrics)),
-        (:period_actions, period_actions_frame(config, runs)),
-        (:battery_operation, battery_operation_frame(config, runs)),
-        (:solve_log, solve_log_frame(config, runs)),
-        (:pea_recovery, pea_recovery_frame(config, runs)),
-        (:configuration_summary, configuration_summary_frame(config, configuration_summaries)),
-        (:paired_statistics, paired_statistics_frame(config, summaries)),
+        (:replication_summary,
+         replication_summary_frame(config, metrics, resolved_identity)),
+        (:household_summary, household_summary_frame(config, metrics, resolved_identity)),
+        (:run_identity, run_identity_frame(config, metrics, resolved_identity)),
+        (:fairness_diagnostics, fairness_diagnostics_frame(config, metrics, resolved_identity)),
+        (:execution_provenance,
+         execution_provenance_frame(config, metrics, resolved_identity; worker=worker,
+                                    retry=retry)),
+        (:solve_provenance, solve_provenance_frame(config, runs, resolved_identity)),
+        (:period_actions, period_actions_frame(config, runs, resolved_identity)),
+        (:battery_operation, battery_operation_frame(config, runs, resolved_identity)),
+        (:solve_log, solve_log_frame(config, runs, resolved_identity)),
+        (:pea_recovery, pea_recovery_frame(config, runs, resolved_identity)),
         (:model_audit, model_audit_frame(config, audits)),
     )
         path = output_path(config, key)
-        CSV.write(path, frame)
+        CSV.write(path, canonical_row_sort(frame))
         push!(written, path)
+    end
+
+    # Campaign aggregates. A SHARD sets `write_aggregates=false`: it holds one replication of one
+    # paired base, so pooling over replications inside it is meaningless and concatenating the
+    # result across shards would produce one row per shard instead of one pooled row. The merge
+    # recomputes them once, from the merged replication-level rows.
+    if write_aggregates
+        for (key, frame) in (
+            (:configuration_summary,
+             configuration_summary_frame(config, configuration_summaries)),
+            (:paired_statistics, paired_statistics_frame(config, summaries)),
+        )
+            path = output_path(config, key)
+            CSV.write(path, canonical_row_sort(frame))
+            push!(written, path)
+        end
     end
 
     failures = failed_solve_log_frame(config, runs)
     if nrow(failures) > 0
         path = joinpath(config.output_directory, "solve_failures.csv")
-        CSV.write(path, failures)
+        CSV.write(path, canonical_row_sort(failures))
         push!(written, path)
     end
 
@@ -710,3 +1075,19 @@ function write_campaign_outputs(
 
     return written
 end
+
+# -------------------------------------------------------------------------------------
+# Retained two-argument frame shapes
+#
+# Callers that hold only the configuration and the runs get the placeholder identity, so the
+# stage-10 columns are always well formed. The campaign and stage 13 always pass their real one.
+# -------------------------------------------------------------------------------------
+
+period_actions_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun}) =
+    period_actions_frame(config, runs, placeholder_run_identity(config))
+battery_operation_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun}) =
+    battery_operation_frame(config, runs, placeholder_run_identity(config))
+solve_log_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun}) =
+    solve_log_frame(config, runs, placeholder_run_identity(config))
+pea_recovery_frame(config::OOSExperimentConfig, runs::Vector{ReplicationRun}) =
+    pea_recovery_frame(config, runs, placeholder_run_identity(config))

@@ -44,6 +44,58 @@ parse_fairness_policy(label::AbstractString) = get(OOS_FAIRNESS_POLICIES, upperc
     )
 end
 
+"""
+Parse a multistage look-ahead tree specification into `(branching, periods_per_stage)`.
+
+Two notations are accepted, matching the two ways `multistage_branching` /
+`multistage_periods_per_stage` are used elsewhere in this module:
+
+  * A comma-separated branching-factor LIST, one entry per stage transition, e.g. `"2,2"` for
+    3 stages branching by 2 each time. `periods_per_stage` comes back empty, so the caller keeps
+    the existing automatic even split of the remaining look-ahead window across stages (see
+    `multistage_stage_layout`).
+  * A compact SYMMETRIC `stages:children:periods_per_stage` triplet, in the same `S:C:P` order as
+    `TREE_SET`, e.g. `"4:4:6"` for 4 stages, branching factor 4 at every transition and 6 periods
+    at every stage. Expanded internally to `fill(children, stages - 1)` and
+    `fill(periods_per_stage, stages)`, which is exactly the list form `OOSExperimentConfig`
+    already validates (`length(periods_per_stage) == length(branching) + 1`).
+
+The two notations cannot be mixed within one spec: a comma-separated list where any entry
+contains `':'` is rejected rather than silently reinterpreted.
+"""
+function parse_multistage_tree_spec(raw::AbstractString)
+    function _tree_spec_int(text)
+        parsed = tryparse(Int, text)
+        parsed === nothing && error(
+            "La especificación del árbol multistage tiene un entero inválido: \"$text\" " *
+            "(en \"$raw\")."
+        )
+        return parsed
+    end
+
+    items = [strip(item) for item in split(raw, ',') if !isempty(strip(item))]
+    isempty(items) && error("La especificación del árbol multistage no puede estar vacía.")
+
+    if length(items) == 1 && occursin(':', items[1])
+        parts = split(items[1], ':')
+        length(parts) == 3 || error(
+            "Formato compacto inválido \"$raw\": usa stages:children:periods_per_stage, " *
+            "por ejemplo \"4:4:6\"."
+        )
+        stages, children, periods_per_stage = (_tree_spec_int(part) for part in parts)
+        stages >= 1 || error("stages debe ser >= 1 en \"$raw\".")
+        children >= 1 || error("children debe ser >= 1 en \"$raw\".")
+        periods_per_stage >= 1 || error("periods_per_stage debe ser >= 1 en \"$raw\".")
+        return (fill(children, stages - 1), fill(periods_per_stage, stages))
+    end
+
+    any(occursin(':', item) for item in items) && error(
+        "No se puede combinar el formato de lista (\",\") con el formato compacto (\":\") en " *
+        "una misma especificación: \"$raw\"."
+    )
+    return ([_tree_spec_int(item) for item in items], Int[])
+end
+
 """`true` when the policy needs the lexicographic max-min machinery."""
 is_lexicographic_policy(policy::FairnessPolicy) = policy in (LEXMMFPEA, LEXMMFSA)
 
@@ -79,6 +131,16 @@ How the PEA equality is handled when the realized past makes it unreachable.
 const OOS_PEA_TOLERANCE_MODES = (:strict, :adaptive_minimum, :fixed_band)
 
 """
+How the SA savings equality is handled when the realized past makes it unreachable.
+
+Identical vocabulary and identical semantics to `OOS_PEA_TOLERANCE_MODES`, for the same reason:
+both rules are horizon-total equalities imposed period after period on a fixed realized past, so
+both can become unreachable. Stage 8 made that visible for SA by closing the grid-direction
+channel that had been absorbing the shortfall. `:adaptive_minimum` is the default.
+"""
+const OOS_SA_TOLERANCE_MODES = (:strict, :adaptive_minimum, :fixed_band)
+
+"""
 Threshold above which a computed PEA band counts as an *activation*.
 
 Bands below this value are numerically indistinguishable from a strict solve and are reported
@@ -102,6 +164,23 @@ numerically necessary.
 const OOS_DEFAULT_FLOW_TOL = 1e-5
 const OOS_DEFAULT_FEASIBILITY_TOL = 1e-5
 const OOS_DEFAULT_INTEGRALITY_TOL = 1e-6
+
+"""
+Default abstract temporal structure of the rolling-horizon experiment.
+
+A period is an **abstract model period**. None of these three numbers carries a clock-time
+interpretation: the physical length of a period lives only in the underlying instance
+(`template.delta`) and is never inferred from the rolling-horizon configuration.
+
+Single source of truth, exactly like the tolerance defaults above: the struct keyword defaults,
+the environment parsing and the shell runners all reference these constants, so the temporal
+contract cannot differ depending on how the campaign was launched.
+
+The semantics and the pure helpers derived from them live in `temporal.jl`.
+"""
+const OOS_DEFAULT_EVALUATION_HORIZON = 24
+const OOS_DEFAULT_LOOKAHEAD_HORIZON = 24
+const OOS_DEFAULT_IMPLEMENTATION_STEP = 1
 
 # -------------------------------------------------------------------------------------
 # Solver-status and failure-attribution vocabulary
@@ -180,6 +259,24 @@ struct OOSExperimentConfig
     experiment_seed::Int
     oos_replications::Int
 
+    # --- abstract temporal structure ----------------------------------------------------
+    # H, L and h in the notation of docs/oos_redesign_plan.md. Counted in ABSTRACT MODEL
+    # PERIODS: no minutes, hours, days or calendar cycle is implied or derivable from them.
+    #
+    # As of redesign stage 4 these three fields DRIVE the experiment: the simulator iterates the
+    # rolling starts derived from H and h, every optimization spans exactly L abstract periods,
+    # and the terminal state-of-charge target binds at the end of that window. `template.T` keeps
+    # its own separate meaning — repository instance horizon and base profile length — and is
+    # never redefined as H, L or a support endpoint. See `temporal.jl` for the derived quantities
+    # and `rolling_context.jl` for the object that binds them to the instance data.
+    #
+    # `implementation_step` is still validated and reported for any admissible value, but the
+    # simulator implements exactly one period per rolling start and rejects h > 1; generalizing
+    # that is stage 6.
+    evaluation_horizon::Int
+    lookahead_horizon::Int
+    implementation_step::Int
+
     controller_set::Vector{ControllerKind}
     fairness_set::Vector{FairnessPolicy}
 
@@ -194,6 +291,7 @@ struct OOSExperimentConfig
     lex_eps_abs::Float64
 
     pea_tolerance_mode::Symbol
+    sa_tolerance_mode::Symbol
     # Absolute numerical allowance in kWh, added to epsilon_pea_star in the Phase-II cap.
     # Same unit as epsilon_pea; it is NOT dimensionless.
     pea_tolerance_numeric_eps::Float64
@@ -203,6 +301,21 @@ struct OOSExperimentConfig
     integrality_tol::Float64
 
     solver_time_limit_sec::Float64
+
+    """
+    Relative MIP gap demanded of every solve, declared rather than inherited.
+
+    CPLEX's own default is `1e-4`. On this study's models the mean look-ahead objective is about
+    283 847, so that default admits roughly 28 cost units of slack per solve, and a trajectory of
+    24 solves can absorb several hundred — the same order as the smallest paired controller
+    effect the campaign estimates (337). A tolerance able to swallow the quantity being measured
+    must not be an unstated property of the solver.
+
+    The default here is `1e-6`: about 0.28 cost units per solve, three orders of magnitude below
+    the smallest effect, and still far cheaper to reach than proven optimality (`0.0`), which a
+    MILP of this size cannot be relied on to deliver inside any fixed time limit.
+    """
+    solver_mip_gap::Float64
 
     formulation_id::String
     allow_legacy_conversion::Bool
@@ -223,6 +336,24 @@ struct OOSExperimentConfig
     battery_scale::Float64
     pv_scale::Float64
     formulation_variant::Symbol
+
+    """
+    Enforce that no household imports and exports at the same information state (stage 8).
+
+    Default `true`. The stage-8 Phase-A audit found real household-level overlap — up to 318 kWh
+    in a single period — under `SA`, because inflating a household's operating cost by pushing
+    energy out and back through the grid is a way to drive its realized savings DOWN onto the
+    fairness target. A household has one grid connection point, so that trade is not physically
+    admissible, and a fairness rule satisfied by burning energy is an artefact rather than an
+    allocation. See `docs/oos_stage8_completion_report.md`.
+
+    Kept configurable so the model-size and runtime price of the exclusivity binaries can be
+    measured in stage 12 rather than assumed. It is a GRID OPERATING RULE, so it is applied
+    identically to every controller and every fairness policy (plan section 4.5); it must never
+    be switched per policy.
+    """
+    grid_direction_exclusivity::Bool
+
     use_warm_starts::Bool
     solver_threads::Int
     require_shared_battery_validation::Bool
@@ -233,15 +364,19 @@ end
 function OOSExperimentConfig(;
     experiment_seed::Int=12345,
     oos_replications::Int=20,
+    evaluation_horizon::Int=OOS_DEFAULT_EVALUATION_HORIZON,
+    lookahead_horizon::Int=OOS_DEFAULT_LOOKAHEAD_HORIZON,
+    implementation_step::Int=OOS_DEFAULT_IMPLEMENTATION_STEP,
     controller_set::Vector{ControllerKind}=collect(instances(ControllerKind)),
     fairness_set::Vector{FairnessPolicy}=collect(instances(FairnessPolicy)),
     two_stage_scenarios::Int=20,
     multistage_branching::Vector{Int}=[2, 2],
     multistage_periods_per_stage::Vector{Int}=Int[],
     fairness_abs_tol::Float64=0.0,
-    sa_fairness_abs_tol::Float64=1.0,
+    sa_fairness_abs_tol::Float64=0.0,
     lex_eps_abs::Float64=1.0,
     pea_tolerance_mode::Symbol=:adaptive_minimum,
+    sa_tolerance_mode::Symbol=:adaptive_minimum,
     # A small absolute numerical allowance in kWh (same unit as epsilon_pea). It exists only so
     # the Phase-II cap cannot be made infeasible by round-off in the Phase-I optimum, and is
     # nine or more orders of magnitude below the bands actually observed, so it never relaxes
@@ -251,6 +386,7 @@ function OOSExperimentConfig(;
     feasibility_tol::Float64=OOS_DEFAULT_FEASIBILITY_TOL,
     integrality_tol::Float64=OOS_DEFAULT_INTEGRALITY_TOL,
     solver_time_limit_sec::Float64=600.0,
+    solver_mip_gap::Float64=1e-6,
     formulation_id::String="shared_battery_mode_node_level_v1",
     allow_legacy_conversion::Bool=false,
     export_representative_models::Bool=true,
@@ -267,6 +403,7 @@ function OOSExperimentConfig(;
     battery_scale::Float64=1.0,
     pv_scale::Float64=1.0,
     formulation_variant::Symbol=:aggregate_only,
+    grid_direction_exclusivity::Bool=true,
     use_warm_starts::Bool=false,
     solver_threads::Int=0,
     require_shared_battery_validation::Bool=true,
@@ -274,6 +411,8 @@ function OOSExperimentConfig(;
     prompt_version::String="oos_receding_horizon_prompt_v1",
 )
     oos_replications >= 1 || error("oos_replications debe ser >= 1.")
+    # Centralized fail-fast validation of the abstract temporal contract (see temporal.jl).
+    validate_temporal_contract(evaluation_horizon, lookahead_horizon, implementation_step)
     isempty(controller_set) && error("controller_set no puede estar vacío.")
     isempty(fairness_set) && error("fairness_set no puede estar vacío.")
     two_stage_scenarios >= 1 || error("two_stage_scenarios debe ser >= 1.")
@@ -290,10 +429,26 @@ function OOSExperimentConfig(;
     fairness_abs_tol >= 0 || error("fairness_abs_tol debe ser >= 0.")
     sa_fairness_abs_tol >= 0 || error("sa_fairness_abs_tol debe ser >= 0.")
     lex_eps_abs >= 0 || error("lex_eps_abs debe ser >= 0.")
+    solver_mip_gap >= 0 || error("solver_mip_gap debe ser >= 0.")
     pea_tolerance_mode in OOS_PEA_TOLERANCE_MODES || error(
         "pea_tolerance_mode no soportado: $pea_tolerance_mode. " *
         "Usa :strict, :adaptive_minimum o :fixed_band."
     )
+    sa_tolerance_mode in OOS_SA_TOLERANCE_MODES || error(
+        "sa_tolerance_mode no soportado: $sa_tolerance_mode. " *
+        "Usa :strict, :adaptive_minimum o :fixed_band."
+    )
+    if sa_fairness_abs_tol > 0 && sa_tolerance_mode !== :fixed_band
+        error(
+            "sa_fairness_abs_tol=$sa_fairness_abs_tol es una banda económica fija y quedó en " *
+            "desuso en la etapa 8. Con sa_tolerance_mode=:$sa_tolerance_mode se ignoraría en " *
+            "silencio, lo que cambiaría la política SA sin dejar rastro. Usa " *
+            "sa_tolerance_mode=:fixed_band de forma explícita, o deja sa_fairness_abs_tol=0.0."
+        )
+    end
+    if sa_tolerance_mode === :fixed_band && sa_fairness_abs_tol <= 0
+        error("sa_tolerance_mode=:fixed_band requiere sa_fairness_abs_tol > 0.")
+    end
     pea_tolerance_numeric_eps > 0 ||
         error("pea_tolerance_numeric_eps (kWh) debe ser > 0.")
     if fairness_abs_tol > 0 && pea_tolerance_mode !== :fixed_band
@@ -321,17 +476,19 @@ function OOSExperimentConfig(;
 
     return OOSExperimentConfig(
         experiment_seed, oos_replications,
+        evaluation_horizon, lookahead_horizon, implementation_step,
         unique(controller_set), unique(fairness_set),
         two_stage_scenarios, copy(multistage_branching), copy(multistage_periods_per_stage),
         fairness_abs_tol, sa_fairness_abs_tol, lex_eps_abs,
-        pea_tolerance_mode, pea_tolerance_numeric_eps,
+        pea_tolerance_mode, sa_tolerance_mode, pea_tolerance_numeric_eps,
         flow_tol, feasibility_tol, integrality_tol,
-        solver_time_limit_sec,
+        solver_time_limit_sec, solver_mip_gap,
         String(strip(formulation_id)), allow_legacy_conversion, export_representative_models,
         output_directory,
         instance_file, in_sample_stages, in_sample_children, in_sample_periods_per_stage,
         households, theta, avg_demand, dev_demand, demand_profile,
-        battery_scale, pv_scale, formulation_variant, use_warm_starts, solver_threads,
+        battery_scale, pv_scale, formulation_variant, grid_direction_exclusivity,
+        use_warm_starts, solver_threads,
         require_shared_battery_validation, experiment_id, prompt_version,
     )
 end
@@ -347,10 +504,14 @@ configuration_count(config::OOSExperimentConfig) =
 """
 Per-household demand model of the calibrated stochastic process.
 
-`active_periods` follows the repository convention in `demandProfile`: morning = 1:8,
-midday = 9:16, night = 17:24 and `alea` = every period. Demand is drawn independently per
-period from `Normal(avg, dev)` inside the active window and is zero elsewhere, exactly as
-in `codes/parametersMS.jl`.
+For a base template, `active_periods` follows the repository convention in `demandProfile`:
+morning = 1:8, midday = 9:16, night = 17:24 and `alea` = every period. Demand is drawn
+independently per period from `Normal(avg, dev)` inside the active window and is zero elsewhere,
+exactly as in `codes/parametersMS.jl`.
+
+An `OOSPeriodDataSupport` may hold a deep-copied model whose activity is extended beyond the
+repository horizon. That activity is derived from this resolved base list through the centralized
+abstract-period mapping; the profile is never sampled again.
 """
 struct OOSHouseholdDemandModel
     household::Int
@@ -367,6 +528,11 @@ Physical parameters, prices and the deterministic PV profile come from the repos
 verified `generateInstance` / `scaleInstance!` pipeline. The stochastic structure lives in
 the uncertainty provider so that the in-sample look-ahead world and the out-of-sample world
 are generated by one calibrated process.
+
+`T`, `nu` and `pv_det` retain their repository meanings here: `T` is the repository instance
+horizon, `nu` is exactly `J x T`, and `pv_det` has exactly `T` entries. Extended deterministic
+data live in the separate `OOSPeriodDataSupport`; `T` is never redefined as an evaluation or
+support endpoint.
 """
 struct OOSInstanceTemplate
     id::String
@@ -383,8 +549,8 @@ struct OOSInstanceTemplate
     f_bar::Float64
     mu::Float64
     beta::Float64
-    nu::Matrix{Float64}      # J x T electricity purchase prices
-    pv_det::Vector{Float64}  # deterministic PV profile, length T
+    nu::Matrix{Float64}      # base J x T electricity purchase prices
+    pv_det::Vector{Float64}  # base deterministic PV profile, exactly length T
     theta::Float64           # PV multiplicative-error standard deviation
     demand_models::Vector{OOSHouseholdDemandModel}
     metadata::Dict{String,Any}
@@ -549,6 +715,13 @@ struct ModelStatistics
     root_relaxation::Float64
     branch_and_bound_nodes::Int
     final_gap::Float64
+    """
+    Peak resident set size of the worker process, in MiB, at the time this model was solved.
+
+    Execution provenance, not science: it depends on the machine and on everything the process
+    did earlier. It is reported in `solve_provenance.csv` only, and is excluded from the
+    scientific digest that the parallel-equivalence gate compares.
+    """
     peak_memory_mb::Float64
 end
 
@@ -637,4 +810,13 @@ struct ControllerResult
 
     """Strict-first / adaptive-minimum PEA workflow record for this period."""
     pea::PEARecoveryRecord
+
+    """
+    The complete ordered block of committed actions, one per period of `t : t+h-1`.
+
+    Stage 6. `action` above is `first(block_actions)`, retained because most consumers only ever
+    look at the rolling start. With `h = 1` the two carry the same single action. Empty whenever
+    the solve produced no implementable decision.
+    """
+    block_actions::Vector{PeriodAction}
 end

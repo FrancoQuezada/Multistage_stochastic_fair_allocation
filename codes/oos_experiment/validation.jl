@@ -24,13 +24,22 @@ Checks, with the configured tolerances and never with exact comparisons against 
   * battery transition `|s_after - (s_before + delta e_c Z - delta Y / e_d)| <= eps_feas`
   * shared mode        no simultaneous aggregate flows, both rate links, binary mode
   * bounds             state-of-charge window, rate limits, nonnegativity, terminal residual
+
+`lookahead_end` is the last abstract period of the window this action was optimized over. The
+terminal state-of-charge target binds only there, so the realized action is held to it only when
+the implemented period *is* that endpoint. Under the stage-4 default (`h = 1 < L = 24`) it never
+is: the target is a model-side boundary condition on the moving window, not a promise about the
+realized trajectory. Passing `nothing` disables the check entirely; the retained pre-stage-4
+default is `template.T`, which reproduces the old behaviour exactly.
 """
 function validate_period_action(
-    template::OOSInstanceTemplate,
+    source::OOSPricedSource,
     state::SimulationState,
     action::PeriodAction,
-    config::OOSExperimentConfig,
+    config::OOSExperimentConfig;
+    lookahead_end::Union{Nothing,Int}=priced_template(source).T,
 )
+    template = priced_template(source)
     violations = String[]
     J = template.J
     t = action.period
@@ -102,7 +111,8 @@ function validate_period_action(
     lambda_residual <= config.feasibility_tol ||
         push!(violations, "Los coeficientes de asignación suman $(sum(action.lambda)).")
 
-    terminal_residual = t == template.T ? abs(soc_after - template.s_I) : 0.0
+    terminal_residual = lookahead_end !== nothing && t == lookahead_end ?
+        abs(soc_after - template.s_I) : 0.0
     terminal_residual <= config.feasibility_tol ||
         push!(violations, "Residuo terminal de la batería: $terminal_residual.")
 
@@ -112,6 +122,92 @@ function validate_period_action(
         integrality, soc_bound_residual, terminal_residual, 0.0,
     )
     return ActionValidation(isempty(violations), residuals, soc_after, violations)
+end
+
+# =====================================================================================
+# State recoverability across rolling solves (OOS redesign stage 9)
+#
+# Stage 6 made one solve commit `h` periods. The state handed to the NEXT solve is therefore the
+# product of `h` sequential physical transitions, and the next look-ahead is built as if that
+# state were exactly reachable. If it is not — if the state drifted, left its admissible window,
+# or disagrees with the trajectory that produced it — the next solve is answering a different
+# question than the one the experiment believes it asked.
+#
+# These checks are diagnostic and BLOCKING: an unrecoverable state stops the configuration. They
+# never repair anything. There is no clipping, no rounding onto a bound, no substitution of
+# another controller's state and no fallback: that prohibition is the whole point of the stage.
+# =====================================================================================
+
+"""Outcome of checking that a state may legitimately be carried into the next rolling solve."""
+struct StateRecoverability
+    recoverable::Bool
+    period::Int
+    soc::Float64
+    soc_bound_residual::Float64
+    replay_residual::Float64
+    violations::Vector{String}
+end
+
+"""
+Check that the state entering the next rolling solve is exactly the one the block produced.
+
+Three independent conditions, none of which the simulator's per-action validation already covers:
+
+  1. **Continuity.** The state's period is the one after the block that was just implemented, and
+     its revealed history covers exactly that block. A gap or an overlap means a period was
+     skipped or implemented twice.
+  2. **Admissibility.** The carried state of charge lies inside `[s_min, s_max]`. The per-action
+     check verifies the transition; this verifies the value that survives it, which is what the
+     next model will use as `state.soc_before`.
+  3. **Replay.** Re-applying the block's implemented aggregate flows to the state of charge that
+     entered the block must reproduce the carried value. This catches an accumulated drift that
+     no single-period residual is large enough to reveal.
+
+`entry_soc` is the state of charge before the first action of the block.
+"""
+function check_state_recoverability(
+    source::OOSPricedSource,
+    state::SimulationState,
+    block::AbstractUnitRange{Int},
+    entry_soc::Float64,
+    actions::AbstractVector{PeriodAction},
+    config::OOSExperimentConfig,
+)
+    template = priced_template(source)
+    violations = String[]
+
+    length(actions) == length(block) || push!(violations,
+        "El bloque $block comprometió $(length(actions)) acciones.")
+    state.period == last(block) + 1 || push!(violations,
+        "Tras implementar $block el estado quedó en el período $(state.period) y debía quedar " *
+        "en $(last(block) + 1).")
+    state.revealed_periods >= last(block) || push!(violations,
+        "La historia revelada llega a $(state.revealed_periods) y el bloque $block ya fue " *
+        "implementado.")
+
+    soc = state.soc_before
+    soc_bound_residual = max(soc - template.s_max, template.s_min - soc, 0.0)
+    soc_bound_residual <= config.feasibility_tol || push!(violations,
+        "El estado de carga transportado $soc está fuera de [$(template.s_min), " *
+        "$(template.s_max)] por $soc_bound_residual.")
+
+    replayed = entry_soc
+    for action in actions
+        replayed = induced_soc(template, replayed, action.aggregate_charge,
+                               action.aggregate_discharge)
+    end
+    replay_residual = abs(replayed - soc)
+    # Scaled by the block length: `h` sequential transitions can accumulate `h` times the
+    # per-transition round-off, and holding a ten-period block to a one-period tolerance would
+    # reject arithmetic rather than error.
+    replay_tolerance = max(1, length(block)) * config.feasibility_tol
+    replay_residual <= replay_tolerance || push!(violations,
+        "Reaplicar los flujos del bloque $block da $replayed y el estado transporta $soc " *
+        "(residuo $replay_residual > $replay_tolerance).")
+
+    return StateRecoverability(
+        isempty(violations), state.period, soc, soc_bound_residual, replay_residual, violations,
+    )
 end
 
 # =====================================================================================
@@ -233,28 +329,33 @@ Run the compatibility gate on the full experiment stack: one gate solve per cont
 per allocation/fairness rule, verifying the mode condition end to end.
 """
 function run_controller_fairness_gate(
-    template::OOSInstanceTemplate,
+    context::OOSRollingContext,
     provider::RepositoryUncertaintyProvider,
-    static_shares::Matrix{Float64},
-    config::OOSExperimentConfig;
+    static_shares::Union{Matrix{Float64},OOSStaticShareTable};
     period::Int=1,
 )
+    config = context.config
     checks = GateCheck[]
-    path = sample_oos_path(provider, template.T, oos_path_rng(config, 0); replication_id=0)
+    path = sample_oos_path(
+        provider, rolling_realized_end(context), oos_path_rng(config, 0); replication_id=0,
+    )
+    # The gate must solve the model the campaign solves, so it uses the same fixed moving window
+    # and reveals the same complete known prefix block `reveal_block!` does in the real
+    # simulation loop — not just one period, which is wrong as soon as h = implementation_step
+    # exceeds 1 (the observed history must cover the whole block, not just `period`).
+    horizon_end = lookahead_end_period(config, period)
+    block = implementation_block(config, period)
 
     for controller in config.controller_set, policy in config.fairness_set
-        state = initial_simulation_state(template, 0)
-        for t in 1:(period-1)
-            reveal_period!(state, path, t)
-            state.period = t + 1
-            state.revealed_periods = t
-        end
-        reveal_period!(state, path, period)
+        state = initial_simulation_state(context, 0)
+        reveal_block!(state, path, block)
         observation = PeriodObservation(period, path.pv[period], collect(path.demand[:, period]))
-        tree = build_lookahead_tree(provider, config, controller, observed_history(state), period, template.T, 0)
+        tree = build_lookahead_tree(
+            provider, config, controller, observed_history(state), period, horizon_end, 0,
+        )
         result = solve_current_action(
-            template, state, observation, tree, controller, policy, config;
-            static_shares=static_shares,
+            context, state, observation, tree, controller, policy, config;
+            static_shares=static_shares, implementation_block=block,
         )
         name = "gate_$(controller)_$(policy)"
         if !result.solved

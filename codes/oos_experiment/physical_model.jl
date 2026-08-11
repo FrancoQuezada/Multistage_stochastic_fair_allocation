@@ -9,8 +9,16 @@
 #
 #     sum_j y[j,n] <= F_d (1 - v_n),      sum_j z[j,n] <= F_c v_n.
 #
-# There is no household-indexed mode variable, and no import/export binary: the
-# shared-battery correction does not imply a new grid-direction mode.
+# There is no household-indexed BATTERY mode variable: the shared-battery correction does not
+# imply one, and none exists anywhere in this module.
+#
+# There IS, since stage 8, a household-indexed GRID-DIRECTION binary. It is a different family
+# with a different justification: a household has one grid connection point, so it cannot import
+# and export at the same information state. The stage-8 Phase-A audit found that the unrestricted
+# formulation admitted such overlap in practice — up to 318 kWh in one period under `SA`, where
+# inflating a household's cost is a way to reach a savings-equality target by burning energy. The
+# two families are counted separately everywhere so the shared-battery model-size claim stays
+# exactly as measurable as before.
 # =====================================================================================
 
 """
@@ -42,8 +50,26 @@ struct PhysicalModelRefs
     future_cost::Any
     expected_future_cost::Any
     tree::LookaheadTree
+
+    """
+    The priced source this model was built from: an `OOSRollingContext` on the campaign path,
+    a bare `OOSInstanceTemplate` on the retained pre-stage-4 path. The fairness layers read
+    their prices through it, so a look-ahead reaching past T0 is priced from the extended
+    support rather than from `template.nu`.
+    """
+    source::OOSPricedSource
+
+    """
+    Readability alias of `priced_template(source)`; the two are equal by construction. Physical
+    parameters are read far more often than prices, so they keep their short spelling.
+    """
     template::OOSInstanceTemplate
+
     formulation_variant::Symbol
+
+    """Whether this model carries the stage-8 grid-direction binaries."""
+    grid_direction_exclusivity::Bool
+
     build_time_sec::Float64
 end
 
@@ -60,6 +86,9 @@ const OOS_SOLVER_FEASIBILITY_TOL = 1e-6
 function configure_oos_solver!(model::JuMP.Model, config::OOSExperimentConfig)
     set_attribute(model, "CPXPARAM_TimeLimit", config.solver_time_limit_sec)
     set_attribute(model, "CPXPARAM_Simplex_Tolerances_Feasibility", OOS_SOLVER_FEASIBILITY_TOL)
+    # Declared, never inherited: see `solver_mip_gap`. Left at the solver's own default, a
+    # tolerance of 1e-4 would be of the same order as the effects this study estimates.
+    set_attribute(model, "CPXPARAM_MIP_Tolerances_MIPGap", config.solver_mip_gap)
     if config.solver_threads > 0
         set_attribute(model, "CPXPARAM_Threads", config.solver_threads)
     end
@@ -68,21 +97,31 @@ function configure_oos_solver!(model::JuMP.Model, config::OOSExperimentConfig)
 end
 
 """
-Build the remaining-horizon physical model for one look-ahead structure.
+Build the look-ahead physical model for one information structure.
 
 `state.soc_before` is the state of charge entering the root period, so the root transition is
 `s_root = s_before + delta e_c Z_root - (delta / e_d) Y_root` and every non-root node uses its
-parent's state of charge. The terminal battery target is imposed on the same calendar
-endpoint `T` for all controllers.
+parent's state of charge.
+
+Stage 4 changed two things here. The window is no longer the shrinking interval `t:T0`: when the
+source is an `OOSRollingContext` the tree must span exactly `lookahead_horizon` abstract periods
+from its own root. And the terminal battery target is imposed at **the end of that window**,
+`tree.last_period`, instead of permanently at `template.T`. For a legacy tree that still ends at
+`template.T` the two coincide, so the retained pre-stage-4 path is unchanged.
+
+Prices come from `priced_matrix(source)`, so a window reaching past the repository horizon uses
+the extended support built in stage 3.
 """
 function build_remaining_horizon_model(
-    template::OOSInstanceTemplate,
+    source::OOSPricedSource,
     state::SimulationState,
     tree::LookaheadTree,
     config::OOSExperimentConfig,
 )
     t_build = time()
     assert_mode_node_consistency(tree)
+    template = priced_template(source)
+    prices = priced_matrix(source)
     J = template.J
     N = lookahead_node_count(tree)
     size(tree.demand, 1) == J || error("El look-ahead debe declarar la demanda de los $J hogares.")
@@ -90,9 +129,18 @@ function build_remaining_horizon_model(
         "La raíz del look-ahead está en el período $(tree.calendar_period[tree.root]) " *
         "pero el estado está en $(state.period)."
     )
-    tree.last_period == template.T || error(
-        "El look-ahead debe terminar en el período calendario $(template.T), no en $(tree.last_period)."
-    )
+    assert_priced_period(source, tree.last_period)
+    if source isa OOSRollingContext
+        # The stage-4 moving-window contract. It is enforced only on the campaign path: the
+        # retained bare-template method keeps accepting the pre-stage-4 shrinking horizon.
+        _assert_matching_temporal_contract(source.config, config)
+        span = tree.last_period - tree.first_period + 1
+        span == config.lookahead_horizon || error(
+            "El look-ahead cubre $span períodos abstractos " *
+            "($(tree.first_period):$(tree.last_period)) y el contrato temporal exige " *
+            "lookahead_horizon=$(config.lookahead_horizon)."
+        )
+    end
 
     model = Model(CPLEX.Optimizer)
     configure_oos_solver!(model, config)
@@ -138,8 +186,30 @@ function build_remaining_horizon_model(
     @constraint(model, household_balance[j in 1:J, n in 1:N],
         tree.demand[j, n] == p[j, n] + y[j, n] + I[j, n] - z[j, n] - G[j, n])
 
-    # Terminal battery target, on the same calendar endpoint for every controller.
-    @constraint(model, terminal_soc[n in 1:N; tau[n] == template.T], s[n] == template.s_I)
+    # Terminal battery target at the end of the moving look-ahead window. Every controller of a
+    # given rolling start shares that endpoint, so the requirement stays identical across the
+    # compared methods; it is no longer pinned to the repository horizon.
+    @constraint(model, terminal_soc[n in 1:N; tau[n] == tree.last_period], s[n] == template.s_I)
+
+    # Grid-direction exclusivity (stage 8, Phase B). A household has ONE grid connection point,
+    # so importing and exporting at the same information state is not physically admissible.
+    # Without this rule the pair `(I, G)` has a free common offset — the balance pins only their
+    # difference — and although the offset costs `(nu - beta)` per unit and is therefore removed
+    # by cost minimization, a savings-equality rule can REWARD it: inflating a household's
+    # operating cost drives its realized savings down onto the fairness target. The stage-8
+    # Phase-A audit observed exactly that, up to 318 kWh in one period under `SA`.
+    #
+    # The big-Ms are read off the look-ahead data rather than picked as a constant. When
+    # `w = 1` export is off, so the balance gives `I = D + z - p - y <= D + F_c`; when `w = 0`
+    # import is off, so `G = p + y - z - D <= C + F_d`. Both bounds are valid on the side the
+    # binary enables, which is all a big-M needs.
+    if config.grid_direction_exclusivity
+        @variable(model, grid_import_direction[1:J, 1:N], Bin)
+        @constraint(model, grid_import_cap[j in 1:J, n in 1:N],
+            I[j, n] <= (tree.demand[j, n] + template.f_under) * grid_import_direction[j, n])
+        @constraint(model, grid_export_cap[j in 1:J, n in 1:N],
+            G[j, n] <= (tree.pv[n] + template.f_bar) * (1 - grid_import_direction[j, n]))
+    end
 
     # Named redundant household linking rows, only for the explicitly requested variant.
     if config.formulation_variant === :aggregate_plus_redundant_links
@@ -152,7 +222,7 @@ function build_remaining_horizon_model(
     @expression(model, node_cost[j in 1:J, n in 1:N],
         template.delta * (
             template.mu * y[j, n] +
-            template.nu[j, tau[n]] * I[j, n] -
+            prices[j, tau[n]] * I[j, n] -
             template.beta * G[j, n]
         ))
     @expression(model, future_cost[j in 1:J], sum(prob[n] * node_cost[j, n] for n in 1:N))
@@ -165,8 +235,39 @@ function build_remaining_horizon_model(
         model, s, I, G, z, y, p, lambda, v,
         aggregate_charge, aggregate_discharge, copy(tree.mode_nodes),
         node_cost, future_cost, expected_future_cost,
-        tree, template, config.formulation_variant, time() - t_build,
+        tree, source, template, config.formulation_variant,
+        config.grid_direction_exclusivity, time() - t_build,
     )
+end
+
+"""Convenience form: a context already carries the configuration the model must honour."""
+build_remaining_horizon_model(
+    context::OOSRollingContext,
+    state::SimulationState,
+    tree::LookaheadTree,
+) = build_remaining_horizon_model(context, state, tree, context.config)
+
+"""
+Reject a configuration whose temporal contract disagrees with the context's.
+
+The context materialized its data support from one `(H, L, h)` triple. Building a model against
+a different triple would silently price or terminate the window on the wrong endpoint, so the
+mismatch is named instead of tolerated. Non-temporal fields (tolerances, solver settings,
+formulation variant) may legitimately differ and are not compared.
+"""
+function _assert_matching_temporal_contract(
+    context_config::OOSExperimentConfig,
+    config::OOSExperimentConfig,
+)
+    (context_config.evaluation_horizon == config.evaluation_horizon &&
+     context_config.lookahead_horizon == config.lookahead_horizon &&
+     context_config.implementation_step == config.implementation_step) || error(
+        "El contexto se construyó con (H=$(context_config.evaluation_horizon), " *
+        "L=$(context_config.lookahead_horizon), h=$(context_config.implementation_step)) y se " *
+        "solicitó el modelo con (H=$(config.evaluation_horizon), " *
+        "L=$(config.lookahead_horizon), h=$(config.implementation_step))."
+    )
+    return nothing
 end
 
 """Restore the expected-future-cost objective after a lexicographic phase."""
@@ -230,6 +331,13 @@ function collect_model_statistics(refs::PhysicalModelRefs, tree::LookaheadTree)
     model = refs.model
     binaries = generated_binary_count(model)
     variables = num_variables(model)
+    # `GeneratedModeBinaries` must remain the SHARED-BATTERY count, not the total: the
+    # model-size-effect report compares it against `|H||V_mode|`, and folding the grid-direction
+    # family into it would silently corrupt that comparison. The direction binaries are the
+    # difference between this and `binaries`.
+    direction_binaries = expected_grid_direction_binary_count(
+        tree, refs.template.J, refs.grid_direction_exclusivity,
+    )
     return ModelStatistics(
         variables,
         binaries,
@@ -237,14 +345,19 @@ function collect_model_statistics(refs::PhysicalModelRefs, tree::LookaheadTree)
         model_constraint_count(model),
         model_nonzero_count(model),
         expected_mode_binary_count(tree),
-        binaries,
+        binaries - direction_binaries,
         unique_policy_mode_count(tree),
         0,
         0,
         Float64(safe_solver_attribute(model, MOI.ObjectiveBound(), NaN)),
         Int(safe_solver_attribute(model, MOI.NodeCount(), 0)),
         Float64(safe_solver_attribute(model, MOI.RelativeGap(), NaN)),
-        NaN,
+        # Peak resident set size of THIS worker process, in MiB. `Sys.maxrss` is monotone, so the
+        # value read after a solve is the high-water mark reached up to that point — which is the
+        # quantity that decides how many workers fit on a machine, and the one plan section 7
+        # (Stage 14) asks the pilot to review. It is machine-dependent by nature, which is why it
+        # is emitted only in `solve_provenance.csv` and never enters the scientific digest.
+        Sys.maxrss() / 1024^2,
     )
 end
 

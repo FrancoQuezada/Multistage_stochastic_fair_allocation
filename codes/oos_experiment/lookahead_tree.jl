@@ -118,42 +118,22 @@ function two_stage_lookahead_tree(
     root_demand::Vector{Float64},
     scenarios::Vector{ScenarioPath},
     first_period::Int,
-    last_period::Int,
+    last_period::Int;
+    known_prefix::Int=1,
 )
     J = length(root_demand)
-    future_periods = last_period - first_period
-    if future_periods == 0
-        parent = [0]
-        probability = [1.0]
-        calendar_period = [first_period]
-        pv = [root_pv]
-        demand = reshape(copy(root_demand), J, 1)
-        return make_lookahead_tree(
-            TWO_STAGE_RH, parent, probability, calendar_period, [[1]],
-            pv, demand, first_period, last_period, max(1, length(scenarios)),
-        )
-    end
+    window = last_period - first_period + 1
+    known_prefix >= 1 || error("El prefijo conocido debe ser >= 1; se recibió $known_prefix.")
+    known_prefix <= window || error(
+        "El prefijo conocido ($known_prefix) no cabe en la ventana de $window períodos."
+    )
+    future_periods = window - known_prefix
 
-    isempty(scenarios) && error("Se requiere al menos un escenario futuro para TWO_STAGE_RH.")
+    isempty(scenarios) && error("Se requiere al menos un escenario para TWO_STAGE_RH.")
     total_probability = sum(sc.probability for sc in scenarios)
     abs(total_probability - 1.0) <= 1e-9 || error(
         "Las probabilidades de escenario de dos etapas suman $total_probability."
     )
-
-    n_nodes = 1 + length(scenarios) * future_periods
-    parent = zeros(Int, n_nodes)
-    probability = zeros(n_nodes)
-    calendar_period = zeros(Int, n_nodes)
-    pv = zeros(n_nodes)
-    demand = zeros(J, n_nodes)
-
-    probability[1] = 1.0
-    calendar_period[1] = first_period
-    pv[1] = root_pv
-    demand[:, 1] .= root_demand
-
-    scenario_paths = Vector{Vector{Int}}()
-    node = 1
     for scenario in scenarios
         scenario.first_period == first_period || error(
             "Todo escenario debe empezar en el período actual $first_period."
@@ -161,12 +141,63 @@ function two_stage_lookahead_tree(
         scenario.last_period == last_period || error(
             "Todo escenario debe terminar en el período final $last_period."
         )
-        length(scenario.pv) == future_periods + 1 || error(
-            "Cada escenario debe cubrir el período actual y $future_periods períodos futuros."
+        length(scenario.pv) == window || error(
+            "Cada escenario debe cubrir los $window períodos de la ventana."
         )
-        path = Int[1]
-        previous = 1
-        for k in 2:(future_periods+1)
+    end
+
+    # The known prefix is a single common chain: every controller was given those realizations,
+    # so no scenario may disagree about them and none may branch inside them.
+    reference = first(scenarios)
+    for scenario in scenarios, k in 1:known_prefix
+        scenario.pv[k] == reference.pv[k] || error(
+            "Los escenarios discrepan en el período $k del prefijo conocido."
+        )
+        collect(scenario.demand[:, k]) == collect(reference.demand[:, k]) || error(
+            "Los escenarios discrepan en la demanda del período $k del prefijo conocido."
+        )
+    end
+    reference.pv[1] == root_pv || error(
+        "El primer período del prefijo no coincide con la raíz observada."
+    )
+    collect(reference.demand[:, 1]) == root_demand || error(
+        "La demanda del primer período del prefijo no coincide con la raíz observada."
+    )
+
+    n_nodes = known_prefix + length(scenarios) * future_periods
+    parent = zeros(Int, n_nodes)
+    probability = zeros(n_nodes)
+    calendar_period = zeros(Int, n_nodes)
+    pv = zeros(n_nodes)
+    demand = zeros(J, n_nodes)
+
+    # 1. The deterministic prefix chain, probability one throughout.
+    prefix_nodes = Int[]
+    for k in 1:known_prefix
+        parent[k] = k == 1 ? 0 : k - 1
+        probability[k] = 1.0
+        calendar_period[k] = first_period + k - 1
+        pv[k] = reference.pv[k]
+        demand[:, k] .= @view reference.demand[:, k]
+        push!(prefix_nodes, k)
+    end
+
+    if future_periods == 0
+        # The window is exactly the known prefix: there is no future to represent, so the
+        # structure collapses to that single chain.
+        return make_lookahead_tree(
+            TWO_STAGE_RH, parent, probability, calendar_period, [prefix_nodes],
+            pv, demand, first_period, last_period, length(scenarios),
+        )
+    end
+
+    # 2. One independent recourse chain per scenario, branching only after the prefix.
+    scenario_paths = Vector{Vector{Int}}()
+    node = known_prefix
+    for scenario in scenarios
+        path = copy(prefix_nodes)
+        previous = last(prefix_nodes)
+        for k in (known_prefix+1):window
             node += 1
             parent[node] = previous
             probability[node] = scenario.probability
@@ -238,12 +269,72 @@ function multistage_stage_layout(
 end
 
 """
+Stage layout that keeps the whole known prefix inside the first, branch-free stage.
+
+Stage 1 never branches, so a layout whose first stage already covers `known_prefix` periods
+satisfies the stage-6 requirement that branching begin no earlier than `t + h`. When it does not,
+stage 1 is grown to exactly `known_prefix` and the periods it takes are drawn from the later
+stages in order; a stage left with no period is dropped together with the branching factor that
+would have entered it.
+
+`known_prefix = 1` therefore returns `multistage_stage_layout` unchanged whenever the configured
+first stage is at least one period long, which it always is. That is what makes `h = 1` an exact
+regression of the stage-5 behaviour rather than a new layout.
+"""
+function multistage_stage_layout_with_prefix(
+    remaining::Int,
+    branching::Vector{Int},
+    requested_periods::Vector{Int},
+    known_prefix::Int,
+)
+    known_prefix >= 1 || error("El prefijo conocido debe ser >= 1; se recibió $known_prefix.")
+    known_prefix <= remaining || error(
+        "El prefijo conocido ($known_prefix) no cabe en la ventana de $remaining períodos."
+    )
+    periods, stage_branching = multistage_stage_layout(remaining, branching, requested_periods)
+    periods[1] >= known_prefix && return (periods, stage_branching)
+
+    periods = copy(periods)
+    deficit = known_prefix - periods[1]
+    periods[1] = known_prefix
+    index = 2
+    while deficit > 0 && index <= length(periods)
+        taken = min(deficit, periods[index])
+        periods[index] -= taken
+        deficit -= taken
+        index += 1
+    end
+    deficit == 0 || error(
+        "No fue posible reservar $known_prefix períodos para el prefijo conocido dentro de " *
+        "una ventana de $remaining períodos."
+    )
+
+    kept_periods = Int[periods[1]]
+    kept_branching = Int[]
+    for stage in 2:length(periods)
+        periods[stage] == 0 && continue
+        push!(kept_periods, periods[stage])
+        push!(kept_branching, stage_branching[stage-1])
+    end
+    return (kept_periods, kept_branching)
+end
+
+"""
 Multistage information structure with progressive revelation.
 
 Node-indexed storage makes nonanticipativity implicit: two scenarios that share a history
 literally share the same node, hence the same shared-battery mode variable.
 `sampler(node_calendar_period, history_nodes, node_index)` returns the `(pv, demand)` pair
 realized at a freshly created node.
+
+STAGE 6. `known_prefix` is the length `h` of the deterministic initial information stage. The
+first `known_prefix` periods form a single branch-free chain whose values come from
+`known_values` — the REALIZED prefix — instead of from the sampler, and branching cannot begin
+before `first_period + known_prefix`. `known_values` is a `(pv, demand)` pair covering
+`first_period : first_period + known_prefix - 1`; the root's own values still come from
+`root_pv`/`root_demand`, which must agree with its first entry.
+
+With `known_prefix = 1` this is exactly the pre-stage-6 construction.
 """
 function multistage_lookahead_tree(
     J::Int,
@@ -253,11 +344,40 @@ function multistage_lookahead_tree(
     root_demand::Vector{Float64},
     branching::Vector{Int},
     requested_periods::Vector{Int},
-    sampler,
+    sampler;
+    known_prefix::Int=1,
+    known_values::Union{Nothing,Tuple{Vector{Float64},Matrix{Float64}}}=nothing,
 )
     remaining = last_period - first_period + 1
-    periods_per_stage, stage_branching = multistage_stage_layout(remaining, branching, requested_periods)
+    periods_per_stage, stage_branching = multistage_stage_layout_with_prefix(
+        remaining, branching, requested_periods, known_prefix,
+    )
     sum(periods_per_stage) == remaining || error("El reparto de períodos por etapa es inconsistente.")
+    periods_per_stage[1] >= known_prefix || error(
+        "La primera etapa cubre $(periods_per_stage[1]) períodos y el prefijo conocido exige " *
+        "$known_prefix."
+    )
+
+    prefix_end = first_period + known_prefix - 1
+    if known_prefix > 1
+        known_values === nothing && error(
+            "Un prefijo conocido de $known_prefix períodos requiere sus valores realizados."
+        )
+        length(known_values[1]) == known_prefix || error(
+            "El prefijo realizado declara $(length(known_values[1])) períodos de PV y se " *
+            "esperaban $known_prefix."
+        )
+        size(known_values[2]) == (J, known_prefix) || error(
+            "El prefijo realizado de demanda tiene dimensión $(size(known_values[2])); se " *
+            "esperaba ($J, $known_prefix)."
+        )
+        known_values[1][1] == root_pv || error(
+            "El primer valor del prefijo realizado no coincide con la raíz observada."
+        )
+        collect(known_values[2][:, 1]) == root_demand || error(
+            "La primera columna del prefijo realizado no coincide con la demanda observada."
+        )
+    end
 
     length(root_demand) == J || error("root_demand debe tener una entrada por hogar.")
 
@@ -279,6 +399,15 @@ function multistage_lookahead_tree(
             current = parent[current]
         end
         reverse!(history)
+        if period <= prefix_end
+            # Inside the known prefix nothing is sampled: the value is the realization every
+            # controller was given. The frontier holds exactly one node here, so the assignment
+            # is unambiguous.
+            offset = period - first_period + 1
+            push!(pv, known_values[1][offset])
+            push!(demand_columns, collect(known_values[2][:, offset]))
+            return idx
+        end
         sampled_pv, sampled_demand = sampler(period, history, idx)
         length(sampled_demand) == J || error("El muestreador devolvió una demanda de largo incorrecto.")
         push!(pv, Float64(sampled_pv))
