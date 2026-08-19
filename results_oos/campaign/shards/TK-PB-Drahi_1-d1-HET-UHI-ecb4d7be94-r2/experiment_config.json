@@ -1,5 +1,5 @@
 {
-  "code_commit": "21d483a7b257ed8666677f6427a5ead5e99167f4",
+  "code_commit": "d765f07c04ca0c41bfa64f229e95776061694e6d",
   "code_dirty": true,
   "configuration_count": 18,
   "controller_parameters": {
@@ -10,7 +10,7 @@
     "two_stage_scenarios_drives_generation": false
   },
   "controllers": ["DETERMINISTIC_RH","TWO_STAGE_RH","MULTISTAGE_RH"],
-  "date_utc": "2026-08-11T10:27:00Z",
+  "date_utc": "2026-08-17T11:33:39Z",
   "experiment_id": "oos_experiment",
   "fairness_parameters": {
     "fairness_abs_tol": 0.0,
@@ -32,10 +32,10 @@
   "formulation_id": "shared_battery_mode_node_level_v1",
   "formulation_variant": "aggregate_only",
   "hardware": {
-    "cpu": "12th Gen Intel(R) Core(TM) i7-1260P",
-    "cpu_threads": 16,
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+    "cpu_threads": 20,
     "machine": "x86_64-linux-gnu",
-    "total_memory_gb": 31.05
+    "total_memory_gb": 31.02
   },
   "instance": {
     "avg_demand": 100.0,
@@ -48,7 +48,7 @@
     "e_d": 0.95,
     "f_bar_discharge_limit": 32.0,
     "f_under_charge_limit": 32.0,
-    "file": "/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020/Drahi_1.csv",
+    "file": "/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020/Drahi_1.csv",
     "horizon": 24,
     "household_profiles": ["midday","morning","morning","night","night"],
     "households": 5,
@@ -61,7 +61,7 @@
       "household_profiles": ["midday","morning","morning","night","night"],
       "in_sample_nodes": 56,
       "in_sample_tree": "S=3,C=2,P=8",
-      "instance_file": "/home/franco/Documentos/Multistage Energy/Code_stochastique/codes/inst/inst2020/Drahi_1.csv",
+      "instance_file": "/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020/Drahi_1.csv",
       "instance_id": "5_56",
       "pv_scale": 1.0,
       "repository_generator_seed_source": "structural_deterministic_base_explicit_override"
@@ -77,12 +77,12 @@
   "manifest_julia_version": "1.12.6",
   "manifest_toml_sha1": "3762613630333235",
   "mode_node_convention": "every_information_state",
-  "oos_replications": 10,
+  "oos_replications": 5,
   "operating_system": {
-    "description": "Ubuntu 22.04.5 LTS",
+    "description": "Ubuntu 22.04.4 LTS",
     "kernel": "Linux"
   },
-  "output_directory": "/home/franco/Documentos/Multistage Energy/Code_stochastique/results_oos/campaign/shards/TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r2.partial.1311103/SI-Drahi_1-d1-HET-UHI-BHI-3c909a552c",
+  "output_directory": "/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_oos/campaign/shards/TK-PB-Drahi_1-d1-HET-UHI-ecb4d7be94-r2.partial.3674113/SI-Drahi_1-d1-HET-UHI-BHI-3c909a552c",
   "output_schema_version": 3,
   "pea_solve_sequence_version": 3,
   "project_toml_sha1": "6331646264323536",

@@ -1,0 +1,150 @@
+{
+  "code_commit": "d765f07c04ca0c41bfa64f229e95776061694e6d",
+  "code_dirty": true,
+  "configuration_count": 18,
+  "controller_parameters": {
+    "multistage_branching": [4,4,4,4],
+    "multistage_periods_per_stage": [4,4,4,4,4],
+    "two_stage_leaves_derived_from": "common_conditional_support",
+    "two_stage_scenarios": 16,
+    "two_stage_scenarios_drives_generation": false
+  },
+  "controllers": ["DETERMINISTIC_RH","TWO_STAGE_RH","MULTISTAGE_RH"],
+  "date_utc": "2026-08-18T06:03:11Z",
+  "experiment_id": "oos_experiment",
+  "fairness_parameters": {
+    "fairness_abs_tol": 0.0,
+    "fairness_abs_tol_deprecated": true,
+    "lex_eps_abs": 1.0,
+    "pea_denominator_floor": 1.0e-9,
+    "pea_recovery_solve_sequence": ["strict","diagnostic_physical","phase1_min_tolerance","phase2_operational"],
+    "pea_recovery_solves_per_recovered_period": 4,
+    "pea_solves_per_strict_feasible_period": 1,
+    "pea_tolerance_activation_threshold": 1.0e-9,
+    "pea_tolerance_mode": "adaptive_minimum",
+    "pea_tolerance_numeric_eps_kwh": 1.0e-6,
+    "pea_tolerance_numeric_eps_unit": "kWh (same unit as epsilon_pea; added to epsilon_pea_star in the Phase-II cap)",
+    "pea_tolerance_unit": "kWh (horizon-total PV allocation band)",
+    "sa_denominator_floor": 1.0,
+    "sa_fairness_abs_tol": 0.0
+  },
+  "fairness_rules": ["NONE","STATIC_DEMAND_SHARE","PEA","SA","LEXMMFPEA","LEXMMFSA"],
+  "formulation_id": "shared_battery_mode_node_level_v1",
+  "formulation_variant": "aggregate_only",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+    "cpu_threads": 20,
+    "machine": "x86_64-linux-gnu",
+    "total_memory_gb": 31.02
+  },
+  "instance": {
+    "avg_demand": 100.0,
+    "battery_scale": 2.0,
+    "beta": 10.0,
+    "delta": 1.0,
+    "demand_profile": "mixed",
+    "dev_demand": 10.0,
+    "e_c": 0.95,
+    "e_d": 0.95,
+    "f_bar_discharge_limit": 32.0,
+    "f_under_charge_limit": 32.0,
+    "file": "/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020/Drahi_14.csv",
+    "horizon": 24,
+    "household_profiles": ["night","midday","night","midday","morning"],
+    "households": 5,
+    "id": "5_56",
+    "metadata": {
+      "actual_repository_generator_seed": 1328473523,
+      "battery_scale": 2.0,
+      "demand_profile": "mixed",
+      "household_profile_source": "structural_catalog_fixed_assignment",
+      "household_profiles": ["night","midday","night","midday","morning"],
+      "in_sample_nodes": 56,
+      "in_sample_tree": "S=3,C=2,P=8",
+      "instance_file": "/home/franco/Documentos/Multistage_stochastic_fair_allocation/codes/inst/inst2020/Drahi_14.csv",
+      "instance_id": "5_56",
+      "pv_scale": 1.0,
+      "repository_generator_seed_source": "structural_deterministic_base_explicit_override"
+    },
+    "mu": 5.0,
+    "pv_scale": 1.0,
+    "s_I": 0.2,
+    "s_max": 126.0,
+    "s_min": 0.2,
+    "theta": 0.4
+  },
+  "julia_version": "1.12.6",
+  "manifest_julia_version": "1.12.6",
+  "manifest_toml_sha1": "3762613630333235",
+  "mode_node_convention": "every_information_state",
+  "oos_replications": 5,
+  "operating_system": {
+    "description": "Ubuntu 22.04.4 LTS",
+    "kernel": "Linux"
+  },
+  "output_directory": "/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_oos/campaign/shards/TK-PB-Drahi_14-d1-HET-UHI-de5b0c77c4-r1.partial.3674139/SI-Drahi_14-d1-HET-UHI-BHI-02841c3c23",
+  "output_schema_version": 3,
+  "pea_solve_sequence_version": 3,
+  "project_toml_sha1": "6331646264323536",
+  "prompt_version": "oos_receding_horizon_prompt_v1",
+  "seeds": {
+    "conditional_support_seed_exclusions": ["controller","fairness_policy","solver_phase","worker","retry","execution_order"],
+    "conditional_support_seed_keys": ["experiment_seed","oos_replication","rolling_start"],
+    "conditional_support_stream": "lookahead_support",
+    "controller_excluded_from_seed": true,
+    "demand_profile_stream": "demand_profiles",
+    "experiment_seed": 12345,
+    "fairness_excluded_from_seed": true,
+    "in_sample_stream": "in_sample",
+    "instance_seed": 1909733226,
+    "oos_stream": "oos_path"
+  },
+  "solver": "CPLEX 22.1.1",
+  "solver_settings": {
+    "mip_gap": 1.0e-6,
+    "threads": 1,
+    "time_limit_sec": 600.0
+  },
+  "temporal_structure": {
+    "contract_status": "wired_rolling_blocks: the simulator iterates the rolling starts, every solve spans exactly lookahead_horizon abstract periods, the terminal state of charge binds at the end of each window, the complete known prefix of length implementation_step is revealed to every controller before it optimizes, and the whole committed block is implemented and validated while only its intersection with 1:H is evaluated",
+    "evaluation_horizon": 24,
+    "final_evaluation_block": [21,22,23,24],
+    "final_implementation_block": [21,22,23,24],
+    "final_lookahead_window": [21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44],
+    "final_rolling_iteration_start": 21,
+    "implementation_step": 4,
+    "known_prefix_length": 4,
+    "lookahead_horizon": 24,
+    "period_mapping_name": "repository_base_period_repeat",
+    "period_mapping_version": "base_period_index_v1",
+    "period_semantics": "abstract model period; no clock-time interpretation is implied",
+    "period_unit": "model periods",
+    "realized_period_end": 24,
+    "repository_instance_horizon": 24,
+    "required_period_support_end": 44,
+    "rolling_iteration_starts": [1,5,9,13,17,21],
+    "rolling_solve_count": 6
+  },
+  "tolerances": {
+    "feasibility_tol": 1.0e-5,
+    "flow_tol": 1.0e-5,
+    "integrality_tol": 1.0e-6
+  },
+  "uncertainty_process": {
+    "pea_repair_per_period": true,
+    "pv_ar_coefficient": 0.8,
+    "pv_ma_coefficient": 0.2,
+    "stochastic_prices": false
+  },
+  "validation": {
+    "export_representative_models": false,
+    "gates": [],
+    "model_audits": [],
+    "require_shared_battery_validation": false
+  },
+  "warm_starts": {
+    "allow_legacy_conversion": false,
+    "enabled": false,
+    "idle_mode_value": 0.0
+  }
+}
