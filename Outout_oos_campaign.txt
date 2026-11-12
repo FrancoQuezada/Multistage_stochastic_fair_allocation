@@ -1,0 +1,274 @@
+análisis por celda: 2852 filas de costo, 2824 filas pareadas
+  campaign_cost_by_cell.csv
+  campaign_paired_by_cell.csv
+
+=== Revisión operativa de campaña ===
+dataset     : /home/franco/Documentos/Multistage_stochastic_fair_allocation/results_oos/campaign/merged
+manifest_id : MF-2c9ce705eb2a4e1a
+réplicas    : 5
+
+--- congelamiento ---
+  commit=d765f07c04ca  [ÁRBOL SUCIO]  julia=1.12.6  CPLEX 22.1.1  hilos=1  gap MIP=1.0e-6
+  esquema de salida v3  secuencia PEA v3
+
+--- completitud por celda del diseño ---
+  batería       incert.         régimen        sorteo  completas   abortadas
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       84/90       6 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       83/90       7 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       86/90       4 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       84/90       6 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       87/90       3 (SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       87/90       3 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       89/90       1 (SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       81/90       9 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       89/90       1 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       83/90       7 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (LEXMMFSA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       88/90       2 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       85/90       5 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       81/90       9 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       85/90       5 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       85/90       5 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       84/90       6 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       87/90       3 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       84/90       6 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       82/90       8 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       85/90       5 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       81/90       9 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       81/90       9 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       88/90       2 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       85/90       5 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       84/90       6 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       85/90       5 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       85/90       5 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       86/90       4 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       88/90       2 (SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       85/90       5 (SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       82/90       8 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       86/90       4 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       87/90       3 (LEXMMFSA,SA)
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  1       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  LOW_UNCERTAINTY HOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  HIGH_BATTERY  HIGH_UNCERTAINTYHOMOGENEOUS    2       90/90       -
+  LOW_BATTERY   LOW_UNCERTAINTY HETEROGENEOUS  2       84/90       6 (LEXMMFSA,SA)
+  HIGH_BATTERY  LOW_UNCERTAINTY HETEROGENEOUS  2       87/90       3 (LEXMMFSA,SA)
+  LOW_BATTERY   HIGH_UNCERTAINTYHETEROGENEOUS  2       89/90       1 (SA)
+  HIGH_BATTERY  HIGH_UNCERTAINTYHETEROGENEOUS  2       89/90       1 (SA)
+
+--- incidencia de recuperación por política ---
+  LEXMMFPEA           períodos=57600  activaciones=    0 (  0.0 %)  banda media activa=0.0  máx=0.0
+  LEXMMFSA            períodos=56712  activaciones=    0 (  0.0 %)  banda media activa=0.0  máx=0.0
+  NONE                períodos=57600  activaciones=    0 (  0.0 %)  banda media activa=0.0  máx=0.0
+  PEA                 períodos=57600  activaciones=   16 (  0.0 %)  banda media activa=14.238  máx=25.147
+  SA                  períodos=54816  activaciones=    0 (  0.0 %)  banda media activa=0.0  máx=0.0
+  STATIC_DEMAND_SHARE períodos=57600  activaciones=    0 (  0.0 %)  banda media activa=0.0  máx=0.0
+
+--- diagnósticos numéricos ---
+  solves=913536  por límite de tiempo=0
+  estados: INFEASIBLE=16  OPTIMAL=913520
+  gap final máx=0.0  medio=0.0
+  residuo físico máx=16.000000000000014
+  residuo de fairness: lexicográficas=1.0000000116342562 (contra su lex_eps_abs)  resto=25.14658184805785 (contra la tolerancia de factibilidad)
+
+--- runtime y memoria (base para dimensionar la campaña) ---
+  solves cronometrados=913536  tiempo total de solver=3.3611032e6 s
+  por solve: medio=3.679 s  máx=599.817 s
+  por tarea: máx=20993.8 s  sobre 400 tareas
+  memoria pico=2219.4 MB
+
+--- efecto pareado sobre el costo de operación ---
+  (unidad: par (instancia estructural, réplica); positivo = la comparación es más cara)
+  DETERMINISTIC_RH|LEXMMFPEA -> MULTISTAGE_RH|LEXMMFPEA    n= 800  media=      -251.8 (-0.0405 %)  IC95=[-321.48, -182.11]
+  DETERMINISTIC_RH|LEXMMFPEA -> TWO_STAGE_RH|LEXMMFPEA     n= 800  media=     -238.26 (-0.0382 %)  IC95=[-307.94, -168.57]
+  DETERMINISTIC_RH|LEXMMFSA  -> MULTISTAGE_RH|LEXMMFSA     n= 800  media=     -212.17 (-0.0317 %)  IC95=[-303.18, -121.16]
+  DETERMINISTIC_RH|LEXMMFSA  -> TWO_STAGE_RH|LEXMMFSA      n= 728  media=      -97.26 (-0.0127 %)  IC95=[-168.98, -25.55]
+  DETERMINISTIC_RH|NONE      -> MULTISTAGE_RH|NONE         n= 800  media=      -234.9 (-0.0476 %)  IC95=[-297.43, -172.36]
+  DETERMINISTIC_RH|NONE      -> TWO_STAGE_RH|NONE          n= 800  media=     -205.27 (-0.0415 %)  IC95=[-260.07, -150.47]
+  DETERMINISTIC_RH|PEA       -> MULTISTAGE_RH|PEA          n= 800  media=     -477.89 (-0.0751 %)  IC95=[-561.36, -394.43]
+  DETERMINISTIC_RH|PEA       -> TWO_STAGE_RH|PEA           n= 800  media=     -450.82 (-0.0703 %)  IC95=[-535.57, -366.08]
+  DETERMINISTIC_RH|SA        -> MULTISTAGE_RH|SA           n= 799  media=     7763.22 (1.0584 %)  IC95=[6573.06, 8953.39]
+  DETERMINISTIC_RH|SA        -> TWO_STAGE_RH|SA            n= 639  media=     6488.86 (0.8388 %)  IC95=[5188.98, 7788.74]
+  DETERMINISTIC_RH|STATIC_DEMAND_SHARE -> MULTISTAGE_RH|STATIC_DEMAND_SHARE n= 800  media=     -278.26 (-0.0576 %)  IC95=[-344.57, -211.95]
+  DETERMINISTIC_RH|STATIC_DEMAND_SHARE -> TWO_STAGE_RH|STATIC_DEMAND_SHARE n= 800  media=     -243.56 (-0.0504 %)  IC95=[-303.74, -183.37]
+  MULTISTAGE_RH|LEXMMFPEA    -> TWO_STAGE_RH|LEXMMFPEA     n= 800  media=       13.54 (0.0024 %)  IC95=[-8.4, 35.48]
+  MULTISTAGE_RH|LEXMMFSA     -> TWO_STAGE_RH|LEXMMFSA      n= 728  media=       -3.14 (-0.0004 %)  IC95=[-27.53, 21.25]
+  MULTISTAGE_RH|NONE         -> TWO_STAGE_RH|NONE          n= 800  media=       29.63 (0.0062 %)  IC95=[10.81, 48.44]
+  MULTISTAGE_RH|PEA          -> TWO_STAGE_RH|PEA           n= 800  media=       27.07 (0.0048 %)  IC95=[2.1, 52.04]
+  MULTISTAGE_RH|SA           -> TWO_STAGE_RH|SA            n= 639  media=      123.64 (0.0155 %)  IC95=[-86.11, 333.38]
+  MULTISTAGE_RH|STATIC_DEMAND_SHARE -> TWO_STAGE_RH|STATIC_DEMAND_SHARE n= 800  media=        34.7 (0.0073 %)  IC95=[14.69, 54.72]
+
+BLOQUEANTES (51):
+  - el árbol de código estaba sucio al producir el dataset (code_dirty=true): la campaña confirmatoria no puede referirse a una versión que no existe en el historial
+  - celda SI-Drahi_10-d2-HET-ULO-BLO-8228c9b54d: abortaron 6 corridas de SA
+  - celda SI-Drahi_10-d2-HET-ULO-BHI-b2e074f2f3: abortaron 7 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_10-d2-HET-UHI-BLO-c1c2c7daf3: abortaron 4 corridas de SA
+  - celda SI-Drahi_10-d2-HET-UHI-BHI-80e59a2310: abortaron 6 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_100-d2-HET-ULO-BLO-1b4b0ed23f: abortaron 5 corridas de SA
+  - celda SI-Drahi_100-d2-HET-ULO-BHI-e4cdb057f0: abortaron 3 corridas de SA
+  - celda SI-Drahi_100-d2-HET-UHI-BLO-a014872e1c: abortaron 3 corridas de SA
+  - celda SI-Drahi_100-d2-HET-UHI-BHI-47067ccef8: abortaron 1 corridas de SA
+  - celda SI-Drahi_11-d1-HET-ULO-BLO-5a1b08d243: abortaron 5 corridas de SA
+  - celda SI-Drahi_11-d1-HET-ULO-BHI-58c22a6ed9: abortaron 9 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_11-d1-HET-UHI-BLO-35689e776d: abortaron 1 corridas de SA
+  - celda SI-Drahi_11-d1-HET-UHI-BHI-e8d17aceb1: abortaron 7 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_11-d2-HET-ULO-BLO-7a709ddb78: abortaron 5 corridas de SA
+  - celda SI-Drahi_11-d2-HET-ULO-BHI-6c2bd74825: abortaron 5 corridas de LEXMMFSA
+  - celda SI-Drahi_11-d2-HET-UHI-BLO-40f227aba9: abortaron 2 corridas de SA
+  - celda SI-Drahi_11-d2-HET-UHI-BHI-996485f61b: abortaron 5 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_12-d1-HET-ULO-BLO-4d89dc9948: abortaron 5 corridas de SA
+  - celda SI-Drahi_12-d1-HET-ULO-BHI-29611f42ee: abortaron 9 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_12-d1-HET-UHI-BLO-65dbe552e9: abortaron 5 corridas de SA
+  - celda SI-Drahi_12-d1-HET-UHI-BHI-fdf881c5c7: abortaron 5 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_12-d2-HET-ULO-BLO-51cf15767d: abortaron 5 corridas de SA
+  - celda SI-Drahi_12-d2-HET-ULO-BHI-23b3d4bb1e: abortaron 6 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_12-d2-HET-UHI-BLO-1a7f78e100: abortaron 3 corridas de SA
+  - celda SI-Drahi_12-d2-HET-UHI-BHI-333eee148b: abortaron 6 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_13-d1-HET-ULO-BLO-f0566750c0: abortaron 5 corridas de SA
+  - celda SI-Drahi_13-d1-HET-ULO-BHI-16f4766447: abortaron 8 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_13-d1-HET-UHI-BLO-0425766316: abortaron 5 corridas de SA
+  - celda SI-Drahi_13-d1-HET-UHI-BHI-830f0c8f9f: abortaron 9 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_13-d2-HET-ULO-BLO-9d5cce1643: abortaron 5 corridas de SA
+  - celda SI-Drahi_13-d2-HET-ULO-BHI-a317fc27ef: abortaron 9 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_13-d2-HET-UHI-BLO-15dd2f4a2b: abortaron 2 corridas de SA
+  - celda SI-Drahi_13-d2-HET-UHI-BHI-b5b4fe09a4: abortaron 5 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_14-d1-HET-ULO-BLO-e7debc667b: abortaron 5 corridas de SA
+  - celda SI-Drahi_14-d1-HET-ULO-BHI-8213f1f308: abortaron 6 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_14-d1-HET-UHI-BLO-94e0bfadf3: abortaron 5 corridas de SA
+  - celda SI-Drahi_14-d1-HET-UHI-BHI-02841c3c23: abortaron 5 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_14-d2-HET-ULO-BLO-7ab132a117: abortaron 5 corridas de SA
+  - celda SI-Drahi_14-d2-HET-ULO-BHI-197fb9d33d: abortaron 5 corridas de SA
+  - celda SI-Drahi_14-d2-HET-UHI-BLO-0090047eb0: abortaron 4 corridas de SA
+  - celda SI-Drahi_14-d2-HET-UHI-BHI-f6e9274e52: abortaron 2 corridas de SA
+  - celda SI-Drahi_16-d2-HET-ULO-BLO-56e36510e7: abortaron 5 corridas de SA
+  - celda SI-Drahi_16-d2-HET-ULO-BHI-60ab08b06e: abortaron 8 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_16-d2-HET-UHI-BLO-8b45b5478c: abortaron 4 corridas de SA
+  - celda SI-Drahi_16-d2-HET-UHI-BHI-b5ad1d7920: abortaron 3 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_17-d2-HET-ULO-BLO-50ebcf4741: abortaron 6 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_17-d2-HET-ULO-BHI-d975d34935: abortaron 3 corridas de LEXMMFSA, SA
+  - celda SI-Drahi_17-d2-HET-UHI-BLO-206a971bb1: abortaron 1 corridas de SA
+  - celda SI-Drahi_17-d2-HET-UHI-BHI-9bb9a5d86c: abortaron 1 corridas de SA
+  - diseño desbalanceado: LEXMMFSA, SA completa en unas celdas y no en otras
+  - residuo de fairness 25.14658184805785 en una política NO lexicográfica, por encima de la tolerancia de factibilidad 1.0e-5: esas políticas no tienen banda propia, así que el residuo es una violación de la regla
+
+OOS_MERGE_STATUS=failed
+OOS_CAMPAIGN_REVIEW_STATUS=blocked
+OOS_MERGED_DIR=/home/franco/Documentos/Multistage_stochastic_fair_allocation/results_oos/campaign/merged

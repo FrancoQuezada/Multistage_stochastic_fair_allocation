@@ -1,0 +1,3 @@
+Checkpoint-preserving handoff to four disjoint single-thread workers.
+2026-10-09T16:10:55.509828 PID=31272 RUN M032 SA Sigma=0.6 J=10 saved=/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/shards/manuscript_design_rerun/M032/SA/solution.bin SHA256=38ef1e9662c1bf2ed2babd41c66bb1f69c6c202f1463d41518e61fc6d6abb858
+2026-10-09T16:23:02.816560 PID=31273 RUN M055 SA Sigma=0.6 J=10 saved=/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/worker_2/shards/manuscript_design_rerun/M055/SA/solution.bin SHA256=17074a4ad5556a8da40bbee84f940111e78d4d7382b98c794e01de7f37866b9f

@@ -1,0 +1,8 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/cplex_threads_1.prm' succeeded.
+Input replication: 80/80 configurations pass
+SKIP M001 NONE validated complete
+SKIP M001 PEA validated complete
+SKIP M001 SA validated complete
+SKIP M001 LEXMMFPEA validated complete
+SKIP M001 LEXMMFSA validated complete
+Merged 438 validated shards; manuscript reruns 400/400

@@ -1,0 +1,31 @@
+{
+  "Passed": true,
+  "OptimizationInvoked": false,
+  "CountsByDataset": {
+    "manuscript_design_rerun": {
+      "PolicySolutions": 400,
+      "Scenarios": 409600,
+      "HouseholdScenarios": 3072000,
+      "MinimumScenarioProbability": 0.0009765625,
+      "MaximumScenarioProbability": 0.0009765625
+    },
+    "recovered_validation_snapshot": {
+      "PolicySolutions": 5,
+      "Scenarios": 20,
+      "HouseholdScenarios": 100,
+      "MinimumScenarioProbability": 0.25,
+      "MaximumScenarioProbability": 0.25
+    },
+    "reproducible_same_numeric_design": {
+      "PolicySolutions": 33,
+      "Scenarios": 33792,
+      "HouseholdScenarios": 235520,
+      "MinimumScenarioProbability": 0.0009765625,
+      "MaximumScenarioProbability": 0.0009765625
+    }
+  },
+  "ExpectedHouseholdRows": 6255,
+  "InstanceMetricRows": 2628,
+  "MaximumSavingsArithmeticResidual": 0.0,
+  "Checks": "CSV key coverage; scenario probabilities; household counts; raw B-K; signed shares; all six metrics and flags; extrema/totals; all household expectations; ex-ante metrics; strict scenario expectations; valid/missing mass; weighted standard deviations"
+}

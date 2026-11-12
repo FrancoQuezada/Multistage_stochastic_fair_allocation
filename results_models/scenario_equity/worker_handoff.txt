@@ -1,0 +1,3 @@
+Atomic solution checkpoint saved before handoff: M013/SA
+Checkpoint: results_models/scenario_equity/shards/manuscript_design_rerun/M013/SA/solution.bin
+No following policy was launched.

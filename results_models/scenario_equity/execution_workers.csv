@@ -1,0 +1,5 @@
+Worker,ConfigIDFirst,ConfigIDLast,ConfigCount,SolverThreads,OutputDirectory
+1,M001,M040,40,1,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity
+2,M041,M064,24,1,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/worker_2
+3,M065,M072,8,1,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/worker_3
+4,M073,M080,8,1,/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/worker_4

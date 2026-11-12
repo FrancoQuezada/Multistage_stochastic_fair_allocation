@@ -1,0 +1,5 @@
+Category,Source,AvailableConfigurations,Reason
+A,none,0,No complete in-sample scenario CSVs
+B,results_models/*validation/*.bin,5,"Four overlapping decision snapshots; one S3:C2:P8,J5,Theta0.2 instance; validate and deduplicate"
+C,results_models/fairness_ALL_report_by_house_1024.csv,400,Only expectation and marginal extrema retained; all original scenario joint outcomes require solves
+excluded,results_oos/;results_oos_timing_probe/,0,Rolling-horizon trajectories and model exports are not in-sample stochastic solutions

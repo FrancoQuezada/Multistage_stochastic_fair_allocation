@@ -1,0 +1,2 @@
+WARNING: could not import LinearAlgebra.libblastrampoline into StaticArrays
+Input replication: 0/80 configurations pass

@@ -1,0 +1,14 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/cplex_threads_1.prm' succeeded.
+Input replication: 0/80 configurations pass
+New reproducible inputs: these solves are not exact replications of the original results.
+RUN M001 NONE Sigma=0.2 J=5
+COMPLETE M001 NONE cost residual=1.6589183360338211e-9
+RUN M001 PEA Sigma=0.2 J=5
+COMPLETE M001 PEA cost residual=4.220055416226387e-10
+RUN M001 SA Sigma=0.2 J=5
+COMPLETE M001 SA cost residual=2.473825588822365e-9
+RUN M001 LEXMMFPEA Sigma=0.2 J=5
+COMPLETE M001 LEXMMFPEA cost residual=5.384208634495735e-10
+RUN M001 LEXMMFSA Sigma=0.2 J=5
+COMPLETE M001 LEXMMFSA cost residual=2.1245796233415604e-9
+Merged 10 validated shards; manuscript reruns 5/400

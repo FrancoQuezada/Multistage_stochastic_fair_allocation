@@ -1,0 +1,11 @@
+Test Summary:                | Pass  Total  Time
+Equity formulas and validity |   21     21  1.0s
+Test Summary:                                             | Pass  Total  Time
+Probability-weighted scenario equity differs from ex ante |   14     14  2.9s
+Test Summary:                                                        | Pass  Total   Time
+Saved stochastic decisions: paths, expectations, costs, conservation |  514    514  26.2s
+Test Summary:                  | Pass  Total   Time
+Historical files are preserved | 6481   6481  12.8s
+Test Summary:                        | Pass  Total  Time
+Recovered historical seed convention |   84     84  0.6s
+Scenario equity validation passed; no optimization was needed for these tests.

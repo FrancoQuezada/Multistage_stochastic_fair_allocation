@@ -1,0 +1,9 @@
+{
+  "GitRevision": "a8871e94633f1899b77e23ff032ef8a0260d29c1",
+  "InitialGitStatus": "?? Equity_plots.png\n?? Outout_oos_campaign.txt\n?? results_oos/campaign/merged_partial/",
+  "ReferenceRevision": "c8e7a25b88cdae026bff575f92edf19a114d949e",
+  "HistoricalFileCount": 6481,
+  "AuditDate": "2026-10-09",
+  "ReferenceIsExactOriginalRun": false,
+  "Reason": "Original run commit/runtime not recorded; earliest tracked formulation selected and generator checked against archived inputs."
+}

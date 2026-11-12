@@ -1,0 +1,298 @@
+Reading override parameter file '/home/franco/Documentos/Multistage Energy/Code_stochastique/results_models/scenario_equity/cplex_threads_1.prm' succeeded.
+Input replication: 80/80 configurations pass
+SKIP M001 NONE validated complete
+SKIP M001 PEA validated complete
+SKIP M001 SA validated complete
+SKIP M001 LEXMMFPEA validated complete
+SKIP M001 LEXMMFSA validated complete
+SKIP M002 NONE validated complete
+SKIP M002 PEA validated complete
+SKIP M002 SA validated complete
+SKIP M002 LEXMMFPEA validated complete
+SKIP M002 LEXMMFSA validated complete
+SKIP M003 NONE validated complete
+SKIP M003 PEA validated complete
+SKIP M003 SA validated complete
+SKIP M003 LEXMMFPEA validated complete
+SKIP M003 LEXMMFSA validated complete
+SKIP M004 NONE validated complete
+SKIP M004 PEA validated complete
+SKIP M004 SA validated complete
+SKIP M004 LEXMMFPEA validated complete
+SKIP M004 LEXMMFSA validated complete
+SKIP M005 NONE validated complete
+SKIP M005 PEA validated complete
+SKIP M005 SA validated complete
+SKIP M005 LEXMMFPEA validated complete
+SKIP M005 LEXMMFSA validated complete
+SKIP M006 NONE validated complete
+SKIP M006 PEA validated complete
+SKIP M006 SA validated complete
+SKIP M006 LEXMMFPEA validated complete
+SKIP M006 LEXMMFSA validated complete
+SKIP M007 NONE validated complete
+SKIP M007 PEA validated complete
+SKIP M007 SA validated complete
+SKIP M007 LEXMMFPEA validated complete
+SKIP M007 LEXMMFSA validated complete
+SKIP M008 NONE validated complete
+SKIP M008 PEA validated complete
+SKIP M008 SA validated complete
+SKIP M008 LEXMMFPEA validated complete
+SKIP M008 LEXMMFSA validated complete
+SKIP M009 NONE validated complete
+SKIP M009 PEA validated complete
+SKIP M009 SA validated complete
+SKIP M009 LEXMMFPEA validated complete
+SKIP M009 LEXMMFSA validated complete
+SKIP M010 NONE validated complete
+SKIP M010 PEA validated complete
+SKIP M010 SA validated complete
+SKIP M010 LEXMMFPEA validated complete
+SKIP M010 LEXMMFSA validated complete
+SKIP M011 NONE validated complete
+SKIP M011 PEA validated complete
+SKIP M011 SA validated complete
+SKIP M011 LEXMMFPEA validated complete
+SKIP M011 LEXMMFSA validated complete
+SKIP M012 NONE validated complete
+SKIP M012 PEA validated complete
+SKIP M012 SA validated complete
+SKIP M012 LEXMMFPEA validated complete
+SKIP M012 LEXMMFSA validated complete
+SKIP M013 NONE validated complete
+SKIP M013 PEA validated complete
+RUN M013 SA Sigma=0.2 J=10
+COMPLETE M013 SA cost residual=1.57160684466362e-9
+RUN M013 LEXMMFPEA Sigma=0.2 J=10
+COMPLETE M013 LEXMMFPEA cost residual=1.1932570487260818e-9
+RUN M013 LEXMMFSA Sigma=0.2 J=10
+COMPLETE M013 LEXMMFSA cost residual=1.1350493878126144e-9
+RUN M014 NONE Sigma=0.2 J=10
+COMPLETE M014 NONE cost residual=2.473825588822365e-9
+RUN M014 PEA Sigma=0.2 J=10
+COMPLETE M014 PEA cost residual=5.820766091346741e-10
+RUN M014 SA Sigma=0.2 J=10
+COMPLETE M014 SA cost residual=5.180481821298599e-9
+RUN M014 LEXMMFPEA Sigma=0.2 J=10
+COMPLETE M014 LEXMMFPEA cost residual=5.238689482212067e-10
+RUN M014 LEXMMFSA Sigma=0.2 J=10
+COMPLETE M014 LEXMMFSA cost residual=4.540197551250458e-9
+RUN M015 NONE Sigma=0.6 J=10
+COMPLETE M015 NONE cost residual=3.0850060284137726e-9
+RUN M015 PEA Sigma=0.6 J=10
+COMPLETE M015 PEA cost residual=1.5425030142068863e-9
+RUN M015 SA Sigma=0.6 J=10
+COMPLETE M015 SA cost residual=1.2514647096395493e-9
+RUN M015 LEXMMFPEA Sigma=0.6 J=10
+COMPLETE M015 LEXMMFPEA cost residual=1.5425030142068863e-9
+RUN M015 LEXMMFSA Sigma=0.6 J=10
+COMPLETE M015 LEXMMFSA cost residual=9.022187441587448e-10
+RUN M016 NONE Sigma=0.6 J=10
+COMPLETE M016 NONE cost residual=2.6193447411060333e-9
+RUN M016 PEA Sigma=0.6 J=10
+COMPLETE M016 PEA cost residual=1.57160684466362e-9
+RUN M016 SA Sigma=0.6 J=10
+COMPLETE M016 SA cost residual=1.391163095831871e-8
+RUN M016 LEXMMFPEA Sigma=0.6 J=10
+COMPLETE M016 LEXMMFPEA cost residual=1.6298145055770874e-9
+RUN M016 LEXMMFSA Sigma=0.6 J=10
+COMPLETE M016 LEXMMFSA cost residual=1.0390067473053932e-8
+RUN M017 NONE Sigma=0.2 J=5
+COMPLETE M017 NONE cost residual=2.3283064365386963e-10
+RUN M017 PEA Sigma=0.2 J=5
+COMPLETE M017 PEA cost residual=2.1827872842550278e-10
+RUN M017 SA Sigma=0.2 J=5
+COMPLETE M017 SA cost residual=5.238689482212067e-10
+RUN M017 LEXMMFPEA Sigma=0.2 J=5
+COMPLETE M017 LEXMMFPEA cost residual=2.1827872842550278e-10
+RUN M017 LEXMMFSA Sigma=0.2 J=5
+COMPLETE M017 LEXMMFSA cost residual=8.731149137020111e-10
+RUN M018 NONE Sigma=0.2 J=5
+COMPLETE M018 NONE cost residual=1.3387762010097504e-9
+RUN M018 PEA Sigma=0.2 J=5
+COMPLETE M018 PEA cost residual=2.764863893389702e-10
+RUN M018 SA Sigma=0.2 J=5
+COMPLETE M018 SA cost residual=8.149072527885437e-10
+RUN M018 LEXMMFPEA Sigma=0.2 J=5
+COMPLETE M018 LEXMMFPEA cost residual=2.473825588822365e-10
+RUN M018 LEXMMFSA Sigma=0.2 J=5
+COMPLETE M018 LEXMMFSA cost residual=1.3096723705530167e-9
+RUN M019 NONE Sigma=0.6 J=5
+COMPLETE M019 NONE cost residual=1.2951204553246498e-9
+RUN M019 PEA Sigma=0.6 J=5
+COMPLETE M019 PEA cost residual=5.238689482212067e-10
+RUN M019 SA Sigma=0.6 J=5
+COMPLETE M019 SA cost residual=9.633367881178856e-9
+RUN M019 LEXMMFPEA Sigma=0.6 J=5
+COMPLETE M019 LEXMMFPEA cost residual=4.94765117764473e-10
+RUN M019 LEXMMFSA Sigma=0.6 J=5
+COMPLETE M019 LEXMMFSA cost residual=1.4988472685217857e-8
+RUN M020 NONE Sigma=0.6 J=5
+COMPLETE M020 NONE cost residual=7.712515071034431e-10
+RUN M020 PEA Sigma=0.6 J=5
+COMPLETE M020 PEA cost residual=1.367880031466484e-9
+RUN M020 SA Sigma=0.6 J=5
+COMPLETE M020 SA cost residual=9.604264050722122e-10
+RUN M020 LEXMMFPEA Sigma=0.6 J=5
+COMPLETE M020 LEXMMFPEA cost residual=1.8335413187742233e-9
+RUN M020 LEXMMFSA Sigma=0.6 J=5
+COMPLETE M020 LEXMMFSA cost residual=6.984919309616089e-10
+RUN M021 NONE Sigma=0.2 J=10
+COMPLETE M021 NONE cost residual=6.111804395914078e-10
+RUN M021 PEA Sigma=0.2 J=10
+COMPLETE M021 PEA cost residual=1.2951204553246498e-9
+RUN M021 SA Sigma=0.2 J=10
+COMPLETE M021 SA cost residual=5.2677933126688e-9
+RUN M021 LEXMMFPEA Sigma=0.2 J=10
+COMPLETE M021 LEXMMFPEA cost residual=8.149072527885437e-10
+RUN M021 LEXMMFSA Sigma=0.2 J=10
+COMPLETE M021 LEXMMFSA cost residual=2.0081643015146255e-9
+RUN M022 NONE Sigma=0.2 J=10
+COMPLETE M022 NONE cost residual=1.862645149230957e-9
+RUN M022 PEA Sigma=0.2 J=10
+COMPLETE M022 PEA cost residual=1.979060471057892e-9
+RUN M022 SA Sigma=0.2 J=10
+COMPLETE M022 SA cost residual=1.979060471057892e-9
+RUN M022 LEXMMFPEA Sigma=0.2 J=10
+COMPLETE M022 LEXMMFPEA cost residual=2.0372681319713593e-9
+RUN M022 LEXMMFSA Sigma=0.2 J=10
+COMPLETE M022 LEXMMFSA cost residual=5.529727786779404e-10
+RUN M023 NONE Sigma=0.6 J=10
+COMPLETE M023 NONE cost residual=8.149072527885437e-10
+RUN M023 PEA Sigma=0.6 J=10
+COMPLETE M023 PEA cost residual=1.0186340659856796e-9
+RUN M023 SA Sigma=0.6 J=10
+COMPLETE M023 SA cost residual=3.3178366720676422e-9
+RUN M023 LEXMMFPEA Sigma=0.6 J=10
+COMPLETE M023 LEXMMFPEA cost residual=1.2514647096395493e-9
+RUN M023 LEXMMFSA Sigma=0.6 J=10
+COMPLETE M023 LEXMMFSA cost residual=3.521563485264778e-9
+RUN M024 NONE Sigma=0.6 J=10
+COMPLETE M024 NONE cost residual=5.238689482212067e-10
+RUN M024 PEA Sigma=0.6 J=10
+COMPLETE M024 PEA cost residual=9.604264050722122e-10
+RUN M024 SA Sigma=0.6 J=10
+COMPLETE M024 SA cost residual=7.275957614183426e-10
+RUN M024 LEXMMFPEA Sigma=0.6 J=10
+COMPLETE M024 LEXMMFPEA cost residual=1.0186340659856796e-9
+RUN M024 LEXMMFSA Sigma=0.6 J=10
+COMPLETE M024 LEXMMFSA cost residual=3.4924596548080444e-10
+RUN M025 NONE Sigma=0.2 J=5
+COMPLETE M025 NONE cost residual=4.94765117764473e-10
+RUN M025 PEA Sigma=0.2 J=5
+COMPLETE M025 PEA cost residual=6.693881005048752e-10
+RUN M025 SA Sigma=0.2 J=5
+COMPLETE M025 SA cost residual=1.0419171303510666e-8
+RUN M025 LEXMMFPEA Sigma=0.2 J=5
+COMPLETE M025 LEXMMFPEA cost residual=1.1059455573558807e-9
+RUN M025 LEXMMFSA Sigma=0.2 J=5
+COMPLETE M025 LEXMMFSA cost residual=2.4389009922742844e-8
+RUN M026 NONE Sigma=0.2 J=5
+COMPLETE M026 NONE cost residual=4.656612873077393e-10
+RUN M026 PEA Sigma=0.2 J=5
+COMPLETE M026 PEA cost residual=2.6193447411060333e-10
+RUN M026 SA Sigma=0.2 J=5
+COMPLETE M026 SA cost residual=7.741618901491165e-9
+RUN M026 LEXMMFPEA Sigma=0.2 J=5
+COMPLETE M026 LEXMMFPEA cost residual=3.7834979593753815e-10
+RUN M026 LEXMMFSA Sigma=0.2 J=5
+COMPLETE M026 LEXMMFSA cost residual=6.693881005048752e-9
+RUN M027 NONE Sigma=0.6 J=5
+COMPLETE M027 NONE cost residual=3.7834979593753815e-10
+RUN M027 PEA Sigma=0.6 J=5
+COMPLETE M027 PEA cost residual=5.529727786779404e-10
+RUN M027 SA Sigma=0.6 J=5
+COMPLETE M027 SA cost residual=2.5902409106492996e-9
+RUN M027 LEXMMFPEA Sigma=0.6 J=5
+COMPLETE M027 LEXMMFPEA cost residual=6.111804395914078e-10
+RUN M027 LEXMMFSA Sigma=0.6 J=5
+COMPLETE M027 LEXMMFSA cost residual=1.7462298274040222e-10
+RUN M028 NONE Sigma=0.6 J=5
+COMPLETE M028 NONE cost residual=3.346940502524376e-9
+RUN M028 PEA Sigma=0.6 J=5
+COMPLETE M028 PEA cost residual=5.093170329928398e-10
+RUN M028 SA Sigma=0.6 J=5
+COMPLETE M028 SA cost residual=2.0372681319713593e-9
+RUN M028 LEXMMFPEA Sigma=0.6 J=5
+COMPLETE M028 LEXMMFPEA cost residual=6.548361852765083e-10
+RUN M028 LEXMMFSA Sigma=0.6 J=5
+COMPLETE M028 LEXMMFSA cost residual=2.3283064365386963e-8
+RUN M029 NONE Sigma=0.2 J=10
+COMPLETE M029 NONE cost residual=3.055902197957039e-9
+RUN M029 PEA Sigma=0.2 J=10
+COMPLETE M029 PEA cost residual=4.0745362639427185e-10
+RUN M029 SA Sigma=0.2 J=10
+COMPLETE M029 SA cost residual=2.7939677238464355e-9
+RUN M029 LEXMMFPEA Sigma=0.2 J=10
+COMPLETE M029 LEXMMFPEA cost residual=6.984919309616089e-10
+RUN M029 LEXMMFSA Sigma=0.2 J=10
+COMPLETE M029 LEXMMFSA cost residual=2.444721758365631e-9
+RUN M030 NONE Sigma=0.2 J=10
+COMPLETE M030 NONE cost residual=4.452886059880257e-9
+RUN M030 PEA Sigma=0.2 J=10
+COMPLETE M030 PEA cost residual=1.1059455573558807e-9
+RUN M030 SA Sigma=0.2 J=10
+COMPLETE M030 SA cost residual=2.2992026060819626e-9
+RUN M030 LEXMMFPEA Sigma=0.2 J=10
+COMPLETE M030 LEXMMFPEA cost residual=3.7834979593753815e-10
+RUN M030 LEXMMFSA Sigma=0.2 J=10
+COMPLETE M030 LEXMMFSA cost residual=1.0797521099448204e-8
+RUN M031 NONE Sigma=0.6 J=10
+COMPLETE M031 NONE cost residual=2.6193447411060333e-9
+RUN M031 PEA Sigma=0.6 J=10
+COMPLETE M031 PEA cost residual=9.89530235528946e-10
+RUN M031 SA Sigma=0.6 J=10
+COMPLETE M031 SA cost residual=1.5133991837501526e-9
+RUN M031 LEXMMFPEA Sigma=0.6 J=10
+COMPLETE M031 LEXMMFPEA cost residual=1.178705133497715e-9
+RUN M031 LEXMMFSA Sigma=0.6 J=10
+COMPLETE M031 LEXMMFSA cost residual=1.4842953532934189e-9
+RUN M032 NONE Sigma=0.6 J=10
+COMPLETE M032 NONE cost residual=2.444721758365631e-9
+RUN M032 PEA Sigma=0.6 J=10
+COMPLETE M032 PEA cost residual=1.367880031466484e-9
+RUN M032 SA Sigma=0.6 J=10
+
+[31272] signal 15: Terminado
+in expression starting at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_scenario_equity.jl:359
+getproperty at ./Base_compiler.jl:54 [inlined]
+_setindex! at ./array.jl:1003 [inlined]
+setindex! at ./array.jl:997 [inlined]
+#equity_extract#19 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/scenario_equity_metrics.jl:149
+equity_extract at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/scenario_equity_metrics.jl:128
+unknown function (ip: 0x7468367f0505) at (unknown file)
+#equity_run#138 at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_scenario_equity.jl:185
+equity_run at /home/franco/Documentos/Multistage Energy/Code_stochastique/codes/run_scenario_equity.jl:131
+unknown function (ip: 0x74683674b962) at (unknown file)
+jl_apply at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/julia.h:2391 [inlined]
+jl_f_invokelatest at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/builtins.c:881
+jl_apply at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/julia.h:2391 [inlined]
+jl_f__apply_iterate at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/builtins.c:868
+invokelatest at ./Base_compiler.jl:250
+jl_apply at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/julia.h:2391 [inlined]
+do_call at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/interpreter.c:123
+eval_value at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/interpreter.c:243
+eval_body at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/interpreter.c:581
+eval_body at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/interpreter.c:558
+jl_interpret_toplevel_thunk at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/interpreter.c:898
+jl_toplevel_eval_flex at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/toplevel.c:1035
+jl_toplevel_eval_flex at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/toplevel.c:975
+ijl_toplevel_eval at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/toplevel.c:1047
+ijl_toplevel_eval_in at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/toplevel.c:1092
+eval at ./boot.jl:489
+include_string at ./loading.jl:2874
+_include at ./loading.jl:2934
+include at ./Base.jl:306
+exec_options at ./client.jl:317
+_start at ./client.jl:550
+jfptr__start_63319.1 at /home/franco/.julia/juliaup/julia-1.12.6+0.x64.linux.gnu/lib/julia/sys.so (unknown line)
+jl_apply at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/julia.h:2391 [inlined]
+true_main at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/jlapi.c:971
+jl_repl_entrypoint at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/src/jlapi.c:1139
+main at /cache/build/builder-amdci5-4/julialang/julia-release-1-dot-12/cli/loader_exe.c:58
+unknown function (ip: 0x746837c29d8f) at /lib/x86_64-linux-gnu/libc.so.6
+__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
+unknown function (ip: 0x4010b8) at /workspace/srcdir/glibc-2.17/csu/../sysdeps/x86_64/start.S
+unknown function (ip: (nil)) at (unknown file)
+Allocations: 4153419118 (Pool: 4153416616; Big: 2502); GC: 8554

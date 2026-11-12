@@ -13,3 +13,10 @@ results_oos/model_audit/*.mps
 .~lock.*#
 *~
 .DS_Store
+
+# Bulk scenario-equity exports and checkpoints remain local.
+results_models/scenario_equity/scenario_household_results.csv
+results_models/scenario_equity/scenario_equity_metrics.csv
+results_models/scenario_equity/shards/
+results_models/scenario_equity/worker_*/
+results_oos/campaign/merged_partial/

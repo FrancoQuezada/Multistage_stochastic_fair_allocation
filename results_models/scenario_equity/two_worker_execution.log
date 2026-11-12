@@ -1,0 +1,4 @@
+Workers started: 31272 (M001-M040), 31273 (M041-M080); one CPLEX thread each.
+Merged 268 validated shards; manuscript reruns 230/400
+Verified checkpoint provenance for 268 policy solutions and 55 generated inputs
+Some target policies remain incomplete; saved solutions are retained for resume.

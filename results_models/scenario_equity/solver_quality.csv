@@ -1,0 +1,434 @@
+DatasetID,ConfigID,Fairness,SolverStatusEvidence,RecordedStepsOptimal,RecordedStepCount,ExpectedRecordedSteps,Note
+manuscript_design_rerun,M001,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M001,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M001,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M001,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M001,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M002,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M002,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M002,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M002,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M002,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M003,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M003,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M003,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M003,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M003,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M004,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M004,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M004,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M004,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M004,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M005,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M005,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M005,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M005,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M005,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M006,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M006,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M006,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M006,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M006,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M007,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M007,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M007,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M007,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M007,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M008,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M008,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M008,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M008,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M008,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M009,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M009,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M009,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M009,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M009,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M010,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M010,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M010,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M010,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M010,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M011,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M011,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M011,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M011,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M011,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M012,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M012,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M012,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M012,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M012,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M013,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M013,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M013,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M013,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M013,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M014,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M014,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M014,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M014,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M014,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M015,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M015,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M015,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M015,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M015,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M016,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M016,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M016,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M016,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M016,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M017,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M017,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M017,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M017,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M017,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M018,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M018,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M018,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M018,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M018,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M019,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M019,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M019,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M019,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M019,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M020,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M020,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M020,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M020,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M020,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M021,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M021,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M021,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M021,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M021,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M022,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M022,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M022,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M022,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M022,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M023,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M023,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M023,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M023,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M023,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M024,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M024,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M024,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M024,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M024,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M025,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M025,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M025,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M025,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M025,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M026,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M026,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M026,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M026,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M026,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M027,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M027,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M027,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M027,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M027,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M028,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M028,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M028,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M028,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M028,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M029,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M029,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M029,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M029,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M029,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M030,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M030,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M030,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M030,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M030,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M031,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M031,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M031,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M031,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M031,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M032,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M032,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M032,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M032,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M032,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M033,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M033,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M033,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M033,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M033,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M034,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M034,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M034,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M034,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M034,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M035,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M035,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M035,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M035,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M035,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M036,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M036,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M036,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M036,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M036,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M037,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M037,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M037,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M037,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M037,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M038,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M038,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M038,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M038,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M038,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M039,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M039,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M039,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M039,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M039,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M040,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M040,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M040,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M040,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M040,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M041,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M041,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M041,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M041,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M041,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M042,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M042,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M042,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M042,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M042,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M043,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M043,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M043,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M043,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M043,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M044,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M044,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M044,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M044,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M044,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M045,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M045,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M045,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M045,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M045,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M046,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M046,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M046,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M046,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M046,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M047,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M047,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M047,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M047,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M047,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M048,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M048,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M048,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M048,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M048,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M049,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M049,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M049,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M049,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M049,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M050,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M050,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M050,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M050,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M050,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M051,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M051,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M051,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M051,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M051,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M052,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M052,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M052,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M052,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M052,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M053,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M053,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M053,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M053,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M053,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M054,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M054,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M054,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M054,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M054,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M055,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M055,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M055,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M055,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M055,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M056,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M056,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M056,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M056,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M056,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M057,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M057,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M057,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M057,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M057,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M058,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M058,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M058,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M058,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M058,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M059,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M059,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M059,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M059,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M059,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M060,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M060,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M060,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M060,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M060,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M061,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M061,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M061,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M061,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M061,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M062,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M062,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M062,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M062,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M062,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M063,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M063,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M063,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M063,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M063,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M064,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M064,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M064,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M064,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M064,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M065,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M065,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M065,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M065,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M065,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M066,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M066,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M066,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M066,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M066,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M067,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M067,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M067,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M067,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M067,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M068,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M068,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M068,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M068,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M068,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M069,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M069,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M069,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M069,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M069,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M070,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M070,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M070,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M070,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M070,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M071,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M071,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M071,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M071,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M071,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M072,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M072,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M072,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M072,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M072,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M073,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M073,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M073,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M073,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M073,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M074,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M074,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M074,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M074,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M074,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M075,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M075,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M075,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M075,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M075,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M076,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M076,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+manuscript_design_rerun,M076,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M076,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M076,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M077,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M077,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M077,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M077,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M077,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M078,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M078,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M078,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M078,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M078,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M079,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M079,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M079,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M079,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M079,SA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M080,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+manuscript_design_rerun,M080,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+manuscript_design_rerun,M080,NONE,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M080,PEA,OPTIMAL,True,1,1,source_solver_log
+manuscript_design_rerun,M080,SA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M001,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+reproducible_same_numeric_design,M001,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+reproducible_same_numeric_design,M001,NONE,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M001,PEA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M001,SA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M002,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+reproducible_same_numeric_design,M002,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+reproducible_same_numeric_design,M002,NONE,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M002,PEA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M002,SA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M003,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+reproducible_same_numeric_design,M003,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+reproducible_same_numeric_design,M003,NONE,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M003,PEA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M003,SA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M004,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+reproducible_same_numeric_design,M004,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL,True,5,5,source_solver_log
+reproducible_same_numeric_design,M004,NONE,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M004,PEA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M004,SA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M005,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+reproducible_same_numeric_design,M005,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+reproducible_same_numeric_design,M005,NONE,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M005,PEA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M005,SA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M006,LEXMMFPEA,OPTIMAL,True,1,1,LEXMMFPEA target LP termination is not exported by source; final solve termination recorded
+reproducible_same_numeric_design,M006,LEXMMFSA,lex_1:OPTIMAL;lex_2:OPTIMAL;lex_3:OPTIMAL;lex_4:OPTIMAL;lex_5:OPTIMAL;lex_6:OPTIMAL;lex_7:OPTIMAL;lex_8:OPTIMAL;lex_9:OPTIMAL;lex_10:OPTIMAL,True,10,10,source_solver_log
+reproducible_same_numeric_design,M006,NONE,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M006,PEA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M006,SA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M007,NONE,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M007,PEA,OPTIMAL,True,1,1,source_solver_log
+reproducible_same_numeric_design,M007,SA,OPTIMAL,True,1,1,source_solver_log

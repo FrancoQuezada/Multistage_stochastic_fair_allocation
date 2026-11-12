@@ -1,0 +1,46 @@
+[
+  {
+    "Sigma": "0.2",
+    "Fairness": "LEXMMFPEA",
+    "Resource": "PV",
+    "NumInstances": 40,
+    "MissingJainProbability": 0.0,
+    "NegativeOutcomeProbability": 0.0,
+    "NegativeBelowMinus1eMinus6Probability": 0.0,
+    "ZeroOrNegligibleVectorProbability": 0.0,
+    "OtherUndefinedProbability": 0.0
+  },
+  {
+    "Sigma": "0.2",
+    "Fairness": "LEXMMFSA",
+    "Resource": "Savings",
+    "NumInstances": 40,
+    "MissingJainProbability": 0.45253906249985587,
+    "NegativeOutcomeProbability": 0.45253906249985587,
+    "NegativeBelowMinus1eMinus6Probability": 0.45253906249985587,
+    "ZeroOrNegligibleVectorProbability": 0.0,
+    "OtherUndefinedProbability": 0.0
+  },
+  {
+    "Sigma": "0.6",
+    "Fairness": "LEXMMFPEA",
+    "Resource": "PV",
+    "NumInstances": 40,
+    "MissingJainProbability": 0.0026367187499999945,
+    "NegativeOutcomeProbability": 0.0,
+    "NegativeBelowMinus1eMinus6Probability": 0.0,
+    "ZeroOrNegligibleVectorProbability": 0.0026367187499999945,
+    "OtherUndefinedProbability": 0.0
+  },
+  {
+    "Sigma": "0.6",
+    "Fairness": "LEXMMFSA",
+    "Resource": "Savings",
+    "NumInstances": 40,
+    "MissingJainProbability": 0.48303222656232814,
+    "NegativeOutcomeProbability": 0.48303222656232814,
+    "NegativeBelowMinus1eMinus6Probability": 0.48303222656232814,
+    "ZeroOrNegligibleVectorProbability": 0.0,
+    "OtherUndefinedProbability": 0.0
+  }
+]

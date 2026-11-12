@@ -1,0 +1,7 @@
+Worker 1 started: 45590, M001-M040, one CPLEX thread.
+Worker 2 started: 45604, M041-M064, one CPLEX thread.
+Worker 3 started: 45618, M065-M072, one CPLEX thread.
+Worker 4 started: 45630, M073-M080, one CPLEX thread.
+Merged 438 validated shards; manuscript reruns 400/400
+Verified checkpoint provenance for 438 policy solutions and 88 generated inputs
+Worker exit codes: 0 0 0 0.

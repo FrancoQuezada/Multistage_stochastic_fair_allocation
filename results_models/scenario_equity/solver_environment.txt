@@ -1,0 +1,5 @@
+JuliaVersion=1.12.6
+CPLEXVersion=22.1.1.0
+Threads=1
+TimeLimit=source_default
+FairnessTolerance=source_default
